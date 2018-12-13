@@ -74,8 +74,13 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, {userName, password}) {
+    handleLogin ({ commit }, {userName, password, role}) {
       userName = userName.trim()
+      let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
+      commit('setToken', access)
+
+      return userName
+      /*
       return new Promise((resolve, reject) => {
         login({
           userName,
@@ -88,6 +93,7 @@ export default {
           reject(err)
         })
       })
+      */
     },
     // 退出登录
     handleLogOut ({ state, commit }) {
@@ -107,6 +113,20 @@ export default {
     },
     // 获取用户相关信息
     getUserInfo ({ state, commit }) {
+      const data = {
+        name: 'admin',
+        user_id: '3',
+        access: [state.token],
+        token: 'admin',
+        avator: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
+      }
+      console.log(data)
+      commit('setAvator', data.avator)
+      commit('setUserName', data.name)
+      commit('setUserId', data.user_id)
+      commit('setAccess', data.access)
+      commit('setHasGetInfo', true)
+      /*
       return new Promise((resolve, reject) => {
         try {
           getUserInfo(state.token).then(res => {
@@ -124,6 +144,7 @@ export default {
           reject(error)
         }
       })
+      */
     },
     // 此方法用来获取未读消息条数，接口只返回数值，不返回消息列表
     getUnreadMessageCount ({ state, commit }) {

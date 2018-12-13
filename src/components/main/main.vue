@@ -9,7 +9,7 @@
       </header-bar>
     </Header>
     <Layout>
-      <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
+      <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}" v-if="hasMenu">
         <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
         </side-menu>
       </Sider>
@@ -68,6 +68,9 @@ export default {
     ...mapGetters([
       'errorCount'
     ]),
+    hasMenu () {
+      return this.$store.state.user.token !== 'student'
+    },
     tagNavList () {
       return this.$store.state.app.tagNavList
     },

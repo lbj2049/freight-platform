@@ -1,5 +1,10 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
+    <FormItem prop="role">
+      <Select v-model="form.role">
+        <Option v-for="item in roles" :value="item.value" :key="item.value">{{ item.label }}</Option>
+      </Select>
+    </FormItem>
     <FormItem prop="userName">
       <Input v-model="form.userName" placeholder="请输入用户名">
         <span slot="prepend">
@@ -13,13 +18,6 @@
           <Icon :size="14" type="md-lock"></Icon>
         </span>
       </Input>
-    </FormItem>
-    <FormItem prop="role">
-      <RadioGroup v-model="form.role" @on-change="changeRole">
-         <Radio v-for="item in roles" :label="item.value" :key="item.value">
-            <span>{{item.label}}</span>
-         </Radio>
-      </RadioGroup>
     </FormItem>
     <FormItem>
       <Button @click="handleSubmit" type="primary" long>登录</Button>
@@ -87,7 +85,8 @@ export default {
         if (valid) {
           this.$emit('on-success-valid', {
             userName: this.form.userName,
-            password: this.form.password
+            password: this.form.password,
+            role: this.form.role
           })
         }
       })

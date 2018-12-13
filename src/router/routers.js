@@ -211,6 +211,61 @@ export default [
     ]
   },
   */
+  /* 管理员菜单 */
+  {
+    path: '/admin',
+    name: 'admin',
+    meta: {
+      access: ['admin'],
+      hideInBread: true
+    },
+    component: Main,
+    children: [
+      {
+        path: 'teacher-list', name: '老师管理', meta: { icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
+      }
+    ]
+  },
+  /* 老师菜单 */
+  {
+    path: '/teacher/base',
+    name: '基础设置',
+    meta: {
+      access: ['teacher'],
+      icon: 'md-menu',
+      title: '基础设置'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'class-list', name: '班级管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
+      },
+      {
+        path: 'student-list', name: '学生管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
+      },
+      {
+        path: 'experiment-list', name: '实验管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/teacher/mock',
+    name: '模拟客户操作',
+    meta: {
+      access: ['teacher'],
+      icon: 'md-menu',
+      title: '模拟客户操作'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'demand-list', name: '分发需求单', access: ['teacher'], meta: { icon: 'ios-navigate', title: '分发需求单' }, component: () => import('@/view/management/demand-list.vue')
+      },
+      {
+        path: 'receipt-list', name: '分发收货单', access: ['teacher'], meta: { icon: 'ios-navigate', title: '分发收货单' }, component: () => import('@/view/management/receipt-list.vue')
+      }
+    ]
+  },
   {
     path: '/multilevel',
     name: 'multilevel',
@@ -295,6 +350,7 @@ export default [
     },
     component: () => import('@/view/error-page/404.vue')
   },
+  /* 学生菜单 */
   /* 货运系统菜单 */
   {
     path: '/business',
