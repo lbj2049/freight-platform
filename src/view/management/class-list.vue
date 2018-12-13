@@ -1,17 +1,8 @@
 <template>
-    <div slot="content">
-      <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging
-      :columns="columns" :data="list" :pagination="pagination" :loading="false"
-      :show-header="true"
-      :stripe="true"
-      :border="true"
-      :disHover="false"
-      :height="400"
-      :width="false"
-      @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"
-    ></table-paging>
-    </div>
+  <div slot="content">
+    <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
+  </div>
 </template>
 <script>
 import SearchForm from '../../components/search-from/search-from'

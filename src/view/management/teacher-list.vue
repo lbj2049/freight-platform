@@ -39,6 +39,21 @@ export default {
           key1: "111",
           key2: "222",
           key3: "333"
+        },
+        {
+          key1: "111",
+          key2: "222",
+          key3: "333"
+        },
+        {
+          key1: "111",
+          key2: "222",
+          key3: "333"
+        },
+        {
+          key1: "111",
+          key2: "222",
+          key3: "333"
         }
       ],
       columns: [
@@ -63,7 +78,7 @@ export default {
         {
           title: '操作',
           key: 'action',
-          fixed: 'right',
+          // fixed: 'right',
           width: 120,
           render: (h, params) => {
             return h('div', [

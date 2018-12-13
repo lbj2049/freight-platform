@@ -1,10 +1,10 @@
 <template>
   <div class="main-data">
     <Spin size="large" fix v-if="loading"></Spin>
-    <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :height="height" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
-    <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width:width?width+'px':'100%'}">
+    <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :height="tableHeight" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
+    <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
       <Col>
-        <Page size="small" :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.currentPage" show-total show-sizer show-elevator @on-change="changePage" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
+        <Page size="small" :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.currentPage" show-total @on-change="changePage" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
       </Col>
     </Row>
   </div>
@@ -34,10 +34,6 @@ export default {
     width: {
       type: String,
       default: '100%'
-    },
-    height: {
-      type: String,
-      default: ''
     },
     disHover: {
       type: Boolean,
@@ -75,7 +71,9 @@ export default {
   ],
   */
   data () {
-    return {}
+    return {
+      tableHeight: 450
+    }
   },
   methods: {
     // 分页切换
@@ -92,6 +90,15 @@ export default {
     }
   },
   mounted () {
+    this.$nextTick(() => {
+      window.onresize = () => {
+        return (() => {
+          this.tableHeight = document.body.clientHeight - this.$el.offsetTop - 50
+        })()
+      }
+      // 设置表格高度
+      this.tableHeight = window.innerHeight - this.$el.offsetTop - 50
+    })
   }
 }
 </script>
