@@ -65,9 +65,9 @@ export default {
           key: 'action',
           fixed: 'right',
           width: 120,
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
+          render: (btn, params) => {
+            return btn('div', [
+              btn('Button', {
                 props: {
                   type: 'error',
                   size: 'small'
@@ -85,7 +85,7 @@ export default {
                   }
                 }
               }, '删除'),
-              h('Button', {
+              btn('Button', {
                 props: {
                   type: 'text',
                   size: 'small'

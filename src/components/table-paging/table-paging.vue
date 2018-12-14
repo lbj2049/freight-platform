@@ -1,5 +1,8 @@
 <template>
-  <div class="main-data">
+  <div>
+    <div class="toolButtonGroup">
+      <slot name="toolButtons"></slot>
+    </div>
     <Spin size="large" fix v-if="loading"></Spin>
     <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :height="tableHeight" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
     <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
@@ -10,6 +13,7 @@
   </div>
 </template>
 <script>
+import './table-pagin.less'
 export default {
   name: 'table-paging',
   props: {

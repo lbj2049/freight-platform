@@ -1,7 +1,11 @@
 <template>
   <div slot="content">
     <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+      <div slot="toolButtons">
+        <Button type="primary" @click="doAdd">添加实验</Button>
+      </div>
+    </table-paging>
   </div>
 </template>
 <script>
@@ -15,59 +19,73 @@ export default {
     return {
       searchData: [
         {
-          type: "input",
-          value: "input",
+          type: 'input',
+          value: 'input',
           clearable: true,
-          // prefix: "ios-contact",
-          suffix: "ios-search",
+          // prefix: 'ios-contact',
+          suffix: 'ios-search',
           // required: true,
-          placeholder: "关键词"
+          placeholder: '关键词'
         }
       ],
       list: [
         {
-          key1: "aaa",
-          key2: "bbb",
-          key3: "ccc"
+          key1: 'aaa',
+          key2: 'bbb',
+          key3: 'ccc'
         },
         {
-          key1: "aaa",
-          key2: "bbb",
-          key3: "ccc"
+          key1: 'aaa',
+          key2: 'bbb',
+          key3: 'ccc'
         },
         {
-          key1: "111",
-          key2: "222",
-          key3: "333"
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
         }
       ],
       columns: [
         {
-          type: "selection", width: 60, align: "center"
+          type: 'index',
+          width: 60,
+          align: 'center'
         },
         {
-          key: "key1", combine: true, title: "用户名"
+          key: 'key1', combine: true, title: '实验名称'
         },
         {
-          key: "key3", combine: true, title: "姓名"
+          key: 'key2', combine: true, title: '参与班级'
         },
         {
-          key: "key2", title: "手机"
+          key: 'key3', combine: true, title: '更新时间'
         },
         {
-          key: "key3", combine: true, title: "性别"
-        },
-        {
-          key: "key3", combine: true, title: "状态"
+          key: 'key2', combine: true, title: '状态'
         },
         {
           title: '操作',
           key: 'action',
-          fixed: 'right',
+          // fixed: 'right',
           width: 120,
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
+          render: (btn, params) => {
+            return btn('div', [
+              btn('Button', {
                 props: {
                   type: 'error',
                   size: 'small'
@@ -85,9 +103,9 @@ export default {
                   }
                 }
               }, '删除'),
-              h('Button', {
+              btn('Button', {
                 props: {
-                  type: 'text',
+                  type: 'info',
                   size: 'small'
                 },
                 on: {
@@ -96,29 +114,25 @@ export default {
                   }
                 }
               }, '修改')
-            ]);
+            ])
           }
         }
-      ],
-      pagination: {
-        total: 100,
-        pageSize: 10,
-        currentPage: 1
-      }
+      ]
     }
   },
   methods: {
     handleSearch (search) {
-      console.log("search", search)
+      console.log('search', search)
     },
     selectChange (value) {
-      console.log("selectChange", value)
+      this.multItem = value
+      console.log('selectChange', value)
     },
     changePage (page) {
-      console.log("page", page)
+      console.log('page', page)
     },
     changePageSize (pageSize) {
-      console.log("pageSize", pageSize)
+      console.log('pageSize', pageSize)
     }
   }
 }
