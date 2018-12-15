@@ -30,9 +30,15 @@ export default {
     handleSubmit ({ userName, password, role }) {
       this.handleLogin({ userName, password, role }).then(res => {
         this.getUserInfo().then(res => {
-          this.$router.push({
-            name: this.$config.homeName
-          })
+          if (role === 1) {
+            this.$router.push({
+              name: 'student-index'
+            })
+          } else {
+            this.$router.push({
+              name: this.$config.homeName
+            })
+          }
         })
       })
     }

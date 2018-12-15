@@ -1,4 +1,4 @@
-import { Main, Business } from '@/components/main'
+import { Main } from '@/components/main'
 import parentView from '@/components/parent-view'
 
 /**
@@ -352,7 +352,7 @@ export default [
   },
   /* 学生菜单 */
   /* 货运系统菜单 */
-  {
+  /* {
     path: '/business',
     name: '_business',
     redirect: '/business/home',
@@ -373,6 +373,34 @@ export default [
           icon: 'md-home'
         },
         component: () => import('@/view/single-page/home')
+      }
+    ]
+  } */
+
+  {
+    path: '/student/index',
+    name: 'student-index',
+    redirect: '/student/index',
+    component: Main,
+    systemName: 'main',
+    meta: {
+      access: ['student'],
+      hideInMenu: true,
+      notCache: true
+    },
+    children: [
+      {
+        path: '/student/index',
+        name: '首页',
+        systemName: 'main',
+        meta: {
+          access: ['student'],
+          hideInMenu: true,
+          title: '首页',
+          notCache: true,
+          icon: 'md-home'
+        },
+        component: () => import('@/view/stu/index')
       }
     ]
   }
