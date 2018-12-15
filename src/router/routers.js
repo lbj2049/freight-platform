@@ -391,12 +391,12 @@ export default [
     children: [
       {
         path: '/student/welcome',
-        name: '首页',
+        name: '实验选择',
         systemName: 'main',
         meta: {
           access: ['student'],
           hideInMenu: true,
-          title: '首页',
+          title: '实验选择',
           notCache: true,
           icon: 'md-home'
         },
@@ -405,9 +405,9 @@ export default [
     ]
   },
   {
-    path: '/student/index',
+    path: '/student/index/:id',
     name: 'student-index',
-    redirect: '/student/index',
+    redirect: '/student/index:id',
     component: Main,
     systemName: 'main',
     meta: {
@@ -417,13 +417,13 @@ export default [
     },
     children: [
       {
-        path: '/student/index',
-        name: '实验选择',
+        path: '/student/index/:id',
+        name: '系统选择',
         systemName: 'main',
         meta: {
           access: ['student'],
           hideInMenu: true,
-          title: '实验选择',
+          title: '系统选择',
           notCache: true,
           icon: 'md-home'
         },
