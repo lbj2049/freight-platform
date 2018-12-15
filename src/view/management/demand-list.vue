@@ -6,17 +6,21 @@
         <Button type="primary" @click="doAdd">添加需求订单</Button>
       </div>
     </table-paging>
+
+    <demand-edit :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
   </div>
 </template>
 <script>
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
+import DemandEdit from './demand-edit'
 export default {
   components: {
-    TablePaging, SearchForm
+    TablePaging, SearchForm, DemandEdit
   },
   data () {
     return {
+      editable: false,
       searchData: [
         {
           type: 'input',
@@ -153,11 +157,30 @@ export default {
       console.log('pageSize', pageSize)
     },
     doAdd () {
-      // this.showUserAddModal()
+      this.faultClickEvent()
     },
     doEdit (param) {
       console.log(param.row)
       // this.showUserEditModal()
+    },
+    /* 表单弹窗事件 */
+    // 表单弹窗的状态
+    watchEditableChange (e) {
+      console.log(e)
+      if (e === false) {
+        this.editable = false
+      };
+    },
+    // 点击事件
+    faultClickEvent () {
+      this.editable = true
+    },
+    // 弹出层的事件
+    formConfirmEvent () {
+      this.editable = false
+    },
+    formCancelEvent () {
+      this.editable = false
     }
   }
 }
