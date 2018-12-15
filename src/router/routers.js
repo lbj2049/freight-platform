@@ -378,6 +378,33 @@ export default [
   } */
 
   {
+    path: '/student/welcome',
+    name: 'student-welcome',
+    redirect: '/student/welcome',
+    component: Main,
+    systemName: 'main',
+    meta: {
+      access: ['student'],
+      hideInMenu: true,
+      notCache: true
+    },
+    children: [
+      {
+        path: '/student/welcome',
+        name: '首页',
+        systemName: 'main',
+        meta: {
+          access: ['student'],
+          hideInMenu: true,
+          title: '首页',
+          notCache: true,
+          icon: 'md-home'
+        },
+        component: () => import('@/view/stu/welcome')
+      }
+    ]
+  },
+  {
     path: '/student/index',
     name: 'student-index',
     redirect: '/student/index',
@@ -391,12 +418,12 @@ export default [
     children: [
       {
         path: '/student/index',
-        name: '首页',
+        name: '实验选择',
         systemName: 'main',
         meta: {
           access: ['student'],
           hideInMenu: true,
-          title: '首页',
+          title: '实验选择',
           notCache: true,
           icon: 'md-home'
         },

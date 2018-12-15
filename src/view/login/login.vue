@@ -32,7 +32,7 @@ export default {
         this.getUserInfo().then(res => {
           if (role === 1) {
             this.$router.push({
-              name: 'student-index'
+              name: 'student-welcome'
             })
           } else {
             this.$router.push({
