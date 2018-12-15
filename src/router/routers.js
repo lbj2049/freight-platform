@@ -1,4 +1,4 @@
-import { Main } from '@/components/main'
+import { Main, Student } from '@/components/main'
 import parentView from '@/components/parent-view'
 
 /**
@@ -381,8 +381,8 @@ export default [
     path: '/student/welcome',
     name: 'student-welcome',
     redirect: '/student/welcome',
-    component: Main,
-    systemName: 'main',
+    component: Student,
+    systemName: 'student',
     meta: {
       access: ['student'],
       hideInMenu: true,
@@ -392,7 +392,7 @@ export default [
       {
         path: '/student/welcome',
         name: '实验选择',
-        systemName: 'main',
+        systemName: 'student',
         meta: {
           access: ['student'],
           hideInMenu: true,
@@ -408,8 +408,8 @@ export default [
     path: '/student/index/:id',
     name: 'student-index',
     redirect: '/student/index:id',
-    component: Main,
-    systemName: 'main',
+    component: Student,
+    systemName: 'student',
     meta: {
       access: ['student'],
       hideInMenu: true,
@@ -419,7 +419,7 @@ export default [
       {
         path: '/student/index/:id',
         name: '系统选择',
-        systemName: 'main',
+        systemName: 'student',
         meta: {
           access: ['student'],
           hideInMenu: true,
