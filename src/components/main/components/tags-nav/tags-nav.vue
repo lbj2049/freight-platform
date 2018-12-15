@@ -36,7 +36,7 @@
             :data-route-item="item"
             @on-close="handleClose(item)"
             @click.native="handleClick(item)"
-            :closable="item.name !== $config.homeName"
+            :closable="!item.name.includes($config.homeName)"
             :color="isCurrentTag(item) ? 'primary' : 'default'"
             @contextmenu.prevent.native="contextMenu(item, $event)"
           >{{ showTitleInside(item) }}</Tag>

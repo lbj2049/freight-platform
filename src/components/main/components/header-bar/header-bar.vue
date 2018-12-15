@@ -6,8 +6,8 @@
       <!--<img v-show="collapsed" :src="minLogo" key="min-logo" />-->
       <span>{{logoName}}</span>
     </div>
-    <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange"></sider-trigger>
-    <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList"></custom-bread-crumb>
+    <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange" v-if="siderable"></sider-trigger>
+    <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList" v-if="crumbable"></custom-bread-crumb>
     <div class="custom-content-con">
       <slot></slot>
     </div>
@@ -34,7 +34,15 @@ export default {
     }
   },
   props: {
-    collapsed: Boolean
+    collapsed: Boolean,
+    siderable: {
+      type: Boolean,
+      default: true
+    },
+    crumbable: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     logoName () {

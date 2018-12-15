@@ -32,8 +32,11 @@ export default {
         this.getUserInfo().then(res => {
           if (role === 1) {
             this.$router.push({
-              name: 'student-index'
+              name: this.$config.guideName
             })
+            // this.$router.push({
+            //   name: 'student-index'
+            // })
           } else {
             this.$router.push({
               name: this.$config.homeName

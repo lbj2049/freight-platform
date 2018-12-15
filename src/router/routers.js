@@ -1,4 +1,4 @@
-import { Main } from '@/components/main'
+import { Main, Guide, Business } from '@/components/main'
 import parentView from '@/components/parent-view'
 
 /**
@@ -238,13 +238,13 @@ export default [
     component: Main,
     children: [
       {
-        path: 'class-list', name: '班级管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
+        path: 'class-list', name: '班级管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
       },
       {
-        path: 'student-list', name: '学生管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
+        path: 'student-list', name: '学生管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
       },
       {
-        path: 'experiment-list', name: '实验管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
+        path: 'experiment-list', name: '实验管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
       }
     ]
   },
@@ -266,6 +266,7 @@ export default [
       }
     ]
   },
+  /*
   {
     path: '/multilevel',
     name: 'multilevel',
@@ -326,6 +327,7 @@ export default [
       }
     ]
   },
+  */
   {
     path: '/401',
     name: 'error_401',
@@ -351,31 +353,131 @@ export default [
     component: () => import('@/view/error-page/404.vue')
   },
   /* 学生菜单 */
-  /* 货运系统菜单 */
-  /* {
-    path: '/business',
-    name: '_business',
-    redirect: '/business/home',
-    component: Business,
+  {
+    path: '/front',
+    name: 'front',
+    redirect: '/front/guide',
+    component: Guide,
+    systemName: 'guide',
     meta: {
-      hideInMenu: true,
-      notCache: true
+      access: ['student'],
+      hideInMenu: true
     },
     children: [
       {
-        path: '/business/home',
-        name: 'home',
-        systemName: 'business',
-        meta: {
-          hideInMenu: true,
-          title: '业务首页',
-          notCache: true,
-          icon: 'md-home'
-        },
-        component: () => import('@/view/single-page/home')
+        path: '/front/guide', name: '/front/guide', systemName: 'guide', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem-guide')
       }
     ]
-  } */
+  },
+  /* 货运系统菜单 */
+  {
+    path: '/business',
+    name: 'business',
+    redirect: '/business/home',
+    component: Business,
+    systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/business/home', name: '/business/home', systemName: 'business', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+      }
+    ]
+  },
+  {
+    path: '/business/demand',
+    name: '需求受理',
+    component: Business,
+    systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '需求受理'
+    },
+    children: [
+      {
+        path: 'accept', name: '运单受理', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '运单受理' }, component: () => import('@/view/management/class-list.vue')
+      },
+      {
+        path: 'print', name: '运单打印', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '运单打印' }, component: () => import('@/view/management/student-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/business/goods',
+    name: '进出货管理',
+    component: Business,
+    systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      showAlways: true,
+      title: '进出货管理'
+    },
+    children: [
+      {
+        path: 'all', name: '整车货场进出站', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '整车货场进出站' }, component: () => import('@/view/management/class-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/business/freight',
+    name: '货运组织',
+    component: Business,
+    systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '货运组织'
+    },
+    children: [
+      {
+        path: 'bf1',
+        name: '生产组织',
+        meta: {
+          access: ['student'],
+          icon: 'md-funnel',
+          showAlways: true,
+          title: '生产组织'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'pl1', name: '装车计划', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/management/class-list.vue')
+          },
+          {
+            path: 'pl2', name: '卸车计划', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/management/student-list.vue')
+          }
+        ]
+      },
+      {
+        path: 'bf2',
+        name: '装卸作业',
+        meta: {
+          access: ['student'],
+          icon: 'md-funnel',
+          showAlways: true,
+          title: '装卸作业'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'wk1', name: '整车装卸', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/management/class-list.vue')
+          },
+          {
+            path: 'wk2', name: '超限超重记录', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
+          }
+        ]
+      }
+    ]
+  }
+  /*
+  ,
 
   {
     path: '/student/index',
@@ -404,4 +506,5 @@ export default [
       }
     ]
   }
+  */
 ]

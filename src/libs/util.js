@@ -115,10 +115,11 @@ export const setTagNavListInLocalstorage = (systemName, list) => {
  * @returns {Array} 其中的每个元素只包含路由原信息中的name, path, meta三项
  */
 export const getTagNavListFromLocalstorage = (systemName) => {
-  let systemTagNave = localStorage.systemTagNave || {}
+  let systemTagNave = localStorage.systemTagNave
+  if (!systemTagNave) return []
   systemTagNave = JSON.parse(systemTagNave)
   if (systemTagNave.systemName === systemName) {
-    return systemTagNave.list || []
+    return systemTagNave.list
   }
 }
 
@@ -136,7 +137,8 @@ export const getHomeRoute = (routers, homeName = 'home', systemName) => {
       let res = getHomeRoute(item.children, homeName, systemName)
       if (res.name) return res
     } else {
-      if ((item.systemName && item.systemName === systemName) && item.name === homeName) {
+      if ((item.systemName && item.systemName === systemName) && item.name.includes(homeName)) {
+      // if ((item.systemName && item.systemName === systemName) && item.name === homeName) {
         homeRoute = item
       }
     }
@@ -150,7 +152,6 @@ export const getLogoName = (systemName) => {
   } else if (systemName === 'business') {
     logoName = '铁路货运电子商务系统'
   }
-  console.log(systemName, logoName)
   return logoName
 }
 

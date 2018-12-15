@@ -57,8 +57,8 @@ export default {
       if (list) {
         tagList = [...list]
       } else tagList = getTagNavListFromLocalstorage(state.systemName) || []
-      if (tagList[0] && tagList[0].name !== homeName) tagList.shift()
-      let homeTagIndex = tagList.findIndex(item => item.name === homeName)
+      if (tagList[0] && !tagList[0].name.includes(homeName)) tagList.shift()
+      let homeTagIndex = tagList.findIndex(item => item.name.includes(homeName))
       if (homeTagIndex > 0) {
         let homeTag = tagList.splice(homeTagIndex, 1)[0]
         tagList.unshift(homeTag)
@@ -85,7 +85,7 @@ export default {
       if (!routeHasExist(state.tagNavList, router)) {
         if (type === 'push') state.tagNavList.push(router)
         else {
-          if (router.name === homeName) state.tagNavList.unshift(router)
+          if (router.name.includes(homeName)) state.tagNavList.unshift(router)
           else state.tagNavList.splice(1, 0, router)
         }
         setTagNavListInLocalstorage(state.systemName, [...state.tagNavList])

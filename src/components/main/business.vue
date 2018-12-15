@@ -129,7 +129,7 @@ export default {
     },
     handleCloseTag (res, type, route) {
       if (type === 'all') {
-        this.turnToPage(this.$config.homeName)
+        this.turnToPage(this.$config.businessHomeName)
       } else if (routeEqual(this.$route, route)) {
         if (type !== 'others') {
           const nextRoute = getNextRoute(this.tagNavList, route)
@@ -164,10 +164,11 @@ export default {
     this.addTag({
       route: this.$store.state.app.homeRoute
     })
+    console.log(this.$store.state.app.homeRoute)
     this.setBreadCrumb(this.$route)
     // 设置初始语言
     this.setLocal(this.$i18n.locale)
-    // 如果当前打开页面不在标签栏中，跳到homeName页
+    // 如果当前打开页面不在标签栏中，跳到businessHomeName页
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
         name: this.$config.businessHomeName
