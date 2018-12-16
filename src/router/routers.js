@@ -473,14 +473,11 @@ export default [
         ]
       }
     ]
-  }
-  /*
-  ,
-
+  },
   {
-    path: '/student/index',
-    name: 'student-index',
-    redirect: '/student/index',
+    path: '/student/welcome',
+    name: 'front',
+    redirect: '/student/welcome',
     component: Main,
     systemName: 'main',
     meta: {
@@ -490,19 +487,45 @@ export default [
     },
     children: [
       {
-        path: '/student/index',
-        name: '首页',
+        path: '/student/welcome',
+        name: '实验选择',
         systemName: 'main',
         meta: {
           access: ['student'],
           hideInMenu: true,
-          title: '首页',
+          title: '实验选择',
           notCache: true,
           icon: 'md-home'
         },
-        component: () => import('@/view/stu/index')
+        component: () => import('@/view/stu/welcome')
+      }
+    ]
+  },
+  {
+    path: '/student/index/:id',
+    name: 'student-index',
+    redirect: '/student/index/:id',
+    component: Main,
+    systemName: 'main',
+    meta: {
+      access: ['student'],
+      hideInMenu: true,
+      notCache: true
+    },
+    children: [
+      {
+        path: '/student/index/:id',
+        name: '进入实验',
+        systemName: 'main',
+        meta: {
+          access: ['student'],
+          hideInMenu: true,
+          title: '进入实验',
+          notCache: true,
+          icon: 'md-home'
+        },
+        component: () => import('@/view/subsystem-guide')
       }
     ]
   }
-  */
 ]
