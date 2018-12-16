@@ -1,4 +1,4 @@
-import { Main, Guide, Business } from '@/components/main'
+import { Main, Guide, Business, HorizontalGuide } from '@/components/main'
 import parentView from '@/components/parent-view'
 
 /**
@@ -525,6 +525,38 @@ export default [
           icon: 'md-home'
         },
         component: () => import('@/view/subsystem-guide')
+      }
+    ]
+  },
+  {
+    path: '/front',
+    name: 'front',
+    redirect: '/front/guide',
+    component: Guide,
+    systemName: 'guide',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/front/guide', name: '/front/guide', systemName: 'guide', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem-guide')
+      }
+    ]
+  },
+  {
+    path: '/freight/home',
+    name: '/freight/home',
+    redirect: '/freight/home',
+    component: HorizontalGuide,
+    systemName: 'horizontal-guide',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/freight/home', name: '电商系统', systemName: 'horizontal-guide', meta: { access: ['student'], hideInMenu: true, title: '电商系统' }, component: () => import('@/view/stu/welcome')
       }
     ]
   }
