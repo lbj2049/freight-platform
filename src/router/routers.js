@@ -270,6 +270,7 @@ export default [
     path: '/multilevel',
     name: 'multilevel',
     meta: {
+      access: ['admin'],
       icon: 'md-menu',
       title: '多级菜单'
     },
@@ -279,6 +280,7 @@ export default [
         path: 'level_2_1',
         name: 'level_2_1',
         meta: {
+          access: ['admin'],
           icon: 'md-funnel',
           title: '二级-1'
         },
@@ -288,7 +290,7 @@ export default [
         path: 'level_2_2',
         name: 'level_2_2',
         meta: {
-          access: ['super_admin'],
+          access: ['admin'],
           icon: 'md-funnel',
           showAlways: true,
           title: '二级-2'
@@ -299,6 +301,7 @@ export default [
             path: 'level_2_2_1',
             name: 'level_2_2_1',
             meta: {
+              access: ['admin'],
               icon: 'md-funnel',
               title: '三级'
             },
@@ -308,6 +311,7 @@ export default [
             path: 'level_2_2_2',
             name: 'level_2_2_2',
             meta: {
+              access: ['admin'],
               icon: 'md-funnel',
               title: '三级'
             },
@@ -319,6 +323,7 @@ export default [
         path: 'level_2_3',
         name: 'level_2_3',
         meta: {
+          access: ['admin'],
           icon: 'md-funnel',
           title: '二级-3'
         },
