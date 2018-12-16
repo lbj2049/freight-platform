@@ -75,11 +75,12 @@ export default {
   actions: {
     // 登录
     handleLogin ({ commit }, {userName, password, role}) {
-      userName = userName.trim()
-      let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
-      commit('setToken', access)
-
-      return userName
+      return new Promise((resolve, reject) => {
+        userName = userName.trim()
+        let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
+        commit('setToken', access)
+        resolve()
+      })
       /*
       return new Promise((resolve, reject) => {
         login({
@@ -98,17 +99,17 @@ export default {
     // 退出登录
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('setToken', '')
-          commit('setAccess', [])
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
+        // logout(state.token).then(() => {
+        //   commit('setToken', '')
+        //   commit('setAccess', [])
+        //   resolve()
+        // }).catch(err => {
+        //   reject(err)
+        // })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-        // commit('setToken', '')
-        // commit('setAccess', [])
-        // resolve()
+        commit('setToken', '')
+        commit('setAccess', [])
+        resolve()
       })
     },
     // 获取用户相关信息
@@ -120,11 +121,14 @@ export default {
         token: 'admin',
         avator: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
       }
-      commit('setAvator', data.avator)
-      commit('setUserName', data.name)
-      commit('setUserId', data.user_id)
-      commit('setAccess', data.access)
-      commit('setHasGetInfo', true)
+      return new Promise((resolve, reject) => {
+        commit('setAvator', data.avator)
+        commit('setUserName', data.name)
+        commit('setUserId', data.user_id)
+        commit('setAccess', data.access)
+        commit('setHasGetInfo', true)
+        resolve()
+      })
       /*
       return new Promise((resolve, reject) => {
         try {
