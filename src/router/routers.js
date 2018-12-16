@@ -238,13 +238,13 @@ export default [
     component: Main,
     children: [
       {
-        path: 'class-list', name: '班级管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
+        path: 'class-list', name: '班级管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
       },
       {
-        path: 'student-list', name: '学生管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
+        path: 'student-list', name: '学生管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
       },
       {
-        path: 'experiment-list', name: '实验管理', access: ['teacher'], meta: { icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
+        path: 'experiment-list', name: '实验管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
       }
     ]
   },
@@ -354,16 +354,19 @@ export default [
   {
     path: '/front',
     name: 'front',
-    redirect: '/front/guide',
+    redirect: '/front/home',
     component: Guide,
-    systemName: 'guide',
+    systemName: 'main',
     meta: {
       access: ['student'],
       hideInMenu: true
     },
     children: [
       {
-        path: '/front/guide', name: '/front/guide', systemName: 'guide', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem-guide')
+        path: '/front/home', name: '/front/home', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem/home.vue')
+      },
+      {
+        path: '/front/guide', name: '/front/guide', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '导航' }, component: () => import('@/view/subsystem/subsystem-guide.vue')
       }
     ]
   },
@@ -524,7 +527,7 @@ export default [
           notCache: true,
           icon: 'md-home'
         },
-        component: () => import('@/view/subsystem-guide')
+        component: () => import('@/view/subsystem/subsystem-guide.vue')
       }
     ]
   }

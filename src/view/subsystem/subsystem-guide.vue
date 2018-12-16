@@ -6,7 +6,7 @@
   <div>
     <Row :gutter="20">
       <Col :xs="4" v-for="(item, i) in subsystemData" :key="`infor-${i}`" :offset="`${ i===0 ? 4 : 0}`" style="height: 120px;padding-bottom: 10px;">
-        <guide-card shadow :color="item.color" :icon="item.icon" :icon-size="36" v-on:click.native="doRedirect(item.url)">
+        <guide-card shadow :color="item.color" :icon="item.icon" :icon-size="36" v-on:click.native="doRedirect(item)">
           <p>{{ item.title }}</p>
         </guide-card>
       </Col>
@@ -32,11 +32,23 @@ export default {
       ]
     }
   },
+  computed: {
+    getExperimentId () {
+      return this.$store.state.user.experimentId
+    }
+  },
   methods: {
-    doRedirect (url) {
-      this.$router.push({
-        name: url
-      })
+    doRedirect (item) {
+      console.log('实验ID', this.getExperimentId)
+      if (item.url.includes('box')) {
+        this.$Notice.warning({
+          title: '[' + item.title + '] 开发中，期待下一个版本'
+        })
+      } else {
+        this.$router.push({
+          name: item.url
+        })
+      }
     }
   }
 }

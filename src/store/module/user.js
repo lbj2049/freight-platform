@@ -23,7 +23,8 @@ export default {
     messageUnreadList: [],
     messageReadedList: [],
     messageTrashList: [],
-    messageContentStore: {}
+    messageContentStore: {},
+    experimentId: ''// 学生子系统实验 ID
   },
   mutations: {
     setAvator (state, avatorPath) {
@@ -65,6 +66,9 @@ export default {
       const msgItem = state[from].splice(index, 1)[0]
       msgItem.loading = false
       state[to].unshift(msgItem)
+    },
+    setExperimentId (state, id) {
+      state.experimentId = id
     }
   },
   getters: {
@@ -235,6 +239,12 @@ export default {
         }).catch(error => {
           reject(error)
         })
+      })
+    },
+    handleExperiment ({ commit }, { experiment_id }) {
+      return new Promise((resolve, reject) => {
+        commit('setExperimentId', experiment_id)
+        resolve()
       })
     }
   }

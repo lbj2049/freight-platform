@@ -6,6 +6,7 @@
         <!--<language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>-->
         <!--<error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>-->
         <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
+        <go-back :backUrl="backUrl" style="margin-right: 10px;"/>
       </header-bar>
     </Header>
     <Layout>
@@ -37,12 +38,11 @@ import User from './components/user'
 import ABackTop from './components/a-back-top'
 import Fullscreen from './components/fullscreen'
 import Language from './components/language'
+import GoBack from './components/go-back'
 import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
-import minLogo from '@/assets/images/logo-min.jpg'
-import maxLogo from '@/assets/images/logo.jpg'
 import './business.less'
 export default {
   name: 'Business',
@@ -52,6 +52,7 @@ export default {
     Language,
     TagsNav,
     Fullscreen,
+    GoBack,
     ErrorStore,
     User,
     ABackTop
@@ -59,9 +60,8 @@ export default {
   data () {
     return {
       collapsed: false,
-      minLogo,
-      maxLogo,
-      isFullscreen: false
+      isFullscreen: false,
+      backUrl: '/front/guide'
     }
   },
   computed: {
@@ -164,7 +164,6 @@ export default {
     this.addTag({
       route: this.$store.state.app.homeRoute
     })
-    console.log(this.$store.state.app.homeRoute)
     this.setBreadCrumb(this.$route)
     // 设置初始语言
     this.setLocal(this.$i18n.locale)
