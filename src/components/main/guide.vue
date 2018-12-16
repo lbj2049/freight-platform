@@ -6,6 +6,7 @@
         <!--<language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>-->
         <!--<error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>-->
         <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
+        <go-back :backUrl="backUrl" style="margin-right: 10px;" v-if="!noBack"/>
       </header-bar>
     </Header>
     <Layout>
@@ -26,6 +27,7 @@ import User from './components/user'
 import ABackTop from './components/a-back-top'
 import Fullscreen from './components/fullscreen'
 import Language from './components/language'
+import GoBack from './components/go-back'
 import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import './main.less'
@@ -35,6 +37,7 @@ export default {
     HeaderBar,
     Language,
     Fullscreen,
+    GoBack,
     ErrorStore,
     User,
     ABackTop
@@ -42,7 +45,8 @@ export default {
   data () {
     return {
       collapsed: false,
-      isFullscreen: false
+      isFullscreen: false,
+      backUrl: '/front/home'
     }
   },
   computed: {
@@ -63,6 +67,9 @@ export default {
     },
     unreadCount () {
       return this.$store.state.user.unreadCount
+    },
+    noBack () {
+      return this.backUrl === this.$route.path
     }
   },
   methods: {
