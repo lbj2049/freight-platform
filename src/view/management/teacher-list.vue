@@ -1,7 +1,7 @@
 <template>
     <div slot="content">
       <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-      <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
         <div slot="toolButtons">
           <Button type="text" @click="doRePass">密码初始化</Button>
           <Button type="primary" @click="doAdd">新增</Button>
@@ -32,6 +32,7 @@ export default {
           placeholder: '关键词'
         }
       ],
+      distance: '272px',
       list: [
         {
           key1: 'aaa',
@@ -59,9 +60,22 @@ export default {
           key3: '333'
         },
         {
-          key1: '111',
-          key2: '222',
-          key3: '333'
+          key1: '111', key2: '222', key3: '333'
+        },
+        {
+          key1: '111', key2: '222', key3: '333'
+        },
+        {
+          key1: '111', key2: '222', key3: '333'
+        },
+        {
+          key1: '111', key2: '222', key3: '333'
+        },
+        {
+          key1: '111', key2: '222', key3: '333'
+        },
+        {
+          key1: '111', key2: '222', key3: '333'
         }
       ],
       columns: [
@@ -87,6 +101,8 @@ export default {
           title: '操作',
           key: 'action',
           // fixed: 'right',
+          className: 'btn-ops',
+          align: 'center',
           width: 120,
           render: (btn, params) => {
             return btn('div', [

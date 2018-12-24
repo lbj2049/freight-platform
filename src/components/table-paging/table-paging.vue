@@ -7,11 +7,13 @@
     <div :style="dataStyle">
       <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
     </div>
-    <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
-      <Col>
-        <Page :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.currentPage" show-total @on-change="changePage" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
-      </Col>
-    </Row>
+    <Affix :offset-bottom="0">
+      <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
+        <Col>
+          <Page :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.currentPage" show-total @on-change="changePage" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
+        </Col>
+      </Row>
+    </Affix>
   </div>
 </template>
 <script>
@@ -37,13 +39,13 @@ export default {
       type: Boolean,
       default: true
     },
-    width: {
-      type: String,
-      default: '100%'
-    },
     distance: {
       type: String,
       default: '190px'
+    },
+    width: {
+      type: String,
+      default: '100%'
     },
     dataStyle: {
       type: Object,
