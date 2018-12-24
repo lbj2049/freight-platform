@@ -1,9 +1,9 @@
 <template>
-  <div slot="content">
+  <Card :bordered="false">
     <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
     </table-paging>
-  </div>
+  </Card>
 </template>
 <script>
 import SearchForm from '../../components/search-from/search-from'
@@ -26,6 +26,7 @@ export default {
           placeholder: '关键词'
         }
       ],
+      distance: '220px',
       list: [
         {
           key1: '整车发货练习1',

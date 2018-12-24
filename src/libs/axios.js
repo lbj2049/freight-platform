@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 import store from '@/store'
 // import { Spin } from 'iview'
 const addErrorLog = errorInfo => {
@@ -22,7 +23,11 @@ class HttpRequest {
       baseURL: this.baseUrl,
       headers: {
         //
-      }
+      },
+      transformRequest: [function (data, headers) {
+        return qs.stringify(data)
+      }],
+      withCredentials: true
     }
     return config
   }
