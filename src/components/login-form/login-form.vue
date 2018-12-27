@@ -20,7 +20,8 @@
       </Input>
     </FormItem>
     <FormItem>
-      <Button @click="handleSubmit" type="primary" long>登录</Button>
+      <Button @click="handleSubmit" type="primary">登录</Button>
+      <Button @click="handleRegister" type="text" style="float: right">注册</Button>
     </FormItem>
   </Form>
 </template>
@@ -90,6 +91,9 @@ export default {
           })
         }
       })
+    },
+    handleRegister () {
+      this.$emit('do-register')
     }
   }
 }
