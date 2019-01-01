@@ -64,6 +64,7 @@ export default {
   height: 100%;
   display: table;
   text-align: center;
+  cursor: pointer;
 }
 .size{
   width: 100%;
