@@ -86,7 +86,7 @@ export default {
                           _this.deleteUser(params)
                         }
                       }) */
-                    _this.$router.push('index/20')
+                    _this.$router.push('maketicketsystem/20')
                   }
                 }
               }, '进入实验')

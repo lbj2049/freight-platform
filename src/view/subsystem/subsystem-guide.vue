@@ -28,7 +28,7 @@ export default {
         { title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
         { title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
         { title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
-        { title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
+        { title: '制票系统', icon: 'ios-paper-outline', url: '/stu/makesys', color: '#ed3f14' }
       ]
     }
   },

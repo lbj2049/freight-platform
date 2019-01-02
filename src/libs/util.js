@@ -2,12 +2,12 @@ import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
-const { title, cookieExpires, useI18n, systemDataMap } = config
+const { title, cookieExpires, useI18n } = config
 
 export const TOKEN_KEY = 'token'
 
 export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, {expires: cookieExpires || 1})
+  Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
 }
 
 export const getToken = () => {
@@ -60,7 +60,7 @@ export const getBreadCrumbList = (route, homeRoute) => {
   let res = routeMetched.filter(item => {
     return item.meta === undefined || !item.meta.hideInBread
   }).map(item => {
-    let meta = {...item.meta}
+    let meta = { ...item.meta }
     if (meta.title && typeof meta.title === 'function') {
       meta.__titleIsFunction__ = true
       meta.title = meta.title(route)
@@ -75,12 +75,12 @@ export const getBreadCrumbList = (route, homeRoute) => {
   res = res.filter(item => {
     return !item.meta.hideInMenu
   })
-  return [{...homeItem, to: homeRoute.path}, ...res]
+  return [{ ...homeItem, to: homeRoute.path }, ...res]
 }
 
 export const getRouteTitleHandled = (route) => {
-  let router = {...route}
-  let meta = {...route.meta}
+  let router = { ...route }
+  let meta = { ...route.meta }
   let title = ''
   if (meta.title) {
     if (typeof meta.title === 'function') {
@@ -109,7 +109,7 @@ export const showTitle = (item, vm) => {
  */
 export const setTagNavListInLocalstorage = (systemName, list) => {
   // localStorage.tagNaveList = JSON.stringify(list)
-  localStorage.systemTagNave = JSON.stringify({systemName, list})
+  localStorage.systemTagNave = JSON.stringify({ systemName, list })
 }
 /**
  * @returns {Array} 其中的每个元素只包含路由原信息中的name, path, meta三项

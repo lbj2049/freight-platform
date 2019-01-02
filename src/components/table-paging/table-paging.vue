@@ -41,7 +41,7 @@ export default {
     },
     distance: {
       type: String,
-      default: '190px'
+      default: '290px'
     },
     width: {
       type: String,

@@ -1,4 +1,5 @@
-import { Main, Guide, Business, HorizontalGuide } from '@/components/main'
+import { Main, Guide, Business, HorizontalGuide, TabGuide } from '@/components/main'
+
 import parentView from '@/components/parent-view'
 
 /**
@@ -375,6 +376,27 @@ export default [
       }
     ]
   },
+  /* 学生制票系统 */
+  {
+    path: '/stu/makesys',
+    name: 'makesys',
+    redirect: '/stu/makesys',
+    component: TabGuide,
+    systemName: 'main',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/stu/makesys', name: '/stu/makesys', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '制票计费' }, component: () => import('@/view/stu/maketicketsystem/make-ticket.vue')
+      },
+      {
+        path: '/stu/checkfees', name: '/stu/checkfees', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '杂费核收' }, component: () => import('@/view/stu/maketicketsystem/check-fees.vue')
+      }
+    ]
+  },
+
   /* 货运系统菜单 */
   {
     path: '/business',
@@ -511,7 +533,7 @@ export default [
   },
   {
     path: '/student/index/:id',
-    name: 'student-index',
+    name: 'student-maketicketsystem',
     redirect: '/student/index/:id',
     component: Main,
     systemName: 'main',
