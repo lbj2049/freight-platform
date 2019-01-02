@@ -2,30 +2,24 @@
 
 <template>
   <div slot="content">
-    <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
+    <Card :dis-hover="true">
+      <p slot="title">查询</p>
+      <day-demand-sub-form @handleFormSubmit="handleSearch"/>
+    </Card>
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
   </div>
 </template>
 <script>
-import SearchForm from '@/components/search-from/search-from'
 import TablePaging from '@/components/table-paging/table-paging'
+import DayDemandSubForm from './day-demand-sub-form'
 export default {
   components: {
-    TablePaging, SearchForm
+    DayDemandSubForm,
+    TablePaging
   },
   data () {
     return {
-      searchData: [
-        {
-          type: 'input',
-          value: 'input',
-          clearable: true,
-          // prefix: 'ios-contact',
-          suffix: 'ios-search',
-          // required: true,
-          placeholder: '关键词'
-        }
-      ],
+      distance: '462px',
       list: [
         {
           key1: 'aaa',
@@ -60,38 +54,38 @@ export default {
       ],
       columns: [
         {
-          key: 'key1', combine: true, title: '班级名称'
+          key: 'key1', combine: true, title: '装运日期'
+        },
+        {
+          key: 'key1', combine: true, title: '预约号'
+        },
+        {
+          key: 'key1', combine: true, title: '受理号'
         },
         {
           title: '操作',
           key: 'action',
           // fixed: 'right',
           width: 120,
-          render: (btn, params) => {
-            return btn('div', [
-              btn('Button', {
-                props: {
-                  type: 'error',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    // this.remove(params)
-                    const _this = this
-                    this.$Modal.confirm({
-                      content: '确认删除？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                props: { type: 'error', size: 'small' }
+              }, [
+                h('Poptip', {
+                  props: { confirm: true, transfer: true, placement: 'left-end', title: '确定要删除吗！', type: 'error', size: 'small', width: '300' },
+                  on: {
+                    'on-ok': () => {
+                      this.$Message.info('点击了确定')
+                    },
+                    'on-cancel': () => {
+                      this.$Message.info('点击了取消')
+                    }
                   }
-                }
-              }, '删除'),
-              btn('Button', {
-                props: {
-                  type: 'info',
-                  size: 'small'
-                },
+                }, '删除')
+              ]),
+              h('Button', {
+                props: { type: 'info', size: 'small' },
                 on: {
                   click: () => {
                     this.edit(params)
@@ -100,11 +94,18 @@ export default {
               }, '修改')
             ])
           }
+
         }
       ]
     }
   },
   methods: {
+    remove (value) {
+      console.log('remove', value)
+    },
+    edit (value) {
+      console.log('edit', value)
+    },
     handleSearch (search) {
       console.log('search', search)
     },
@@ -121,5 +122,3 @@ export default {
   }
 }
 </script>
-
-
