@@ -1,9 +1,9 @@
-<style lang="less">
-  @import './index.less';
+<style lang="less" scoped>
+  @import 'check-fees.less';
 </style>
 
 <template>
-  <div class="stu-index">
+  <div class="stu-make-ticket">
     <Row :gutter="16" class-name="stu-index-content">
       <Col class-name="menu shangwu" span="6">
       <div @click="handleClickShanghu" value="shanghu">电子商务系统</div>

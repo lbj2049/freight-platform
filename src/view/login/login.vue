@@ -45,7 +45,7 @@ export default {
               name: this.$config.guideName
             })
             // this.$router.push({
-            //   name: 'student-index'
+            //   name: 'student-maketicketsystem'
             // })
           } else {
             this.$router.push({

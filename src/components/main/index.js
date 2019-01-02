@@ -1,4 +1,5 @@
 import Main from './main.vue'
 import Guide from './guide.vue'
 import Business from './business.vue'
-export { Main, Guide, Business }
+import TabGuide from './tabguide.vue'
+export { Main, Guide, Business, TabGuide }
