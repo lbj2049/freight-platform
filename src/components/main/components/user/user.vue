@@ -9,17 +9,21 @@
         <DropdownItem name="message">
           消息中心<Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
         </DropdownItem>
+        <DropdownItem name="profile">个人信息</DropdownItem>
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
+    <profile :profileable="profileable" @profileCancelEvent="profileCancelEvent" @watchProfileAbleChange="watchProfileAbleChange"/>
   </div>
 </template>
 
 <script>
 import './user.less'
 import { mapActions } from 'vuex'
+import Profile from './profile'
 export default {
   name: 'User',
+  components: { Profile },
   props: {
     userAvator: {
       type: String,
@@ -28,6 +32,11 @@ export default {
     messageUnreadCount: {
       type: Number,
       default: 0
+    }
+  },
+  data () {
+    return {
+      profileable: false
     }
   },
   methods: {
@@ -46,13 +55,32 @@ export default {
         name: 'message_page'
       })
     },
+    profile () {
+      this.profileClickEvent()
+    },
     handleClick (name) {
       switch (name) {
         case 'logout': this.logout()
           break
+        case 'profile': this.profile()
+          break
         case 'message': this.message()
           break
       }
+    },
+    // 表单弹窗的状态
+    watchProfileAbleChange (e) {
+      if (e === false) {
+        this.profileable = false
+      };
+    },
+    // 点击事件
+    profileClickEvent () {
+      this.profileable = true
+    },
+    // 弹出层的事件
+    profileCancelEvent () {
+      this.profileable = false
     }
   }
 }

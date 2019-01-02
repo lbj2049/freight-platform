@@ -50,7 +50,7 @@ export default {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
     },
     setHomeRoute (state, routes) {
-      state.homeRoute = getHomeRoute(routes, homeName, state.systemName)
+      state.homeRoute = getHomeRoute(routes, state.systemName, homeName)
     },
     setTagNavList (state, list) {
       let tagList = []

@@ -415,15 +415,44 @@ export default [
     ]
   },
   {
-    path: '/business/demand',
-    name: '需求受理',
+    path: '/business/demand/mnt',
+    name: '日需求管理',
     component: Business,
     systemName: 'business',
     meta: {
       access: ['student'],
       hideInBread: true,
       icon: 'md-menu',
-      title: '需求受理'
+      title: '日需求管理'
+    },
+    children: [
+      {
+        path: 'day-demand-transport', name: '日运输需求', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日运输需求' }, component: () => import('@/view/subsystem/business/day-demand-transport.vue')
+      },
+      {
+        path: 'day-demand-select', name: '日需求查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日需求查询' }, component: () => import('@/view/subsystem/business/day-demand-select.vue')
+      },
+      {
+        path: 'day-demand-unsub-select', name: '日需求退订查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日需求退订查询' }, component: () => import('@/view/subsystem/business/day-demand-unsub-select.vue')
+      },
+      {
+        path: 'day-demand-sub', name: '日需求预订', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日需求预订' }, component: () => import('@/view/subsystem/business/day-demand-sub.vue')
+      },
+      {
+        path: 'day-demand-sub-select', name: '日预订查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日预订查询' }, component: () => import('@/view/subsystem/business/day-demand-sub-select.vue')
+      }
+    ]
+  },
+  {
+    path: '/business/demand',
+    name: '运单管理',
+    component: Business,
+    systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '运单管理'
     },
     children: [
       {

@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+// https://github.com/AqingCyan/iView_Test
 import './table-pagin.less'
 export default {
   name: 'table-paging',
@@ -51,7 +52,8 @@ export default {
       type: Object,
       default: function () {
         return {
-          height: 'calc(100vh - ' + this.distance + ')'
+          height: 'calc(100vh - ' + this.distance + ')',
+          overflow: 'auto'
         }
       }
     },

@@ -43,6 +43,7 @@ import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
+import '@/theme/business/index.less'
 import './business.less'
 export default {
   name: 'Business',
@@ -132,7 +133,7 @@ export default {
         this.turnToPage(this.$config.businessHomeName)
       } else if (routeEqual(this.$route, route)) {
         if (type !== 'others') {
-          const nextRoute = getNextRoute(this.tagNavList, route)
+          const nextRoute = getNextRoute(this.tagNavList, route, 'business')
           this.$router.push(nextRoute)
         }
       }

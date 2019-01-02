@@ -1,6 +1,12 @@
 <template>
   <div>
     <Row :gutter="20" style="margin-top: 10px;">
+
+      <Col span="24" style="text-align: center">
+        <h2 style="margin-top: 170px;margin-bottom: 20px;font-size: 28px;color: #91ADDC;">欢迎使用铁路货运平台 !</h2>
+        <img src="../../../assets/images/welcome.png"/>
+      </Col>
+      <!--
       <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
         <Card shadow>
           <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>
@@ -11,12 +17,15 @@
           <chart-bar style="height: 300px;" :value="barData" text="需求单数量"/>
         </Card>
       </i-col>
+      -->
     </Row>
+    <!--
     <Row>
       <Card shadow>
         <example style="height: 310px;"/>
       </Card>
     </Row>
+    -->
   </div>
 </template>
 

@@ -127,14 +127,14 @@ export const getTagNavListFromLocalstorage = (systemName) => {
  * @param {Array} routers 路由列表数组
  * @description 用于找到路由列表中name为home的对象
  */
-export const getHomeRoute = (routers, homeName = 'home', systemName) => {
+export const getHomeRoute = (routers, systemName, homeName = 'home') => {
   let i = -1
   let len = routers.length
   let homeRoute = {}
   while (++i < len) {
     let item = routers[i]
     if (item.children && item.children.length) {
-      let res = getHomeRoute(item.children, homeName, systemName)
+      let res = getHomeRoute(item.children, systemName, homeName)
       if (res.name) return res
     } else {
       if ((item.systemName && item.systemName === systemName) && item.name.includes(homeName)) {
@@ -216,10 +216,10 @@ export const getParams = url => {
  * @param {Array} list 标签列表
  * @param {String} name 当前关闭的标签的name
  */
-export const getNextRoute = (list, route) => {
+export const getNextRoute = (list, route, systemName) => {
   let res = {}
   if (list.length === 2) {
-    res = getHomeRoute(list)
+    res = getHomeRoute(list, systemName)
   } else {
     const index = list.findIndex(item => routeEqual(item, route))
     if (index === list.length - 1) res = list[list.length - 2]
