@@ -599,7 +599,7 @@ export default [
     },
     children: [
       {
-        path: '/front/guide', name: '/front/guide', systemName: 'guide', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem-guide')
+        path: '/front/guide', name: '/front/guide', systemName: 'guide', meta: { access: ['student'], hideInMenu: true, title: '首页' }, component: () => import('@/view/subsystem/subsystem-guide')
       }
     ]
   },
