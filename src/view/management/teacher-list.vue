@@ -9,17 +9,22 @@
           <Button type="warning" @click="doAuth">审核</Button>
         </div>
       </table-paging>
+      <teacher-edit :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
     </div>
 </template>
 <script>
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
+import TeacherEdit from './teacher-edit'
+
 export default {
   components: {
-    TablePaging, SearchForm
+    TablePaging, SearchForm, TeacherEdit
   },
   data () {
     return {
+      loading: false,
+      editable: false,
       multItem: [],
       searchData: [
         {
@@ -160,7 +165,7 @@ export default {
       this.$Message.success('密码初始化完成')
     },
     doAdd () {
-      // this.showUserAddModal()
+      this.faultClickEvent()
     },
     doBatchDelete () {
       if (this.multItem) {
@@ -187,6 +192,23 @@ export default {
           this.$Message.success('审核完成')
         }
       })
+    },
+    // 表单弹窗的状态
+    watchEditableChange (e) {
+      console.log(e)
+      if (e === false) {
+        this.editable = false
+      };
+    },
+    faultClickEvent () {
+      this.editable = true
+    },
+    // 弹出层的事件
+    formConfirmEvent () {
+      this.editable = false
+    },
+    formCancelEvent () {
+      this.editable = false
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style=" height:350px; overflow:auto">
       <Form ref="demand" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
 
         <Row>
