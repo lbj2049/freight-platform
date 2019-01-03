@@ -2,7 +2,7 @@
 <template>
   <div slot="content">
     <Card :dis-hover="true">
-    <day-demand-transport-form/>
+    <day-demand-transport-form />
     </Card>
     <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
   </div>
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      distance: '662px',
+      distance: '560px',
       list: [
         {
           key1: 'aaa',
