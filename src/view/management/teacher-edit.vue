@@ -22,7 +22,7 @@
         <Row>
           <Col span="24">
           <FormItem label="手机号" prop="phoneNum">
-            <Input v-model="teacherData.phoneNum"  placeholder="请输入手机号"  number></Input>
+            <Input v-model="teacherData.phoneNum"  placeholder="请输入手机号" ></Input>
           </FormItem>
           </Col>
         </Row>
@@ -31,8 +31,8 @@
           <Col span="24">
             <FormItem label="性别" prop="sex">
               <RadioGroup v-model="teacherData.sex">
-                <Radio label="男"></Radio>
-                <Radio label="女"></Radio>
+                <Radio label="男" ></Radio>
+                <Radio label="女" ></Radio>
               </RadioGroup>
             </FormItem>
           </Col>
@@ -82,21 +82,16 @@ export default {
       },
       rules: {
         userName: [
-          { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+          { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
         teacherName: [
-          { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-          { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+          { required: true, message: '老师姓名不能为空', trigger: 'blur' }
         ],
         phoneNum: [
-          { required: true, message: 'Please select the city', trigger: 'change' }
+          { required: true, message: '请输入手机号', trigger: 'blur' }, { pattern: /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/, message: '请输入正确的电话', rigger: 'blur' }
         ],
         sex: [
-          { required: true, message: 'Please select gender', trigger: 'change' }
-        ],
-        status: [
-          { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-          { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
+          { required: true, message: '', trigger: 'change' }
         ]
       }
     }
