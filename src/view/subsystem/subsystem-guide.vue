@@ -28,7 +28,7 @@ export default {
         { title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
         { title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
         { title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
-        { title: '制票系统', icon: 'ios-paper-outline', url: '/stu/makesys', color: '#ed3f14' }
+        { title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
       ]
     }
   },
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     doRedirect (item) {
-      console.log('实验ID', this.getExperimentId)
+      console.log('实验ID', this.getExperimentId, item.url)
       if (item.url.includes('box')) {
         this.$Notice.warning({
           title: '[' + item.title + '] 开发中，期待下一个版本'

@@ -591,6 +591,22 @@ export default [
     ]
   },
   {
+    path: '/ticket',
+    name: 'ticket',
+    redirect: '/ticket/home',
+    component: Ticket,
+    systemName: 'ticket',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/ticket/home', name: '/ticket/home', systemName: 'ticket', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+      }
+    ]
+  }/*,
+  {
     path: '/front',
     name: 'front',
     redirect: '/front/guide',
@@ -621,5 +637,5 @@ export default [
         path: '/freight/home', name: '电商系统', systemName: 'horizontal-guide', meta: { access: ['student'], hideInMenu: true, title: '电商系统' }, component: () => import('@/view/stu/welcome')
       }
     ]
-  }
+  }*/
 ]
