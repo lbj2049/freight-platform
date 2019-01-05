@@ -26,10 +26,14 @@ export default {
   homeName: 'home',
   guideName: 'front',
   businessHomeName: 'business',
-  systemNames: ['main', 'business'],
+  freightHomeName: 'freight',
+  ticketHomeName: 'ticket',
+  systemNames: ['main', 'business', 'freight', 'ticket'],
   systemDataMap: {
     main: [],
-    business: []
+    business: [],
+    freight: [],
+    ticket: []
   },
   /**
    * @description 需要加载的插件

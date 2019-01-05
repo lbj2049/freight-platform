@@ -43,8 +43,8 @@ import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
-import '@/theme/business/index.less'
-import './business.less'
+import '@/theme/ticket/index.less'
+import './ticket.less'
 export default {
   name: 'Business',
   components: {
@@ -130,10 +130,10 @@ export default {
     },
     handleCloseTag (res, type, route) {
       if (type === 'all') {
-        this.turnToPage(this.$config.businessHomeName)
+        this.turnToPage(this.$config.ticketHomeName)
       } else if (routeEqual(this.$route, route)) {
         if (type !== 'others') {
-          const nextRoute = getNextRoute(this.tagNavList, route, 'business')
+          const nextRoute = getNextRoute(this.tagNavList, route, 'ticket')
           this.$router.push(nextRoute)
         }
       }
@@ -155,11 +155,8 @@ export default {
       this.$refs.sideMenu.updateOpenName(newRoute.name)
     }
   },
-  created () {
-    // this.setSystemName('business')
-  },
   mounted () {
-    this.setSystemName('business')
+    this.setSystemName('ticket')
     /**
      * @description 初始化设置面包屑导航和标签导航
      */
@@ -171,10 +168,10 @@ export default {
     this.setBreadCrumb(this.$route)
     // 设置初始语言
     this.setLocal(this.$i18n.locale)
-    // 如果当前打开页面不在标签栏中，跳到businessHomeName页
+    // 如果当前打开页面不在标签栏中，跳到ticketHomeName页
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
-        name: this.$config.businessHomeName
+        name: this.$config.ticketHomeName
       })
     }
     // 获取未读消息条数

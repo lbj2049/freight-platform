@@ -39,6 +39,10 @@ export default {
   cropper_page: '图片裁剪',
   message_page: '消息中心',
   tree_table_page: '树状表格',
-  '/business/home': '首页'
+  '/front/home': '首页',
+  '/business/home': '首页',
+  '/freight/home': '首页',
+  '/ticket/home': '首页'
+  // 电子商务系统
 
 }

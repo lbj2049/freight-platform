@@ -5,7 +5,7 @@
           <Row>
             <Col span="8">
               <FormItem label="需求类型" prop="mail">
-                <Select v-model="demand.city" placeholder="Select your city">
+                <Select size="small" v-model="demand.city" placeholder="Select your city">
                   <Option value="beijing">New York</Option>
                   <Option value="shanghai">London</Option>
                   <Option value="shenzhen">Sydney</Option>
@@ -77,7 +77,7 @@
               <Row>
                 <Col span="12">
                   <FormItem label="需求类型" prop="mail">
-                    <Select v-model="demand.city" placeholder="Select your city">
+                    <Select size="small" v-model="demand.city" placeholder="Select your city">
                       <Option value="beijing">New York</Option>
                       <Option value="shanghai">London</Option>
                       <Option value="shenzhen">Sydney</Option>
@@ -109,7 +109,7 @@
               <Row>
                 <Col span="12">
                   <FormItem label="品类" prop="mail">
-                    <Select v-model="demand.city" placeholder="Select your city">
+                    <Select size="small" v-model="demand.city" placeholder="Select your city">
                       <Option value="beijing">New York</Option>
                       <Option value="shanghai">London</Option>
                       <Option value="shenzhen">Sydney</Option>
@@ -118,7 +118,7 @@
                 </Col>
                 <Col span="12">
                   <FormItem label="到局" prop="mail">
-                    <Select v-model="demand.city" placeholder="Select your city">
+                    <Select size="small" v-model="demand.city" placeholder="Select your city">
                       <Option value="beijing">New York</Option>
                       <Option value="shanghai">London</Option>
                       <Option value="shenzhen">Sydney</Option>

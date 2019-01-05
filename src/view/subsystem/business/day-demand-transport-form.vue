@@ -140,7 +140,7 @@
           </Col>
           <Col span="22">
             <FormItem label="记载事项" prop="desc">
-              <Input size="small" v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+              <Input v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
             </FormItem>
           </Col>
         </Row>

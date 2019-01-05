@@ -20,7 +20,7 @@ import config from '@/config'
 const { homeName } = config
 
 const closePage = (state, route) => {
-  const nextRoute = getNextRoute(state.tagNavList, route)
+  const nextRoute = getNextRoute(state.tagNavList, route, state.systemName)
   state.tagNavList = state.tagNavList.filter(item => {
     return !routeEqual(item, route)
   })
@@ -39,7 +39,7 @@ export default {
   },
   getters: {
     logoName: (state) => getLogoName(state.systemName),
-    menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
+    menuList: (state, getters, rootState) => getMenuByRouter(routers, state.systemName, rootState.user.access),
     errorCount: state => state.errorList.length
   },
   mutations: {
@@ -53,6 +53,7 @@ export default {
       state.homeRoute = getHomeRoute(routes, state.systemName, homeName)
     },
     setTagNavList (state, list) {
+      // debugger
       let tagList = []
       if (list) {
         tagList = [...list]

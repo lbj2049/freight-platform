@@ -1,4 +1,4 @@
-import { Main, Guide, Business, HorizontalGuide, TabGuide } from '@/components/main'
+import { Main, Guide, Business, Freight, Ticket, HorizontalGuide, TabGuide } from '@/components/main'
 
 import parentView from '@/components/parent-view'
 
@@ -35,6 +35,7 @@ export default [
     component: Main,
     systemName: 'main',
     meta: {
+      access: ['admin', 'teacher'],
       hideInMenu: true,
       notCache: true
     },
@@ -44,6 +45,7 @@ export default [
         name: 'home',
         systemName: 'main',
         meta: {
+          access: ['admin', 'teacher'],
           hideInMenu: true,
           title: '首页',
           notCache: true,
@@ -216,6 +218,7 @@ export default [
   {
     path: '/admin',
     name: 'admin',
+    // systemName: 'main',
     meta: {
       access: ['admin'],
       hideInBread: true
@@ -223,7 +226,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'teacher-list', name: '老师管理', meta: { icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
+        path: 'teacher-list', name: '老师管理', /*systemName: 'main', */meta: { access: ['admin'], icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
       }
     ]
   },
@@ -231,6 +234,7 @@ export default [
   {
     path: '/teacher/base',
     name: '基础设置',
+    systemName: 'main',
     meta: {
       access: ['teacher'],
       icon: 'md-menu',
@@ -239,19 +243,20 @@ export default [
     component: Main,
     children: [
       {
-        path: 'class-list', name: '班级管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
+        path: 'class-list', name: '班级管理', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '班级管理' }, component: () => import('@/view/management/class-list.vue')
       },
       {
-        path: 'student-list', name: '学生管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
+        path: 'student-list', name: '学生管理', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '学生管理' }, component: () => import('@/view/management/student-list.vue')
       },
       {
-        path: 'experiment-list', name: '实验管理', meta: { access: ['teacher'], icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
+        path: 'experiment-list', name: '实验管理', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '实验管理' }, component: () => import('@/view/management/experiment-list.vue')
       }
     ]
   },
   {
     path: '/teacher/mock',
     name: '模拟客户操作',
+    systemName: 'main',
     meta: {
       access: ['teacher'],
       icon: 'md-menu',
@@ -260,16 +265,17 @@ export default [
     component: Main,
     children: [
       {
-        path: 'demand-list', name: '分发需求单', access: ['teacher'], meta: { icon: 'ios-navigate', title: '分发需求单' }, component: () => import('@/view/management/demand-list.vue')
+        path: 'demand-list', name: '分发需求单', access: ['teacher'], systemName: 'main', meta: { icon: 'ios-navigate', title: '分发需求单' }, component: () => import('@/view/management/demand-list.vue')
       },
       {
-        path: 'receipt-list', name: '分发收货单', access: ['teacher'], meta: { icon: 'ios-navigate', title: '分发收货单' }, component: () => import('@/view/management/receipt-list.vue')
+        path: 'receipt-list', name: '分发收货单', access: ['teacher'], systemName: 'main', meta: { icon: 'ios-navigate', title: '分发收货单' }, component: () => import('@/view/management/receipt-list.vue')
       }
     ]
   },
   {
     path: '/multilevel',
     name: 'multilevel',
+    systemName: 'main',
     meta: {
       access: ['admin'],
       icon: 'md-menu',
@@ -280,6 +286,7 @@ export default [
       {
         path: 'level_2_1',
         name: 'level_2_1',
+        systemName: 'main',
         meta: {
           access: ['admin'],
           icon: 'md-funnel',
@@ -290,6 +297,7 @@ export default [
       {
         path: 'level_2_2',
         name: 'level_2_2',
+        systemName: 'main',
         meta: {
           access: ['admin'],
           icon: 'md-funnel',
@@ -301,6 +309,7 @@ export default [
           {
             path: 'level_2_2_1',
             name: 'level_2_2_1',
+            systemName: 'main',
             meta: {
               access: ['admin'],
               icon: 'md-funnel',
@@ -311,6 +320,7 @@ export default [
           {
             path: 'level_2_2_2',
             name: 'level_2_2_2',
+            systemName: 'main',
             meta: {
               access: ['admin'],
               icon: 'md-funnel',
@@ -323,6 +333,7 @@ export default [
       {
         path: 'level_2_3',
         name: 'level_2_3',
+        systemName: 'main',
         meta: {
           access: ['admin'],
           icon: 'md-funnel',
@@ -376,27 +387,6 @@ export default [
       }
     ]
   },
-  /* 学生制票系统 */
-  {
-    path: '/stu/makesys',
-    name: 'makesys',
-    redirect: '/stu/makesys',
-    component: TabGuide,
-    systemName: 'main',
-    meta: {
-      access: ['student'],
-      hideInMenu: true
-    },
-    children: [
-      {
-        path: '/stu/makesys', name: '/stu/makesys', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '制票计费' }, component: () => import('@/view/stu/maketicketsystem/make-ticket.vue')
-      },
-      {
-        path: '/stu/checkfees', name: '/stu/checkfees', systemName: 'main', meta: { access: ['student'], hideInMenu: true, title: '杂费核收' }, component: () => import('@/view/stu/maketicketsystem/check-fees.vue')
-      }
-    ]
-  },
-
   /* 货运系统菜单 */
   {
     path: '/business',
@@ -444,7 +434,7 @@ export default [
     ]
   },
   {
-    path: '/business/demand',
+    path: '/business/waybill/mnt',
     name: '运单管理',
     component: Business,
     systemName: 'business',
@@ -456,18 +446,83 @@ export default [
     },
     children: [
       {
-        path: 'accept', name: '运单受理', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '运单受理' }, component: () => import('@/view/management/class-list.vue')
+        path: 'waybill-accept', name: '运单受理', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '运单受理' }, component: () => import('@/view/subsystem/business/waybill-accept.vue')
       },
       {
-        path: 'print', name: '运单打印', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '运单打印' }, component: () => import('@/view/management/student-list.vue')
+        path: 'waybill-accept-select', name: '运单受理查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '运单受理查询' }, component: () => import('@/view/subsystem/business/waybill-accept-select.vue')
+      },
+      {
+        path: 'waybill-match', name: '运单匹配', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '运单匹配' }, component: () => import('@/view/subsystem/business/waybill-match.vue')
       }
     ]
   },
   {
-    path: '/business/goods',
+    path: '/business/inout/mnt',
     name: '进出货管理',
     component: Business,
     systemName: 'business',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '进出货管理'
+    },
+    children: [
+      {
+        path: 'waybill-send-select', name: '发货运单查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '发货运单查询' }, component: () => import('@/view/subsystem/business/waybill-send-select.vue')
+      },
+      {
+        path: 'waybill-arrive-select', name: '到达运单查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '到达运单查询' }, component: () => import('@/view/subsystem/business/waybill-arrive-select.vue')
+      },
+      {
+        path: 'waybill-send-mnt', name: '发货运单管理', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '发货运单管理' }, component: () => import('@/view/subsystem/business/waybill-send-mnt.vue')
+      },
+      {
+        path: 'waybill-arrive-mnt', name: '到达运单管理', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '到达运单管理' }, component: () => import('@/view/subsystem/business/waybill-arrive-mnt.vue')
+      }
+    ]
+  },
+  {
+    path: '/freight',
+    name: 'freight',
+    redirect: '/freight/home',
+    component: Freight,
+    systemName: 'freight',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/freight/home', name: '/freight/home', systemName: 'freight', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+      }
+    ]
+  },
+  {
+    path: '/freight/demand',
+    name: '运单管理',
+    component: Freight,
+    systemName: 'freight',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '运单管理'
+    },
+    children: [
+      {
+        path: 'accept', name: '运单受理', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单受理' }, component: () => import('@/view/management/class-list.vue')
+      },
+      {
+        path: 'print', name: '运单打印', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单打印' }, component: () => import('@/view/management/student-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/freight/goods',
+    name: '进出货管理',
+    component: Freight,
+    systemName: 'freight',
     meta: {
       access: ['student'],
       hideInBread: true,
@@ -496,6 +551,7 @@ export default [
       {
         path: 'bf1',
         name: '生产组织',
+        systemName: 'freight',
         meta: {
           access: ['student'],
           icon: 'md-funnel',
@@ -505,16 +561,17 @@ export default [
         component: parentView,
         children: [
           {
-            path: 'pl1', name: '装车计划', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/management/class-list.vue')
+            path: 'pl1', name: '装车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/management/class-list.vue')
           },
           {
-            path: 'pl2', name: '卸车计划', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/management/student-list.vue')
+            path: 'pl2', name: '卸车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/management/student-list.vue')
           }
         ]
       },
       {
         path: 'bf2',
         name: '装卸作业',
+        systemName: 'freight',
         meta: {
           access: ['student'],
           icon: 'md-funnel',
@@ -524,66 +581,12 @@ export default [
         component: parentView,
         children: [
           {
-            path: 'wk1', name: '整车装卸', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/management/class-list.vue')
+            path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/management/class-list.vue')
           },
           {
-            path: 'wk2', name: '超限超重记录', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
+            path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
           }
         ]
-      }
-    ]
-  },
-  {
-    path: '/student/welcome',
-    name: 'front',
-    redirect: '/student/welcome',
-    component: Main,
-    systemName: 'main',
-    meta: {
-      access: ['student'],
-      hideInMenu: true,
-      notCache: true
-    },
-    children: [
-      {
-        path: '/student/welcome',
-        name: '实验选择',
-        systemName: 'main',
-        meta: {
-          access: ['student'],
-          hideInMenu: true,
-          title: '实验选择',
-          notCache: true,
-          icon: 'md-home'
-        },
-        component: () => import('@/view/stu/welcome')
-      }
-    ]
-  },
-  {
-    path: '/student/index/:id',
-    name: 'student-maketicketsystem',
-    redirect: '/student/index/:id',
-    component: Main,
-    systemName: 'main',
-    meta: {
-      access: ['student'],
-      hideInMenu: true,
-      notCache: true
-    },
-    children: [
-      {
-        path: '/student/index/:id',
-        name: '进入实验',
-        systemName: 'main',
-        meta: {
-          access: ['student'],
-          hideInMenu: true,
-          title: '进入实验',
-          notCache: true,
-          icon: 'md-home'
-        },
-        component: () => import('@/view/subsystem/subsystem-guide.vue')
       }
     ]
   },

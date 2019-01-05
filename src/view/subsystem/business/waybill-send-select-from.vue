@@ -4,56 +4,71 @@
 
           <Row>
             <Col span="8">
-              <FormItem label="提交日期" prop="mail">
-                <DatePicker size="small" type="daterange" placeholder="请选择提交日期" v-model="demand.date"></DatePicker>
+              <FormItem label="提报日期" prop="mail">
+                <DatePicker size="small" type="daterange" placeholder="请选择提报日期" v-model="demand.date"></DatePicker>
               </FormItem>
             </Col>
+            <Col span="8">
+              <FormItem label="预约号" prop="mail">
+                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="需求号" prop="mail">
+                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
             <Col span="8">
               <FormItem label="装车日期" prop="mail">
                 <DatePicker size="small" type="daterange" placeholder="请选择装车日期" v-model="demand.date"></DatePicker>
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="订车号" prop="mail">
+              <FormItem label="到站" prop="city">
                 <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="装车地点" prop="mail">
+                <Select size="small" v-model="demand.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="8">
-              <FormItem label="发站" prop="mail">
+              <FormItem label="品名" prop="mail">
                 <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
               </FormItem>
             </Col>
-            <Col span="8">
-              <FormItem label="托运人" prop="mail">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-              </FormItem>
-            </Col>
-            <Col span="8">
-
-              <Row>
-                <Col span="12">
-                  <FormItem label="品类" prop="mail">
-                    <Select size="small" v-model="demand.city" placeholder="Select your city">
-                      <Option value="beijing">New York</Option>
-                      <Option value="shanghai">London</Option>
-                      <Option value="shenzhen">Sydney</Option>
-                    </Select>
-                  </FormItem>
-                </Col>
-                <Col span="12">
-                  <FormItem label="货物名称" prop="mail">
-                    <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                  </FormItem>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
             <Col span="8">
               <FormItem label="到站" prop="city">
                 <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="卸车地点" prop="mail">
+                <Select size="small" v-model="demand.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="运单类型" prop="mail">
+                <Select size="small" v-model="demand.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
               </FormItem>
             </Col>
             <Col span="8">
@@ -62,23 +77,40 @@
               </FormItem>
             </Col>
             <Col span="8">
+              <FormItem label="托运人" prop="mail">
+                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="电子提货" prop="city">
+                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+            </Col>
+            <Col span="8">
+            </Col>
+          </Row>
 
-              <Row>
-                <Col span="12">
-                  <FormItem label="品类" prop="mail">
-                    <Select size="small" v-model="demand.city" placeholder="Select your city">
-                      <Option value="beijing">New York</Option>
-                      <Option value="shanghai">London</Option>
-                      <Option value="shenzhen">Sydney</Option>
-                    </Select>
-                  </FormItem>
-                </Col>
-                <Col span="12">
-                  <FormItem prop="mail" :label-width="45">
-                    <Checkbox v-model="demand.msg">大宗交易需求</Checkbox>
-                  </FormItem>
-                </Col>
-              </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="运单状态" prop="city">
+                <CheckboxGroup v-model="demand.interest">
+                  <Checkbox label="待受理"></Checkbox>
+                  <Checkbox label="已通过受理"></Checkbox>
+                  <Checkbox label="已装车"></Checkbox>
+                  <Checkbox label="已发车"></Checkbox>
+                  <Checkbox label="已到达"></Checkbox>
+                  <Checkbox label="已卸车"></Checkbox>
+                  <Checkbox label="已交付"></Checkbox>
+                </CheckboxGroup>
+              </FormItem>
+            </Col>
+            <Col span="8">
+            </Col>
+            <Col span="8">
             </Col>
           </Row>
 

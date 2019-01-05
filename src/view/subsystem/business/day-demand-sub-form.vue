@@ -47,12 +47,12 @@
             <Row>
               <Col span="8">
                 <FormItem label="托运人名称" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="发站" prop="city">
-                  <Select v-model="demand.city" placeholder="Select your city">
+                  <Select size="small" v-model="demand.city" placeholder="Select your city">
                     <Option value="beijing">New York</Option>
                     <Option value="shanghai">London</Option>
                     <Option value="shenzhen">Sydney</Option>
@@ -61,14 +61,14 @@
               </Col>
               <Col span="8">
                 <FormItem label="发局" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span="8">
                 <FormItem label="装车地点" prop="mail">
-                  <Select v-model="demand.city" placeholder="Select your city">
+                  <Select size="small" v-model="demand.city" placeholder="Select your city">
                     <Option value="beijing">New York</Option>
                     <Option value="shanghai">London</Option>
                     <Option value="shenzhen">Sydney</Option>
@@ -77,31 +77,31 @@
               </Col>
               <Col span="8">
                 <FormItem label="移动电话" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span="8">
                 <FormItem label="经办人" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="身份证" prop="city">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="手机" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span="8">
                 <FormItem label="通讯地址" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
             </Row>
@@ -116,7 +116,7 @@
             <Row>
               <Col span="8">
                 <FormItem label="货物名称" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="16">
@@ -138,17 +138,17 @@
             <Row>
               <Col span="8">
                 <FormItem label="货物包装" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="最大单件重量" prop="city" :label-width="98">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"><span slot="append">(kg)</span></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"><span slot="append">(kg)</span></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="货区货位" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
             </Row>
@@ -205,7 +205,7 @@
           </Col>
           <Col span="22">
             <FormItem label="记载事项" prop="desc">
-              <Input size="small" v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+              <Input v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
             </FormItem>
           </Col>
         </Row>
@@ -218,12 +218,12 @@
             <Row>
               <Col span="4">
                 <FormItem label="吨数" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="4">
                 <FormItem label="车种" prop="city">
-                  <Select v-model="demand.city" placeholder="Select your city">
+                  <Select size="small" v-model="demand.city" placeholder="Select your city">
                     <Option value="beijing">New York</Option>
                     <Option value="shanghai">London</Option>
                     <Option value="shenzhen">Sydney</Option>
@@ -232,7 +232,7 @@
               </Col>
               <Col span="4">
                 <FormItem label="车数" prop="mail">
-                  <Input v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
                 </FormItem>
               </Col>
               <Col span="12">

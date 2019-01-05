@@ -30,7 +30,7 @@ const showThisMenuEle = (item, access) => {
  * @param {Array} list 通过路由列表得到菜单列表
  * @returns {Array}
  */
-export const getMenuByRouter = (list, access) => {
+export const getMenuByRouter = (list, systemName, access) => {
   let res = []
   forEach(list, item => {
     if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
@@ -40,10 +40,10 @@ export const getMenuByRouter = (list, access) => {
         meta: item.meta
       }
       if ((hasChild(item) || (item.meta && item.meta.showAlways)) && showThisMenuEle(item, access)) {
-        obj.children = getMenuByRouter(item.children, access)
+        obj.children = getMenuByRouter(item.children, systemName, access)
       }
       if (item.meta && item.meta.href) obj.href = item.meta.href
-      if (showThisMenuEle(item, access)) res.push(obj)
+      if ((!item.systemName || (item.systemName && item.systemName === systemName)) && showThisMenuEle(item, access)) res.push(obj)
     }
   })
   return res
@@ -151,6 +151,10 @@ export const getLogoName = (systemName) => {
     logoName = '铁路货运平台'
   } else if (systemName === 'business') {
     logoName = '铁路货运电子商务系统'
+  } else if (systemName === 'freight') {
+    logoName = '铁路货运站系统'
+  } else if (systemName === 'ticket') {
+    logoName = '铁路制票系统'
   }
   return logoName
 }
