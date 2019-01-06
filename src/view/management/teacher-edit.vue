@@ -42,7 +42,8 @@
           <Col span="24">
           <FormItem label="状态" prop="status">
             <RadioGroup v-model="teacherData.status">
-              <Radio label="开通"></Radio>
+              <Radio label="已审核"></Radio>
+              <Radio label="未审核"></Radio>
               <Radio label="禁用"></Radio>
             </RadioGroup>
           </FormItem>
@@ -78,7 +79,7 @@ export default {
         teacherName: '',
         phoneNum: '',
         sex: '男',
-        status: '开通'
+        status: '审核'
       },
       rules: {
         userName: [
