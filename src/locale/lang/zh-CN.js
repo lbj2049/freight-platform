@@ -42,7 +42,13 @@ export default {
   '/front/home': '首页',
   '/business/home': '首页',
   '/freight/home': '首页',
-  '/ticket/home': '首页'
+  '/ticket/home': '首页',
   // 电子商务系统
+  'waybill-accept': '运单管理',
+  'waybill-accept-select': '运单受理查询',
+  'waybill-match': '运单匹配',
 
+  // 货运系统
+  'mnt-waybill-accept': '运单管理',
+  'mnt-waybill-print': '运单打印'
 }

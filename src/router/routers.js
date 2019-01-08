@@ -499,7 +499,7 @@ export default [
     ]
   },
   {
-    path: '/freight/demand',
+    path: '/freight/waybill',
     name: '运单管理',
     component: Freight,
     systemName: 'freight',
@@ -511,10 +511,10 @@ export default [
     },
     children: [
       {
-        path: 'accept', name: '运单受理', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单受理' }, component: () => import('@/view/management/class-list.vue')
+        path: 'mnt-waybill-accept', name: 'mnt-waybill-accept', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单受理' }, component: () => import('@/view/subsystem/freight/waybill-accept')
       },
       {
-        path: 'print', name: '运单打印', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单打印' }, component: () => import('@/view/management/student-list.vue')
+        path: 'mnt-waybill-print', name: 'mnt-waybill-print', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '运单打印' }, component: () => import('@/view/subsystem/freight/waybill-print')
       }
     ]
   },
@@ -532,7 +532,7 @@ export default [
     },
     children: [
       {
-        path: 'all', name: '整车货场进出站', systemName: 'business', meta: { access: ['student'], icon: 'ios-navigate', title: '整车货场进出站' }, component: () => import('@/view/management/class-list.vue')
+        path: 'mnt-whole-inout', name: '整车货场进出站', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车货场进出站' }, component: () => import('@/view/subsystem/freight/whole-inout')
       }
     ]
   },
@@ -540,7 +540,7 @@ export default [
     path: '/business/freight',
     name: '货运组织',
     component: Business,
-    systemName: 'business',
+    systemName: 'freight',
     meta: {
       access: ['student'],
       hideInBread: true,
