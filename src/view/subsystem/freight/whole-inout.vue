@@ -6,7 +6,7 @@
       <Col span="4">
         <Card :dis-hover="true">
           <p slot="title">查询</p>
-          <whole-inout-ticket-verify-from @handleFormSubmit="handleSearch" @handleFormAuth="handleAuth"/>
+          <whole-inout-ticket-verify-from @handleFormSubmit="handleSearch" @handleTicketVerify="handleTicketVerify"/>
         </Card>
       </Col>
       <Col span="12">
@@ -122,6 +122,9 @@ export default {
     },
     handleAuth () {
       console.log('handleAuth')
+    },
+    handleTicketVerify () {
+      console.log('handleTicketVerify')
     },
     selectChange (value) {
       this.multItem = value

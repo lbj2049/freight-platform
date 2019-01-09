@@ -12,12 +12,12 @@
             <Col span="12">
               <Row>
                 <Col span="12">
-                  <FormItem prop="msg" label-width="15">
+                  <FormItem prop="msg" :label-width="15">
                     <Radio v-model="search.msg">需求联</Radio>
                   </FormItem>
                 </Col>
                 <Col span="12">
-                  <FormItem prop="msg" label-width="0">
+                  <FormItem prop="msg" :label-width="0">
                     <Radio v-model="search.msg">到达运单</Radio>
                   </FormItem>
                 </Col>
@@ -38,7 +38,7 @@
           </Row>
         </Col>
         <Col span="6">
-          <FormItem label-width="10">
+          <FormItem :label-width="20">
             <Button size="small" type="primary" :loading="loading" @click="handleSubmit('search')" style="margin-left: 8px">查询</Button>
             <Button size="small" @click="handleOut()" style="margin-left: 8px">退出</Button>
           </FormItem>
