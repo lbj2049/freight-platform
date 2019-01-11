@@ -79,7 +79,7 @@ export default {
         teacherName: '',
         phoneNum: '',
         sex: '男',
-        status: '审核'
+        status: '已审核'
       },
       rules: {
         userName: [
@@ -109,6 +109,7 @@ export default {
       this.$emit('watchEditableChange', e)
     },
     handleSubmit (name) {
+      alert(Object.values(this.teacherData))
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$Message.success('Success!')

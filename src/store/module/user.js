@@ -78,7 +78,7 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, {userName, password, role}) {
+    handleLogin ({ commit }, { userName, password, role }) {
       return new Promise((resolve, reject) => {
         userName = userName.trim()
         let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'

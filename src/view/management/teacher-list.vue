@@ -108,9 +108,39 @@ export default {
           // fixed: 'right',
           className: 'btn-ops',
           align: 'center',
-          width: 120,
+          width: 180,
           render: (btn, params) => {
             return btn('div', [
+              btn('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    // this.remove(params)
+                    alert(params.row.key1)
+                    const _this = this
+                    this.$Modal.confirm({
+                      content: '确认审核？',
+                      onOk: function () {
+                        _this.deleteUser(params)
+                      }
+                    })
+                  }
+                }
+              }, '审核'),
+              btn('Button', {
+                props: {
+                  type: 'info',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.edit(params)
+                  }
+                }
+              }, '修改'),
               btn('Button', {
                 props: {
                   type: 'error',
@@ -128,18 +158,7 @@ export default {
                     })
                   }
                 }
-              }, '删除'),
-              btn('Button', {
-                props: {
-                  type: 'info',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    this.edit(params)
-                  }
-                }
-              }, '修改')
+              }, '删除')
             ])
           }
         }
@@ -147,16 +166,20 @@ export default {
     }
   },
   methods: {
+    // 搜索
     handleSearch (search) {
       console.log('search', search)
     },
+    // 选中对象切换
     selectChange (value) {
       this.multItem = value
       console.log('selectChange', value)
     },
+    // 切换页面
     changePage (page) {
       console.log('page', page)
     },
+    // 切换页面size
     changePageSize (pageSize) {
       console.log('pageSize', pageSize)
     },
@@ -164,9 +187,11 @@ export default {
     doRePass () {
       this.$Message.success('密码初始化完成')
     },
+    // 添加老师
     doAdd () {
-      this.faultClickEvent()
+      this.editable = true
     },
+    // 批量删除
     doBatchDelete () {
       if (this.multItem) {
         const userIds = []
@@ -184,6 +209,7 @@ export default {
         })
       }
     },
+    // 批量审核
     doAuth () {
       this.$Modal.confirm({
         title: '审核',
@@ -200,15 +226,17 @@ export default {
         this.editable = false
       };
     },
-    faultClickEvent () {
-      this.editable = true
-    },
-    // 弹出层的事件
+    // 弹出事件
     formConfirmEvent () {
       this.editable = false
     },
+    // 弹窗消失⌚
     formCancelEvent () {
       this.editable = false
+    },
+    // 审核或者禁用
+    auditOrDisable () {
+
     }
   }
 }

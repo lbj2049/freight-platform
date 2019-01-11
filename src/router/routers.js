@@ -226,7 +226,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'teacher-list', name: '老师管理', /*systemName: 'main', */meta: { access: ['admin'], icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
+        path: 'teacher-list', name: '老师管理', /* systemName: 'main', */meta: { access: ['admin'], icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
       }
     ]
   },
@@ -387,7 +387,7 @@ export default [
       }
     ]
   },
-  /* 货运系统菜单 */
+  /* 电子商务系统 */
   {
     path: '/business',
     name: 'business',
@@ -482,6 +482,8 @@ export default [
       }
     ]
   },
+
+  /* 货运站系统 */
   {
     path: '/freight',
     name: 'freight',
@@ -637,5 +639,5 @@ export default [
         path: '/freight/home', name: '电商系统', systemName: 'horizontal-guide', meta: { access: ['student'], hideInMenu: true, title: '电商系统' }, component: () => import('@/view/stu/welcome')
       }
     ]
-  }*/
+  } */
 ]
