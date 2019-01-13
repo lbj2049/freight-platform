@@ -123,7 +123,80 @@
       </Modal>
 
       <Modal v-model="ticketSearchModel" title="票据查询" @on-ok="ticketSearchOk" @on-cancel="ticketSearchCancel">
+        <Form ref="ticket" :model="ticket" :rules="rules" :show-message="false" :label-width="72" class="qib-form">
+          <Row>
+            <Col span="6">
+              <FormItem label="票据类型">
+                <RadioGroup v-model="ticket.msg">
+                  <Radio label="运单"></Radio>
+                  <Radio label="货单"></Radio>
+                  <Radio label="出站单"></Radio>
+                </RadioGroup>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="运输方式">
+                <RadioGroup v-model="ticket.msg">
+                  <Radio label="整车"></Radio>
+                  <Radio label="零担"></Radio>
+                  <Radio label="集装箱"></Radio>
+                </RadioGroup>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="提报日期">
+                <DatePicker size="small" type="date" placeholder="请选择提报日期" v-model="search.date"></DatePicker>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem>
+                <Button size="small" type="primary" @click="handleSelectPosition()">查询</Button>
+                <Button size="small" type="primary" @click="handleSelectPosition()">重置</Button>
+                <Button size="small" type="primary" @click="handleSelectPosition()">取货票</Button>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="6">
+              <FormItem label="托运人">
+                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="收货人">
+                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="处理状态">
+                <Select size="small" v-model="ticket.city" placeholder="Select your city">
+                  <Option value="beijing">通知进货</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col span="6">
+            </Col>
+          </Row>
 
+          <Row>
+            <Col span="6">
+              <FormItem label="票据号">
+                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="发站">
+                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              </FormItem>
+            </Col>
+            <Col span="6">
+            </Col>
+            <Col span="6">
+            </Col>
+          </Row>
+        </Form>
       </Modal>
 
       <Modal v-model="positionSelectModel" title="选择货位" @on-ok="positionSelectOk" @on-cancel="positionSelectCancel">
