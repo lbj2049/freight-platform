@@ -64,7 +64,7 @@
             </Col>
             <Col span="12">
               <FormItem label="预约日期">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+                <Input size="small" type="date" v-model="ticket.date" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
           </Row>
@@ -77,7 +77,7 @@
             </Col>
             <Col span="12">
               <FormItem label="有效日期">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+                <Input size="small" type="date" v-model="ticket.date" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
           </Row>
@@ -122,12 +122,12 @@
         </Form>
       </Modal>
 
-      <Modal v-model="ticketSearchModel" title="票据查询" @on-ok="ticketSearchOk" @on-cancel="ticketSearchCancel">
-        <Form ref="ticket" :model="ticket" :rules="rules" :show-message="false" :label-width="72" class="qib-form">
+      <Modal v-model="ticketSearchModel" title="票据查询" width="800" :footer-hide="true">
+        <Form ref="ts" :model="ts" :show-message="false" :label-width="72" class="qib-form">
           <Row>
             <Col span="6">
-              <FormItem label="票据类型">
-                <RadioGroup v-model="ticket.msg">
+              <FormItem label="票据类型" prop="msg">
+                <RadioGroup v-model="ts.msg">
                   <Radio label="运单"></Radio>
                   <Radio label="货单"></Radio>
                   <Radio label="出站单"></Radio>
@@ -135,8 +135,8 @@
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="运输方式">
-                <RadioGroup v-model="ticket.msg">
+              <FormItem label="运输方式" prop="msg">
+                <RadioGroup v-model="ts.msg">
                   <Radio label="整车"></Radio>
                   <Radio label="零担"></Radio>
                   <Radio label="集装箱"></Radio>
@@ -144,32 +144,32 @@
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="提报日期">
-                <DatePicker size="small" type="date" placeholder="请选择提报日期" v-model="search.date"></DatePicker>
+              <FormItem label="提报日期" prop="date">
+                <DatePicker size="small" type="date" v-model="ts.date" placeholder="请选择提报日期"></DatePicker>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem>
-                <Button size="small" type="primary" @click="handleSelectPosition()">查询</Button>
-                <Button size="small" type="primary" @click="handleSelectPosition()">重置</Button>
-                <Button size="small" type="primary" @click="handleSelectPosition()">取货票</Button>
+              <FormItem :label-width="15">
+                <Button size="small" type="primary" @click="handleSearchPosition('ts')">查询</Button>
+                <Button size="small" @click="handleSearchReset('ts')" style="margin-left: 8px">重置</Button>
+                <Button size="small" type="primary" @click="handleGetPosition('ts')" style="margin-left: 8px">取货票</Button>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="6">
-              <FormItem label="托运人">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="托运人" prop="name">
+                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="收货人">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="收货人" prop="name">
+                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="处理状态">
-                <Select size="small" v-model="ticket.city" placeholder="Select your city">
+              <FormItem label="处理状态" prop="city">
+                <Select size="small" v-model="ts.city" placeholder="Select your city">
                   <Option value="beijing">通知进货</Option>
                   <Option value="shanghai">London</Option>
                   <Option value="shenzhen">Sydney</Option>
@@ -182,13 +182,13 @@
 
           <Row>
             <Col span="6">
-              <FormItem label="票据号">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="票据号" prop="name">
+                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="发站">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="发站" prop="name">
+                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
               </FormItem>
             </Col>
             <Col span="6">
@@ -197,6 +197,7 @@
             </Col>
           </Row>
         </Form>
+        <Table ref="tsRowTable" border :columns="tscols" :data="tsrs" @on-current-change="getCurrentData" size="small" highlight-row></Table>
       </Modal>
 
       <Modal v-model="positionSelectModel" title="选择货位" @on-ok="positionSelectOk" @on-cancel="positionSelectCancel">
@@ -232,12 +233,73 @@ export default {
         time: '',
         desc: ''
       },
+      ticketTmp: {
+      },
+      ts: {
+        name: '',
+        mail: '',
+        city: '',
+        gender: '',
+        interest: [],
+        msg: 1,
+        date: '',
+        time: '',
+        desc: ''
+      },
+      tscols: [
+        { type: 'index', width: 38, align: 'center' },
+        // { type: 'selection', width: 45, align: 'center' },
+        {
+          key: 'name', combine: true, title: '运单号'
+        },
+        {
+          key: 'date', combine: true, title: '货主提报日期'
+        }
+      ],
+      tsrs: [
+        {
+          name: 'a1',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        },
+        {
+          name: 'a2',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        },
+        {
+          name: 'a3',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        }
+      ],
       rules: {
       }
     }
   },
   methods: {
     handleSubmit (name) {
+      this.$emit('handleFormSubmit', this.transit)
+      this.$Message.success('Success!')
+      /*
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit('handleFormSubmit', this.transit)
@@ -246,6 +308,7 @@ export default {
           this.$Message.error('Fail!')
         }
       })
+      */
     },
     handleTicketVerify () {
       this.$emit('handleTicketVerify')
@@ -259,16 +322,65 @@ export default {
       console.log('handleSelectPosition')
       this.positionSelectModel = true
     },
+    handleSearchPosition () {
+      this.tsrs = [
+        {
+          name: 'b1',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        },
+        {
+          name: 'b2',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        },
+        {
+          name: 'b3',
+          mail: '1@1.1',
+          city: 'bj',
+          gender: '1',
+          interest: [1],
+          msg: 1,
+          date: '2019-01-01',
+          time: '08:08:08',
+          desc: 'test'
+        }
+      ]
+    },
+    handleSearchReset (name) {
+      this.$refs[name].resetFields()
+      this.$refs.tsRowTable.clearCurrentRow()
+    },
+    handleGetPosition (name) {
+      if (Object.is(this.ticketTmp, null) || Object.keys(this.ticketTmp).length === 0) {
+        this.$Message.error('请选择一条数据')
+        return
+      }
+      this.ticket = this.ticketTmp
+      this.ticketTmp = {}
+      this.ticketSearchModel = false
+      this.$refs[name].resetFields()
+      this.$refs.tsRowTable.clearCurrentRow()
+    },
+    getCurrentData (data) {
+      this.ticketTmp = data
+    },
     verifyOk () {
 
     },
     verifyCancel () {
-
-    },
-    ticketSearchOk () {
-
-    },
-    ticketSearchCancel () {
 
     },
     positionSelectOk () {
