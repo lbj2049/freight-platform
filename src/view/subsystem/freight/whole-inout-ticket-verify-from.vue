@@ -200,12 +200,241 @@
         <Table ref="tsRowTable" border :columns="tscols" :data="tsrs" @on-current-change="getCurrentData" size="small" highlight-row></Table>
       </Modal>
 
-      <Modal v-model="positionSelectModel" title="选择货位" @on-ok="positionSelectOk" @on-cancel="positionSelectCancel">
+      <Modal v-model="positionSelectModel" title="选择货位" width="800" @on-ok="positionSelectOk" @on-cancel="positionSelectCancel">
+        <Row :gutter="6">
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
+          <Col span="3">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+                <Row :gutter="1">
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                  <Col span="8"><div class="position-cell"></div></Col>
+                </Row>
+              </div>
+              <div class="position-title">1门1货位 空</div>
+            </div>
+          </Col>
 
+          <Col span="3" v-for="ps in psrs">
+            <div class="position-col">
+              <div class="position-body">
+                <Row :gutter="1">
+                  <Col span="8" v-for="lv in ps.ls"><div class="position-cell" v-bind:class="{'position-cell-1': lv.status === 1, 'position-cell-2': lv.status === 2, 'position-cell-3': lv.status === 3, 'position-cell-4': lv.status === 4}"></div></Col>
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
+                </Row>
+              </div>
+              <div class="position-title">{{ps.door}}门{{ps.pos}}货位 {{ps.full}}</div>
+            </div>
+          </Col>
+        </Row>
       </Modal>
 
   </div>
 </template>
+<style>
+  .position-col {
+    border: 1px #bfd2e6 solid;
+    margin-bottom: 5px;
+  }
+  .position-body {
+    padding: 2px 4px;
+
+  }
+  .position-title {
+    /*height: 12px;*/
+    padding: 2px;
+    text-align: center;
+    border-top: 1px #bfd2e6 solid;
+  }
+  .position-cell {
+    /*border: 1px #bfd2e6 dashed;*/
+    height: 24px;
+  }
+  .position-cell-1 {
+    border: 1px #bfd2e6 dashed;
+  }
+  .position-cell-2 {
+    border: 1px #F5CBD1 dashed;
+  }
+  .position-cell-3 {
+    border: 1px #e6584a dashed;
+  }
+  .position-cell-4 {
+    border: 1px #e676cc dashed;
+  }
+
+</style>
 <script>
 export default {
   props: {
@@ -290,6 +519,391 @@ export default {
           time: '08:08:08',
           desc: 'test'
         }
+      ],
+      psrs: [
+        {
+          door: 1,
+          pos: 1,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 1,
+          pos: 2,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 1,
+          pos: 3,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 2, hn: ''
+            },
+            {
+              full: 0, status: 3, hn: ''
+            },
+            {
+              full: 0, status: 4, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 2, hn: ''
+            },
+            {
+              full: 0, status: 3, hn: ''
+            },
+            {
+              full: 0, status: 4, hn: ''
+            }
+          ]
+        },
+        {
+          door: 1,
+          pos: 4,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 2, hn: ''
+            },
+            {
+              full: 0, status: 3, hn: ''
+            },
+            {
+              full: 0, status: 4, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 2, hn: ''
+            },
+            {
+              full: 0, status: 3, hn: ''
+            },
+            {
+              full: 0, status: 4, hn: ''
+            }
+          ]
+        },
+        {
+          door: 2,
+          pos: 1,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 2,
+          pos: 2,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 2,
+          pos: 3,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 2,
+          pos: 4,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 3,
+          pos: 1,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 3,
+          pos: 2,
+          full: 0,
+          ls: [
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            },
+            {
+              full: 0, status: 1, hn: ''
+            }
+          ]
+        },
+        {
+          door: 3,
+          pos: 3,
+          full: 0,
+          ls: [
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 0, status: 0, hn: ''
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            },
+            {
+              full: 1, status: 1, hn: '大豆'
+            }
+          ]
+        }
+        /*,
+        {
+          door: 3,
+          pos: 4,
+          full: 1,
+          status: 1,
+          hn: '大豆'
+        }
+        */
       ],
       rules: {
       }
