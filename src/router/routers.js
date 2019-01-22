@@ -541,7 +541,7 @@ export default [
   {
     path: '/business/freight',
     name: '货运组织',
-    component: Business,
+    component: Freight,
     systemName: 'freight',
     meta: {
       access: ['student'],
@@ -563,10 +563,10 @@ export default [
         component: parentView,
         children: [
           {
-            path: 'pl1', name: '装车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/management/class-list.vue')
+            path: 'pl1', name: '装车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/subsystem/freight/plan-1.vue')
           },
           {
-            path: 'pl2', name: '卸车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/management/student-list.vue')
+            path: 'pl2', name: '卸车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/subsystem/freight/plan-2.vue')
           }
         ]
       },
@@ -580,7 +580,7 @@ export default [
           showAlways: true,
           title: '装卸作业'
         },
-        component: parentView,
+        // component: Business,
         children: [
           {
             path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/management/class-list.vue')
