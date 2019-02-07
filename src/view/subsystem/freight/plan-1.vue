@@ -12,7 +12,7 @@
     <div class="split-pane-wrapper">
       <Split v-model="split1" mode="vertical">
         <div slot="top" class="split-pane-2">
-          <Split v-model="split2" mode="horizontal">
+          <Split v-model="split2" style="height: 100%">
             <div slot="left" class="split-pane-2-padding" :style="dataStyle">
                 <Table size="small" stripe :columns="columns" :data="list"></Table>
             </div>
@@ -28,7 +28,7 @@
             </div>
             <div slot="right" class="split-pane-2">
 
-              <Split v-model="split1" mode="horizontal">
+              <Split v-model="split4" mode="horizontal">
                 <div slot="left" class="split-pane-2-padding" :style="dataStyle">
                   <Table size="small" stripe :columns="columns" :data="list"></Table>
                 </div>
@@ -144,6 +144,12 @@ export default {
 </script>
 
 <style lang="less">
+
+  .ivu-split-horizontal .ivu-split-trigger-con {
+    top: 50%;
+    height: 100%;
+    width: 0;
+  }
 
   .split-pane-wrapper {
     height: ~"calc(100vh - 240px)";

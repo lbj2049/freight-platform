@@ -1,30 +1,51 @@
 <!-- 装车计划 -->
 
 <template>
-  <div>
+  <div slot="content">
     <Row>
       <Col span="24">
         <Card :dis-hover="true">
-          <plan-1-search-form @handleFormSubmit="handleSearch" @handlePlan="handlePlan" @handleExport="handleExport"/>
+          <plan-2-search-form @handleFormSubmit="handleSearch" @handlePlan="handlePlan" @handleExport="handleExport"/>
         </Card>
       </Col>
     </Row>
-
-
-    <div class="list-split">
-      <Split v-model="split1">
-        <div slot="left" class="list-split-pane no-padding">
-          <Split v-model="split2" mode="vertical">
-            <div slot="top" class="demo-split-pane">
-              Top Pane
+    <div class="split-pane-wrapper">
+      <Split v-model="split1" mode="vertical">
+        <div slot="top" class="split-pane-2">
+          <Split v-model="split2" mode="horizontal">
+            <div slot="left" class="split-pane-2-padding" :style="dataStyle">
+              <Table size="small" stripe :columns="columns" :data="list"></Table>
             </div>
-            <div slot="bottom" class="demo-split-pane">
-              Bottom Pane
+            <div slot="right" class="split-pane-2">
+
+              <Split v-model="split4" mode="horizontal">
+                <div slot="left" class="split-pane-2-padding" :style="dataStyle">
+                  <Table size="small" stripe :columns="columns" :data="list"></Table>
+                </div>
+                <div slot="right" class="split-pane-2-padding" :style="dataStyle">
+                  <Table size="small" stripe :columns="columns" :data="list"></Table>
+                </div>
+              </Split>
             </div>
           </Split>
         </div>
-        <div slot="right" class="list-split-pane">
-          Right Pane
+        <div slot="bottom" class="split-pane-2">
+          <Split v-model="split3" mode="horizontal">
+            <div slot="left" class="split-pane-2-padding" :style="dataStyle">
+              <Table size="small" stripe :columns="columns" :data="list"></Table>
+            </div>
+            <div slot="right" class="split-pane-2">
+
+              <Split v-model="split4" mode="horizontal">
+                <div slot="left" class="split-pane-2-padding" :style="dataStyle">
+                  <Table size="small" stripe :columns="columns" :data="list"></Table>
+                </div>
+                <div slot="right" class="split-pane-2-padding" :style="dataStyle">
+                  <Table size="small" stripe :columns="columns" :data="list"></Table>
+                </div>
+              </Split>
+            </div>
+          </Split>
         </div>
       </Split>
     </div>
@@ -32,17 +53,27 @@
   </div>
 </template>
 <script>
-import Plan1SearchForm from './plan-1-search-form'
+import TablePaging from '@/components/table-paging/table-paging'
+import Plan2SearchForm from './plan-2-search-form'
+
 export default {
   components: {
-    Plan1SearchForm
+    Plan2SearchForm,
+    TablePaging
+  },
+  props: {
   },
   data () {
     return {
+      dataStyle: {
+        height: 'calc(100% - 5px)',
+        overflow: 'auto'
+      },
       split1: 0.5,
-      split2: 0.5,
+      split2: 0.3,
       split3: 0.5,
-      split4: 0.5,
+      split4: 0.6,
+      th: 300,
       list: [
         {
           key1: 'aaa',
@@ -73,6 +104,21 @@ export default {
           key1: '111',
           key2: '222',
           key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
         }
       ],
       columns: [
@@ -83,51 +129,11 @@ export default {
         },
         {
           key: 'key1', combine: true, title: '搬运日期'
-        },
-        {
-          title: '操作',
-          key: 'action',
-          // fixed: 'right',
-          width: 120,
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: { type: 'error', size: 'small' }
-              }, [
-                h('Poptip', {
-                  props: { confirm: true, transfer: true, placement: 'left-end', title: '确定要删除吗！', type: 'error', size: 'small', width: '300' },
-                  on: {
-                    'on-ok': () => {
-                      this.$Message.info('点击了确定')
-                    },
-                    'on-cancel': () => {
-                      this.$Message.info('点击了取消')
-                    }
-                  }
-                }, '删除')
-              ]),
-              h('Button', {
-                props: { type: 'info', size: 'small' },
-                on: {
-                  click: () => {
-                    this.edit(params)
-                  }
-                }
-              }, '修改')
-            ])
-          }
-
         }
       ]
     }
   },
   methods: {
-    remove (value) {
-      console.log('remove', value)
-    },
-    edit (value) {
-      console.log('edit', value)
-    },
     handleSearch (search) {
       console.log('search', search)
     },
@@ -140,13 +146,38 @@ export default {
     selectChange (value) {
       this.multItem = value
       console.log('selectChange', value)
-    },
-    changePage (page) {
-      console.log('page', page)
-    },
-    changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
     }
   }
 }
 </script>
+
+<style lang="less">
+
+  .ivu-split-horizontal .ivu-split-trigger-con {
+    top: 50%;
+    height: 100%;
+    width: 0;
+  }
+
+  .split-pane-wrapper {
+    height: ~"calc(100vh - 240px)";
+    border: 1px solid #dcdee2;
+    margin: 10px 0;
+  }
+  .split-pane-1 {
+    padding: 10px;
+  }
+  .split-pane-2 {
+    height: 100%;
+  }
+
+  .split-pane-2 .split-pane-2-padding {
+    height: 100%;
+    padding: 10px;
+  }
+  .data-list {
+    height: 300px;
+    /*overflow: hidden;*/
+    overflow: auto !important;
+  }
+</style>

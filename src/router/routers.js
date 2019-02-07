@@ -551,44 +551,16 @@ export default [
     },
     children: [
       {
-        path: 'bf1',
-        name: '生产组织',
-        systemName: 'freight',
-        meta: {
-          access: ['student'],
-          icon: 'md-funnel',
-          showAlways: true,
-          title: '生产组织'
-        },
-        component: parentView,
-        children: [
-          {
-            path: 'pl1', name: '装车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/subsystem/freight/plan-1.vue')
-          },
-          {
-            path: 'pl2', name: '卸车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/subsystem/freight/plan-2.vue')
-          }
-        ]
+        path: 'pl1', name: '装车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '装车计划' }, component: () => import('@/view/subsystem/freight/plan-1.vue')
       },
       {
-        path: 'bf2',
-        name: '装卸作业',
-        systemName: 'freight',
-        meta: {
-          access: ['student'],
-          icon: 'md-funnel',
-          showAlways: true,
-          title: '装卸作业'
-        },
-        // component: Business,
-        children: [
-          {
-            path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/management/class-list.vue')
-          },
-          {
-            path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
-          }
-        ]
+        path: 'pl2', name: '卸车计划', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '卸车计划' }, component: () => import('@/view/subsystem/freight/plan-2.vue')
+      },
+      {
+        path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/subsystem/freight/work-1')
+      },
+      {
+        path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
       }
     ]
   },

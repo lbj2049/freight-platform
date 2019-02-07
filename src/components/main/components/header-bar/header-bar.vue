@@ -8,6 +8,7 @@
     </div>
     <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange" v-if="siderable"></sider-trigger>
     <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList" v-if="crumbable"></custom-bread-crumb>
+    <slot name="top-menu"></slot>
     <div class="custom-content-con">
       <slot></slot>
     </div>
