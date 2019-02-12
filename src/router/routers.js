@@ -558,10 +558,11 @@ export default [
       },
       {
         path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/subsystem/freight/work-1')
-      },
+      }/*,
       {
         path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
       }
+      */
     ]
   },
   {
@@ -577,6 +578,41 @@ export default [
     children: [
       {
         path: '/ticket/home', name: '/ticket/home', systemName: 'ticket', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+      },
+      {
+        path: 'wk1', name: '整车装卸', systemName: 'ticket', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/subsystem/freight/work-1')
+      }/*,
+      {
+        path: 'wk2', name: '超限超重记录', systemName: 'ticket', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
+      }
+      */
+    ]
+  },
+  {
+    path: '/ticket/fee-1',
+    name: 'ticket-fee-1',
+    meta: {
+      hideInBread: true
+    },
+    component: Ticket,
+    systemName: 'ticket',
+    children: [
+      {
+        path: 'fee-1-page', name: '制票计费', meta: { icon: 'md-menu', title: '制票计费' }, component: () => import('@/view/subsystem/ticket/fee-1')
+      }
+    ]
+  },
+  {
+    path: '/ticket/fee-2',
+    name: 'ticket-fee-2',
+    meta: {
+      hideInBread: true
+    },
+    component: Ticket,
+    systemName: 'ticket',
+    children: [
+      {
+        path: 'fee-2-page', name: '杂费核收', meta: { icon: 'md-menu', title: '杂费核收' }, component: () => import('@/view/tools-methods/tools-methods.vue')
       }
     ]
   }/*,

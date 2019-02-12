@@ -1,7 +1,11 @@
 <template>
   <Layout style="height: 100%" class="main">
     <Header class="header-con">
-      <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
+      <header-bar :collapsed="collapsed" :siderable="siderable" :crumbable="crumbable" @on-coll-change="handleCollapsedChange">
+        <div slot="top-menu" class="top-menu">
+          <side-menu accordion ref="sideMenu" :mode="mode" :theme="theme" hideTitle="hideTitle" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
+          </side-menu>
+        </div>
         <user :message-unread-count="unreadCount" :user-avator="userAvator"/>
         <!--<language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>-->
         <!--<error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>-->
@@ -10,10 +14,6 @@
       </header-bar>
     </Header>
     <Layout>
-      <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
-        <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
-        </side-menu>
-      </Sider>
       <Content class="main-content-con">
         <Layout class="main-layout-con">
           <div class="tag-nav-wrapper">
@@ -60,7 +60,12 @@ export default {
   },
   data () {
     return {
+      crumbable: false,
+      siderable: false,
       collapsed: false,
+      hideTitle: true,
+      mode: 'horizontal',
+      theme: 'light',
       isFullscreen: false,
       backUrl: '/front/guide'
     }
