@@ -1,61 +1,340 @@
 <template>
   <div>
-    <Form ref="search" :model="search" :rules="rules" :label-width="64" :show-message="false" class="qib-form">
+    <Form ref="search" :model="search" :rules="rules" :label-width="92" :show-message="false" class="qib-form">
       <Row>
         <Col span="24">
-          <FormItem label="车/箱 号" prop="mail">
-            <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
-          </FormItem>
+          <Row>
+            <Col span="6">
+              <FormItem label="号码" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+              <FormItem label="需求单号码" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <div style="width: 100%; text-align: center; font-size: 24px; padding-top: 12px;">铁路局整车运单</div>
+            </Col>
+            <Col span="6">
+              <FormItem label="工作日期" prop="mail">
+                <Input disabled size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+              <FormItem label="运单号码" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+          </Row>
         </Col>
         <Col span="24">
-          <FormItem label="到站">
-            <Select size="small" v-model="search.city" placeholder="Select your city">
-              <Option value="beijing">New York</Option>
-              <Option value="shanghai">London</Option>
-              <Option value="shenzhen">Sydney</Option>
-            </Select>
-          </FormItem>
+          <Row>
+            <Col span="6">
+              <FormItem label="发站" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="6">
+              <FormItem label="经由" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="运到期限" prop="mail" :label-width="72">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="车种车号" prop="mail" :label-width="72">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="货区" prop="mail" :label-width="54">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="标重" prop="mail" :label-width="54">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+          </Row>
         </Col>
         <Col span="24">
-          <FormItem label="开装日期" prop="mail">
-            <DatePicker size="small" type="date" placeholder="请选择开装日期" v-model="search.date"></DatePicker>
-          </FormItem>
+          <Row>
+            <Col span="6">
+              <FormItem label="到站" prop="city">
+                <Select size="small" v-model="search.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col span="9">
+              <FormItem label="运价里程" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="施封号码" prop="mail" :label-width="72">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="货位" prop="mail" :label-width="54">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="承运人装车">
+              </FormItem>
+            </Col>
+          </Row>
         </Col>
         <Col span="24">
-          <FormItem label="结束日期" prop="mail">
-            <DatePicker size="small" type="date" placeholder="请选择结束日期" v-model="search.date"></DatePicker>
-          </FormItem>
+          <Row>
+            <Col span="15">
+              <FormItem label="发站专用线" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="集装箱型" prop="city" :label-width="72">
+                <Select size="small" v-model="search.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="">
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem prop="mail" :label-width="20">
+                <Checkbox v-model="search.mail">标准价率测算</Checkbox>
+              </FormItem>
+            </Col>
+          </Row>
         </Col>
         <Col span="24">
-          <FormItem label="托运人" prop="mail">
-            <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
-          </FormItem>
+          <Row>
+            <Col span="15">
+              <FormItem label="到站专用线" prop="mail">
+                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="服务内容" prop="city" :label-width="72">
+                <Select size="small" v-model="search.city" placeholder="Select your city">
+                  <Option value="beijing">New York</Option>
+                  <Option value="shanghai">London</Option>
+                  <Option value="shenzhen">Sydney</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="">
+              </FormItem>
+            </Col>
+            <Col span="3">
+              <FormItem label="">
+              </FormItem>
+            </Col>
+          </Row>
         </Col>
         <Col span="24">
-          <FormItem label="收货人" prop="mail">
-            <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
-          </FormItem>
+          <Row>
+            <Col span="18">
+              <Row>
+                <Col span="1">
+                  <FormItem label="托运人" :label-width="72">
+                  </FormItem>
+                </Col>
+                <Col span="23">
+                  <Row>
+                    <Col span="18">
+                      <FormItem label="名称" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="经办人" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span="14">
+                      <FormItem label="地址" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="邮编" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span="10">
+                      <FormItem label="取货地址" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="里程" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="联系人" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col span="1">
+                  <FormItem label="收货人" :label-width="72">
+                  </FormItem>
+                </Col>
+                <Col span="23">
+                  <Row>
+                    <Col span="18">
+                      <FormItem label="名称" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="经办人" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span="14">
+                      <FormItem label="地址" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="邮编" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span="10">
+                      <FormItem label="取货地址" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="里程" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="4">
+                      <FormItem label="联系人" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" prop="mail">
+                        <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col span="24">
+                  <div style="padding-left: 20px; padding-bottom: 10px;">
+                    <Table size="small" height="250" stripe :columns="columns" :data="list"></Table>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col span="12">
+                  <FormItem label="" prop="mail" :label-width="20">
+                    <Input v-model="search.mail" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                  </FormItem>
+                </Col>
+                <Col span="12">
+                  <FormItem label="" prop="mail" :label-width="20">
+                    <Input v-model="search.mail" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                  </FormItem>
+                </Col>
+              </Row>
+            </Col>
+            <Col span="6">
+              <Row>
+                <Col span="24">
+                  <FormItem label="付费方式" prop="city">
+                    <Select size="small" v-model="search.city" placeholder="Select your city">
+                      <Option value="beijing">New York</Option>
+                      <Option value="shanghai">London</Option>
+                      <Option value="shenzhen">Sydney</Option>
+                    </Select>
+                  </FormItem>
+                </Col>
+              </Row>
+              <Row>
+                <Col span="24">
+                  <FormItem label="领取方式" prop="city">
+                    <CheckboxGroup v-model="search.interest">
+                      <Checkbox label="电子领货"></Checkbox>
+                      <Checkbox label="纸质领货"></Checkbox>
+                    </CheckboxGroup>
+                  </FormItem>
+                </Col>
+              </Row>
+              <Row>
+                <Col span="24">
+                  <div style="padding-left: 20px; padding-bottom: 10px;">
+                    <Table size="small" height="398" stripe :columns="columns" :data="list"></Table>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col span="24">
+                  <FormItem label="发票合计" prop="mail">
+                    <Input v-model="search.mail" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                  </FormItem>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </Col>
+      </Row>
+      <Row>
         <Col span="24">
-          <FormItem label="货物名称">
-            <Select size="small" v-model="search.city" placeholder="Select your city">
-              <Option value="beijing">New York</Option>
-              <Option value="shanghai">London</Option>
-              <Option value="shenzhen">Sydney</Option>
-            </Select>
-          </FormItem>
-        </Col>
-        <Col span="24">
-          <FormItem label="品名代码" prop="mail">
-            <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
-          </FormItem>
-        </Col>
-        <Col span="24">
-          <FormItem :label-width="8">
-            <Button size="small" type="primary" :loading="loading" @click="handleSearch('search')" style="margin-left: 8px">查询</Button>
-            <Button size="small" type="primary" @click="handleSubmit('search')" style="margin-left: 8px">确定</Button>
-            <Button size="small" type="primary" @click="handleCopy('search')" style="margin-left: 8px">粘贴</Button>
-          </FormItem>
+          <div style="text-align: center">
+            <FormItem :label-width="0">
+              <Button type="primary" :loading="loading" @click="handleWrite('search')" style="margin-left: 8px">记事</Button>
+              <Button type="primary" :loading="loading" @click="handleFee('search')" style="margin-left: 8px">计费</Button>
+            </FormItem>
+          </div>
         </Col>
       </Row>
     </Form>
@@ -85,32 +364,86 @@ export default {
         desc: ''
       },
       rules: {
-      }
+      },
+      list: [
+        {
+          key1: 'aaa',
+          key2: 'bbb',
+          key3: 'ccc'
+        },
+        {
+          key1: 'aaa',
+          key2: 'bbb',
+          key3: 'ccc'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        },
+        {
+          key1: '111',
+          key2: '222',
+          key3: '333'
+        }
+      ],
+      columns: [
+        { type: 'index', width: 38, align: 'center' },
+        // { type: 'selection', width: 45, align: 'center' },
+        {
+          key: 'key1', combine: true, title: '托运信息'
+        },
+        {
+          key: 'key1', combine: true, title: '搬运日期'
+        }
+      ]
     }
   },
   methods: {
-    handleSubmit (name) {
+    handleWrite (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$emit('handleSubmit', this.search)
+          this.$emit('handleWrite', this.search)
           this.$Message.success('Success!')
         } else {
           this.$Message.error('Fail!')
         }
       })
     },
-    handleSearch () {
+    handleFee () {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$emit('handleSearch', this.search)
+          this.$emit('handleFee', this.search)
           this.$Message.success('Success!')
         } else {
           this.$Message.error('Fail!')
         }
       })
-    },
-    handleCopy () {
-      this.$emit('handleCopy')
     }
   }
 }

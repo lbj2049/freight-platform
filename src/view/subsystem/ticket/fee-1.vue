@@ -6,7 +6,7 @@
         <fee-1-search-result/>
       </Col>
       <Col span="20" >
-        <fee-1-bill-form @handleSearch="handleSearch" @handleSubmit="handleSubmit" @handleCopy="handleCopy"/>
+        <fee-1-bill-form @handleWrite="handleWrite" @handleFee="handleFee"/>
       </Col>
     </Row>
 
@@ -110,6 +110,12 @@ export default {
     selectChange (value) {
       this.multItem = value
       console.log('selectChange', value)
+    },
+    handleWrite () {
+      console.log('handleWrite')
+    },
+    handleFee () {
+      console.log('handleFee')
     }
   }
 }
