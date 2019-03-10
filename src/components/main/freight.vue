@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 100%" class="main">
+  <Layout style="height: 100%" class="main freight">
     <Header class="header-con">
       <header-bar :collapsed="collapsed" :siderable="siderable" :crumbable="crumbable" @on-coll-change="handleCollapsedChange">
         <div slot="top-menu" class="top-menu">
@@ -43,8 +43,8 @@ import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
-import '@/theme/freight/index.less'
 import './freight.less'
+import '@/theme/freight/index.less'
 export default {
   name: 'Business',
   components: {

@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 100%" class="main">
+  <Layout style="height: 100%" class="main admin">
     <Header class="header-con">
       <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange" :siderable="false" :crumbable="false">
         <user :message-unread-count="unreadCount" :user-avator="userAvator"/>
@@ -31,6 +31,7 @@ import GoBack from './components/go-back'
 import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import './main.less'
+import '@/theme/admin/index.less'
 export default {
   name: 'Guide',
   components: {
