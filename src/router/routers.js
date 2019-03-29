@@ -612,7 +612,7 @@ export default [
     systemName: 'ticket',
     children: [
       {
-        path: 'fee-2-page', name: '杂费核收', meta: { icon: 'md-menu', title: '杂费核收' }, component: () => import('@/view/tools-methods/tools-methods.vue')
+        path: 'fee-2-page', name: '杂费核收', meta: { icon: 'md-menu', title: '杂费核收' }, component: () => import('@/view/subsystem/ticket/fee-2')
       }
     ]
   }/*,
