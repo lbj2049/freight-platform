@@ -13,6 +13,7 @@ import { setToken, getToken } from '@/libs/util'
 
 export default {
   state: {
+    userInfo: {},
     userName: '',
     userId: '',
     avatorImgPath: '',
@@ -27,6 +28,9 @@ export default {
     experimentId: ''// 学生子系统实验 ID
   },
   mutations: {
+    setUserInfo (state, userInfo) {
+      state.userInfo = userInfo
+    },
     setAvator (state, avatorPath) {
       state.avatorImgPath = avatorPath
     },
@@ -78,18 +82,45 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, { userName, password, role }) {
+    handleLogin ({ commit }, { loginName, loginPwd, role, type }) {
+      /*
       return new Promise((resolve, reject) => {
         userName = userName.trim()
         let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
         commit('setToken', access)
         resolve()
       })
+      */
+      return new Promise((resolve, reject) => {
+        login({
+          loginName,
+          loginPwd,
+          type
+        }).then(res => {
+          const body = res.data
+          // commit('setToken', data.token)
+          if (body.Status === 2000) {
+            let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
+            commit('setToken', access)
+
+            const data = body.Data
+            commit('setUserInfo', data)
+            commit('setAvator', data.head_img)
+            commit('setUserName', data.userName)
+            commit('setUserId', data.UUID)
+            commit('setAccess', data.userType)
+            commit('setHasGetInfo', true)
+          }
+          resolve(body)
+        }).catch(err => {
+          reject(err)
+        })
+      })
       /*
       return new Promise((resolve, reject) => {
         login({
           userName,
-          password
+          loginPwd
         }).then(res => {
           const data = res.data
           commit('setToken', data.token)

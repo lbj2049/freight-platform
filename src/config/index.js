@@ -17,8 +17,10 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/',
-    pro: 'https://produce.com'
+    // dev: 'http://121.42.10.114:9090/yzsoft/',
+    // pro: 'http://121.42.10.114:9090/yzsoft/'
+    dev: '',
+    pro: ''
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home

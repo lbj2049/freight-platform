@@ -37,8 +37,22 @@ export default {
       'handleLogin',
       'getUserInfo'
     ]),
-    handleSubmit ({ userName, password, role }) {
-      this.handleLogin({ userName, password, role }).then(res => {
+    handleSubmit ({ loginName, loginPwd, role, type }) {
+      this.handleLogin({ loginName, loginPwd, role, type }).then(body => {
+        if (body.Status === 2000) {
+          if (role === 1) {
+            this.$router.push({
+              name: this.$config.guideName
+            })
+          } else {
+            this.$router.push({
+              name: this.$config.homeName
+            })
+          }
+        } else {
+          this.$Message.error(body.Data.ErrorDes)
+        }
+        /*
         this.getUserInfo().then(res => {
           if (role === 1) {
             this.$router.push({
@@ -53,6 +67,7 @@ export default {
             })
           }
         })
+        */
       })
     },
     doRegister () {
@@ -62,7 +77,7 @@ export default {
     watchEditableChange (e) {
       if (e === false) {
         this.editable = false
-      };
+      }
     },
     // 点击事件
     faultClickEvent () {
