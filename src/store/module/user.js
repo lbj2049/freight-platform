@@ -100,15 +100,16 @@ export default {
           const body = res.data
           // commit('setToken', data.token)
           if (body.Status === 2000) {
-            let access = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
-            commit('setToken', access)
+            let token = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
+            let access = [token]
 
             const data = body.Data
+            commit('setToken', token)
             commit('setUserInfo', data)
             commit('setAvator', data.head_img)
             commit('setUserName', data.userName)
             commit('setUserId', data.UUID)
-            commit('setAccess', data.userType)
+            commit('setAccess', access)
             commit('setHasGetInfo', true)
           }
           resolve(body)
@@ -142,9 +143,18 @@ export default {
         //   reject(err)
         // })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-        commit('setToken', '')
-        commit('setAccess', [])
-        resolve()
+        // commit('setToken', '')
+        // commit('setAccess', [])
+        // resolve()
+
+        logout(state.userId).then(() => {
+          commit('setUserInfo', {})
+          commit('setToken', '')
+          commit('setAccess', [])
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
       })
     },
     // 获取用户相关信息

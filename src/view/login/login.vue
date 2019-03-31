@@ -40,6 +40,7 @@ export default {
     handleSubmit ({ loginName, loginPwd, role, type }) {
       this.handleLogin({ loginName, loginPwd, role, type }).then(body => {
         if (body.Status === 2000) {
+          console.log(loginName, loginPwd, role, type, body)
           if (role === 1) {
             this.$router.push({
               name: this.$config.guideName

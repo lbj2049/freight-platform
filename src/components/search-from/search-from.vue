@@ -1,9 +1,9 @@
 <style scoped>
   .ivu-form-item {
-    margin-bottom: 20px;
+    margin-bottom: 20px
   }
   .ivu-input-number {
-    width: 100%;
+    width: 100%
   }
 </style>
 <template>
@@ -45,7 +45,7 @@
           </FormItem>
         </template>
       </div>
-      <div style="textAlign:center;">
+      <div style="textAlign:center">
         <Button type="primary" @click="handleSubmit('submitForm')">{{btnName}}</Button>
       </div>
     </template>
@@ -153,7 +153,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       // 表单数据
       searchFormData: {
@@ -164,8 +164,8 @@ export default {
   },
   watch: {
     searchDefault: {
-      handler() {
-        this.searchFormData = this.searchDefault;
+      handler () {
+        this.searchFormData = this.searchDefault
       },
       deep: true
     }
@@ -173,7 +173,7 @@ export default {
   methods: {
     // 下拉框变化触发
     handleSelectChange (value, key) {
-      this.searchFormData[key] = value;
+      this.searchFormData[key] = value
     },
     // 时间范围限制
     dateLimit (limit) {
@@ -182,55 +182,55 @@ export default {
           return (
             (date && date.valueOf() > new Date(limit.up)) ||
             (date && date.valueOf() < new Date(limit.down))
-          );
+          )
         }
-      };
+      }
     },
     // 提交搜索框数据
     handleSubmit (name) {
-      let bPass = true;
+      let bPass = true
       // 遍历props数组验证是否有规则验证,否则直接emit搜索参数
       for (let index = 0; index < this.searchData.length; index++) {
-        const element = this.searchData[index];
+        const element = this.searchData[index]
         if (element.required) {
-          bPass = false;
-          break;
+          bPass = false
+          break
         }
       }
       if (bPass) {
-        this.$emit('handleFormSubmit', this.searchFormData);
+        this.$emit('handleFormSubmit', this.searchFormData)
       } else {
         this.$refs[name].validate(valid => {
           if (valid) {
-            this.$emit('handleFormSubmit', this.searchFormData);
+            this.$emit('handleFormSubmit', this.searchFormData)
           } else {
-            this.$Message.error('搜索参数不符合规则!');
+            this.$Message.error('搜索参数不符合规则!')
           }
-        });
+        })
       }
     },
     // 时间选择框变化触发
     dataChange(date, key) {
       if (typeof key == 'searchect') {
         key.map((item, index) => {
-          this.searchFormData[item] = date[index];
-        });
+          this.searchFormData[item] = date[index]
+        })
       } else {
-        this.searchFormData[key] = date;
+        this.searchFormData[key] = date
       }
     }
   },
   mounted () {
     if (this.searchDefault) {
-      this.searchFormData = this.searchDefault;
+      this.searchFormData = this.searchDefault
     }
     // this.searchData.map(item => {
     //     if (item.type == 'select' || item.type == 'radio') {
     //         if (item.defaultValue) {
-    //             this.searchFormData[item.value] = item.defaultValue;
+    //             this.searchFormData[item.value] = item.defaultValue
     //         }
     //     }
-    // });
+    // })
   }
 }
 </script>

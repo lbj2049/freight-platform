@@ -1,7 +1,7 @@
 <template>
     <div slot="content">
       <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize" :pagination="pagination">
         <div slot="toolButtons">
           <Button type="text" @click="doRePass">密码初始化</Button>
           <Button type="primary" @click="doAdd">新增</Button>
@@ -13,6 +13,9 @@
     </div>
 </template>
 <script>
+import {
+  getTeaList
+} from '@/api/admin.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
 import TeacherEdit from './teacher-edit'
@@ -29,7 +32,7 @@ export default {
       searchData: [
         {
           type: 'input',
-          value: 'input',
+          value: 'keyword',
           clearable: true,
           // prefix: 'ios-contact',
           suffix: 'ios-search',
@@ -38,69 +41,45 @@ export default {
         }
       ],
       distance: '272px',
-      list: [
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        },
-        {
-          key1: '111', key2: '222', key3: '333'
-        }
-      ],
+      list: [],
       columns: [
         {
           type: 'selection', width: 60, align: 'center'
         },
         {
-          key: 'key1', combine: true, title: '用户名'
+          key: 'loginName', combine: true, title: '用户名'
         },
         {
-          key: 'key3', combine: true, title: '姓名'
+          key: 'userName', combine: true, title: '姓名'
         },
         {
-          key: 'key2', title: '手机'
+          key: 'userTel', title: '手机'
         },
         {
-          key: 'key3', combine: true, title: '性别'
+          key: 'userSex', combine: true, title: '性别',
+          render: (h, params) => {
+            // 状态：0 未审核 1 正常 2 禁用
+            let userSex = params.row.userSex
+            let userSexTxt = '男'
+            if (userSex === 2) {
+              userSexTxt = '女'
+            }
+            return h('div', userSexTxt)
+          }
         },
         {
-          key: 'key3', combine: true, title: '状态'
+          key: 'state', combine: true, title: '状态',
+          render: (h, params) => {
+            // 状态：0 未审核 1 正常 2 禁用
+            let state = params.row.state
+            let stateTxt = '禁用'
+            if (state === 0) {
+              stateTxt = '未审核'
+            } else if (state === 1) {
+              stateTxt = '正常'
+            }
+            return h('div', stateTxt)
+          }
         },
         {
           title: '操作',
@@ -162,13 +141,37 @@ export default {
             ])
           }
         }
-      ]
+      ],
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        currentPage: 1
+      }
     }
+  },
+  mounted: function () {
+    this.handleSearch('')
   },
   methods: {
     // 搜索
     handleSearch (search) {
       console.log('search', search)
+      getTeaList(search).then(res => {
+        const body = res.data
+        // commit('setToken', data.token)
+        if (body.Status === 2000) {
+          const data = body.Data
+          console.log(data)
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            currentPage: data.page
+          }
+          console.log(this.pagination)
+        } else {
+        }
+      })
     },
     // 选中对象切换
     selectChange (value) {
