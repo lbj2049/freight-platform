@@ -7,7 +7,7 @@
   }
 </style>
 <template>
-  <Form ref="submitForm" autocomplete="on" :model="searchFormData" :label-width="labelShow?null:labelWidth">
+  <Form ref="submitForm" autocomplete="on" :model="searchFormData" :label-width="labelShow?null:labelWidth" @submit.native.prevent>
     <template v-if="vertical">
       <div v-for="(item,index) in searchData" :key="index">
         <template v-if="item.type === 'select'">
@@ -178,7 +178,7 @@ export default {
     // 时间范围限制
     dateLimit (limit) {
       return {
-        disabledDate(date) {
+        disabledDate (date) {
           return (
             (date && date.valueOf() > new Date(limit.up)) ||
             (date && date.valueOf() < new Date(limit.down))
@@ -210,8 +210,8 @@ export default {
       }
     },
     // 时间选择框变化触发
-    dataChange(date, key) {
-      if (typeof key == 'searchect') {
+    dataChange (date, key) {
+      if (typeof key === 'searchect') {
         key.map((item, index) => {
           this.searchFormData[item] = date[index]
         })

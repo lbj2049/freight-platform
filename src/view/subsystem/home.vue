@@ -1,7 +1,7 @@
 <template>
   <Card :bordered="false">
     <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
     </table-paging>
   </Card>
 </template>
@@ -115,7 +115,7 @@ export default {
       this.multItem = value
       console.log('selectChange', value)
     },
-    changePage (page) {
+    changePageNum (page) {
       console.log('page', page)
     },
     changePageSize (pageSize) {

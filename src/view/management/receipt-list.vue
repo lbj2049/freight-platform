@@ -1,7 +1,7 @@
 <template>
   <div slot="content">
     <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize">
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
       <div slot="toolButtons">
         <Button type="primary" @click="doAdd">添加收货单</Button>
       </div>
@@ -150,7 +150,7 @@ export default {
       this.multItem = value
       console.log('selectChange', value)
     },
-    changePage (page) {
+    changePageNum (page) {
       console.log('page', page)
     },
     changePageSize (pageSize) {

@@ -4,7 +4,7 @@
     <Card :dis-hover="true">
     <day-demand-transport-form />
     </Card>
-    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
   </div>
 </template>
 <script>
@@ -108,7 +108,7 @@ export default {
       this.multItem = value
       console.log('selectChange', value)
     },
-    changePage (page) {
+    changePageNum (page) {
       console.log('page', page)
     },
     changePageSize (pageSize) {

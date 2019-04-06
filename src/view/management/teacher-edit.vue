@@ -1,38 +1,38 @@
 <template>
   <div>
     <Modal :value="editable" :mask-closable="false" :footer-hide="true" title="添加老师" @on-visible-change="watchEditableChange" :styles="{top: '16%'}" width="880">
-      <Form ref="addTeacher" :model="teacherData" :rules="rules" :label-width="120">
+      <Form ref="editUserForm" :model="userInfo" :rules="rules" :label-width="120">
 
         <Row>
           <Col span="24">
-            <FormItem label="用户名" prop="userName">
-              <Input v-model="teacherData.userName" placeholder="请输入教师用户名"></Input>
+            <FormItem label="用户名" prop="loginName">
+              <Input v-model="userInfo.loginName" placeholder="请输入用户名"></Input>
             </FormItem>
           </Col>
         </Row>
 
         <Row>
           <Col span="24">
-          <FormItem label="老师姓名" prop="teacherName">
-            <Input v-model="teacherData.teacherName" placeholder="请输入教师姓名"></Input>
+          <FormItem label="姓名" prop="userName">
+            <Input v-model="userInfo.userName" placeholder="请输入姓名"></Input>
           </FormItem>
           </Col>
         </Row>
 
         <Row>
           <Col span="24">
-          <FormItem label="手机号" prop="phoneNum">
-            <Input v-model="teacherData.phoneNum"  placeholder="请输入手机号" ></Input>
+          <FormItem label="电话" prop="userTel">
+            <Input v-model="userInfo.userTel"  placeholder="请输入电话" ></Input>
           </FormItem>
           </Col>
         </Row>
 
         <Row>
           <Col span="24">
-            <FormItem label="性别" prop="sex">
-              <RadioGroup v-model="teacherData.sex">
-                <Radio label="男" ></Radio>
-                <Radio label="女" ></Radio>
+            <FormItem label="性别" prop="userSex">
+              <RadioGroup v-model="userInfo.userSex">
+                <Radio :label="1" >男</Radio>
+                <Radio :label="2" >女</Radio>
               </RadioGroup>
             </FormItem>
           </Col>
@@ -40,19 +40,19 @@
 
         <Row>
           <Col span="24">
-          <FormItem label="状态" prop="status">
-            <RadioGroup v-model="teacherData.status">
-              <Radio label="已审核"></Radio>
-              <Radio label="未审核"></Radio>
-              <Radio label="禁用"></Radio>
+          <FormItem label="状态" prop="state">
+            <RadioGroup v-model="userInfo.state">
+              <Radio :label="0">未审核</Radio>
+              <Radio :label="1">正常</Radio>
+              <Radio :label="2">禁用</Radio>
             </RadioGroup>
           </FormItem>
           </Col>
         </Row>
 
         <FormItem>
-          <Button type="primary" :loading="loading" @click="handleSubmit('addTeacher')">提交</Button>
-          <Button @click="handleReset('addTeacher')" style="margin-left: 8px">清空</Button>
+          <Button type="primary" :loading="loading" @click="handleSubmit('editUserForm')">提交</Button>
+          <Button @click="handleReset('editUserForm')" style="margin-left: 8px">清空</Button>
         </FormItem>
       </Form>
       <!--提交时加载动画-->
@@ -74,25 +74,22 @@ export default {
   },
   data () {
     return {
-      teacherData: {
+      userInfo: {
+        UUID: '',
+        loginName: '',
         userName: '',
-        teacherName: '',
-        phoneNum: '',
-        sex: '男',
-        status: '已审核'
+        state: 1,
+        userNo: '',
+        userTel: 1,
+        userSex: '1',
+        userType: 2
       },
       rules: {
-        userName: [
+        loginName: [
           { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
-        teacherName: [
-          { required: true, message: '老师姓名不能为空', trigger: 'blur' }
-        ],
-        phoneNum: [
-          { required: true, message: '请输入手机号', trigger: 'blur' }, { pattern: /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/, message: '请输入正确的电话', rigger: 'blur' }
-        ],
-        sex: [
-          { required: true, message: '', trigger: 'change' }
+        userName: [
+          { required: true, message: '姓名不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -108,13 +105,13 @@ export default {
     watchEditableChange (e) {
       this.$emit('watchEditableChange', e)
     },
+    editFormData (userInfo) {
+      this.userInfo = { ...userInfo }
+    },
     handleSubmit (name) {
-      alert(Object.values(this.teacherData))
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
+          this.$emit('onSuccessValid', this.userInfo)
         }
       })
     },

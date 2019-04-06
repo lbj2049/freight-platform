@@ -4,7 +4,7 @@
       <slot name="toolButtons"></slot>
     </div>
     <Spin size="large" fix v-if="loading"></Spin>
-    <div>
+    <div :style="dataStyle">
       <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
     </div>
     <Affix :offset-bottom="0">
@@ -99,8 +99,8 @@ export default {
   },
   methods: {
     // 分页切换
-    changePageNum (pageNum) {
-      this.$emit('changePageNum', pageNum)
+    changePageNum (page) {
+      this.$emit('changePageNum', page)
     },
     // 页码数切换
     changePageSize (pagesize) {

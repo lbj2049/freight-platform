@@ -6,7 +6,7 @@
       <p slot="title">查询</p>
       <waybill-print-form @handleFormSubmit="handleSearch" @handleFormPrint="handlePrint" @handleFormOut="handleOut"/>
     </Card>
-    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
   </div>
 </template>
 <script>
@@ -116,7 +116,7 @@ export default {
       this.multItem = value
       console.log('selectChange', value)
     },
-    changePage (page) {
+    changePageNum (page) {
       console.log('page', page)
     },
     changePageSize (pageSize) {

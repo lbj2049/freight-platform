@@ -50,7 +50,7 @@ export default {
     return {
       form: {
         loginName: 'admin',
-        loginPwd: '123456',
+        loginPwd: 'admin',
         role: 1
       },
       roles: [

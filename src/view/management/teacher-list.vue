@@ -1,20 +1,28 @@
 <template>
     <div slot="content">
-      <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePage="changePage" @changePageSize="changePageSize" :pagination="pagination">
+      <search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>
+      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
         <div slot="toolButtons">
           <Button type="text" @click="doRePass">密码初始化</Button>
-          <Button type="primary" @click="doAdd">新增</Button>
-          <Button type="error" @click="doBatchDelete">批量删除</Button>
-          <Button type="warning" @click="doAuth">审核</Button>
+          <Button type="primary" @click="toAdd">新增</Button>
+          <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
+          <Poptip confirm title="确定删除?" @on-ok="doBatchDelete" style="text-align: left">
+            <Button type="error">批量删除</Button>
+          </Poptip>
+          <Poptip confirm title="确定审核?" @on-ok="doBatchAuth">
+            <Button type="warning">审核</Button>
+          </Poptip>
         </div>
       </table-paging>
-      <teacher-edit :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
+      <teacher-edit ref="editUserForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
     </div>
 </template>
 <script>
 import {
-  getTeaList
+  getTeaList,
+  editUserInfo,
+  delUserInfo,
+  setState
 } from '@/api/admin.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
@@ -40,7 +48,7 @@ export default {
           placeholder: '关键词'
         }
       ],
-      distance: '272px',
+      distance: '282px',
       list: [],
       columns: [
         {
@@ -56,7 +64,9 @@ export default {
           key: 'userTel', title: '手机'
         },
         {
-          key: 'userSex', combine: true, title: '性别',
+          key: 'userSex',
+          combine: true,
+          title: '性别',
           render: (h, params) => {
             // 状态：0 未审核 1 正常 2 禁用
             let userSex = params.row.userSex
@@ -68,7 +78,9 @@ export default {
           }
         },
         {
-          key: 'state', combine: true, title: '状态',
+          key: 'state',
+          combine: true,
+          title: '状态',
           render: (h, params) => {
             // 状态：0 未审核 1 正常 2 禁用
             let state = params.row.state
@@ -92,20 +104,13 @@ export default {
             return btn('div', [
               btn('Button', {
                 props: {
-                  type: 'primary',
+                  type: 'warning',
                   size: 'small'
                 },
                 on: {
                   click: () => {
-                    // this.remove(params)
-                    alert(params.row.key1)
                     const _this = this
-                    this.$Modal.confirm({
-                      content: '确认审核？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+                    _this.doAuth(params.row)
                   }
                 }
               }, '审核'),
@@ -116,28 +121,36 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.edit(params)
+                    const _this = this
+                    _this.toEdit(params.row)
                   }
                 }
               }, '修改'),
-              btn('Button', {
+              btn('Poptip', {
                 props: {
+                  transfer: true,
+                  confirm: true,
                   type: 'error',
-                  size: 'small'
+                  size: 'large',
+                  title: '你确定要删除吗?'
                 },
                 on: {
-                  click: () => {
-                    // this.remove(params)
+                  'on-ok': () => {
                     const _this = this
-                    this.$Modal.confirm({
-                      content: '确认删除？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+                    _this.doDelete(params.row)
                   }
                 }
-              }, '删除')
+              }, [
+                btn('Button', {
+                  props: {
+                    type: 'error',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  }
+                }, '删除')
+              ])
             ])
           }
         }
@@ -145,86 +158,188 @@ export default {
       pagination: {
         total: 0,
         pageSize: 10,
-        currentPage: 1
+        pageNum: 1
       }
     }
   },
   mounted: function () {
-    this.handleSearch('')
+    this.toHandleSearch()
   },
   methods: {
+    toHandleSearch () {
+      this.$refs.searchForm.handleSubmit('submitForm')
+    },
     // 搜索
-    handleSearch (search) {
-      console.log('search', search)
-      getTeaList(search).then(res => {
+    doHandleSearch (search) {
+      let params = search ? Object.assign(search, this.pagination) : { ...this.pagination }
+      getTeaList(params).then(res => {
         const body = res.data
-        // commit('setToken', data.token)
         if (body.Status === 2000) {
           const data = body.Data
-          console.log(data)
           this.list = data.datas || []
           this.pagination = {
             total: data.total,
             pageSize: data.pageSize,
-            currentPage: data.page
+            pageNum: data.page
           }
-          console.log(this.pagination)
         } else {
+          this.$Message.error(data.ErrorDes)
         }
       })
     },
     // 选中对象切换
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
     },
     // 切换页面
-    changePage (page) {
-      console.log('page', page)
+    changePageNum (pageNum) {
+      this.pagination.pageNum = pageNum
+      this.toHandleSearch()
     },
     // 切换页面size
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      this.pagination.pageSize = pageSize
+      this.toHandleSearch()
     },
     // 列表方法
     doRePass () {
       this.$Message.success('密码初始化完成')
     },
     // 添加老师
-    doAdd () {
+    toAdd () {
       this.editable = true
+      this.$refs.editUserForm.handleReset('editUserForm')
     },
-    // 批量删除
-    doBatchDelete () {
-      if (this.multItem) {
+    // 编辑老师
+    toEdit (item) {
+      this.editable = true
+      this.$refs.editUserForm.editFormData(item)
+    },
+    getBatchIds () {
+      if (this.multItem && this.multItem.length > 0) {
         const userIds = []
         this.multItem.forEach((k, v) => {
           userIds.push(k.key1)
         })
-        console.log(userIds)
-
-        this.$Modal.confirm({
-          title: '批量删除',
-          content: '确定删除？',
-          onOk: function () {
-            this.$Message.success('删除完成')
-          }
-        })
+        return userIds
+      } else {
+        this.$Message.error('请选择数据')
       }
     },
-    // 批量审核
-    doAuth () {
+    // 删除
+    doDelete (item) {
+      delUserInfo({ UUIDs: item.UUID }).then(res => {
+        this.resultHandler(res)
+      })
+    },
+    // 批量删除
+    doBatchDelete () {
+      const userIds = this.getBatchIds()
+      delUserInfo({ UUIDs: userIds }).then(res => {
+        this.resultHandler(res)
+      })
+    },
+    // 审核
+    doAuth (item) {
+      let state = item.state
       this.$Modal.confirm({
         title: '审核',
-        content: '确定审核？',
-        onOk: function () {
-          this.$Message.success('审核完成')
+        render: (h) => {
+          return h('RadioGroup', {
+            props: {
+              value: 1
+            },
+            on: {
+              'on-change': (val) => {
+                state = val
+              }
+            },
+            style: {
+              marginLeft: '120px'
+            }
+          }, [
+            h('Radio', {
+              props: {
+                label: 0
+              }
+            }, '未审核'),
+            h('Radio', {
+              props: {
+                label: 1
+              }
+            }, '正常'),
+            h('Radio', {
+              props: {
+                label: 2
+              }
+            }, '禁用')]
+          )
+        },
+        onOk: () => {
+          setState({ UUIDs: item.UUID, state: state }).then(res => {
+            this.resultHandler(res)
+          })
         }
       })
     },
+    // 批量审核
+    doBatchAuth () {
+      const userIds = this.getBatchIds()
+      this.$Modal.confirm({
+        title: '审核',
+        render: (h) => {
+          return h('RadioGroup', {
+            props: {
+              value: 1
+            },
+            on: {
+              'on-change': (val) => {
+                state = val
+              }
+            }
+          }, [
+            h('Radio', {
+              props: {
+                label: 0
+              }
+            }, '未审核'),
+            h('Radio', {
+              props: {
+                label: 1
+              }
+            }, '正常'),
+            h('Radio', {
+              props: {
+                label: 2
+              }
+            }, '禁用')]
+          )
+        },
+        onOk: () => {
+          setState({ UUIDs: userIds, state: state }).then(res => {
+            this.resultHandler(res)
+          })
+        }
+      })
+    },
+    handleSubmit (userInfo) {
+      editUserInfo(userInfo).then(res => {
+        this.resultHandler(res)
+      })
+    },
+    resultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.formCancelEvent()
+        this.toHandleSearch()
+        this.$Message.success(data.Result)
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
+    },
     // 表单弹窗的状态
     watchEditableChange (e) {
-      console.log(e)
       if (e === false) {
         this.editable = false
       };
