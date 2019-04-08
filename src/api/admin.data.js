@@ -25,6 +25,7 @@ export const delUserInfo = (params) => {
     method: 'post'
   })
 }
+
 export const setState = (params) => {
   return axios.request({
     url: '/userInfo/setState',

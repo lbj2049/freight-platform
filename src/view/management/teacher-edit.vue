@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal :value="editable" :mask-closable="false" :footer-hide="true" title="添加老师" @on-visible-change="watchEditableChange" :styles="{top: '16%'}" width="880">
+    <Modal :value="editable" :mask-closable="false" :footer-hide="true" :title="getTitle()" @on-visible-change="watchEditableChange" :styles="{top: '16%'}" width="880">
       <Form ref="editUserForm" :model="userInfo" :rules="rules" :label-width="120">
 
         <Row>
@@ -74,6 +74,7 @@ export default {
   },
   data () {
     return {
+      isAdd: true,
       userInfo: {
         UUID: '',
         loginName: '',
@@ -95,6 +96,9 @@ export default {
     }
   },
   methods: {
+    getTitle () {
+      return (this.isAdd ? '添加' : '修改') + '班级'
+    },
     // 弹出层的事件
     formConfirmEvent () {
       this.$emit('formConfirmEvent')
@@ -107,6 +111,10 @@ export default {
     },
     editFormData (userInfo) {
       this.userInfo = { ...userInfo }
+      this.isAdd = true
+      if (this.userInfo.UUID) {
+        this.isAdd = false
+      }
     },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {

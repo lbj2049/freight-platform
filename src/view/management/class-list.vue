@@ -1,22 +1,38 @@
 <template>
   <div slot="content">
-    <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
+    <search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>
+    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
+      <div slot="toolButtons">
+        <Button type="primary" @click="toAdd">新增</Button>
+      </div>
+    </table-paging>
+    <class-edit ref="editClassForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
   </div>
 </template>
 <script>
+import {
+  getClassList,
+  addClassInfo,
+  editClassInfo,
+  delClassInfo
+} from '@/api/teacher.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
+import ClassEdit from './class-edit'
+
 export default {
   components: {
-    TablePaging, SearchForm
+    TablePaging, SearchForm, ClassEdit
   },
   data () {
     return {
+      loading: false,
+      editable: false,
+      multItem: [],
       searchData: [
         {
           type: 'input',
-          value: 'input',
+          value: 'keyword',
           clearable: true,
           // prefix: 'ios-contact',
           suffix: 'ios-search',
@@ -24,67 +40,36 @@ export default {
           placeholder: '关键词'
         }
       ],
-      list: [
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        }
-      ],
+      distance: '282px',
+      list: [],
       columns: [
         {
-          key: 'key1', combine: true, title: '班级名称'
+          type: 'index', width: 60, align: 'center'
+        },
+        {
+          key: 'className', combine: true, title: '班级名称'
         },
         {
           title: '操作',
           key: 'action',
           // fixed: 'right',
-          width: 120,
+          className: 'btn-ops',
+          align: 'center',
+          width: 180,
           render: (btn, params) => {
             return btn('div', [
               btn('Button', {
                 props: {
-                  type: 'error',
+                  type: 'warning',
                   size: 'small'
                 },
                 on: {
                   click: () => {
-                    // this.remove(params)
                     const _this = this
-                    this.$Modal.confirm({
-                      content: '确认删除？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+                    _this.doAuth(params.row)
                   }
                 }
-              }, '删除'),
+              }, '审核'),
               btn('Button', {
                 props: {
                   type: 'info',
@@ -92,29 +77,156 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.edit(params)
+                    const _this = this
+                    _this.toEdit(params.row)
                   }
                 }
-              }, '修改')
+              }, '修改'),
+              btn('Poptip', {
+                props: {
+                  transfer: true,
+                  confirm: true,
+                  type: 'error',
+                  size: 'large',
+                  title: '你确定要删除吗?'
+                },
+                on: {
+                  'on-ok': () => {
+                    const _this = this
+                    _this.doDelete(params.row)
+                  }
+                }
+              }, [
+                btn('Button', {
+                  props: {
+                    type: 'error',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  }
+                }, '删除')
+              ])
             ])
           }
         }
-      ]
+      ],
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        pageNum: 1
+      }
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    }
+  },
+  mounted: function () {
+    this.toHandleSearch()
+  },
   methods: {
-    handleSearch (search) {
-      console.log('search', search)
+    toHandleSearch () {
+      this.$refs.searchForm.handleSubmit('submitForm')
     },
+    // 搜索
+    doHandleSearch (search) {
+      const UUID = this.getUserId
+      let params = { ...search, ...this.pagination, UUID }
+      getClassList(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            pageNum: data.page
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
+    // 选中对象切换
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
     },
-    changePageNum (page) {
-      console.log('page', page)
+    // 切换页面
+    changePageNum (pageNum) {
+      this.pagination.pageNum = pageNum
+      this.toHandleSearch()
     },
+    // 切换页面size
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      this.pagination.pageSize = pageSize
+      this.toHandleSearch()
+    },
+    // 添加
+    toAdd () {
+      this.editable = true
+      this.$refs.editClassForm.editFormData({})
+      this.$refs.editClassForm.handleReset('editClassForm')
+    },
+    // 编辑
+    toEdit (item) {
+      this.editable = true
+      this.$refs.editClassForm.editFormData(item)
+    },
+    getBatchIds () {
+      if (this.multItem && this.multItem.length > 0) {
+        const userIds = []
+        this.multItem.forEach((k, v) => {
+          userIds.push(k.key1)
+        })
+        return userIds
+      } else {
+        this.$Message.error('请选择数据')
+      }
+    },
+    // 删除
+    doDelete (item) {
+      delClassInfo({ classID: item.classID }).then(res => {
+        this.resultHandler(res)
+      })
+    },
+    handleSubmit (classInfo) {
+      const info = { ...classInfo }
+      if (!info.classID) {
+        addClassInfo(classInfo).then(res => {
+          this.resultHandler(res)
+        })
+      } else {
+        editClassInfo(classInfo).then(res => {
+          this.resultHandler(res)
+        })
+      }
+    },
+    resultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.formCancelEvent()
+        this.toHandleSearch()
+        this.$Message.success(data.Result)
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
+    },
+    // 表单弹窗的状态
+    watchEditableChange (e) {
+      if (e === false) {
+        this.editable = false
+      }
+    },
+    // 弹出事件
+    formConfirmEvent () {
+      this.editable = false
+    },
+    // 弹窗消失⌚
+    formCancelEvent () {
+      this.editable = false
     }
   }
 }

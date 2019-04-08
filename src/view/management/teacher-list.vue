@@ -174,8 +174,8 @@ export default {
       let params = search ? Object.assign(search, this.pagination) : { ...this.pagination }
       getTeaList(params).then(res => {
         const body = res.data
+        const data = body.Data
         if (body.Status === 2000) {
-          const data = body.Data
           this.list = data.datas || []
           this.pagination = {
             total: data.total,

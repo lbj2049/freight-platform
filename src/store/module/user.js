@@ -82,7 +82,7 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, { loginName, loginPwd, role, type }) {
+    handleLogin ({ state, commit }, { loginName, loginPwd, role, type }) {
       /*
       return new Promise((resolve, reject) => {
         userName = userName.trim()
@@ -106,11 +106,12 @@ export default {
             const data = body.Data
             commit('setToken', token)
             commit('setUserInfo', data)
-            commit('setAvator', data.head_img)
             commit('setUserName', data.userName)
             commit('setUserId', data.UUID)
             commit('setAccess', access)
             commit('setHasGetInfo', true)
+            commit('setAvator', data.head_img)
+            console.log(state)
           }
           resolve(body)
         }).catch(err => {
@@ -146,7 +147,6 @@ export default {
         // commit('setToken', '')
         // commit('setAccess', [])
         // resolve()
-
         logout(state.userId).then(() => {
           commit('setUserInfo', {})
           commit('setToken', '')
