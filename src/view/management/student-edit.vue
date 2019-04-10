@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     getTitle () {
-      return (this.isAdd ? '添加' : '修改') + '老师'
+      return (this.isAdd ? '添加' : '修改') + '学生'
     },
     // 弹出层的事件
     formConfirmEvent () {

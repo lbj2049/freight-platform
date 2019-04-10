@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import iView from 'iview'
+import formCreate from 'form-create'
 import i18n from '@/locale'
 import config from '@/config'
 import importDirective from '@/directive'
@@ -21,6 +22,7 @@ import '@/assets/icons/iconfont.css'
 Vue.use(iView, {
   i18n: (key, value) => i18n.t(key, value)
 })
+Vue.use(formCreate)
 // Vue.use(TreeTable)
 /**
  * @description 注册admin内置插件

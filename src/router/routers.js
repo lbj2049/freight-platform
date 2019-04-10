@@ -218,7 +218,7 @@ export default [
   {
     path: '/admin',
     name: 'admin',
-    // systemName: 'main',
+    systemName: 'main',
     meta: {
       access: ['admin'],
       hideInBread: true
@@ -226,7 +226,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'teacher-list', name: '老师管理', /* systemName: 'main', */meta: { access: ['admin'], icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
+        path: 'teacher-list', name: '老师管理', systemName: 'main', meta: { access: ['admin'], icon: 'ios-navigate', title: '老师管理' }, component: () => import('@/view/management/teacher-list.vue')
       }
     ]
   },
@@ -265,10 +265,10 @@ export default [
     component: Main,
     children: [
       {
-        path: 'demand-list', name: '分发需求单', access: ['teacher'], systemName: 'main', meta: { icon: 'ios-navigate', title: '分发需求单' }, component: () => import('@/view/management/demand-list.vue')
+        path: 'demand-list', name: '分发需求单', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '分发需求单' }, component: () => import('@/view/management/demand-list.vue')
       },
       {
-        path: 'receipt-list', name: '分发收货单', access: ['teacher'], systemName: 'main', meta: { icon: 'ios-navigate', title: '分发收货单' }, component: () => import('@/view/management/receipt-list.vue')
+        path: 'receipt-list', name: '分发收货单', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '分发收货单' }, component: () => import('@/view/management/receipt-list.vue')
       }
     ]
   },

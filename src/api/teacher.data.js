@@ -8,6 +8,14 @@ export const getClassList = (params) => {
   })
 }
 
+export const getClassSel = (params) => {
+  return axios.request({
+    url: '/classInfo/getClassSel',
+    data: params,
+    method: 'post'
+  })
+}
+
 export const addClassInfo = (classInfo) => {
   return axios.request({
     url: '/classInfo/adClassInfo',
@@ -31,3 +39,36 @@ export const delClassInfo = (params) => {
     method: 'post'
   })
 }
+
+export const getStudentList = (params) => {
+  return axios.request({
+    url: '/userInfo/getStuList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const editUserInfo = (userInfo) => {
+  return axios.request({
+    url: '/userInfo/editUserInfo',
+    data: userInfo,
+    method: 'post'
+  })
+}
+
+export const delUserInfo = (params) => {
+  return axios.request({
+    url: '/userInfo/delUserInfo',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const setState = (params) => {
+  return axios.request({
+    url: '/userInfo/setState',
+    data: params,
+    method: 'post'
+  })
+}
+
