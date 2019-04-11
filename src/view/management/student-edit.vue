@@ -10,20 +10,27 @@
             </FormItem>
           </Col>
         </Row>
-
         <Row>
           <Col span="24">
-          <FormItem label="姓名" prop="userName">
-            <Input v-model="userInfo.userName" placeholder="请输入姓名"></Input>
-          </FormItem>
+            <FormItem label="密码" prop="loginPwd">
+              <Input v-model="userInfo.loginPwd" placeholder="请输入密码"></Input>
+            </FormItem>
           </Col>
         </Row>
 
         <Row>
           <Col span="24">
-          <FormItem label="电话" prop="userTel">
-            <Input v-model="userInfo.userTel"  placeholder="请输入电话" ></Input>
-          </FormItem>
+            <FormItem label="姓名" prop="userName">
+              <Input v-model="userInfo.userName" placeholder="请输入姓名"></Input>
+            </FormItem>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span="24">
+            <FormItem label="电话" prop="userTel">
+              <Input v-model="userInfo.userTel"  placeholder="请输入电话" ></Input>
+            </FormItem>
           </Col>
         </Row>
 
@@ -40,13 +47,13 @@
 
         <Row>
           <Col span="24">
-          <FormItem label="状态" prop="state">
-            <RadioGroup v-model="userInfo.state">
-              <Radio :label="0">未审核</Radio>
-              <Radio :label="1">正常</Radio>
-              <Radio :label="2">禁用</Radio>
-            </RadioGroup>
-          </FormItem>
+            <FormItem label="状态" prop="state">
+              <RadioGroup v-model="userInfo.state">
+                <Radio :label="0">未审核</Radio>
+                <Radio :label="1">正常</Radio>
+                <Radio :label="2">禁用</Radio>
+              </RadioGroup>
+            </FormItem>
           </Col>
         </Row>
 
@@ -78,12 +85,14 @@ export default {
       userInfo: {
         UUID: '',
         loginName: '',
+        loginPwd: '',
         userName: '',
         state: 1,
         userNo: '',
-        userTel: 1,
-        userSex: '1',
-        userType: 2
+        userTel: '',
+        userSex: 1,
+        userType: 1,
+        classID: null
       },
       rules: {
         loginName: [

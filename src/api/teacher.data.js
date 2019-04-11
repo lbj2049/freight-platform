@@ -72,3 +72,50 @@ export const setState = (params) => {
   })
 }
 
+export const getExpList = (params) => {
+  return axios.request({
+    url: '/expInfo/getExpList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const getExpSel = (params) => {
+  return axios.request({
+    url: 'stuExpInfo/getExpSel',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const adExp = (info) => {
+  return axios.request({
+    url: '/expInfo/adExp',
+    data: info,
+    method: 'post'
+  })
+}
+
+export const updExp = (info) => {
+  return axios.request({
+    url: '/expInfo/updExp',
+    data: info,
+    method: 'post'
+  })
+}
+
+export const delExp = (params) => {
+  return axios.request({
+    url: '/expInfo/delExp',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const setExpState = (params) => {
+  return axios.request({
+    url: '/expInfo/setState',
+    data: params,
+    method: 'post'
+  })
+}

@@ -4,6 +4,7 @@
     <!--<search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>-->
     <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="toolButtons">
+        <Button type="text" @click="doRePass">密码初始化</Button>
         <Button type="primary" @click="toAdd">新增</Button>
         <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
         <Poptip confirm title="确定删除?" @on-ok="doBatchDelete" style="text-align: left">
@@ -187,9 +188,6 @@ export default {
     this.searchModel = this.searchApi.model()
   },
   methods: {
-    toHandleSearch () {
-      this.doHandleSearch(this.searchApi.formData())
-    },
     getClassList () {
       const UUID = this.getUserId
       let params = { UUID }
@@ -211,6 +209,9 @@ export default {
           this.$Message.error(data.ErrorDes)
         }
       })
+    },
+    toHandleSearch () {
+      this.doHandleSearch(this.searchApi.formData())
     },
     // 搜索
     doHandleSearch (search) {
@@ -249,12 +250,12 @@ export default {
     doRePass () {
       this.$Message.success('密码初始化完成')
     },
-    // 添加老师
+    // 添加
     toAdd () {
       this.editable = true
       this.$refs.editUserForm.handleReset('editUserForm')
     },
-    // 编辑老师
+    // 编辑
     toEdit (item) {
       this.editable = true
       this.$refs.editUserForm.editFormData(item)
@@ -367,7 +368,10 @@ export default {
       })
     },
     handleSubmit (userInfo) {
-      editUserInfo(userInfo).then(res => {
+      let classID = this.searchModel.classID.value
+      let u = { ...userInfo, classID }
+      // userInfo.classID = this.searchModel.classID.value
+      editUserInfo(u).then(res => {
         this.resultHandler(res)
       })
     },
