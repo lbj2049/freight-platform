@@ -166,7 +166,7 @@ export default {
     // 添加
     toAdd () {
       this.editable = true
-      this.$refs.editClassForm.editFormData({})
+      // this.$refs.editClassForm.editFormData({})
       this.$refs.editClassForm.handleReset('editClassForm')
     },
     // 编辑

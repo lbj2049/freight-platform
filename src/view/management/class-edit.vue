@@ -46,8 +46,15 @@ export default {
         className: [
           { required: true, message: '班级名称不能为空', trigger: 'blur' }
         ]
+      },
+      defaultInfo: {
+
       }
     }
+  },
+  created () {
+    // 保留初始值
+    this.defaultInfo = { ...this.classInfo }
   },
   methods: {
     getTitle () {
@@ -81,6 +88,7 @@ export default {
       })
     },
     handleReset (name) {
+      this.classInfo = { ...this.defaultInfo }
       this.$refs[name].resetFields()
     }
   }

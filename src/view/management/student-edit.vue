@@ -2,7 +2,8 @@
   <div>
     <Modal :value="editable" :mask-closable="false" :footer-hide="true" :title="getTitle()" @on-visible-change="watchEditableChange" :styles="{top: '16%'}" width="880">
       <Form ref="editUserForm" :model="userInfo" :rules="rules" :label-width="120">
-
+        <input v-model="userInfo.UUID" type="hidden"/>
+        <input v-model="userInfo.classID" type="hidden"/>
         <Row>
           <Col span="24">
             <FormItem label="用户名" prop="loginName">
@@ -101,8 +102,15 @@ export default {
         userName: [
           { required: true, message: '姓名不能为空', trigger: 'blur' }
         ]
+      },
+      defaultInfo: {
+
       }
     }
+  },
+  created () {
+    // 保留初始值
+    this.defaultInfo = this.userInfo
   },
   methods: {
     getTitle () {
@@ -133,6 +141,7 @@ export default {
       })
     },
     handleReset (name) {
+      this.userInfo = this.defaultInfo
       this.$refs[name].resetFields()
     }
   }

@@ -1,21 +1,21 @@
 <template>
-    <div slot="content">
-      <search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>
-      <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
-        <div slot="toolButtons">
-          <Button type="text" @click="doRePass">密码初始化</Button>
-          <Button type="primary" @click="toAdd">新增</Button>
-          <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
-          <Poptip confirm title="确定删除?" @on-ok="doBatchDelete" style="text-align: left">
-            <Button type="error">批量删除</Button>
-          </Poptip>
-          <Poptip confirm title="确定审核?" @on-ok="doBatchAuth">
-            <Button type="warning">审核</Button>
-          </Poptip>
-        </div>
-      </table-paging>
-      <teacher-edit ref="editUserForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
-    </div>
+  <div slot="content">
+    <search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
+      <div slot="toolButtons">
+        <Button type="text" @click="doRePass">密码初始化</Button>
+        <Button type="primary" @click="toAdd">新增</Button>
+        <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
+        <Poptip confirm title="确定删除?" @on-ok="doBatchDelete" style="text-align: left">
+          <Button type="error">批量删除</Button>
+        </Poptip>
+        <Poptip confirm title="确定审核?" @on-ok="doBatchAuth">
+          <Button type="warning">审核</Button>
+        </Poptip>
+      </div>
+    </table-paging>
+    <teacher-edit ref="editUserForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
+  </div>
 </template>
 <script>
 import {

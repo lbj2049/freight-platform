@@ -59,7 +59,8 @@ export default {
       isAdd: true,
       itemInfo: {
         UUID: null,
-        classIDs: [],
+        classIDs: '',
+        expID: null,
         expName: null
       },
       rules: {
@@ -122,13 +123,22 @@ export default {
     editFormData (itemInfo) {
       this.itemInfo = { ...itemInfo }
       this.isAdd = true
-      if (this.itemInfo.classID) {
+      if (this.itemInfo.expID) {
         this.isAdd = false
       }
     },
     handleSubmit (name) {
-      if (!this.classID) {
+      if (!this.expID) {
         this.itemInfo.UUID = this.$store.state.user.userId
+      }
+      if (this.list2) {
+        let cids = []
+        this.list2.forEach((v, i) => {
+          cids.push(v.classID)
+        })
+        this.itemInfo.classIDs = cids.join(',')
+      } else {
+        this.$Message.error('请选择班级')
       }
       this.$refs[name].validate((valid) => {
         if (valid) {

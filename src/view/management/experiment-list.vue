@@ -1,7 +1,7 @@
 <template>
   <div slot="content">
     <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="toolButtons">
         <Button type="primary" @click="toAdd">添加实验</Button>
       </div>
@@ -51,7 +51,8 @@ export default {
         submitBtn: false
 
       },
-      stateMap: { 0: '未初始化', 1: '完成初始化', 2: '开始', 3: '暂停', 4: '关闭' },
+      stateMap: { 0: '未初始化', 1: '完成初始化', 2: '开始', 4: '关闭' },
+      nextStateMap: { 0: '初始化', 1: '开始', 2: '关闭', 4: '开始' },
       list: [],
       columns: [
         {
@@ -67,7 +68,7 @@ export default {
           combine: true,
           title: '实验状态',
           render: (h, params) => {
-            // 状态：0：未初始化；1：完成初始化；2：开始；3：暂停；4关闭
+            // 状态：0：未初始化；1：完成初始化；2：开始；4：关闭
             let state = params.row.state
             return h('div', this.stateMap[state])
           }
@@ -79,27 +80,35 @@ export default {
           title: '操作',
           key: 'action',
           // fixed: 'right',
-          width: 120,
+          width: 180,
           render: (btn, params) => {
             return btn('div', [
-              btn('Button', {
+
+              btn('Poptip', {
                 props: {
-                  type: 'error',
-                  size: 'small'
+                  transfer: true,
+                  confirm: true,
+                  type: 'warning',
+                  size: 'large',
+                  title: '你确定要' + this.nextStateMap[params.row.state] + '吗?'
                 },
                 on: {
-                  click: () => {
-                    // this.remove(params)
+                  'on-ok': () => {
                     const _this = this
-                    this.$Modal.confirm({
-                      content: '确认删除？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+                    _this.doAuth(params.row)
                   }
                 }
-              }, '删除'),
+              }, [
+                btn('Button', {
+                  props: {
+                    type: 'warning',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  }
+                }, this.nextStateMap[params.row.state])
+              ]),
               btn('Button', {
                 props: {
                   type: 'info',
@@ -107,10 +116,36 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.edit(params)
+                    const _this = this
+                    _this.toEdit(params.row)
+                  }
+                },
+                style: {
+                  marginRight: '5px'
+                }
+              }, '修改'),
+              btn('Poptip', {
+                props: {
+                  transfer: true,
+                  confirm: true,
+                  type: 'error',
+                  size: 'large',
+                  title: '你确定要删除吗?'
+                },
+                on: {
+                  'on-ok': () => {
+                    const _this = this
+                    _this.doDelete(params.row)
                   }
                 }
-              }, '修改')
+              }, [
+                btn('Button', {
+                  props: {
+                    type: 'error',
+                    size: 'small'
+                  }
+                }, '删除')
+              ])
             ])
           }
         }
@@ -141,7 +176,7 @@ export default {
     // 搜索
     doHandleSearch (search) {
       const UUID = this.getUserId
-      const params = { UUID }
+      const params = { search, UUID }
       getExpList(params).then(res => {
         const body = res.data
         const data = body.Data
@@ -187,25 +222,19 @@ export default {
     },
     getBatchIds () {
       if (this.multItem && this.multItem.length > 0) {
-        const userIds = []
+        const itemIds = []
         this.multItem.forEach((k, v) => {
-          userIds.push(k.key1)
+          itemIds.push(k.key1)
         })
-        return userIds
+        return itemIds
       } else {
         this.$Message.error('请选择数据')
       }
     },
     // 删除
     doDelete (item) {
-      delExp({ UUIDs: item.UUID }).then(res => {
-        this.resultHandler(res)
-      })
-    },
-    // 批量删除
-    doBatchDelete () {
-      const userIds = this.getBatchIds()
-      delUserInfo({ UUIDs: userIds }).then(res => {
+      const UUID = this.getUserId
+      delExp({ UUIDs: UUID, expID: item.expID }).then(res => {
         this.resultHandler(res)
       })
     },
@@ -213,55 +242,25 @@ export default {
     doAuth (item) {
       const UUID = this.getUserId
       let state = item.state
-      this.$Modal.confirm({
-        title: '审核',
-        render: (h) => {
-          return h('RadioGroup', {
-            props: {
-              value: 1
-            },
-            on: {
-              'on-change': (val) => {
-                state = val
-              }
-            },
-            style: {
-              marginLeft: '120px'
-            }
-          }, [ // 0: '未初始化', 1: '完成初始化', 2: '开始', 3: '暂停', 4: '关闭'
-            h('Radio', {
-              props: {
-                label: 1
-              }
-            }, '初始化'),
-            h('Radio', {
-              props: {
-                label: 2
-              }
-            }, '开启实验'),
-            h('Radio', {
-              props: {
-                label: 3
-              }
-            }, '暂停实验'),
-            h('Radio', {
-              props: {
-                label: 4
-              }
-            }, '关闭实验')]
-          )
-        },
-        onOk: () => {
-          setExpState({ UUID: UUID, expID: item.expID, state: state }).then(res => {
-            this.resultHandler(res)
-          })
-        }
+      // 0: '未初始化', 1: '完成初始化', 2: '开始', 4: '关闭'
+      if (state === 0) {
+        state = 1
+      } else if (state === 1) {
+        state = 2
+      } else if (state === 2) {
+        state = 4
+      } else if (state === 4) {
+        state = 2
+      }
+
+      setExpState({ UUID: UUID, expID: item.expID, state: state }).then(res => {
+        this.resultHandler(res)
       })
     },
     handleSubmit (info) {
       const UUID = this.getUserId
       let item = { ...info, UUID }
-      if (item.expID) {
+      if (!item.expID) {
         adExp(item).then(res => {
           this.resultHandler(res)
         })

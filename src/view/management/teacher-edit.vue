@@ -92,8 +92,15 @@ export default {
         userName: [
           { required: true, message: '姓名不能为空', trigger: 'blur' }
         ]
+      },
+      defaultInfo: {
+
       }
     }
+  },
+  created () {
+    // 保留初始值
+    this.defaultInfo = this.userInfo
   },
   methods: {
     getTitle () {
@@ -124,6 +131,7 @@ export default {
       })
     },
     handleReset (name) {
+      this.userInfo = this.defaultInfo
       this.$refs[name].resetFields()
     }
   }
