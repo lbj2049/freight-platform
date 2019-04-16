@@ -64,6 +64,9 @@ export default {
           key: 'expName', combine: true, title: '实验名称'
         },
         {
+          key: 'classNames', combine: true, title: '班级'
+        },
+        {
           key: 'state',
           combine: true,
           title: '实验状态',
@@ -176,7 +179,7 @@ export default {
     // 搜索
     doHandleSearch (search) {
       const UUID = this.getUserId
-      const params = { search, UUID }
+      const params = { ...search, ...this.pagination, UUID }
       getExpList(params).then(res => {
         const body = res.data
         const data = body.Data

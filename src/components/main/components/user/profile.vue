@@ -4,14 +4,14 @@
     <Modal :value="profileable" :mask-closable="false" title="基本信息" @on-visible-change="watchProfileAbleChange" :styles="{top: '16%'}" width="450">
       <Card :bordered="false" :dis-hover="true">
         <Form ref="dataFrom" :model="dataFrom" :label-width="80">
-          <FormItem label="用户名" prop="username">
-            <span v-html="dataFrom.username"></span>
+          <FormItem label="用户名" prop="loginName">
+            <span v-html="dataFrom.loginName"></span>
           </FormItem>
-          <FormItem label="姓名" prop="realName">
-            <span v-html="dataFrom.realName"></span>
+          <FormItem label="姓名" prop="userName">
+            <span v-html="dataFrom.userName"></span>
           </FormItem>
-          <FormItem label="电话" prop="phone">
-            <span v-html="dataFrom.phone"></span>
+          <FormItem label="电话" prop="userTel">
+            <span v-html="dataFrom.userTel"></span>
           </FormItem>
         </Form>
       </Card>
@@ -21,14 +21,14 @@
       </div>
       <Modal v-model="profileModifyAble" title="修改基本信息">
         <Form ref="dataFrom" :model="dataFrom" :rules="dataRule" :label-width="80">
-          <FormItem label="用户名" prop="username">
-            <Input v-model="dataFrom.username" placeholder="请输入用户名"></Input>
+          <FormItem label="用户名" prop="loginName">
+            <span v-html="dataFrom.loginName"></span>
           </FormItem>
-          <FormItem label="姓名" prop="realName">
-            <Input v-model="dataFrom.realName" placeholder="请输入姓名"></Input>
+          <FormItem label="姓名" prop="userName">
+            <span v-html="dataFrom.userName"></span>
           </FormItem>
-          <FormItem label="电话" prop="phone">
-            <Input v-model="dataFrom.phone" placeholder="请输入电话"></Input>
+          <FormItem label="电话" prop="userTel">
+            <span v-html="dataFrom.userTel"></span>
           </FormItem>
           <FormItem label="密码" prop="password">
             <Input v-model="dataFrom.password" type="password" placeholder="请输入密码"></Input>
@@ -44,6 +44,9 @@
 </template>
 
 <script>
+import {
+  upPwd
+} from '@/api/user'
 export default {
   name: 'profile',
   props: {
@@ -56,25 +59,31 @@ export default {
     return {
       profileModifyAble: false,
       dataFrom: {
-        username: 'admin',
-        realName: 'admin',
-        phone: '18888888888',
+        loginName: 'admin',
+        userName: 'admin',
+        userTel: '18888888888',
         password: ''
       },
       dataRule: {
-        username: [
-          { required: true, message: '不能为空', trigger: 'blur' }
-        ],
-        realName: [
-          { required: true, message: '不能为空', trigger: 'blur' }
-        ],
-        phone: [
+        password: [
           { required: true, message: '不能为空', trigger: 'blur' }
         ]
       }
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    }
+  },
+  mounted: function () {
+    this.initInfo()
+  },
   methods: {
+    initInfo () {
+      this.dataFrom = { ...this.$store.state.user.userInfo }
+      console.log(this.$store.state.user.userInfo)
+    },
     // 弹出层的事件
     profileCancelEvent () {
       this.$emit('profileCancelEvent', false)
@@ -88,15 +97,25 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!')
-          this.profileModifyAble = false
-        } else {
-          this.$Message.error('Fail!')
+          const UUID = this.getUserId
+          upPwd({ UUID: UUID, newPwd: this.dataFrom.password }).then(res => {
+            this.resultHandler(res)
+          })
         }
       })
     },
     handleReset (name) {
       this.$refs[name].resetFields()
+    },
+    resultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.profileModifyAble = false
+        this.$Message.success(data.Result)
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
     }
   }
 }

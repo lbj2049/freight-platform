@@ -76,7 +76,7 @@ export default {
     }
   },
   getters: {
-    messageUnreadCount: state => state.messageUnreadList.length,
+    messagmessageeUnreadCount: state => state.messageUnreadList.length,
     messageReadedCount: state => state.messageReadedList.length,
     messageTrashCount: state => state.messageTrashList.length
   },
@@ -111,7 +111,7 @@ export default {
             commit('setAccess', access)
             commit('setHasGetInfo', true)
             commit('setAvator', data.head_img)
-            console.log(state)
+            // console.log(state)
           }
           resolve(body)
         }).catch(err => {

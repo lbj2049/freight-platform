@@ -116,7 +116,7 @@ export default {
     this.setLocal(this.$i18n.locale)
 
     // 获取未读消息条数
-    this.getUnreadMessageCount()
+    // this.getUnreadMessageCount()
   }
 }
 </script>

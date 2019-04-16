@@ -78,9 +78,6 @@ export default {
     }
   },
   methods: {
-    changeRole (val) {
-      console.log(val)
-    },
     handleSubmit () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {

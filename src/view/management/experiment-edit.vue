@@ -74,8 +74,16 @@ export default {
         left: ['drop-box', 'left-drop-box'],
         right: ['drop-box', 'right-drop-box']
       },
-      handleList: []
+      handleList: [],
+      defaultInfo: {
+
+      },
+      defaultList: []
     }
+  },
+  created () {
+    // 保留初始值
+    this.defaultInfo = this.itemInfo
   },
   computed: {
     getUserId () {
@@ -96,8 +104,7 @@ export default {
           let classes = []
           if (data) {
             data.forEach(({ classID, className }) => classes.push({ value: classID, label: className }))
-            this.list1 = data
-            // this.list2 = [data[0]]
+            this.defaultList = data
           }
         } else {
           this.$Message.error(data.ErrorDes)
@@ -108,6 +115,7 @@ export default {
       return (this.isAdd ? '添加' : '修改') + '实验'
     },
     handleChange ({ src, target, oldIndex, newIndex }) {
+      console.log(src, target, oldIndex, newIndex)
       this.handleList.push(`${src} => ${target}, ${oldIndex} => ${newIndex}`)
     },
     // 弹出层的事件
@@ -121,10 +129,21 @@ export default {
       this.$emit('watchEditableChange', e)
     },
     editFormData (itemInfo) {
+      this.list1 = []
+      this.list2 = []
       this.itemInfo = { ...itemInfo }
       this.isAdd = true
       if (this.itemInfo.expID) {
         this.isAdd = false
+        if (this.itemInfo.classIDs) {
+          this.defaultList.forEach((l, i) => {
+            if (!this.itemInfo.classIDs.includes(l.classID)) {
+              this.list1.push(l)
+            } else {
+              this.list2.push(l)
+            }
+          })
+        }
       }
     },
     handleSubmit (name) {
@@ -147,6 +166,9 @@ export default {
       })
     },
     handleReset (name) {
+      this.itemInfo = this.defaultInfo
+      this.list1 = this.defaultList
+      this.list2 = []
       this.$refs[name].resetFields()
     }
   }

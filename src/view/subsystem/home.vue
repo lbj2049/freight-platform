@@ -1,13 +1,17 @@
 <template>
   <Card :bordered="false">
-    <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
+    <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
     </table-paging>
   </Card>
 </template>
 <script>
+import {
+  getExpList
+} from '@/api/student.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
+import { maker } from 'form-create'
 import { mapActions } from 'vuex'
 export default {
   components: {
@@ -15,38 +19,29 @@ export default {
   },
   data () {
     return {
-      searchData: [
-        {
-          type: 'input',
-          value: 'input',
-          clearable: true,
-          // prefix: 'ios-contact',
-          suffix: 'ios-search',
-          // required: true,
-          placeholder: '关键词'
-        }
+      searchApi: {},
+      searchModel: {},
+      // 表单生成规则
+      searchRule: [
+        maker.input('关键词', 'keyword').col({ span: 6, labelWidth: 64 }),
+        maker.create('i-button')
+          .props({ type: 'primary', size: 'default', shape: undefined, long: false, htmlType: 'button', disabled: false, icon: 'ios-upload', loading: false, show: true })
+          .col({ span: 2 })
+          .on({
+            'click': () => {
+              this.toHandleSearch()
+            }
+          })
+          .children([ '查询' ])
       ],
-      distance: '220px',
-      list: [
-        {
-          key1: '整车发货练习1',
-          key2: '一班、二班',
-          key3: '2018-12-10',
-          key4: '未初始化'
-        },
-        {
-          key1: '整车发货练习2',
-          key2: '一班',
-          key3: '2018-12-10',
-          key4: '开启'
-        },
-        {
-          key1: '整车发货练习2',
-          key2: '二班',
-          key3: '2018-12-10',
-          key4: '关闭'
-        }
-      ],
+      // 组件参数配置
+      searchOption: {
+        // submitBtn: { innerText: '查询', size: 'small', col: { span: 2 } }
+        submitBtn: false
+
+      },
+      stateMap: { 0: '未初始化', 1: '完成初始化', 2: '开始', 4: '关闭' },
+      list: [],
       columns: [
         {
           type: 'index',
@@ -96,31 +91,75 @@ export default {
             ])
           }
         }
-      ]
+      ],
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        pageNum: 1
+      }
     }
+  },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
+    getClassId () {
+      return this.$store.state.user.userInfo.classID
+    }
+  },
+  created: function () {
+
+  },
+  mounted: function () {
+    this.searchModel = this.searchApi.model()
+    this.toHandleSearch()
   },
   methods: {
     ...mapActions([
       'handleExperiment'
     ]),
+    toHandleSearch () {
+      this.doHandleSearch(this.searchApi.formData())
+    },
+    // 搜索
+    doHandleSearch (search) {
+      const UUID = this.getUserId
+      const classID = this.getClassId
+      const params = { ...search, ...this.pagination, UUID, classID }
+      getExpList(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            pageNum: data.page
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
     toSubsystem (experiment_id) {
       this.handleExperiment({ experiment_id }).then(res => {
         this.$router.push('/front/guide')
       })
     },
-    handleSearch (search) {
-      console.log('search', search)
-    },
+    // 选中对象切换
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
     },
-    changePageNum (page) {
-      console.log('page', page)
+    // 切换页面
+    changePageNum (pageNum) {
+      this.pagination.pageNum = pageNum
+      this.toHandleSearch()
     },
+    // 切换页面size
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
-    }
+      this.pagination.pageSize = pageSize
+      this.toHandleSearch()
+    },
   }
 }
 </script>

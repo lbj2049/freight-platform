@@ -15,6 +15,14 @@ export const login = ({ loginName, loginPwd, role, type }) => {
   })
 }
 
+export const upPwd = (params) => {
+  return axios.request({
+    url: '/userInfo/upPwd',
+    data: params,
+    method: 'post'
+  })
+}
+
 export const getUserInfo = (token) => {
   return axios.request({
     url: 'get_info',
