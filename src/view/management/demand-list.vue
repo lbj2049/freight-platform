@@ -1,19 +1,28 @@
 <template>
   <div slot="content">
-    <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
+    <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="toolButtons">
-        <Button type="primary" @click="doAdd">添加需求单</Button>
+        <Button type="primary" @click="toAdd">添加需求单</Button>
       </div>
     </table-paging>
 
-    <demand-edit :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
+    <demand-edit ref="editItemForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
   </div>
 </template>
 <script>
+import {
+  getExpSel,
+  getTeaWayBill,
+  adTeaWayBill,
+  updTeaWayBill,
+  delTeaWayBill,
+  sendTeaWayBill
+} from '@/api/teacher.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
 import DemandEdit from './demand-edit'
+import { maker } from 'form-create'
 export default {
   components: {
     TablePaging, SearchForm, DemandEdit
@@ -21,164 +30,255 @@ export default {
   data () {
     return {
       editable: false,
-      searchData: [
-        {
-          type: 'input',
-          value: 'input',
-          clearable: true,
-          // prefix: 'ios-contact',
-          suffix: 'ios-search',
-          // required: true,
-          placeholder: '关键词'
-        }
+      searchApi: {},
+      searchModel: {},
+      // 表单生成规则
+      searchRule: [
+        maker.select('实验', 'expID').props({ placeholder: '请选择实验' }).col({ span: 6, labelWidth: 40 }),
+        maker.input('关键词', 'keyword').col({ span: 6, labelWidth: 64 }),
+        maker.create('i-button')
+          .props({ type: 'primary', size: 'default', shape: undefined, long: false, htmlType: 'button', disabled: false, icon: 'ios-upload', loading: false, show: true })
+          .col({ span: 2 })
+          .on({
+            'click': () => {
+              this.toHandleSearch()
+            }
+          })
+          .children([ '查询' ])
       ],
-      list: [
-        {
-          key1: '需求1',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        },
-        {
-          key1: '需求2',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        },
-        {
-          key1: '需求3',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        },
-        {
-          key1: '需求4',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        },
-        {
-          key1: '需求5',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        },
-        {
-          key1: '需求6',
-          key2: '整车',
-          key3: '2018-12-12',
-          key4: '分发'
-        }
-      ],
+      // 组件参数配置
+      searchOption: {
+        // submitBtn: { innerText: '查询', size: 'small', col: { span: 2 } }
+        submitBtn: false
+
+      },
+      carTypeMap: { 0: '整车', 1: '集装箱', 2: '零担', 3: '其他' },
+      list: [],
       columns: [
-        {
-          key: 'key1', combine: true, title: '需求单名称'
-        },
-        {
-          key: 'key2', combine: true, title: '车种'
-        },
-        {
-          key: 'key1', combine: true, title: '更新时间'
-        },
-        {
-          key: 'key1', combine: true, title: '状态'
-        },
+        { type: 'index', width: 60, align: 'center' },
+        { key: 'title', title: '需求单名称' },
+        { key: 'carType', title: '车种', combine: true, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
+        { key: 'uptime', title: '更新时间' },
+        { key: 'smobile', title: '状态' },
         {
           title: '操作',
           key: 'action',
           // fixed: 'right',
           width: 180,
           render: (btn, params) => {
-            return btn('div', [
+            let btns = []
+            btns.push(
               btn('Button', {
-                props: {
-                  type: 'warning',
-                  size: 'small'
-                },
+                props: { type: 'warning', size: 'small' },
                 on: {
                   click: () => {
-                    this.$Modal.confirm({
-                      title: '分发',
-                      content: '确定分发？',
-                      onOk: function () {
-                        this.$Message.success('分发完成')
-                      }
-                    })
-                  }
-                }
-              }, '分发'),
-              btn('Button', {
-                props: {
-                  type: 'info',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    this.doEdit(params)
-                  }
-                }
-              }, '修改'),
-              btn('Button', {
-                props: {
-                  type: 'error',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    // this.remove(params)
                     const _this = this
-                    this.$Modal.confirm({
-                      content: '确认删除？',
-                      onOk: function () {
-                        _this.deleteUser(params)
-                      }
-                    })
+                    _this.toDistribute(params.row)
+                    // this.toDistribute(params.row)
+                  }
+                },
+                style: { marginRight: '5px' }
+              }, '分发')
+            )
+            btns.push(
+              btn('Button', {
+                props: { type: 'info', size: 'small' },
+                on: {
+                  click: () => {
+                    this.toEdit(params.row)
+                  }
+                },
+                style: { marginRight: '5px' }
+              }, '修改')
+            )
+            btns.push(
+              btn('Poptip', {
+                props: { transfer: true, confirm: true, type: 'error', size: 'large', title: '你确定要删除吗?' },
+                on: {
+                  'on-ok': () => {
+                    this.doDelete(params.row)
                   }
                 }
-              }, '删除')
-            ])
+              }, [
+                btn('Button', { props: { type: 'error', size: 'small' } }, '删除')
+              ])
+            )
+            return btn('div', btns)
           }
         }
-      ]
+      ],
+      exps: [],
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        pageNum: 1
+      }
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    }
+  },
+  created: function () {
+  },
+  mounted: function () {
+    this.getExpList()
+    this.toHandleSearch()
+    this.searchModel = this.searchApi.model()
+  },
   methods: {
-    handleSearch (search) {
-      console.log('search', search)
+    getExpList () {
+      const UUID = this.getUserId
+      let params = { UUID }
+      getExpSel(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          if (data) {
+            data.forEach(({ expID, expName }) => this.exps.push({ value: expID, label: expName }))
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
     },
+    toHandleSearch () {
+      this.doHandleSearch(this.searchApi.formData())
+    },
+    // 搜索
+    doHandleSearch (search) {
+      const teaUUID = this.getUserId
+      let params = { teaUUID, ...search, ...this.pagination }
+      getTeaWayBill(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            pageNum: data.page
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
+    // 选中对象切换
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
     },
-    changePageNum (page) {
-      console.log('page', page)
+    // 切换页面
+    changePageNum (pageNum) {
+      this.pagination.pageNum = pageNum
+      this.toHandleSearch()
     },
+    // 切换页面size
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      this.pagination.pageSize = pageSize
+      this.toHandleSearch()
     },
-    doAdd () {
-      this.faultClickEvent()
+    // 分发
+    toDistribute (item) {
+      const teaUUID = this.getUserId
+      let expID
+      this.$Modal.confirm({
+        title: '选择实验',
+        render: (h) => {
+          return h('Select', {
+            props: {
+              value: 1
+            },
+            on: {
+              'on-change': (val) => {
+                expID = val
+              }
+            }
+          }, this.exps.map((d) => {
+            return h('Option', {
+              props: {
+                value: d.value,
+                label: d.label
+              }
+            })
+          })
+          )
+        },
+        onOk: () => {
+          if (expID) {
+            sendTeaWayBill({ teaUUID: teaUUID, bwbIDs: item.bwbID, expID: expID, carType: item.carType, receptType: item.receptType }).then(res => {
+              this.resultHandler(res)
+            })
+          } else {
+            this.$Message.error('请选择实验')
+          }
+        }
+      })
     },
-    doEdit (param) {
-      console.log(param.row)
-      // this.showUserEditModal()
+    // 添加
+    toAdd () {
+      this.editable = true
+      this.$refs.editItemForm.handleReset('editItemForm')
     },
-    /* 表单弹窗事件 */
+    // 编辑
+    toEdit (item) {
+      this.editable = true
+      this.$refs.editItemForm.editFormData(item)
+    },
+    getBatchIds () {
+      if (this.multItem && this.multItem.length > 0) {
+        const itemIds = []
+        this.multItem.forEach((k, v) => {
+          itemIds.push(k.key1)
+        })
+        return itemIds
+      } else {
+        this.$Message.error('请选择数据')
+      }
+    },
+    // 删除
+    doDelete (item) {
+      const teaUUID = this.getUserId
+      delTeaWayBill({ teaUUID: teaUUID, bwbIDs: item.bwbID }).then(res => {
+        this.resultHandler(res)
+      })
+    },
+    handleSubmit (info) {
+      const teaUUID = this.getUserId
+      let item = { ...info, teaUUID }
+      if (!item.bwbID) {
+        adTeaWayBill(item).then(res => {
+          this.resultHandler(res)
+        })
+      } else {
+        updTeaWayBill(item).then(res => {
+          this.resultHandler(res)
+        })
+      }
+    },
+    resultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.formCancelEvent()
+        this.toHandleSearch()
+        this.$Message.success(data.Result)
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
+    },
     // 表单弹窗的状态
     watchEditableChange (e) {
-      console.log(e)
       if (e === false) {
         this.editable = false
-      };
+      }
     },
-    // 点击事件
-    faultClickEvent () {
-      this.editable = true
-    },
-    // 弹出层的事件
+    // 弹出事件
     formConfirmEvent () {
       this.editable = false
     },
+    // 弹窗消失⌚
     formCancelEvent () {
       this.editable = false
     }

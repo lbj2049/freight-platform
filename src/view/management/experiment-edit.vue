@@ -115,7 +115,6 @@ export default {
       return (this.isAdd ? '添加' : '修改') + '实验'
     },
     handleChange ({ src, target, oldIndex, newIndex }) {
-      console.log(src, target, oldIndex, newIndex)
       this.handleList.push(`${src} => ${target}, ${oldIndex} => ${newIndex}`)
     },
     // 弹出层的事件

@@ -216,7 +216,6 @@ export default {
     // 搜索
     doHandleSearch (search) {
       let params = search ? Object.assign(search, this.pagination) : { ...this.pagination }
-      console.log(params)
       getStudentList(params).then(res => {
         const body = res.data
         const data = body.Data

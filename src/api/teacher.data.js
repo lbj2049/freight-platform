@@ -82,7 +82,7 @@ export const getExpList = (params) => {
 
 export const getExpSel = (params) => {
   return axios.request({
-    url: 'stuExpInfo/getExpSel',
+    url: '/stuExpInfo/getExpSel',
     data: params,
     method: 'post'
   })
@@ -115,6 +115,47 @@ export const delExp = (params) => {
 export const setExpState = (params) => {
   return axios.request({
     url: '/expInfo/setState',
+    data: params,
+    method: 'post'
+  })
+}
+
+
+export const getTeaWayBill = (params) => {
+  return axios.request({
+    url: '/teaWayBill/getTeaWayBill',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const adTeaWayBill = (info) => {
+  return axios.request({
+    url: '/teaWayBill/adTeaWayBill',
+    data: info,
+    method: 'post'
+  })
+}
+
+export const updTeaWayBill = (info) => {
+  return axios.request({
+    url: '/teaWayBill/updTeaWayBill',
+    data: info,
+    method: 'post'
+  })
+}
+
+export const delTeaWayBill = (params) => {
+  return axios.request({
+    url: '/teaWayBill/delTeaWayBill',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const sendTeaWayBill = (params) => {
+  return axios.request({
+    url: '/teaWayBill/sendTeaWayBill',
     data: params,
     method: 'post'
   })
