@@ -34,7 +34,7 @@ export default {
       searchModel: {},
       // 表单生成规则
       searchRule: [
-        maker.select('实验', 'expID').props({ placeholder: '请选择实验' }).col({ span: 6, labelWidth: 40 }),
+        // maker.select('实验', 'expID').props({ placeholder: '请选择实验' }).col({ span: 6, labelWidth: 40 }),
         maker.input('关键词', 'keyword').col({ span: 6, labelWidth: 64 }),
         maker.create('i-button')
           .props({ type: 'primary', size: 'default', shape: undefined, long: false, htmlType: 'button', disabled: false, icon: 'ios-upload', loading: false, show: true })
@@ -52,14 +52,13 @@ export default {
         submitBtn: false
 
       },
-      carTypeMap: { 0: '整车', 1: '集装箱', 2: '零担', 3: '其他' },
+      carTypeMap: { 1: '整车', 2: '集装箱', 3: '零担', 4: '其他' },
       list: [],
       columns: [
         { type: 'index', width: 60, align: 'center' },
         { key: 'title', title: '需求单名称' },
         { key: 'carType', title: '车种', combine: true, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
         { key: 'uptime', title: '更新时间' },
-        { key: 'smobile', title: '状态' },
         {
           title: '操作',
           key: 'action',

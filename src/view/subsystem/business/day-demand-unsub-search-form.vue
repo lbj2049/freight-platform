@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
+    <!--
       <Form ref="demand" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
 
           <Row>
@@ -23,11 +26,12 @@
           <Button @click="handleReset('demand')" style="margin-left: 8px">清空</Button>
         </FormItem>
       </Form>
-      <!--提交时加载动画-->
       <Spin size="large" fix v-if="loading"></Spin>
+    -->
   </div>
 </template>
 <script>
+import { maker } from 'form-create'
 export default {
   props: {
     loading: {
@@ -37,6 +41,28 @@ export default {
   },
   data () {
     return {
+      searchApi: {},
+      searchModel: {},
+      // 表单生成规则
+      searchRule: [
+        maker.input('装车日期', 'keyword').col({ span: 6, labelWidth: 64 }),
+        maker.input('订单号', 'roderNo').col({ span: 6, labelWidth: 64 }),
+        maker.create('i-button')
+          .props({ type: 'primary', size: 'default', shape: undefined, long: false, htmlType: 'button', disabled: false, icon: 'ios-upload', loading: false, show: true })
+          .col({ span: 2 })
+          .on({
+            'click': () => {
+              this.toHandleSearch()
+            }
+          })
+          .children([ '查询' ])
+      ],
+      // 组件参数配置
+      searchOption: {
+        // submitBtn: { innerText: '查询', size: 'small', col: { span: 2 } }
+        submitBtn: false
+
+      },
       demand: {
         name: '',
         mail: '',
@@ -55,7 +81,18 @@ export default {
       }
     }
   },
+  mounted: function () {
+    this.toHandleSearch()
+    this.searchModel = this.searchApi.model()
+  },
   methods: {
+    toHandleSearch () {
+      this.doHandleSearch(this.searchApi.formData())
+    },
+    // 搜索
+    doHandleSearch (search) {
+      this.$emit('handleToHandleSearch', search)
+    },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {

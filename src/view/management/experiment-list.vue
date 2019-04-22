@@ -85,49 +85,50 @@ export default {
           // fixed: 'right',
           width: 180,
           render: (btn, params) => {
-            return btn('div', [
-
-              btn('Poptip', {
-                props: {
-                  transfer: true,
-                  confirm: true,
-                  type: 'warning',
-                  size: 'large',
-                  title: '你确定要' + this.nextStateMap[params.row.state] + '吗?'
-                },
-                on: {
-                  'on-ok': () => {
-                    const _this = this
-                    _this.doAuth(params.row)
-                  }
+            let btns = []
+            btns.push(btn('Poptip', {
+              props: {
+                transfer: true,
+                confirm: true,
+                type: 'warning',
+                size: 'large',
+                title: '你确定要' + this.nextStateMap[params.row.state] + '吗?'
+              },
+              on: {
+                'on-ok': () => {
+                  const _this = this
+                  _this.doAuth(params.row)
                 }
-              }, [
-                btn('Button', {
-                  props: {
-                    type: 'warning',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  }
-                }, this.nextStateMap[params.row.state])
-              ]),
+              }
+            }, [
               btn('Button', {
                 props: {
-                  type: 'info',
+                  type: 'warning',
                   size: 'small'
-                },
-                on: {
-                  click: () => {
-                    const _this = this
-                    _this.toEdit(params.row)
-                  }
                 },
                 style: {
                   marginRight: '5px'
                 }
-              }, '修改'),
-              btn('Poptip', {
+              }, this.nextStateMap[params.row.state])
+            ]))
+            btns.push(btn('Button', {
+              props: {
+                type: 'info',
+                size: 'small'
+              },
+              on: {
+                click: () => {
+                  const _this = this
+                  _this.toEdit(params.row)
+                }
+              },
+              style: {
+                marginRight: '5px'
+              }
+            }, '修改'))
+
+            if (params.row.state !== 2) {
+              btns.push(btn('Poptip', {
                 props: {
                   transfer: true,
                   confirm: true,
@@ -148,8 +149,9 @@ export default {
                     size: 'small'
                   }
                 }, '删除')
-              ])
-            ])
+              ]))
+            }
+            return btn('div', btns)
           }
         }
       ],
@@ -288,7 +290,7 @@ export default {
     watchEditableChange (e) {
       if (e === false) {
         this.editable = false
-      };
+      }
     },
     // 弹出事件
     formConfirmEvent () {

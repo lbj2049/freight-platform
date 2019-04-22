@@ -3,13 +3,17 @@
 <template>
   <div slot="content">
     <Card :dis-hover="true">
-      <p slot="title">查询</p>
-      <day-demand-sub-form @handleFormSubmit="handleSearch"/>
+      <p slot="title">日需求预定</p>
+      <day-demand-sub-form ref="editItemForm" @handleFormSubmit="doHandleFormSubmit"/>
     </Card>
-    <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
   </div>
 </template>
 <script>
+import {
+  getWayBillList,
+  saveWayBill
+} from '@/api/business.data'
 import TablePaging from '@/components/table-paging/table-paging'
 import DayDemandSubForm from './day-demand-sub-form'
 export default {
@@ -20,55 +24,33 @@ export default {
   data () {
     return {
       distance: '462px',
-      list: [
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        }
-      ],
+      carTypeMap: { 1: '整车', 2: '集装箱', 3: '零担', 4: '其他' },
+      list: [],
       columns: [
-        {
-          key: 'key1', combine: true, title: '装运日期'
-        },
-        {
-          key: 'key1', combine: true, title: '预约号'
-        },
-        {
-          key: 'key1', combine: true, title: '受理号'
-        },
+        { key: 'loadDate', title: '装运日期', width: 90, fixed: 'left' },
+        { key: 'reservaNo', title: '预约号', width: 160, fixed: 'left' },
+        { key: 'acceptNo', title: '受理号', width: 90, fixed: 'left' },
+        { key: 'station', title: '发站', width: 90, fixed: 'left' },
+        { key: 'astation', title: '到站', width: 90, fixed: 'left' },
+        { key: 'gname', title: '货物名称', width: 160 },
+        { key: 'tunnage', title: '需求吨数', width: 90 },
+        { key: '', title: '总体积数', width: 90 },
+        { key: 'carType', title: '车种', width: 90, combine: true, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
+        { key: 'carNum', title: '订车数', width: 90 },
+        { key: 'carNum', title: '批车数', width: 90 },
+        { key: 'sname', title: '托运人', width: 90 },
+        { key: 'aname', title: '收货人', width: 90 },
+        { key: 'acceptNo', title: '提交日期', width: 90 },
+        { key: '', title: '快运标志', width: 90 },
         {
           title: '操作',
           key: 'action',
           // fixed: 'right',
-          width: 120,
+          width: 80,
+          fixed: 'right',
           render: (h, params) => {
             return h('div', [
+              /*
               h('Button', {
                 props: { type: 'error', size: 'small' }
               }, [
@@ -84,11 +66,12 @@ export default {
                   }
                 }, '删除')
               ]),
+              */
               h('Button', {
                 props: { type: 'info', size: 'small' },
                 on: {
                   click: () => {
-                    this.edit(params)
+                    this.toEdit(params.row)
                   }
                 }
               }, '修改')
@@ -96,18 +79,76 @@ export default {
           }
 
         }
-      ]
+      ],
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        pageNum: 1
+      }
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
+    getCompyId () {
+      return this.$store.state.user.compyId
+    }
+  },
+  created: function () {
+  },
+  mounted: function () {
+    this.toHandleSearch()
+  },
   methods: {
-    remove (value) {
-      console.log('remove', value)
+    // 搜索
+    doHandleSearch () {
+      const UUID = this.getUserId
+      const compyID = this.getCompyId
+      let params = { UUID, compyID, ...this.pagination }
+      getWayBillList(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            pageNum: data.page
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
     },
-    edit (value) {
-      console.log('edit', value)
+    toHandleSearch () {
+      this.doHandleSearch()
     },
-    handleSearch (search) {
-      console.log('search', search)
+    doHandleFormSubmit (formData) {
+      const UUID = this.getUserId
+      const compyID = this.getCompyId
+      let item = { ...formData, UUID, compyID }
+      saveWayBill(item).then(res => {
+        this.doResultHandler(res)
+      })
+    },
+    doResultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.toHandleSearch()
+        this.$Message.success(data.Result)
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
+    },
+    doDelete (item) {
+      console.log('remove', item)
+    },
+    // 编辑
+    toEdit (item) {
+      console.log('edit', item)
+      this.$refs.editItemForm.editFormData(item)
     },
     selectChange (value) {
       this.multItem = value

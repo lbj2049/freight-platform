@@ -179,8 +179,12 @@ export default {
     width: 100%;
     .drag-item {
       margin: 10px;
+      line-height: 14px;
       .ivu-card {
         padding: 0 5px;
+      }
+      .ivu-card-body {
+        padding: 6px;
       }
     }
     h3 {

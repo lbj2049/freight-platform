@@ -1,300 +1,251 @@
 <template>
-  <div style=" height:350px; overflow:auto">
-      <Form ref="demand" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
+  <div>
+    <Form ref="editItemForm" :model="demand" :rules="rules" :label-width="96" class="qib-form">
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">客户信息</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="8">
-                <FormItem label="所属企业" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="请输入所属企业"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="所属客户" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="请输入所属客户"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">发货信息</label>
+        </Col>
+        <Col span="22">
+          <Row>
+            <Col span="8">
+              <FormItem label="托运人名称" prop="sname">
+                <Input size="small" v-model="demand.sname" placeholder="请输入托运人名称"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="发站" prop="sStation">
+                <Input size="small" v-model="demand.sStation" placeholder="请输入发站" disabled/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="发局" prop="soffic">
+                <Input size="small" v-model="demand.soffic" placeholder="请输入发局" disabled/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="装车地点" prop="sCarLoadAddr">
+                <Input size="small" v-model="demand.sCarLoadAddr" placeholder="请输入装车地点"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="移动电话" prop="smobile">
+                <Input size="small" v-model="demand.smobile" placeholder="请输入移动电话"/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="经办人" prop="sagent">
+                <Input size="small" v-model="demand.sagent" placeholder="请输入经办人"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="身份证" prop="scardID">
+                <Input size="small" v-model="demand.scardID" placeholder="请输入身份证"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="手机" prop="stel">
+                <Input size="small" v-model="demand.stel" placeholder="请输入手机"/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="通讯地址" prop="saddr">
+                <Input size="small" v-model="demand.saddr" placeholder="请输入通讯地址"/>
+              </FormItem>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">交易合同</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="8">
-                <FormItem label="合同号" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="请输入合同号"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">货物信息</label>
+        </Col>
+        <Col span="22">
+          <Row>
+            <Col span="8">
+              <FormItem label="货物名称" prop="gname">
+                <Input size="small" v-model="demand.gname" placeholder="请输入货物名称"/>
+              </FormItem>
+            </Col>
+            <Col span="16">
+              <FormItem label="货物特种" prop="city">
+                <span>[</span>
+                <RadioGroup>
+                  <Radio label="male" disabled>怕湿</Radio>
+                  <Radio label="female" disabled>不怕湿</Radio>
+                </RadioGroup>
+                <span>]    [</span>
+                <RadioGroup>
+                  <Radio label="male" disabled>散堆装</Radio>
+                  <Radio label="female" disabled>非散堆装</Radio>
+                </RadioGroup>
+                <span>]</span>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="货物包装" prop="gpackage">
+                <Input size="small" v-model="demand.gpackage" placeholder="请输入货物包装"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="最大单件重量" prop="gMaxWeight">
+                <Input size="small" v-model="demand.gMaxWeight" placeholder="请输入最大单件重量" number/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="货区货位" prop="glocation">
+                <Input size="small" v-model="demand.glocation" placeholder="请输入货区货位"/>
+              </FormItem>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">发货信息</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="8">
-                <FormItem label="托运人名称" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="发站" prop="city">
-                  <Select size="small" v-model="demand.city" placeholder="Select your city">
-                    <Option value="beijing">New York</Option>
-                    <Option value="shanghai">London</Option>
-                    <Option value="shenzhen">Sydney</Option>
-                  </Select>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="发局" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col span="8">
-                <FormItem label="装车地点" prop="mail">
-                  <Select size="small" v-model="demand.city" placeholder="Select your city">
-                    <Option value="beijing">New York</Option>
-                    <Option value="shanghai">London</Option>
-                    <Option value="shenzhen">Sydney</Option>
-                  </Select>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="移动电话" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col span="8">
-                <FormItem label="经办人" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="身份证" prop="city">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="手机" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col span="8">
-                <FormItem label="通讯地址" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+          <Row>
+            <Col span="24">
+              <FormItem slot>
+                若需要填写物品清单，请在日需求查询功能中填写。
+              </FormItem>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">货物信息</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="8">
-                <FormItem label="货物名称" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="16">
-                <FormItem label="货物特种" prop="city">
-                  <span>[</span>
-                  <RadioGroup v-model="demand.gender">
-                    <Radio label="male">怕湿</Radio>
-                    <Radio label="female">不怕湿</Radio>
-                  </RadioGroup>
-                  <span>]    [</span>
-                  <RadioGroup v-model="demand.gender">
-                    <Radio label="male">散堆装</Radio>
-                    <Radio label="female">非散堆装</Radio>
-                  </RadioGroup>
-                  <span>]</span>
-                </FormItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col span="8">
-                <FormItem label="货物包装" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="最大单件重量" prop="city" :label-width="98">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"><span slot="append">(kg)</span></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="货区货位" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">收货信息</label>
+        </Col>
+        <Col span="22">
+          <Row>
+            <Col span="8">
+              <FormItem label="收货人名称" prop="aname">
+                <Input size="small" v-model="demand.aname" placeholder="请输入收货人名称"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="发站" prop="aStation">
+                <Input size="small" v-model="demand.aStation" placeholder="请输入到站"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="到局" prop="aoffic">
+                <Input size="small" v-model="demand.aoffic" placeholder="请输入到局" disabled/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="卸车地点" prop="aCarDownAddr">
+                <Input size="small" v-model="demand.aCarDownAddr" placeholder="请输入卸车地点"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="移动电话" prop="amobile">
+                <Input size="small" v-model="demand.amobile" placeholder="请输入移动电话"/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="经办人" prop="aagent">
+                <Input size="small" v-model="demand.aagent" placeholder="请输入经办人"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="身份证" prop="acardID">
+                <Input size="small" v-model="demand.acardID" placeholder="请输入身份证"/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="手机" prop="atel">
+                <Input size="small" v-model="demand.atel" placeholder="请输入手机"/>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="通讯地址" prop="aaddr">
+                <Input size="small" v-model="demand.aaddr" placeholder="请输入通讯地址"/>
+              </FormItem>
+            </Col>
+          </Row>
+          <FormItem prop="interest">
+            <CheckboxGroup v-model="demand.interest">
+              <Checkbox label="领货通知" disabled></Checkbox>
+            </CheckboxGroup>
+          </FormItem>
+        </Col>
+      </Row>
 
-            <Row>
-              <Col span="24">
-                <FormItem slot>
-                  若需要填写物品清单，请在日需求查询功能中填写。
-                </FormItem>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">记载事项</label>
+        </Col>
+        <Col span="22">
+          <FormItem label="记载事项" prop="notepad">
+            <Input size="small" v-model="demand.notepad" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."/>
+          </FormItem>
+        </Col>
+      </Row>
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">记载事项</label>
-          </Col>
-          <Col span="22">
-            <FormItem label="记载事项" prop="desc">
-              <Input v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-            </FormItem>
-          </Col>
-        </Row>
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">运输信息</label>
+        </Col>
+        <Col span="22">
+          <Row>
+            <Col span="8">
+              <FormItem label="吨数" prop="tunnage">
+                <Input size="small" v-model="demand.tunnage" placeholder="请输入吨数" number/>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="车种" prop="carType">
+                <Select size="small" v-model="demand.carType" placeholder="请选择车种">
+                  <Option v-for="item in carTypes" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="车数" prop="carNum">
+                <Input size="small" v-model="demand.carNum" placeholder="请输入车数" number/>
+              </FormItem>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">收货信息</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="8">
-                <FormItem label="经办人" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="身份证" prop="city">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                <FormItem label="手机" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+<!--
+      <Row>
+        <Col span="2">
+          <label class="ivu-form-item-label">物流服务</label>
+        </Col>
+        <Col span="22">
+          <FormItem>
+            <CheckboxGroup>
+              <Checkbox label="门到站" disabled></Checkbox>
+              <Checkbox label="站到门" disabled></Checkbox>
+              （可根据您的需求，选择录入发到站截取、送达、仓储等物流服务信息）
+            </CheckboxGroup>
+          </FormItem>
+        </Col>
+      </Row>
+-->
 
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">记载事项</label>
-          </Col>
-          <Col span="22">
-            <FormItem label="记载事项" prop="desc">
-              <Input v-model="demand.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-            </FormItem>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">运输信息</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="4">
-                <FormItem label="吨数" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="4">
-                <FormItem label="车种" prop="city">
-                  <Select size="small" v-model="demand.city" placeholder="Select your city">
-                    <Option value="beijing">New York</Option>
-                    <Option value="shanghai">London</Option>
-                    <Option value="shenzhen">Sydney</Option>
-                  </Select>
-                </FormItem>
-              </Col>
-              <Col span="4">
-                <FormItem label="车数" prop="mail">
-                  <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-                </FormItem>
-              </Col>
-              <Col span="12">
-                <Row>
-                  <Col span="6">
-                    <FormItem label="装载加固材料" prop="msg">
-                      <Checkbox v-model="demand.msg"></Checkbox>
-                    </FormItem>
-                  </Col>
-                  <Col span="6">
-                    <FormItem label="保价运输" prop="msg">
-                      <Checkbox v-model="demand.msg"></Checkbox>
-                    </FormItem>
-                  </Col>
-                  <Col span="6">
-                    <FormItem label="仓储" prop="msg">
-                      <Checkbox v-model="demand.msg"></Checkbox>
-                    </FormItem>
-                  </Col>
-                  <Col span="6">
-                    <FormItem label="冷藏(保温)" prop="msg">
-                      <Checkbox v-model="demand.msg"></Checkbox>
-                    </FormItem>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col span="2">
-            <label class="ivu-form-item-label">物流服务</label>
-          </Col>
-          <Col span="22">
-            <Row>
-              <Col span="6">
-                <FormItem prop="interest">
-                  <CheckboxGroup v-model="demand.interest">
-                    <Checkbox label="门到站"></Checkbox>
-                    <Checkbox label="站到门"></Checkbox>
-                  </CheckboxGroup>
-                </FormItem>
-              </Col>
-              <Col span="18">
-                <FormItem :label-width="0">
-                  （可根据您的需求，选择录入发到站截取、送达、仓储等物流服务信息）
-                </FormItem>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
-        <Divider />
-        <FormItem>
-          <Button disabled style="float: left">零散货物快运提报</Button>
-          <Button type="primary" :loading="loading" @click="handleSubmit('demand')" style="margin-left: 8px">保存</Button>
-          <Button @click="handleReset('demand')" style="margin-left: 8px">清空</Button>
-        </FormItem>
-      </Form>
-      <!--提交时加载动画-->
-      <Spin size="large" fix v-if="loading"></Spin>
+      <FormItem :label-width="0" style="text-align: center">
+        <Button type="primary" :loading="loading" @click="handleSubmit('editItemForm')">提交</Button>
+        <Button @click="handleReset('editItemForm')" style="margin-left: 8px">清空</Button>
+      </FormItem>
+    </Form>
+    <!--提交时加载动画-->
+    <Spin size="large" fix v-if="loading"></Spin>
   </div>
 </template>
 <script>
@@ -303,62 +254,111 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    editable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
+      isAdd: true,
+      carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
+        bwbID: '',
+        title: '',
+        receptType: 1,
+        gMaxWeight: '',
+        gpackage: '',
+        smobile: '',
+        amobile: '',
+        tunnage: '',
+        aname: '',
+        notepad: '',
+        aagent: '',
+        carNum: '',
+        gname: '',
+        glocation: '',
+        sCarLoadAddr: '',
+        acardID: '',
+        carType: '',
+        sname: '',
+        sagent: '',
+        scardID: '',
+        atel: '',
+        stel: '',
+        aCarDownAddr: '',
+        soffic: '',
+        aoffic: '',
+        aaddr: '',
+        saddr: ''
       },
       rules: {
-        name: [
-          { required: true, message: 'The name cannot be empty', trigger: 'blur' }
-        ],
-        mail: [
-          { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' }
-        ],
-        city: [
-          { required: true, message: 'Please select the city', trigger: 'change' }
-        ],
-        gender: [
-          { required: true, message: 'Please select gender', trigger: 'change' }
-        ],
-        interest: [
-          { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-          { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-        ],
-        date: [
-          { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-        ],
-        time: [
-          { required: true, type: 'string', message: 'Please select time', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-          { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-        ]
+        title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        tunnage: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        aname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // notepad: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // aagent: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        carNum: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        gname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // glocation: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        sCarLoadAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        acardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        carType: [ { required: true, message: '不能为空', trigger: 'change', type: 'number' } ],
+        sname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // sagent: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        scardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        atel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        stel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        aCarDownAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ]
+        // soffic: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // aoffic: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // aaddr: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // saddr: [ { required: true, message: '不能为空', trigger: 'blur' } ]
+      },
+      defaultInfo: {
+
       }
     }
   },
+  created () {
+    // 保留初始值
+    this.defaultInfo = this.demand
+  },
   methods: {
+    getTitle () {
+      return (this.isAdd ? '添加' : '修改') + '需求单'
+    },
+    // 弹出层的事件
+    formConfirmEvent () {
+      this.$emit('formConfirmEvent')
+    },
+    formCancelEvent () {
+      this.$emit('formCancelEvent')
+    },
+    watchEditableChange (e) {
+      this.$emit('watchEditableChange', e)
+    },
+    editFormData (demand) {
+      this.demand = { ...demand }
+      this.isAdd = true
+      if (this.demand.bwbID) {
+        this.isAdd = false
+      }
+    },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
+          this.$emit('handleFormSubmit', this.demand)
         }
       })
     },
     handleReset (name) {
+      this.demand = this.defaultInfo
       this.$refs[name].resetFields()
     }
   }

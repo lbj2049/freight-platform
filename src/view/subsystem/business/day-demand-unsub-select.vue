@@ -4,12 +4,15 @@
   <div slot="content">
     <Card :dis-hover="true">
       <p slot="title">查询</p>
-      <day-demand-unsub-search-form @handleFormSubmit="handleSearch"/>
+      <day-demand-unsub-search-form @handleToHandleSearch="doHandleSearch"/>
     </Card>
     <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
   </div>
 </template>
 <script>
+import {
+  getTDWayBillList
+} from '@/api/business.data'
 import TablePaging from '@/components/table-paging/table-paging'
 import DayDemandUnsubSearchForm from './day-demand-unsub-search-form'
 export default {
@@ -96,6 +99,11 @@ export default {
       ]
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    }
+  },
   methods: {
     remove (value) {
       console.log('remove', value)
@@ -103,8 +111,23 @@ export default {
     edit (value) {
       console.log('edit', value)
     },
-    handleSearch (search) {
-      console.log('search', search)
+    doHandleSearch (search) {
+      const UUID = this.getUserId
+      let params = { UUID, ...search, ...this.pagination }
+      getTDWayBillList(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.list = data.datas || []
+          this.pagination = {
+            total: data.total,
+            pageSize: data.pageSize,
+            pageNum: data.page
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
     },
     selectChange (value) {
       this.multItem = value

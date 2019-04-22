@@ -8,9 +8,20 @@
             <label class="ivu-form-item-label">基本信息</label>
           </Col>
           <Col span="22">
-            <FormItem label="需求单名称" prop="title">
-              <Input v-model="demand.title" placeholder="请输入需求单名称"/>
-            </FormItem>
+            <Row>
+              <Col span="16">
+                <FormItem label="需求单名称" prop="title">
+                  <Input v-model="demand.title" placeholder="请输入需求单名称"/>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="练习类型" prop="carType">
+                  <Select v-model="demand.receptType" placeholder="请选择练习类型">
+                    <Option v-for="item in receptTypes" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+                </FormItem>
+              </Col>
+            </Row>
             <Row>
               <Col span="8">
                 <FormItem label="吨数" prop="tunnage">
@@ -19,7 +30,7 @@
               </Col>
               <Col span="8">
                 <FormItem label="车种" prop="carType">
-                  <Select v-model="demand.carType" placeholder="请输入车种">
+                  <Select v-model="demand.carType" placeholder="请选择车种">
                     <Option v-for="item in carTypes" :value="item.value" :key="item.value">{{ item.label }}</Option>
                   </Select>
                 </FormItem>
@@ -268,10 +279,12 @@ export default {
   data () {
     return {
       isAdd: true,
-      carTypes: [{ value: 0, label: '整车' }, { value: 1, label: '集装箱' }, { value: 2, label: '零担' }, { value: 3, label: '其他' }],
+      receptTypes: [{ value: 1, label: '发车练习' }, { value: 2, label: '接车练习' }],
+      carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
         bwbID: '',
         title: '',
+        receptType: 1,
         gMaxWeight: '',
         gpackage: '',
         smobile: '',

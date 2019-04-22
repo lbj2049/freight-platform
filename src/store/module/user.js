@@ -9,6 +9,9 @@ import {
   restoreTrash,
   getUnreadCount
 } from '@/api/user'
+import {
+  enterTest
+} from '@/api/student.data'
 import { setToken, getToken } from '@/libs/util'
 
 export default {
@@ -25,7 +28,8 @@ export default {
     messageReadedList: [],
     messageTrashList: [],
     messageContentStore: {},
-    experimentId: ''// 学生子系统实验 ID
+    experimentId: '',// 学生子系统实验 ID,
+    compyId: ''// 学生公司 ID
   },
   mutations: {
     setUserInfo (state, userInfo) {
@@ -73,6 +77,9 @@ export default {
     },
     setExperimentId (state, id) {
       state.experimentId = id
+    },
+    setCompyId (state, id) {
+      state.compyId = id
     }
   },
   getters: {
@@ -282,10 +289,21 @@ export default {
         })
       })
     },
-    handleExperiment ({ commit }, { experiment_id }) {
+    handleExperiment ({ commit }, param) {
       return new Promise((resolve, reject) => {
-        commit('setExperimentId', experiment_id)
-        resolve()
+        enterTest(param).then(res => {
+          const body = res.data
+          const data = body.Data
+          if (body.Status === 2000) {
+            commit('setExperimentId', data.expID)
+            commit('setCompyId', data.compyID)
+          } else {
+            this.$Message.error(data.ErrorDes)
+          }
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
       })
     }
   }

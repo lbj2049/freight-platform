@@ -15,6 +15,9 @@
 </template>
 
 <script>
+import {
+  isSubsystem
+} from '@/api/student.data'
 import GuideCard from '_c/guide-card'
 export default {
   name: 'SubsystemGuide',
@@ -23,31 +26,57 @@ export default {
   },
   data () {
     return {
-
+      subsystemMap: {},
       subsystemData: [
-        { title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
-        { title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
-        { title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
-        { title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
+        { type: 'ec', title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
+        { type: 'container', title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
+        { type: 'freight', title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
+        { type: 'bill', title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
       ]
     }
   },
   computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
     getExperimentId () {
       return this.$store.state.user.experimentId
     }
   },
+  mounted: function () {
+    this.getSubsystem()
+  },
   methods: {
+    getSubsystem () {
+      const UUID = this.getUserId
+      let params = { UUID }
+      isSubsystem(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.subsystemMap = data
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
     doRedirect (item) {
-      console.log('实验ID', this.getExperimentId, item.url)
-      if (item.url.includes('box')) {
+      const installed = this.subsystemMap[ item.type ] === 1
+
+      if (item.type === 'freight') {
         this.$Notice.warning({
           title: '[' + item.title + '] 开发中，期待下一个版本'
         })
       } else {
-        this.$router.push({
-          name: item.url
-        })
+        if (!installed) {
+          this.$Notice.warning({
+            title: '[' + item.title + '] 暂未安装'
+          })
+        } else {
+          this.$router.push({
+            name: item.url
+          })
+        }
       }
     }
   }
@@ -56,4 +85,4 @@ export default {
 
 <style>
 
-</style>
+</style

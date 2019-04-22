@@ -40,7 +40,7 @@ export default {
         submitBtn: false
 
       },
-      stateMap: { 0: '未初始化', 1: '完成初始化', 2: '开始', 4: '关闭' },
+      stateMap: { 0: '未初始化', 1: '完成初始化', 2: '开始', 3: '暂停', 4: '关闭' },
       list: [],
       columns: [
         {
@@ -50,16 +50,13 @@ export default {
           title: '序号'
         },
         {
-          key: 'key1', combine: true, title: '实验名称'
+          key: 'expName', combine: true, title: '实验名称'
         },
         {
-          key: 'key2', combine: true, title: '参与班级'
+          key: 'isopen', combine: true, title: '状态', render: (h, params) => { let state = params.row.state; return h('div', this.stateMap[state]) }
         },
         {
-          key: 'key3', combine: true, title: '更新时间'
-        },
-        {
-          key: 'key4', combine: true, title: '状态'
+          key: 'upTime', combine: true, title: '更新时间'
         },
         {
           title: '操作',
@@ -67,24 +64,20 @@ export default {
           // fixed: 'right',
           width: 120,
           render: (btn, params) => {
+            const toSubsystem = params.row.state === 2
             return btn('div', [
               btn('Button', {
                 props: {
-                  type: 'primary'
+                  type: 'primary',
+                  disabled: !toSubsystem
                 },
                 on: {
                   click: () => {
-                    this.toSubsystem(88)
-                    // this.remove(params)
-                    // const _this = this
-
-                    /* this.$Modal.confirm({
-                        content: '确认删除？',
-                        onOk: function () {
-                          _this.deleteUser(params)
-                        }
-                      }) */
-                    // _this.$router.push('maketicketsystem/20')
+                    if (toSubsystem) {
+                      this.toSubsystem(params.row)
+                    } else {
+                      this.$Message.error('该实验暂未开启')
+                    }
                   }
                 }
               }, '进入实验')
@@ -141,8 +134,10 @@ export default {
         }
       })
     },
-    toSubsystem (experiment_id) {
-      this.handleExperiment({ experiment_id }).then(res => {
+    toSubsystem (item) {
+      const UUID = this.getUserId
+      const param = { ...item, UUID }
+      this.handleExperiment(param).then(res => {
         this.$router.push('/front/guide')
       })
     },

@@ -1,24 +1,24 @@
 import axios from '@/libs/api.request'
 
-export const getExpList = (params) => {
+export const getTDWayBillList = (params) => {
   return axios.request({
-    url: '/stuExpInfo/getExpList',
+    url: '/stuWayBill/getTDWayBillList',
     data: params,
     method: 'post'
   })
 }
 
-export const isSubsystem = (params) => {
+export const getWayBillList = (params) => {
   return axios.request({
-    url: '/expInfo/isSubsystem',
+    url: '/stuWayBill/getWayBillList',
     data: params,
     method: 'post'
   })
 }
 
-export const enterTest = (params) => {
+export const saveWayBill = (params) => {
   return axios.request({
-    url: '/stuExpInfo/enterTest',
+    url: '/stuWayBill/saveWayBill',
     data: params,
     method: 'post'
   })
