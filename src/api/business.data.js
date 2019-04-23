@@ -23,3 +23,11 @@ export const saveWayBill = (params) => {
     method: 'post'
   })
 }
+
+export const gg32323 = (params) => {
+  return axios.request({
+    url: 'stuWayBill/getWayBillList',
+    data: params,
+    method: 'post'
+  })
+}

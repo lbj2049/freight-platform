@@ -154,11 +154,15 @@ export default {
       this.multItem = value
       console.log('selectChange', value)
     },
-    changePageNum (page) {
-      console.log('page', page)
+    // 切换页面
+    changePageNum (pageNum) {
+      this.pagination.pageNum = pageNum
+      this.toHandleSearch()
     },
+    // 切换页面size
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      this.pagination.pageSize = pageSize
+      this.toHandleSearch()
     }
   }
 }

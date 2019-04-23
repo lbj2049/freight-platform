@@ -1,7 +1,7 @@
 <template>
   <Card :bordered="false">
     <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
     </table-paging>
   </Card>
 </template>
@@ -154,7 +154,7 @@ export default {
     changePageSize (pageSize) {
       this.pagination.pageSize = pageSize
       this.toHandleSearch()
-    },
+    }
   }
 }
 </script>
