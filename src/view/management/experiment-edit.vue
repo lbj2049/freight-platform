@@ -150,11 +150,11 @@ export default {
         this.itemInfo.UUID = this.$store.state.user.userId
       }
       if (this.list2) {
-        let cids = []
+        let itemIds = []
         this.list2.forEach((v, i) => {
-          cids.push(v.classID)
+          itemIds.push(v.classID)
         })
-        this.itemInfo.classIDs = cids.join(',')
+        this.itemInfo.classIDs = itemIds.join(',')
       } else {
         this.$Message.error('请选择班级')
       }

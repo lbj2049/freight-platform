@@ -2,7 +2,7 @@
   <div slot="content">
     <search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>
     <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
-      <div slot="toolButtons">
+      <div slot="topTools">
         <Button type="text" @click="doRePass">密码初始化</Button>
         <Button type="primary" @click="toAdd">新增</Button>
         <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
@@ -217,11 +217,11 @@ export default {
     },
     getBatchIds () {
       if (this.multItem && this.multItem.length > 0) {
-        const userIds = []
+        const itemIds = []
         this.multItem.forEach((k, v) => {
-          userIds.push(k.key1)
+          itemIds.push(k.UUID)
         })
-        return userIds
+        return itemIds
       } else {
         this.$Message.error('请选择数据')
       }

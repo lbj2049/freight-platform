@@ -2,7 +2,7 @@
   <div slot="content">
     <form-create ref="fc" v-model="searchApi" :rule="searchRule" :option="searchOption" class="qib-form"></form-create>
     <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
-      <div slot="toolButtons">
+      <div slot="topTools">
         <Button type="primary" @click="toAdd">添加需求单</Button>
       </div>
     </table-paging>
@@ -229,7 +229,7 @@ export default {
       if (this.multItem && this.multItem.length > 0) {
         const itemIds = []
         this.multItem.forEach((k, v) => {
-          itemIds.push(k.key1)
+          itemIds.push(k.bwbID)
         })
         return itemIds
       } else {

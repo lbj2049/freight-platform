@@ -262,7 +262,6 @@ export default {
   },
   data () {
     return {
-      isAdd: true,
       carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
         bwbID: '',
@@ -330,9 +329,6 @@ export default {
     this.defaultInfo = this.demand
   },
   methods: {
-    getTitle () {
-      return (this.isAdd ? '添加' : '修改') + '需求单'
-    },
     // 弹出层的事件
     formConfirmEvent () {
       this.$emit('formConfirmEvent')

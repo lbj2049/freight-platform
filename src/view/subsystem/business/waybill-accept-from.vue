@@ -1,69 +1,65 @@
 <template>
   <div>
-      <Form ref="demand" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
+      <Form ref="searchForm" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
 
           <Row>
             <Col span="8">
-              <FormItem label="预约号" prop="mail">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="预约号" prop="reservaNo">
+                <Input size="small" v-model="demand.reservaNo" placeholder="请输入预约号"></Input>
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="需求号" prop="mail">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="需求号" prop="needNo">
+                <Input size="small" v-model="demand.needNo" placeholder="请输入需求号"></Input>
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="装车日期" prop="mail">
-                <DatePicker size="small" type="daterange" placeholder="请选择提报日期" v-model="demand.date"></DatePicker>
-              </FormItem>
-            </Col>
-          </Row>
-          <Row>
-            <Col span="8">
-              <FormItem label="发站" prop="city">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-              </FormItem>
-            </Col>
-            <Col span="8">
-              <FormItem label="托运人" prop="city">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
-              </FormItem>
-            </Col>
-            <Col span="8">
-              <FormItem label="货运名称" prop="mail">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="装车日期" prop="loadDate">
+                <DatePicker size="small" v-model="demand.loadDate" type="date" placeholder="请选择装车日期" @on-change="handleChangeDate"></DatePicker>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="8">
-              <FormItem label="到站" prop="mail">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="发站" prop="station">
+                <Input size="small" v-model="demand.station" placeholder="请输入发站"></Input>
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="收货人" prop="city">
-                <Input size="small" v-model="demand.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="托运人" prop="sname">
+                <Input size="small" v-model="demand.sname" placeholder="请输入托运人"></Input>
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="运单状态" prop="mail">
-                <Select size="small" v-model="demand.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
+              <FormItem label="货运名称" prop="gname">
+                <Input size="small" v-model="demand.gname" placeholder="请输入货运名称"></Input>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="到站" prop="astation">
+                <Input size="small" v-model="demand.astation" placeholder="请输入到站"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="收货人" prop="aname">
+                <Input size="small" v-model="demand.aname" placeholder="请输入收货人"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="运单状态" prop="state">
+                <Select size="small" v-model="demand.state" placeholder="请选择运单状态">
+                  <Option v-for="item in states" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="8">
-              <FormItem label="承认车标识" prop="mail">
-                <Select size="small" v-model="demand.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
+              <FormItem label="承认车标识" prop="admitCarState">
+                <Select size="small" v-model="demand.admitCarState" placeholder="请选择承认车标识">
+                  <Option v-for="item in admitCarStates" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
               </FormItem>
             </Col>
@@ -75,8 +71,8 @@
 
         <Divider />
         <FormItem>
-          <Button type="primary" :loading="loading" @click="handleSubmit('demand')" style="margin-left: 8px">查询</Button>
-          <Button @click="handleReset('demand')" style="margin-left: 8px">清空</Button>
+          <Button size="small" type="primary" :loading="loading" @click="handleSubmit('searchForm')" style="margin-left: 8px">查询</Button>
+          <Button size="small" @click="handleReset('searchForm')" style="margin-left: 8px">清空</Button>
         </FormItem>
       </Form>
       <!--提交时加载动画-->
@@ -93,60 +89,52 @@ export default {
   },
   data () {
     return {
+      states: [{ value: 2, label: '待受理' }, { value: 4, label: '已通过受理' }, { value: 41, label: '未通过受理' }],
+      admitCarStates: [{ value: 0, label: '未匹配' }, { value: 1, label: '已匹配' }],
       demand: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
+        reservaNo: '',
+        needNo: '',
+        loadDate: '',
+        station: '',
+        astation: '',
+        sname: '',
+        aname: '',
+        gname: '',
+        state: '',
+        admitCarState: ''
       },
       rules: {
-        name: [
-          { required: true, message: 'The name cannot be empty', trigger: 'blur' }
-        ],
-        mail: [
-          { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' }
-        ],
-        city: [
-          { required: true, message: 'Please select the city', trigger: 'change' }
-        ],
-        gender: [
-          { required: true, message: 'Please select gender', trigger: 'change' }
-        ],
-        interest: [
-          { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-          { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-        ],
-        date: [
-          { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-        ],
-        time: [
-          { required: true, type: 'string', message: 'Please select time', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-          { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-        ]
+      },
+      defaultInfo: {
+
       }
     }
   },
+  created () {
+    // 保留初始值
+    this.defaultInfo = { ...this.demand }
+  },
+  mounted: function () {
+    this.toHandleSearch()
+  },
   methods: {
+    // 搜索
+    toHandleSearch () {
+      this.handleSubmit('searchForm')
+    },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit('handleFormSubmit', this.demand)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
         }
       })
     },
     handleReset (name) {
+      this.demand = { ...this.defaultInfo }
       this.$refs[name].resetFields()
+    },
+    handleChangeDate (dr) {
+      this.demand.loadDate = dr
     }
   }
 }

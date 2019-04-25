@@ -2,13 +2,20 @@
   margin: @border_width;
 }
 
-.toolButtonGroup {
+.topToolGroup {
   text-align: right;
-  .margin(5px);
+  .margin(5px 0 5px 5px);
   button {
     margin: 0 0 0 10px;
   }
 }
+.bottomToolGroup {
+  .margin(5px 5px 5px 0);
+  button {
+    margin: 0 10px 0 0;
+  }
+}
+
 .btn-ops {
   margin-left: 0;
   margin-right: 0;

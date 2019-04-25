@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="toolButtonGroup">
+    <div class="topToolGroup">
       <slot name="toolButtons"></slot>
     </div>
     <Spin size="large" fix v-if="loading"></Spin>
@@ -8,11 +8,18 @@
       <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
     </div>
     <Affix :offset-bottom="0">
-      <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
-        <Col>
-          <Page :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.pageNum" show-total @on-change="changePageNum" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
-        </Col>
-      </Row>
+      <Col span="8">
+        <div class="bottomToolGroup">
+          <slot name="bottomTools"></slot>
+        </div>
+      </Col>
+      <Col span="16">
+        <Row v-if="pagination" type="flex" justify="end" :style="{marginTop:'10px',width: width}">
+          <Col>
+            <Page :pageSize="pagination.pageSize" :total="pagination.total" :current="pagination.pageNum" show-total @on-change="changePageNum" @on-page-size-change="changePageSize" :page-size-opts="[10, 50, 100]"></Page>
+          </Col>
+        </Row>
+      </Col>
     </Affix>
   </div>
 </template>

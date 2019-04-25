@@ -2,7 +2,7 @@
   <div slot="content">
     <search-form btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="handleSearch" ></search-form>
     <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize">
-      <div slot="toolButtons">
+      <div slot="topTools">
         <Button type="primary" @click="doAdd">添加收货单</Button>
       </div>
     </table-paging>
