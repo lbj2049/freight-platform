@@ -9,10 +9,10 @@
     <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="bottomTools">
         <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
-        <Poptip transfer="true" confirm title="确定通过?" @on-ok="doBatchPass" style="text-align: left">
+        <Poptip :transfer="true" confirm title="确定通过?" @on-ok="doBatchPass" style="text-align: left">
           <Button type="primary">通过</Button>
         </Poptip>
-        <Poptip transfer="true" confirm title="不通过?" @on-ok="doBatchUnPass" style="text-align: left">
+        <Poptip :transfer="true" confirm title="不通过?" @on-ok="doBatchUnPass" style="text-align: left">
           <Button type="warning">不通过</Button>
         </Poptip>
         <Button disabled>整列成组</Button>
@@ -49,8 +49,8 @@ export default {
         // { key: 'acceptNo', title: '受理号', width: 90, fixed: 'left' },
         { key: 'station', title: '发站', width: 90 },
         { key: 'astation', title: '到站', width: 90 },
-        { key: 'soffic', title: '发局', width: 90, fixed: 'left' },
-        { key: 'aoffic', title: '到局', width: 90, fixed: 'left' },
+        { key: 'soffic', title: '发局', width: 90 },
+        { key: 'aoffic', title: '到局', width: 90 },
         { key: 'sname', title: '托运人', width: 90 },
         { key: 'aname', title: '收货人', width: 90 },
         { key: 'sCarLoadAddr', title: '托运人装车地点', width: 160 },
@@ -62,7 +62,7 @@ export default {
         { key: 'tunnage', title: '吨数', width: 90 },
         { key: '', title: '保价', width: 90 },
         { key: 'loadDate', title: '装车日期', width: 90 },
-        { key: 'reservaNo', title: '预约号', width: 160, fixed: 'left' },
+        { key: 'reservaNo', title: '预约号', width: 160 },
         { key: 'carType', title: '车种', width: 90, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
         { key: 'carNum', title: '车数', width: 90 },
         { key: 'state', title: '运单状态', width: 90, render: (h, params) => { let state = params.row.state; return h('div', this.stateMap[state]) } }
