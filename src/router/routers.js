@@ -456,6 +456,8 @@ export default [
       }
     ]
   },
+  /* 进出货管理 暂时屏蔽 */
+  /*
   {
     path: '/business/inout/mnt',
     name: '进出货管理',
@@ -482,6 +484,7 @@ export default [
       }
     ]
   },
+  */
 
   /* 货运站系统 */
   {

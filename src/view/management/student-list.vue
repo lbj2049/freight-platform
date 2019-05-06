@@ -380,6 +380,7 @@ export default {
       if (body.Status === 2000) {
         this.formCancelEvent()
         this.toHandleSearch()
+        this.multItem = []
         this.$Message.success(data.Result)
       } else {
         this.$Message.error(data.ErrorDes)

@@ -137,6 +137,7 @@ export default {
       const data = body.Data
       if (body.Status === 2000) {
         this.toHandleSearch()
+        this.multItem = []
         this.$Message.success(data.Result)
       } else {
         this.$Message.error(data.ErrorDes)
