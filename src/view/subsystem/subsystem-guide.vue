@@ -29,8 +29,8 @@ export default {
       subsystemMap: {},
       subsystemData: [
         { type: 'ec', title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
-        { type: 'container', title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
-        { type: 'freight', title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
+        { type: 'freight', title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
+        { type: 'container', title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
         { type: 'bill', title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
       ]
     }
@@ -63,7 +63,7 @@ export default {
     doRedirect (item) {
       const installed = this.subsystemMap[ item.type ] === 1
 
-      if (item.type === 'freight') {
+      if (item.type === 'container') {
         this.$Notice.warning({
           title: '[' + item.title + '] 开发中，期待下一个版本'
         })

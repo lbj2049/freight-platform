@@ -20,9 +20,13 @@
         <div style="overflow: hidden; text-align: center">
           <!--<Button shape="circle" type="success" icon="ios-radio-button-off" size="small"/>-->
           <div v-for="(m, index) in states" :label="m.value" :key="m.value" style="float: left">
-            <div v-if="item.state >= m.value">
+            <div v-if="item.state > m.value">
               <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
               <Icon type="md-remove" size="32" color="#19be6b" v-if="index < states.length - 1"/>
+            </div>
+            <div v-if="item.state == m.value">
+              <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
+              <Icon type="md-remove" size="32" color="#c5c8ce" v-if="index < states.length - 1"/>
             </div>
             <div v-if="item.state < m.value">
               <Icon type="ios-radio-button-on" size="32" color="#c5c8ce"/>

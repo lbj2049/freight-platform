@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="topToolGroup">
-      <slot name="toolButtons"></slot>
+      <slot name="topTools"></slot>
     </div>
     <Spin size="large" fix v-if="loading"></Spin>
     <div>
