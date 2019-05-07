@@ -23,8 +23,7 @@
         </Select>
       </FormItem>
       <FormItem>
-        <Button size="small" type="primary" :loading="loading" @click="handleSubmit('searchForm')" style="margin-left: 8px">查询
-        </Button>
+        <Button size="small" type="primary" :loading="loading" @click="handleSubmit('searchForm')" style="margin-left: 8px">查询</Button>
         <Button size="small" type="warning" @click="handleAuth()" style="margin-left: 8px">审核</Button>
       </FormItem>
     </Form>
