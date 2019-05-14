@@ -24,3 +24,41 @@ export const setPass = (params) => {
   })
 }
 
+export const inOutStationList = (params) => {
+  return axios.request({
+    url: '/fWayBill/inOutStationList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const waybillNoSel = (params) => {
+  return axios.request({
+    url: '/fWayBill/waybillNoSel',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const warehouseList = (params) => {
+  return axios.request({
+    url: '/gLocation/warehouseList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const compyGlocation = (params) => {
+  return axios.request({
+    url: '/gLocation/compyGlocation',
+    data: params,
+    method: 'post'
+  })
+}
+export const adCompyGlocation = (params) => {
+  return axios.request({
+    url: '/gLocation/adCompyGlocation',
+    data: params,
+    method: 'post'
+  })
+}

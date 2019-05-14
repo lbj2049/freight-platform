@@ -180,6 +180,12 @@ export default {
     },
     toStates () {
       console.log(this.item)
+      var arr = Object.keys(this.item)
+      if (arr.length === 0) {
+        this.$Message.error('请选择数据')
+        return
+      }
+
       this.stateModel = true
     }
   }

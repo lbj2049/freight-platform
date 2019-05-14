@@ -1,12 +1,11 @@
+<style lang="less">
+  @import 'whole-inout-ticket-verify-from';
+</style>
 <template>
   <div>
       <Form ref="transit" :model="transit" :rules="rules" :show-message="false" class="qib-form">
-          <FormItem prop="mail" label="股道" :label-width="40">
-            <Select size="small" v-model="transit.city" placeholder="Select your option">
-              <Option value="">全部</Option>
-              <Option value="1">1</Option>
-              <Option value="2">2</Option>
-            </Select>
+          <FormItem label="股道" prop="yardName" :label-width="40">
+            <Input size="small" v-model="transit.yardName" placeholder="请输入股道"></Input>
           </FormItem>
           <FormItem :label-width="10">
             <Button size="small" type="primary" :loading="loading" @click="handleSubmit('transit')" style="margin-left: 8px">查询</Button>
@@ -18,97 +17,93 @@
 
       <Modal v-model="verifyFormModel" title="外勤进出货验证" @on-ok="verifyOk" @on-cancel="verifyCancel">
         <Form ref="ticket" :model="ticket" :rules="rules" :show-message="false" :label-width="72" class="qib-form">
-          <FormItem label="票据号">
-            <Input size="small" v-model="ticket.name" placeholder="Enter something...">
+          <FormItem label="票据号" prop="waybillNo">
+            <Input size="small" v-model="ticket.waybillNo" placeholder="请输入">
               <Button slot="append" @click="handleSelectTicket">选择</Button>
             </Input>
           </FormItem>
           <Divider orientation="left" class="divider">整车进出货信息</Divider>
-          <FormItem label="托运人">
-            <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+          <FormItem label="托运人" prop="sname">
+            <Input size="small" v-model="ticket.sname" placeholder="请输入"></Input>
           </FormItem>
-          <FormItem label="收货人">
-            <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+          <FormItem label="收货人" prop="aname">
+            <Input size="small" v-model="ticket.aname" placeholder="请输入"></Input>
           </FormItem>
           <Row>
             <Col span="12">
-              <FormItem label="品名">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="品名" prop="gname">
+                <Input size="small" v-model="ticket.gname" placeholder="请输入"></Input>
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="货重">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span="12">
-              <FormItem label="发站">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="12">
-              <FormItem label="到站">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="货重" prop="tunnage">
+                <Input size="small" v-model="ticket.tunnage" placeholder="请输入"></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="12">
-              <FormItem label="汽车号码">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="发站" prop="station">
+                <Input size="small" v-model="ticket.station" placeholder="请输入"></Input>
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="预约日期">
-                <Input size="small" type="date" v-model="ticket.date" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span="12">
-              <FormItem label="进门重量">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="12">
-              <FormItem label="有效日期">
-                <Input size="small" type="date" v-model="ticket.date" placeholder="Enter something..."></Input>
+              <FormItem label="到站" prop="astation">
+                <Input size="small" v-model="ticket.astation" placeholder="请输入"></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="12">
-              <FormItem label="需求号">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="汽车号码" prop="waybillNo">
+                <Input size="small" v-model="ticket.name" placeholder="请输入"></Input>
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="股道简称">
-                <Select size="small" v-model="ticket.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
-                </Select>
+              <FormItem label="预约日期" prop="waybillNo">
+                <Input size="small" type="date" v-model="ticket.date" placeholder="请输入"></Input>
+              </FormItem>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span="12">
+              <FormItem label="进门重量" prop="tunnage">
+                <Input size="small" v-model="ticket.tunnage" placeholder="请输入"></Input>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="有效日期" prop="date">
+                <Input size="small" type="date" v-model="ticket.date" placeholder="请输入"></Input>
+              </FormItem>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span="12">
+              <FormItem label="需求号" prop="needNo">
+                <Input size="small" v-model="ticket.needNo" placeholder="请输入"></Input>
+              </FormItem>
+            </Col>
+            <Col span="12">
+              <FormItem label="股道简称" prop="yardName">
+                <Input size="small" v-model="ticket.yardName" placeholder="请输入"></Input>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="12">
-              <FormItem label="货区货位">
-                <Input size="small" v-model="ticket.name" placeholder="Enter something..."></Input>
+              <FormItem label="货区货位" prop="glocation">
+                <Input size="small" v-model="ticket.glocation" placeholder="请输入"></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <Row>
                 <Col span="10">
-                  <FormItem :label-width="12">
-                    <Checkbox v-model="ticket.msg">综合货位</Checkbox>
+                  <FormItem :label-width="12" prop="isg">
+                    <Checkbox v-model="ticket.isg">综合货位</Checkbox>
                   </FormItem>
                 </Col>
                 <Col span="12">
@@ -122,33 +117,64 @@
         </Form>
       </Modal>
 
-      <Modal v-model="ticketSearchModel" title="票据查询" width="800" :footer-hide="true">
-        <Form ref="ts" :model="ts" :show-message="false" :label-width="72" class="qib-form">
+      <Modal v-model="ticketSearchModel" title="票据查询" width="960" :footer-hide="true">
+        <Form ref="ts" :model="ts" :rules="tsrules" :show-message="false" :label-width="72" class="qib-form">
           <Row>
-            <Col span="6">
-              <FormItem label="票据类型" prop="msg">
-                <RadioGroup v-model="ts.msg">
-                  <Radio label="运单"></Radio>
-                  <Radio label="货单"></Radio>
-                  <Radio label="出站单"></Radio>
+            <Col span="8">
+              <FormItem label="票据类型" :label-width="72">
+                <RadioGroup v-model="ts.ticketType">
+                  <Radio label="1" >运单</Radio>
+                  <Radio label="2" disabled>货单</Radio>
+                  <Radio label="3" disabled>出站单</Radio>
                 </RadioGroup>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="运输方式" prop="msg">
-                <RadioGroup v-model="ts.msg">
-                  <Radio label="整车"></Radio>
-                  <Radio label="零担"></Radio>
-                  <Radio label="集装箱"></Radio>
-                </RadioGroup>
+            <Col span="8">
+              <FormItem label="运输方式" prop="carType">
+
+                <Select size="small" v-model="ts.carType" placeholder="请选择车种">
+                  <Option v-for="item in carTypes" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="提报日期" prop="date">
-                <DatePicker size="small" type="date" v-model="ts.date" placeholder="请选择提报日期"></DatePicker>
+            <Col span="8">
+              <FormItem label="提报日期" prop="resDate">
+                <DatePicker size="small" type="daterange" v-model="ts.resDate" placeholder="请选择提报日期" @on-change="handleChangeResDate"></DatePicker>
               </FormItem>
             </Col>
-            <Col span="6">
+          </Row>
+          <Row>
+            <Col span="8">
+              <FormItem label="托运人" prop="sname">
+                <Input size="small" v-model="ts.sname" placeholder="请输入托运人"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="收货人" prop="aname">
+                <Input size="small" v-model="ts.aname" placeholder="请输入收货人"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="处理状态" prop="state">
+                <Select size="small" v-model="ts.state" placeholder="请选择运单状态">
+                  <Option v-for="item in states" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+              </FormItem>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span="8">
+              <FormItem label="票据号" prop="waybillNo">
+                <Input size="small" v-model="ts.waybillNo" placeholder="请输入票据号"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="发站" prop="station">
+                <Input size="small" v-model="ts.station" placeholder="请输入发站"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
               <FormItem :label-width="15">
                 <Button size="small" type="primary" @click="handleSearchPosition('ts')">查询</Button>
                 <Button size="small" @click="handleSearchReset('ts')" style="margin-left: 8px">重置</Button>
@@ -156,286 +182,71 @@
               </FormItem>
             </Col>
           </Row>
-          <Row>
-            <Col span="6">
-              <FormItem label="托运人" prop="name">
-                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="6">
-              <FormItem label="收货人" prop="name">
-                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="6">
-              <FormItem label="处理状态" prop="city">
-                <Select size="small" v-model="ts.city" placeholder="Select your city">
-                  <Option value="beijing">通知进货</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
-                </Select>
-              </FormItem>
-            </Col>
-            <Col span="6">
-            </Col>
-          </Row>
-
-          <Row>
-            <Col span="6">
-              <FormItem label="票据号" prop="name">
-                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="6">
-              <FormItem label="发站" prop="name">
-                <Input size="small" v-model="ts.name" placeholder="Enter something..."></Input>
-              </FormItem>
-            </Col>
-            <Col span="6">
-            </Col>
-            <Col span="6">
-            </Col>
-          </Row>
         </Form>
         <Table ref="tsRowTable" border :columns="tscols" :data="tsrs" @on-current-change="getCurrentData" size="small" highlight-row></Table>
       </Modal>
 
       <Modal v-model="positionSelectModel" title="选择货位" width="800" @on-ok="positionSelectOk" @on-cancel="positionSelectCancel">
+        <Form ref="glocation" :model="glocation" :rules="rules" :show-message="false" :label-width="72" class="qib-form">
         <Row :gutter="6">
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
+          <Col span="18">
+            <div style="line-height: 32px">
+              <Row>
+                <Col span="3"><div class="legend"><span class="legend-text">空位</span><div class="legend-img position-cell-0"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">预约</span><div class="legend-img position-cell-1"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">作业中</span><div class="legend-img position-cell-2"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">仓单</span><div class="legend-img position-cell-3"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">混合</span><div class="legend-img position-cell-4"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">占用</span><div class="legend-img position-cell-5"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">仓单</span><div class="legend-img position-cell-6"></div></div></Col>
+                <Col span="3"><div class="legend"><span class="legend-text">混合</span><div class="legend-img position-cell-7"></div></div></Col>
+              </Row>
             </div>
           </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
+          <Col span="6">
+            <FormItem label="货区" prop="bgwID">
+              <Select size="small" v-model="glocation.bgwID" placeholder="请选择货区" @on-change="handleChangeBGW">
+                <Option v-for="item in pwhs" :value="item.value" :key="item.value">{{ item.label }}</Option>
+              </Select>
+            </FormItem>
           </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
+        </Row>
+        </Form>
+        <Row :gutter="6">
+          <Col span="3" v-for="pr in psrs">
+            <Poptip v-model="pr.visible">
+              <div slot="title"><i>选择仓位</i></div>
+              <div slot="content">
+                <Button @click="doHandlePrCancel">关闭</Button>
+                <Button type="primary" @on-ok="doHandlePrOk">确定</Button>
               </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
-          </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
+              <div class="position-col ">
+                <div class="position-body">
+                  <Row :gutter="1">
+                    <Col span="8" v-for="lv in pr.ls">
+                      <div v-if="lv.site > 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked}" class="position-cell" v-bind:class="psdsMap[lv.state]" v-on:click="doHandlePrChecked1(pr, lv)"></div>
+                      <div v-else-if="lv.site === 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked}" class="position-cell" v-bind:class="psdsMap[lv.state]" v-on:click="doHandlePrChecked2(pr)"></div>
+                      <div v-else class="position-cell" v-bind:class="psdsMap[lv.state]"></div>
+                    </Col>
+                  </Row>
+                </div>
+                <div class="position-title">{{pr.door}}门{{pr.warehouse}}货位 {{pr.full}}</div>
               </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
-          </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
-          </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
-          </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
-          </Col>
-          <Col span="3">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-                <Row :gutter="1">
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                  <Col span="8"><div class="position-cell"></div></Col>
-                </Row>
-              </div>
-              <div class="position-title">1门1货位 空</div>
-            </div>
+            </Poptip>
           </Col>
 
-          <Col span="3" v-for="ps in psrs">
-            <div class="position-col">
-              <div class="position-body">
-                <Row :gutter="1">
-                  <Col span="8" v-for="lv in ps.ls"><div class="position-cell" v-bind:class="{'position-cell-1': lv.status === 1, 'position-cell-2': lv.status === 2, 'position-cell-3': lv.status === 3, 'position-cell-4': lv.status === 4}"></div></Col>
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                  <!--<Col span="8"><div class="position-cell position-cell-1"></div></Col>-->
-                </Row>
-              </div>
-              <div class="position-title">{{ps.door}}门{{ps.pos}}货位 {{ps.full}}</div>
-            </div>
-          </Col>
         </Row>
       </Modal>
 
   </div>
 </template>
-<style>
-  .position-col {
-    border: 1px #bfd2e6 solid;
-    margin-bottom: 5px;
-  }
-  .position-body {
-    padding: 2px 4px;
-
-  }
-  .position-title {
-    /*height: 12px;*/
-    padding: 2px;
-    text-align: center;
-    border-top: 1px #bfd2e6 solid;
-  }
-  .position-cell {
-    /*border: 1px #bfd2e6 dashed;*/
-    height: 24px;
-  }
-  .position-cell-1 {
-    border: 1px #bfd2e6 dashed;
-  }
-  .position-cell-2 {
-    border: 1px #F5CBD1 dashed;
-  }
-  .position-cell-3 {
-    border: 1px #e6584a dashed;
-  }
-  .position-cell-4 {
-    border: 1px #e676cc dashed;
-  }
-
-</style>
 <script>
+import {
+  waybillNoSel,
+  warehouseList,
+  adCompyGlocation,
+  compyGlocation
+} from '@/api/freight.data'
 export default {
   props: {
     loading: {
@@ -449,480 +260,111 @@ export default {
       ticketSearchModel: false,
       positionSelectModel: false,
       transit: {
-        mail: ''
+        yardName: ''
       },
       ticket: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
+        waybillNo: '', // 运单号
+        resDate: '', // 提报日期
+        station: '', // 发站
+        astation: '', // 到站
+        sname: '', // 托运人
+        aname: '', // 收货人
+        state: '', // 状态
+        gname: '', // 品名
+        carNum: '', // 车数
+        carType: '', // 运输方式
+        tunnage: '', // 货重
+        yardName: '', // 股道名称
+        glocation: '' // 货区货位
+
       },
       ticketTmp: {
       },
+      carTypeMap: { 1: '整车', 2: '集装箱', 3: '零担', 4: '其他' },
+      carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
+      stateMap: { 1: '待用', 2: '待上报', 3: '待受理', 4: '已通过受理', 41: '未通过受理', 5: '已装车', 6: '已发车', 7: '已到达', 8: '已卸车', 9: '已交付', 10: '待理赔', 11: '已理赔', 12: '已作废', 13: '已制票', 14: '通知进货', 400: '退订' },
+      states: [{ value: 1, label: '待用' }, { value: 2, label: '待上报' }, { value: 3, label: '待受理' }, { value: 4, label: '已通过受理' }, { value: 41, label: '未通过受理' }, { value: 5, label: '已装车' }, { value: 6, label: '已发车' }, { value: 7, label: '已到达' }, { value: 8, label: '已卸车' }, { value: 9, label: '已交付' }, { value: 10, label: '待理赔' }, { value: 11, label: '已理赔' }, { value: 12, label: '已作废' }, { value: 13, label: '已制票' }],
       ts: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
+        ticketType: '1',
+        resDate: '',
+        resDate_bg: '',
+        resDate_ed: '',
+        carType: '',
+        sname: '',
+        aname: '',
+        station: '',
+        waybillNo: '',
+        state: '',
+        isg: ''
       },
+      tsrules: {},
       tscols: [
         { type: 'index', width: 38, align: 'center' },
-        // { type: 'selection', width: 45, align: 'center' },
-        {
-          key: 'name', combine: true, title: '运单号'
-        },
-        {
-          key: 'date', combine: true, title: '货主提报日期'
-        }
+        { key: 'waybillNo', title: '运单号', width: 90 },
+        { key: 'resDate', title: '货主提报日期', width: 160 },
+        { key: 'station', title: '发站', width: 160 },
+        { key: 'astation', title: '到站', width: 160 },
+        { key: 'sname', title: '托运人', width: 160 },
+        { key: 'aname', title: '收货人', width: 90 },
+        { key: 'state', title: '处理状态', width: 120, render: (h, params) => { let state = params.row.state; return h('div', this.stateMap[state]) } },
+        { key: 'gname', title: '品名', width: 160 },
+        { key: 'carNum', title: '车数', width: 160 },
+        { key: 'carType', title: '运输方式', width: 90, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } }
       ],
-      tsrs: [
-        {
-          name: 'a1',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
-        },
-        {
-          name: 'a2',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
-        },
-        {
-          name: 'a3',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
-        }
+      tsrs: [],
+      glocation: {
+        visible: false,
+        wbID: '',
+        bgwID: '',
+        bglID: '',
+        sites: []
+      },
+      pwhs: [],
+      psds: [
+        { wbID: '', bglID: '', site: 1, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 2, state: 1, checked: false },
+        { wbID: '', bglID: '', site: 3, state: 2, checked: false },
+        { wbID: '', bglID: '', site: 4, state: 3, checked: false },
+        { wbID: '', bglID: '', site: 0, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 5, state: 4, checked: false },
+        { wbID: '', bglID: '', site: 6, state: 5, checked: false },
+        { wbID: '', bglID: '', site: 7, state: 6, checked: false },
+        { wbID: '', bglID: '', site: 8, state: 7, checked: false }
       ],
-      psrs: [
-        {
-          door: 1,
-          pos: 1,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 1,
-          pos: 2,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 1,
-          pos: 3,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 2, hn: ''
-            },
-            {
-              full: 0, status: 3, hn: ''
-            },
-            {
-              full: 0, status: 4, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 2, hn: ''
-            },
-            {
-              full: 0, status: 3, hn: ''
-            },
-            {
-              full: 0, status: 4, hn: ''
-            }
-          ]
-        },
-        {
-          door: 1,
-          pos: 4,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 2, hn: ''
-            },
-            {
-              full: 0, status: 3, hn: ''
-            },
-            {
-              full: 0, status: 4, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 2, hn: ''
-            },
-            {
-              full: 0, status: 3, hn: ''
-            },
-            {
-              full: 0, status: 4, hn: ''
-            }
-          ]
-        },
-        {
-          door: 2,
-          pos: 1,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 2,
-          pos: 2,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 2,
-          pos: 3,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 2,
-          pos: 4,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 3,
-          pos: 1,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 3,
-          pos: 2,
-          full: 0,
-          ls: [
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            },
-            {
-              full: 0, status: 1, hn: ''
-            }
-          ]
-        },
-        {
-          door: 3,
-          pos: 3,
-          full: 0,
-          ls: [
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 0, status: 0, hn: ''
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            },
-            {
-              full: 1, status: 1, hn: '大豆'
-            }
-          ]
-        }
-        /*,
-        {
-          door: 3,
-          pos: 4,
-          full: 1,
-          status: 1,
-          hn: '大豆'
-        }
-        */
-      ],
+      psdsMap: { 0: 'position-cell-0', 1: 'position-cell-1', 2: 'position-cell-2', 3: 'position-cell-3', 4: 'position-cell-4', 5: 'position-cell-5', 6: 'position-cell-6', 7: 'position-cell-7', 8: 'position-cell-8' },
+      psrs: [],
       rules: {
+      },
+      pagination: {
+        total: 0,
+        pageSize: 10,
+        pageNum: 1
       }
     }
   },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
+    getCompyId () {
+      return this.$store.state.user.compyId
+    }
+  },
   methods: {
+    // 搜索
+    toHandleSearch () {
+      this.handleSubmit('transit')
+    },
     handleSubmit (name) {
-      this.$emit('handleFormSubmit', this.transit)
-      this.$Message.success('Success!')
+      // this.$emit('handleFormSubmit', this.transit)
+      // this.$Message.success('Success!')
       /*
+      */
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit('handleFormSubmit', this.transit)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
         }
       })
-      */
     },
     handleTicketVerify () {
       this.$emit('handleTicketVerify')
@@ -933,45 +375,48 @@ export default {
       this.ticketSearchModel = true
     },
     handleSelectPosition () {
-      console.log('handleSelectPosition')
+      this.pwhs = []
+      const UUID = this.getUserId
+      const compyID = this.getCompyId
+      const type = 1
+      let params = { UUID, type }
+      warehouseList(params).then(res => {
+        console.log(res)
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          if (data) {
+            data.forEach(({ bgwID, warehouse }) => this.pwhs.push({ value: bgwID, label: warehouse }))
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
       this.positionSelectModel = true
     },
-    handleSearchPosition () {
-      this.tsrs = [
-        {
-          name: 'b1',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
-        },
-        {
-          name: 'b2',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
-        },
-        {
-          name: 'b3',
-          mail: '1@1.1',
-          city: 'bj',
-          gender: '1',
-          interest: [1],
-          msg: 1,
-          date: '2019-01-01',
-          time: '08:08:08',
-          desc: 'test'
+    handleSearchPosition (name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          const UUID = this.getUserId
+          const compyID = this.getCompyId
+          let params = { UUID, compyID, ...this.ts, ...this.pagination }
+          waybillNoSel(params).then(res => {
+            console.log(res)
+            const body = res.data
+            const data = body.Data
+            if (body.Status === 2000) {
+              this.tsrs = data.datas || []
+              this.pagination = {
+                total: data.total,
+                pageSize: data.pageSize,
+                pageNum: data.page
+              }
+            } else {
+              this.$Message.error(data.ErrorDes)
+            }
+          })
         }
-      ]
+      })
     },
     handleSearchReset (name) {
       this.$refs[name].resetFields()
@@ -1002,6 +447,97 @@ export default {
     },
     positionSelectCancel () {
 
+    },
+    handleChangeResDate (dr) {
+      this.ts.resDate_bg = dr[0]
+      this.ts.resDate_ed = dr[1]
+    },
+    // 选择货区
+    handleChangeBGW () {
+      console.log(this.glocation)
+      const UUID = this.getUserId
+      const compyID = this.getCompyId
+      const bgwID = this.glocation.bgwID
+      if (!bgwID) {
+        this.$Message.error('请选择货位')
+        return
+      }
+      let params = { UUID, compyID, bgwID }
+      this.psrs = []
+      compyGlocation(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          if (data) {
+            let visible = false
+            data.forEach(dv => {
+              let bglID = dv.bglID
+              let pv = {
+                bglID: bglID,
+                door: dv.door,
+                warehouse: dv.warehouse,
+                ls: []
+              }
+              let psds = []
+              // let psds = [ ...this.psds ]
+              if (dv.used && dv.used.length > 0) {
+                this.psds.forEach(pd => {
+                  let pdt = { ...pd, visible }
+                  dv.used.forEach(dc => {
+                    if (pdt.site === dc.site) {
+                      let checked = false
+                      if (dc.state > 0) {
+                        checked = true
+                      }
+                      pdt = { ...dc, bgwID, bglID, checked, visible }
+                    } else if (pdt.site === 0) {
+                      if ((dv.used.length === 8)) {
+                        pdt.checked = true
+                      }
+                    } else {
+                      pdt.bglID = bglID
+                    }
+                    psds.push(pdt)
+                  })
+                })
+              } else {
+                this.psds.forEach(pd => {
+                  let pdt = { ...pd, visible }
+                  pdt.bglID = bglID
+                  psds.push(pdt)
+                })
+              }
+              pv.ls = psds
+              this.psrs.push(pv)
+            })
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
+    doHandlePrChecked1 (pr, pd) {
+      pr.visible = true
+      pd.checked = !pd.checked
+      this.glocation.visible = true
+      if (this.glocation.bglID && this.glocation.bglID === pd.bglID) {
+        this.glocation.sites = this.glocation.sites + ',' + pd.site
+      } else {
+        this.glocation.sites = pd.site
+      }
+
+      this.glocation.wbID = pd.wbID
+      this.glocation.bglID = pd.bglID
+      console.log(this.glocation, pd)
+    },
+    doHandlePrChecked2 (pr) {
+      console.log(pr)
+    },
+    doHandlePrOk () {
+      console.log('doHandlePr')
+    },
+    doHandlePrCancel () {
+      console.log('doHandlePr')
     }
   }
 }
