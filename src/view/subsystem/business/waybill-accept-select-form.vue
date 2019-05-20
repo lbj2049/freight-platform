@@ -122,7 +122,7 @@ export default {
     this.defaultInfo = { ...this.demand }
   },
   mounted: function () {
-    this.toHandleSearch()
+    // this.toHandleSearch()
   },
   methods: {
     // 搜索

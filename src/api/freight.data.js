@@ -62,3 +62,77 @@ export const adCompyGlocation = (params) => {
     method: 'post'
   })
 }
+
+export const compyGyardList = (params) => {
+  return axios.request({
+    url: '/gLocation/compyGyardList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const compyOutworkerList = (params) => {
+  return axios.request({
+    url: '/gLocation/compyOutworkerList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const compyLoadGroupList = (params) => {
+  return axios.request({
+    url: '/gLocation/compyLoadGroupList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const truckLoadList = (params) => {
+  return axios.request({
+    url: '/fWayBill/truckLoadList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const executePlan = (params) => {
+  return axios.request({
+    url: '/fWayBill/executePlan',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const loadCarNeedList = (params) => {
+  return axios.request({
+    url: '/gLocation/loadCarNeedList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const arriveList = (params) => {
+  return axios.request({
+    url: '/fWayBill/arriveList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const unloadPlanList = (params) => {
+  return axios.request({
+    url: '/fWayBill/unloadPlanList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const unloadCarNeedList = (params) => {
+  return axios.request({
+    url: '/gLocation/unloadCarNeedList',
+    data: params,
+    method: 'post'
+  })
+}
+
+

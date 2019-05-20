@@ -1,28 +1,25 @@
 <template>
   <div>
-    <Form ref="search" :model="search" :rules="rules" :label-width="64" :show-message="false" class="qib-form">
+    <Form ref="searchForm" :model="search" :rules="rules" :label-width="64" :show-message="false" class="qib-form">
       <Row>
         <Col span="12">
           <Row>
             <Col span="8">
-              <FormItem label="代报站">
-                <Select size="small" v-model="search.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
-                </Select>
+              <FormItem prop="station" label="代理站">
+                <Input size="small" v-model="search.station" placeholder="请输入代理站"></Input>
               </FormItem>
             </Col>
             <Col span="8">
               <Row>
-                <Col span="12">
-                  <FormItem prop="gender" :label-width="15">
-                    <RadioGroup size="small" v-model="search.gender" >
+                <Col span="24">
+                  <FormItem prop="yardType" :label-width="15">
+                    <RadioGroup size="small" v-model="search.yardType" >
                       <Radio value="1" label="到达股道"></Radio>
                       <Radio value="2" label="现车股道"></Radio>
                     </RadioGroup>
                   </FormItem>
                 </Col>
+                <!--
                 <Col span="12">
                   <FormItem prop="city" :label-width="0">
                     <Select size="small" v-model="search.city" placeholder="Select your city">
@@ -32,31 +29,24 @@
                     </Select>
                   </FormItem>
                 </Col>
+                -->
               </Row>
             </Col>
             <Col span="8">
               <Row>
                 <Col span="24">
-                  <FormItem label="车次">
-                    <Select size="small" v-model="search.city" placeholder="Select your city">
-                      <Option value="beijing">New York</Option>
-                      <Option value="shanghai">London</Option>
-                      <Option value="shenzhen">Sydney</Option>
-                    </Select>
+                  <FormItem prop="trainNum" label="车次">
+                    <Input size="small" v-model="search.trainNum" placeholder="请输入车次"></Input>
                   </FormItem>
                 </Col>
                 <Col span="24">
-                  <FormItem label="到站">
-                    <Select size="small" v-model="search.city" placeholder="Select your city">
-                      <Option value="beijing">New York</Option>
-                      <Option value="shanghai">London</Option>
-                      <Option value="shenzhen">Sydney</Option>
-                    </Select>
+                  <FormItem prop="astation" label="到站">
+                    <Input size="small" v-model="search.astation" placeholder="请输入到站"></Input>
                   </FormItem>
                 </Col>
                 <Col span="24">
-                  <FormItem label="车号">
-                    <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                  <FormItem prop="carTypeNum" label="车号">
+                    <Input size="small" v-model="search.carTypeNum" placeholder="请输入车号"></Input>
                   </FormItem>
                 </Col>
               </Row>
@@ -65,9 +55,9 @@
         </Col>
         <Col span="6">
           <FormItem :label-width="20">
-            <Button size="small" type="primary" :loading="loading" @click="handleSubmit('search')" style="margin-left: 8px">查询</Button>
-            <Button size="small" type="primary" @click="handlePlan('search')" style="margin-left: 8px">执行计划</Button>
-            <Button size="small" type="primary" @click="handleExport('search')" style="margin-left: 8px">导出excel</Button>
+            <Button size="small" type="primary" :loading="loading" @click="handleSubmit('searchForm')" style="margin-left: 8px">查询</Button>
+            <Button size="small" type="primary" @click="handlePlan('searchForm')" style="margin-left: 8px">执行计划</Button>
+            <Button size="small" type="primary" @click="handleExport('searchForm')" style="margin-left: 8px">导出excel</Button>
           </FormItem>
         </Col>
       </Row>
@@ -87,30 +77,40 @@ export default {
   data () {
     return {
       search: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
+        wbID: '',
+        station: '',
+        trainNum: '',
+        astation: '',
+        carTypeNum: '',
+        yardType: 1,
+        cgyID: ''
       },
       rules: {
       }
     }
   },
+  created () {
+    // 保留初始值
+    this.defaultInfo = { ...this.search }
+  },
+  mounted: function () {
+    // this.toHandleSearch()
+  },
   methods: {
+    // 搜索
+    toHandleSearch () {
+      this.handleSubmit('searchForm')
+    },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit('handleFormSubmit', this.search)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
         }
       })
+    },
+    handleReset (name) {
+      this.search = { ...this.defaultInfo }
+      this.$refs[name].resetFields()
     },
     handlePlan () {
       this.$emit('handlePlan')

@@ -214,18 +214,19 @@
         </Form>
         <Row :gutter="6">
           <Col span="3" v-for="pr in psrs">
-            <Poptip v-model="pr.visible">
-              <div slot="title"><i>选择仓位</i></div>
-              <div slot="content">
-                <Button @click="doHandlePrCancel">关闭</Button>
-                <Button type="primary" @on-ok="doHandlePrOk">确定</Button>
+            <Poptip trigger="hover">
+              <div slot="title" v-show="pr.checked"><i>仓位已满</i></div>
+              <div slot="title" v-show="!pr.checked"><i>选择仓位</i></div>
+              <div slot="content" v-show="!pr.checked">
+                <Button size="small" type="primary" @click="doHandlePrOk(pr)">确定</Button>
+                <Button size="small" style="margin-left: 8px" @click="doHandlePrCancel(pr)">关闭</Button>
               </div>
               <div class="position-col ">
                 <div class="position-body">
                   <Row :gutter="1">
                     <Col span="8" v-for="lv in pr.ls">
-                      <div v-if="lv.site > 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked}" class="position-cell" v-bind:class="psdsMap[lv.state]" v-on:click="doHandlePrChecked1(pr, lv)"></div>
-                      <div v-else-if="lv.site === 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked}" class="position-cell" v-bind:class="psdsMap[lv.state]" v-on:click="doHandlePrChecked2(pr)"></div>
+                      <div v-if="lv.site > 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked, 'position-cell position-cell-0': lv.state === 0}" v-on:click="doHandlePrChecked1(pr, lv.site)"></div>
+                      <div v-else-if="lv.site === 0 && lv.state === 0" :class="{'position-cell-checked': lv.checked, 'position-cell position-cell-0': true}" v-on:click="doHandlePrChecked2(pr)"></div>
                       <div v-else class="position-cell" v-bind:class="psdsMap[lv.state]"></div>
                     </Col>
                   </Row>
@@ -263,6 +264,7 @@ export default {
         yardName: ''
       },
       ticket: {
+        wbID: '', // id
         waybillNo: '', // 运单号
         resDate: '', // 提报日期
         station: '', // 发站
@@ -313,23 +315,22 @@ export default {
       ],
       tsrs: [],
       glocation: {
-        visible: false,
-        wbID: '',
-        bgwID: '',
-        bglID: '',
-        sites: []
+        bgwID: ''
+        // wbID: '',
+        // bglID: '',
+        // sites: []
       },
       pwhs: [],
       psds: [
         { wbID: '', bglID: '', site: 1, state: 0, checked: false },
-        { wbID: '', bglID: '', site: 2, state: 1, checked: false },
-        { wbID: '', bglID: '', site: 3, state: 2, checked: false },
-        { wbID: '', bglID: '', site: 4, state: 3, checked: false },
+        { wbID: '', bglID: '', site: 2, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 3, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 4, state: 0, checked: false },
         { wbID: '', bglID: '', site: 0, state: 0, checked: false },
-        { wbID: '', bglID: '', site: 5, state: 4, checked: false },
-        { wbID: '', bglID: '', site: 6, state: 5, checked: false },
-        { wbID: '', bglID: '', site: 7, state: 6, checked: false },
-        { wbID: '', bglID: '', site: 8, state: 7, checked: false }
+        { wbID: '', bglID: '', site: 5, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 6, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 7, state: 0, checked: false },
+        { wbID: '', bglID: '', site: 8, state: 0, checked: false }
       ],
       psdsMap: { 0: 'position-cell-0', 1: 'position-cell-1', 2: 'position-cell-2', 3: 'position-cell-3', 4: 'position-cell-4', 5: 'position-cell-5', 6: 'position-cell-6', 7: 'position-cell-7', 8: 'position-cell-8' },
       psrs: [],
@@ -375,13 +376,18 @@ export default {
       this.ticketSearchModel = true
     },
     handleSelectPosition () {
+      if (!(this.ticket && this.ticket.wbID)) {
+        this.$Message.error('请选择票据')
+        return
+      }
+
       this.pwhs = []
       const UUID = this.getUserId
       const compyID = this.getCompyId
       const type = 1
       let params = { UUID, type }
       warehouseList(params).then(res => {
-        console.log(res)
+        // console.log(res)
         const body = res.data
         const data = body.Data
         if (body.Status === 2000) {
@@ -401,7 +407,7 @@ export default {
           const compyID = this.getCompyId
           let params = { UUID, compyID, ...this.ts, ...this.pagination }
           waybillNoSel(params).then(res => {
-            console.log(res)
+            // console.log(res)
             const body = res.data
             const data = body.Data
             if (body.Status === 2000) {
@@ -454,7 +460,7 @@ export default {
     },
     // 选择货区
     handleChangeBGW () {
-      console.log(this.glocation)
+      // console.log(this.glocation)
       const UUID = this.getUserId
       const compyID = this.getCompyId
       const bgwID = this.glocation.bgwID
@@ -469,27 +475,49 @@ export default {
         const data = body.Data
         if (body.Status === 2000) {
           if (data) {
-            let visible = false
             data.forEach(dv => {
               let bglID = dv.bglID
               let pv = {
+                bgwID: bgwID,
                 bglID: bglID,
                 door: dv.door,
                 warehouse: dv.warehouse,
+                check: false,
                 ls: []
               }
               let psds = []
               // let psds = [ ...this.psds ]
               if (dv.used && dv.used.length > 0) {
                 this.psds.forEach(pd => {
-                  let pdt = { ...pd, visible }
+                  let checked = false
+                  if (pd.site !== 0) {
+                    const dc = dv.used.find(prt => prt.site === pd.site)
+                    console.log(dc)
+                    if (dc) {
+                      if (dc.state > 0) {
+                        checked = true
+                      }
+                      let pdt = { ...pd, ...dc, bgwID, bglID, checked }
+                      psds.push(pdt)
+                    } else {
+                      let pdt = { ...pd, bgwID, bglID, checked }
+                      psds.push(pdt)
+                    }
+                  } else {
+                    if ((dv.used.length === 8)) {
+                      checked = true
+                    }
+                    let pdt = { ...pd, bgwID, bglID, checked }
+                    psds.push(pdt)
+                  }
+                  /*
                   dv.used.forEach(dc => {
                     if (pdt.site === dc.site) {
                       let checked = false
                       if (dc.state > 0) {
                         checked = true
                       }
-                      pdt = { ...dc, bgwID, bglID, checked, visible }
+                      pdt = { ...dc, bgwID, bglID, checked }
                     } else if (pdt.site === 0) {
                       if ((dv.used.length === 8)) {
                         pdt.checked = true
@@ -499,10 +527,11 @@ export default {
                     }
                     psds.push(pdt)
                   })
+                */
                 })
               } else {
                 this.psds.forEach(pd => {
-                  let pdt = { ...pd, visible }
+                  let pdt = { ...pd }
                   pdt.bglID = bglID
                   psds.push(pdt)
                 })
@@ -516,28 +545,82 @@ export default {
         }
       })
     },
-    doHandlePrChecked1 (pr, pd) {
-      pr.visible = true
-      pd.checked = !pd.checked
-      this.glocation.visible = true
-      if (this.glocation.bglID && this.glocation.bglID === pd.bglID) {
-        this.glocation.sites = this.glocation.sites + ',' + pd.site
+    doHandlePrChecked1 (pr, site) {
+      let checked = false
+      let stateNum = 0
+      let checkNum = 0
+      pr.ls.forEach(prt => {
+        if (prt.site !== 0 && prt.state === 0) {
+          if (prt.site === site) {
+            prt.checked = !prt.checked
+            checked = prt.checked
+          }
+          if (prt.state === 0) {
+            ++stateNum
+          }
+          if (prt.checked) {
+            ++checkNum
+          }
+        }
+      })
+      console.log(checkNum, stateNum)
+      if (stateNum === checkNum) {
+        if (checked) {
+          let prtv = pr.ls.find(prt => prt.site === 0)
+          prtv.checked = true
+        }
       } else {
-        this.glocation.sites = pd.site
+        let prtv = pr.ls.find(prt => prt.site === 0)
+        prtv.checked = false
       }
-
-      this.glocation.wbID = pd.wbID
-      this.glocation.bglID = pd.bglID
-      console.log(this.glocation, pd)
     },
     doHandlePrChecked2 (pr) {
       console.log(pr)
+      const prtv = pr.ls.find(prt => prt.site === 0)
+
+      let checked = prtv.checked
+
+      pr.ls.forEach(prt => {
+        if (prt.state === 0) {
+          prt.checked = !checked
+        }
+      })
     },
-    doHandlePrOk () {
-      console.log('doHandlePr')
+    doHandlePrOk (pr) {
+      console.log(pr)
+      let site = []
+      pr.ls.forEach(prt => {
+        if (prt.site !== 0 && prt.state === 0 && prt.checked) {
+          site.push(prt.site)
+        }
+      })
+      if (site.length === 0) {
+        this.$Message.error('请选择货位')
+      }
+      const sites = site.join(',')
+      const bglID = pr.bglID
+      const wbID = this.ticket.wbID
+      const UUID = this.getUserId
+      const compyID = this.getCompyId
+      let params = { UUID, compyID, sites, wbID, bglID }
+      adCompyGlocation(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        console.log(data)
+        if (body.Status === 2000) {
+          this.$Message.success(data.Result)
+          this.handleChangeBGW()
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
     },
-    doHandlePrCancel () {
-      console.log('doHandlePr')
+    doHandlePrCancel (pr) {
+      pr.ls.forEach(prt => {
+        if (prt.state === 0) {
+          prt.checked = false
+        }
+      })
     }
   }
 }

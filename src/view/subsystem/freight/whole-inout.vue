@@ -16,7 +16,7 @@
         </Card>
       </Col>
     </Row>
-    <table-paging :columns="columns" :data="list" :border="true" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" :border="true" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination"></table-paging>
   </div>
 </template>
 <script>
