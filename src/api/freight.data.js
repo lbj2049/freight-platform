@@ -135,4 +135,90 @@ export const unloadCarNeedList = (params) => {
   })
 }
 
+export const getNoticCarList = (params) => {
+  return axios.request({
+    url: '/loadUnload/getNoticCarList',
+    data: params,
+    method: 'post'
+  })
+}
 
+export const noticCar = (params) => {
+  return axios.request({
+    url: '/loadUnload/noticCar',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const getList = (params) => {
+  return axios.request({
+    url: '/loadUnload/getList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const getCarPlaceList = (params) => {
+  return axios.request({
+    url: '/loadUnload/getCarPlaceList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const setCarPlace = (params) => {
+  return axios.request({
+    url: '/loadUnload/setCarPlace',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const setPBoardSet = (params) => {
+  return axios.request({
+    url: '/loadUnload/setPBoardSet',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const bg3CheckLoad = (params) => {
+  return axios.request({
+    url: '/loadUnload/bg3CheckLoad',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const ed3CheckLoad = (params) => {
+  return axios.request({
+    url: '/loadUnload/ed3CheckLoad',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const bg3CheckUnLoad = (params) => {
+  return axios.request({
+    url: '/loadUnload/bg3CheckUnLoad',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const ed3CheckUnLoad = (params) => {
+  return axios.request({
+    url: '/loadUnload/ed3CheckUnLoad',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const setPBoardMove = (params) => {
+  return axios.request({
+    url: '/loadUnload/setPBoardMove',
+    data: params,
+    method: 'post'
+  })
+}

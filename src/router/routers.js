@@ -561,6 +561,9 @@ export default [
       },
       {
         path: 'wk1', name: '整车装卸', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '整车装卸' }, component: () => import('@/view/subsystem/freight/work-1')
+      },
+      {
+        path: 'wk2', name: '票据确认', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '票据确认' }, component: () => import('@/view/subsystem/freight/ticket-notice')
       }/*,
       {
         path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
