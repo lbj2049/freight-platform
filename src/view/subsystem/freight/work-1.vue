@@ -9,6 +9,7 @@
     <Table size="small" stripe :columns="columns" :data="list"></Table>
 
     <work1-set1-form ref="set1form" @handleFormSubmit="doHandleSearch"/>
+    <work1-set34-form ref="set34form" @handleFormSubmit="doHandleSearch"/>
   </div>
 </template>
 <script>
@@ -27,10 +28,12 @@ import { formatDate } from '@/libs/tools'
 import TablePaging from '@/components/table-paging/table-paging'
 import Work1Form from './work-1-form'
 import Work1Set1Form from './work-1-set-1-form'
+import Work1Set34Form from './work-1-set-34-form'
 export default {
   components: {
     Work1Form,
     Work1Set1Form,
+    Work1Set34Form,
     TablePaging
   },
   data () {
@@ -108,7 +111,7 @@ export default {
             if (params.row.PBmove === 1) {
               return h('div', [ h('div', '√') ])
             }
-            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'on-ok': () => { this.doSet5(params.row) } } }, '配置') ])
+            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'click': () => { this.doSet7(params.row) } } }, '配置') ])
           }
         },
 
@@ -162,7 +165,7 @@ export default {
         title: '防护牌安设',
         render: (h) => {
           return h('div', [
-            h('div', { style: { float: 'left', width: '120px', lineHeight: '32px' } }, [h('p','安设防护牌时间')]),
+            h('div', { style: { float: 'left', width: '120px', lineHeight: '32px' } }, [h('p', '安设防护牌时间')]),
             h('DatePicker', {
               props: {
                 type: 'datetime',
@@ -191,13 +194,55 @@ export default {
       })
     },
     doSet3 (vo) {
-
+      this.$refs.set34form.show(vo, 3)
     },
     doSet4 (vo) {
-
+      this.$refs.set34form.show(vo, 4)
     },
-    doSet5 (vo) {
-
+    doSet7 (vo) {
+      let now = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+      let dt = now
+      this.$Modal.confirm({
+        title: '防护牌移除',
+        render: (h) => {
+          return h('div', [
+            h('div', { style: { float: 'left', width: '120px', lineHeight: '32px' } }, [h('p', '移除防护牌时间')]),
+            h('DatePicker', {
+              props: {
+                type: 'datetime',
+                value: now,
+                placeholder: '请选择移除防护牌时间'
+              },
+              on: {
+                'on-change': (val) => {
+                  dt = val
+                }
+              }
+            })
+          ])
+        },
+        onOk: () => {
+          const UUID = this.getUserId
+          console.log(dt)
+          if (!dt) {
+            this.$Message.error('请选择时间')
+            return false
+          }
+          setPBoardMove({ UUID: UUID, wbID: vo.wbID, ctime: dt }).then(res => {
+            this.resultHandler(res)
+          })
+        }
+      })
+    },
+    resultHandler (res) {
+      const body = res.data
+      const data = body.Data
+      if (body.Status === 2000) {
+        this.$Message.success(data.Result)
+        this.toHandleSearch()
+      } else {
+        this.$Message.error(data.ErrorDes)
+      }
     },
     handleWorkTime () {
       console.log('handleWorkTime')
