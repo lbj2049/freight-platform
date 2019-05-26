@@ -5,6 +5,8 @@
     <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="topTools">
         <Button type="text" @click="doRePass">密码初始化</Button>
+        <Button type="default" @click="downloadTpl">下载模版</Button>
+        <Button type="default" @click="doImport">批量导入</Button>
         <Button type="primary" @click="toAdd">新增</Button>
         <!--<Button type="error" @click="doBatchDelete">批量删除</Button>-->
         <Poptip confirm title="确定删除?" @on-ok="doBatchDelete" style="text-align: left">
@@ -24,7 +26,9 @@ import {
   getStudentList,
   editUserInfo,
   delUserInfo,
-  setState
+  setState,
+  getStuModelURL,
+  importStuInfo
 } from '@/api/teacher.data'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
@@ -39,6 +43,7 @@ export default {
     return {
       loading: false,
       editable: false,
+      file: null,
       multItem: [],
       searchApi: {},
       searchModel: {},
@@ -403,6 +408,56 @@ export default {
     // 审核或者禁用
     auditOrDisable () {
 
+    },
+    downloadTpl () {
+      getStuModelURL({}).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          window.open(data.url, '_blank')
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
+    doImport () {
+      let classID = this.searchModel.classID.value
+      const UUID = this.getUserId
+      this.$Modal.confirm({
+        width: 180,
+        render: (h) => {
+          return h('Upload', {
+            props: {
+              'show-upload-list': false,
+              type: 'select',
+              format: ['xlsx', 'xls'],
+              name: 'file',
+              action: '/userInfo/importStuInfo?classID=' + classID + '&UUID=' + UUID,
+              'before-upload': this.handleBeforeUpload
+            }
+          }, [h('Button', '上传')])
+        },
+        onOk: () => {
+          const params = {
+            classID: classID,
+            UUID: UUID,
+            file: this.file
+          }
+          importStuInfo(params).then(res => {
+            const body = res.data
+            const data = body.Data
+            if (body.Status === 2000) {
+              this.$Message.success(data.Result)
+            } else {
+              this.$Message.error(data.ErrorDes)
+            }
+          })
+        }
+      })
+    },
+    handleBeforeUpload (file) {
+      this.file = file
+      return false
     }
   }
 }

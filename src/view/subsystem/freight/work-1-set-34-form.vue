@@ -8,24 +8,24 @@
           <Col span="12">
             <Card>
               <p slot="title">装车前三检</p>
-              <Form ref="dt3Form" :model="dt3" :rules="dt3rules" :label-width="80" :show-message="false" class="qib-form">
+              <Form ref="dt3Form" :model="dt31" :rules="dt31rules" :label-width="80" :show-message="false" class="qib-form">
                 <FormItem label="车辆状态">
                   <Checkbox disabled>良好</Checkbox>
                 </FormItem>
                 <FormItem label="轴数" prop="axleNum">
-                  <Input size="small" type="text" v-model="dt3.axleNum" readonly :disabled="dt3disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.axleNum" readonly :disabled="dt31disabled"></Input>
                 </FormItem>
                 <FormItem label="车型" prop="carVersion">
-                  <Input size="small" type="text" v-model="dt3.carVersion" readonly :disabled="dt3disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.carVersion" readonly :disabled="dt31disabled"></Input>
                 </FormItem>
                 <FormItem label="车号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt3.carCard" readonly :disabled="dt3disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.carCard" readonly :disabled="dt31disabled"></Input>
                 </FormItem>
                 <FormItem label="标重" prop="tunnage">
-                  <Input size="small" type="text" v-model="dt3.tunnage" :disabled="dt3disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.tunnage" :disabled="dt31disabled"></Input>
                 </FormItem>
                 <FormItem label="货位" prop="bglID">
-                  <Input size="small" type="text" v-model="dt3.bglID" readonly :disabled="dt3disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.bglID" readonly :disabled="dt31disabled"></Input>
                 </FormItem>
                 <FormItem>
                   <Checkbox disabled>综合货拉</Checkbox>
@@ -37,7 +37,7 @@
           <Col span="12">
             <Card>
               <p slot="title">装车后三检</p>
-              <Form ref="dt4Form" :model="dt4" :rules="dt4rules" :label-width="80" :show-message="false" class="qib-form">
+              <Form ref="dt4Form" :model="dt41" :rules="dt41rules" :label-width="80" :show-message="false" class="qib-form">
                 <Row>
                   <Col span="6">
                     <FormItem label="品名"></FormItem>
@@ -54,13 +54,13 @@
                 </Row>
                 <Row>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
@@ -147,7 +147,7 @@
                   </Col>
                 </Row>
                 <FormItem :label-width="0" prop="carrierNote">
-                  <Input v-model="dt4.carrierNote" type="textarea" :rows="2"  :disabled="dt4disabled"/>
+                  <Input v-model="dt41.carrierNote" type="textarea" :rows="2"  :disabled="dt41disabled"/>
                 </FormItem>
               </Form>
             </Card>
@@ -160,21 +160,21 @@
           <Col span="12">
             <Card>
               <p slot="title">卸车前三检</p>
-              <Form ref="dt3Form" :model="dt5" :rules="dt5rules" :label-width="80" :show-message="false" class="qib-form">
+              <Form ref="dt3Form" :model="dt32" :rules="dt32rules" :label-width="80" :show-message="false" class="qib-form">
                 <FormItem label="车型" prop="carVersion">
-                  <Input size="small" type="text" v-model="dt5.carVersion" readonly :disabled="dt5disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carVersion" readonly :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem label="车号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt5.carCard" readonly :disabled="dt5disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem label="施封篷布号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt5.carCard" readonly :disabled="dt5disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem label="发站" prop="station">
-                  <Input size="small" type="text" v-model="dt5.station" readonly :disabled="dt5disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.station" readonly :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem label="货位" prop="bglID">
-                  <Input size="small" type="text" v-model="dt5.bglID" readonly :disabled="dt5disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.bglID" :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem>
                   <Checkbox disabled>综合货拉</Checkbox>
@@ -186,7 +186,7 @@
           <Col span="12">
             <Card>
               <p slot="title">卸车后三检</p>
-              <Form ref="dt4Form" :model="dt6" :rules="dt6rules" :label-width="80" :show-message="false" class="qib-form">
+              <Form ref="dt4Form" :model="dt42" :rules="dt42rules" :label-width="80" :show-message="false" class="qib-form">
                 <Row>
                   <Col span="6">
                     <FormItem label="品名"></FormItem>
@@ -203,13 +203,13 @@
                 </Row>
                 <Row>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
@@ -298,7 +298,7 @@ export default {
       loading: false,
       editable: false,
       currType: '',
-      dt3: {
+      dt31: {
         axleNum: '',
         carVersion: '',
         carCard: '',
@@ -307,19 +307,21 @@ export default {
         sites: '',
         tunnage: ''
       },
-      dt3rules: {
+      dt31rules: {
 
       },
-      dt3disabled: true,
-      dt4: {
+      dt31disabled: true,
+      dt41: {
         wbID: '',
-        carrierNote: ''
+        carrierNote: '',
+        gname: '',
+        caseNum: '',
+        tunnage: ''
       },
-      dt4rules: {
-
+      dt41rules: {
       },
-      dt4disabled: true,
-      dt5: {
+      dt41disabled: true,
+      dt312: {
         carVersion: '',
         carCard: '',
         wbID: '',
@@ -328,17 +330,20 @@ export default {
         station: '',
         astation: ''
       },
-      dt5rules: {
+      dt32rules: {
 
       },
-      dt5disabled: true,
-      dt6: {
-        wbID: ''
+      dt32disabled: true,
+      dt42: {
+        wbID: '',
+        gname: '',
+        caseNum: '',
+        tunnage: ''
       },
-      dt6rules: {
+      dt42rules: {
 
       },
-      dt6disabled: true
+      dt42disabled: true
     }
   },
   mounted: function () {
@@ -355,49 +360,65 @@ export default {
     show (item, type) {
       console.log(item, type)
       this.editable = true
-      this.currType = type
-      if (type === 3) {
-        this.dt3disabled = false
-        this.dt3 = {
-          axleNum: item.axleNum,
-          carVersion: item.carVersion,
-          carCard: item.carCard,
-          wbID: item.wbID,
-          bglID: item.bglID,
-          sites: item.sites,
-          tunnage: item.tunnage
+      if (item.receptType === 1) {
+        this.dt32 = this.dt42 = {}
+        this.dt32disabled = this.dt42disabled = true
+        if (type === 3) {
+          this.currType = 31
+          this.dt31disabled = false
+          this.dt31 = {
+            axleNum: item.axleNum,
+            carVersion: item.carVersion,
+            carCard: item.carCard,
+            wbID: item.wbID,
+            bglID: item.bglID,
+            sites: item.sites,
+            tunnage: item.tunnage
+          }
+        } else {
+          this.dt31disabled = true
+        }
+        if (type === 4) {
+          this.currType = 41
+          this.dt41disabled = false
+          this.dt41 = {
+            wbID: item.wbID,
+            carrierNote: '',
+            gname: item.gname,
+            caseNum: item.caseNum,
+            tunnage: item.tunnage
+          }
+        } else {
+          this.dt41disabled = true
         }
       } else {
-        this.dt3disabled = true
-      }
-      if (type === 4) {
-        this.dt4disabled = false
-        this.dt4 = {
-          wbID: item.wbID,
-          carrierNote: ''
+        this.dt31 = this.dt41 = {}
+        this.dt31disabled = this.dt41disabled = true
+        if (type === 3) {
+          this.currType = 32
+          this.dt32disabled = false
+          this.dt32 = {
+            carVersion: item.carVersion,
+            carCard: item.carCard,
+            wbID: item.wbID,
+            bglID: item.bglID,
+            sites: item.sites
+          }
+        } else {
+          this.dt32disabled = true
         }
-      } else {
-        this.dt4disabled = true
-      }
-      if (type === 5) {
-        this.dt5disabled = false
-        this.dt5 = {
-          carVersion: item.carVersion,
-          carCard: item.carCard,
-          wbID: item.wbID,
-          bglID: item.bglID,
-          sites: item.sites
+        if (type === 4) {
+          this.currType = 42
+          this.dt42disabled = false
+          this.dt42 = {
+            wbID: item.wbID,
+            gname: item.gname,
+            caseNum: item.caseNum,
+            tunnage: item.tunnage
+          }
+        } else {
+          this.dt42disabled = true
         }
-      } else {
-        this.dt5disabled = true
-      }
-      if (type === 6) {
-        this.dt6disabled = false
-        this.dt6 = {
-          wbID: item.wbID
-        }
-      } else {
-        this.dt6disabled = true
       }
     },
     doSubmit () {
@@ -407,29 +428,29 @@ export default {
       // ed3CheckUnLoad
       const UUID = this.getUserId
       const compyId = this.getCompyId
-      if (this.currType === 3) {
-        let params = { UUID, compyId, ...this.dt3 }
+      if (this.currType === 31) {
+        let params = { UUID, compyId, ...this.dt31 }
         bg3CheckLoad(params).then(res => {
           this.resultHandler(res)
         })
       }
 
-      if (this.currType === 4) {
-        let params = { UUID, compyId, ...this.dt4 }
+      if (this.currType === 41) {
+        let params = { UUID, compyId, ...this.dt41 }
         ed3CheckLoad(params).then(res => {
           this.resultHandler(res)
         })
       }
 
-      if (this.currType === 5) {
-        let params = { UUID, compyId, ...this.dt5 }
+      if (this.currType === 32) {
+        let params = { UUID, compyId, ...this.dt31 }
         bg3CheckUnLoad(params).then(res => {
           this.resultHandler(res)
         })
       }
 
-      if (this.currType === 6) {
-        let params = { UUID, compyId, ...this.dt6 }
+      if (this.currType === 42) {
+        let params = { UUID, compyId, ...this.dt42 }
         ed3CheckUnLoad(params).then(res => {
           this.resultHandler(res)
         })

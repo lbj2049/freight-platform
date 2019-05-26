@@ -159,65 +159,26 @@ export default {
   data () {
     return {
       search: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        msg: 1,
-        date: '',
-        time: '',
-        desc: ''
       },
       rules: {
       },
-      list: [
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: 'aaa',
-          key2: 'bbb',
-          key3: 'ccc'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        },
-        {
-          key1: '111',
-          key2: '222',
-          key3: '333'
-        }
+      list1: [],
+      columns1: [
+        { key: 'gname', title: '货物名称', width: 120, fixed: 'left', tooltip: true },
+        { key: 'gnameCode', title: '品名代码', width: 120, fixed: 'left', tooltip: true },
+        { key: 'caseNum', title: '件数', width: 60, tooltip: true },
+        { key: 'package', title: '包装', width: 60, tooltip: true },
+        { key: 'tunnage', title: '货物重量', width: 120, tooltip: true },
+        { key: 'ironHeavy', title: '铁重', width: 60, tooltip: true },
+        { key: 'price', title: '价格', width: 60, tooltip: true },
+        { key: 'disabled', title: '计重', width: 60, tooltip: true },
+        { key: 'volume', title: '体积', width: 60, tooltip: true },
+        { key: 'priceRate', title: '价号/价率', width: 120, tooltip: true },
+        { key: 'disabled', title: '集装箱号码', width: 120, tooltip: true },
+        { key: 'disabled', title: '封号', width: 60, tooltip: true },
+        { key: 'carrierNote', title: '记事', width: 60, tooltip: true }
       ],
+      list: [],
       columns: [
         { type: 'index', width: 38, align: 'center' },
         // { type: 'selection', width: 45, align: 'center' },
@@ -231,6 +192,31 @@ export default {
     }
   },
   methods: {
+    doSetData (item) {
+      this.search = { ...item }
+      this.list1 = []
+      let dt = {
+        gname: item.gname, // 货物名称
+        gnameCode: item.gnameCode, // 品名代码
+        caseNum: item.caseNum, // 件数
+        package: item.package, // 包装
+        tunnage: item.tunnage, // 货物重量
+        ironHeavy: item.ironHeavy, // 铁重
+        price: item.price, // 价格
+        // 计重 只读框
+        volume: item.volume, // 体积
+        priceRate: item.priceRate, // 价号/价率/加减成数    只读框
+        // 集装箱号码   只读框灰显
+        // 封号 只读框灰显
+        carrierNote: item.carrierNote // 记事
+      }
+      this.list1.push(dt)
+      this.list1.push({})
+      this.list1.push({})
+      this.list1.push({})
+      this.list1.push({})
+      console.log(this.list1)
+    },
     handleWrite (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {

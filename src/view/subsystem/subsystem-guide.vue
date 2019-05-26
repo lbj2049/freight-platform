@@ -26,6 +26,7 @@ export default {
   },
   data () {
     return {
+      gray: '#D3D3D3',
       subsystemMap: {},
       subsystemData: [
         { type: 'ec', title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
@@ -55,6 +56,11 @@ export default {
         const data = body.Data
         if (body.Status === 2000) {
           this.subsystemMap = data
+          this.subsystemData.forEach((item, i) => {
+            if (this.subsystemMap[ item.type ] !== 1) {
+              item.color = this.gray
+            }
+          })
         } else {
           this.$Message.error(data.ErrorDes)
         }

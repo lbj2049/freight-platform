@@ -79,7 +79,7 @@ export default {
   data () {
     return {
       search: {
-        type: 1,
+        type: '1',
         cowName: '',
         cgyName: ''
       },

@@ -160,3 +160,19 @@ export const sendTeaWayBill = (params) => {
     method: 'post'
   })
 }
+
+export const getStuModelURL = (params) => {
+  return axios.request({
+    url: '/userInfo/getStuModelURL',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const importStuInfo = (params) => {
+  return axios.request({
+    url: '/userInfo/importStuInfo',
+    data: params,
+    method: 'post'
+  })
+}

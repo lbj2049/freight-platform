@@ -71,9 +71,9 @@ export default {
           fixed: 'left',
           render: (h, params) => {
             let currItem = params.row
-            let currId = currItem.acceptNo
+            let currId = currItem.wbID
             let flag = false
-            if (this.item.acceptNo === currId) {
+            if (this.item.wbID === currId) {
               flag = true
             } else {
               flag = false

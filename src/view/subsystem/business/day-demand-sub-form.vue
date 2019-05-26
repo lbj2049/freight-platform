@@ -98,7 +98,7 @@
             </Col>
             <Col span="8">
               <FormItem label="最大单件重量" prop="gMaxWeight">
-                <Input size="small" v-model="demand.gMaxWeight" placeholder="请输入最大单件重量" number/>
+                <InputNumber size="small" v-model="demand.gMaxWeight" placeholder="请输入最大单件重量"/>
               </FormItem>
             </Col>
             <Col span="8">
@@ -294,7 +294,7 @@ export default {
       },
       rules: {
         title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
         gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],

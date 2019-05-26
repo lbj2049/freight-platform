@@ -141,7 +141,7 @@ export default {
     },
     doSetState (type) {
       const UUID = this.getUserId
-      const state = type === 1 ? 41 : 4
+      const state = type === 0 ? 41 : 4
       const itemIds = this.getBatchIds()
       setPass({ UUID: UUID, wbIDs: itemIds.join(','), state: state }).then(res => {
         this.resultHandler(res)
