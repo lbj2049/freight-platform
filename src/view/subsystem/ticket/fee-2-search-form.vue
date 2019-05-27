@@ -18,12 +18,12 @@
             </Col>
             <Col span="6">
               <FormItem label="发站" prop="station">
-                <Input size="small" v-model="search.station" placeholder="请输入发站"></Input>
+                <Input size="small" v-model="search.station"></Input>
               </FormItem>
             </Col>
             <Col span="6">
               <FormItem label="到站" prop="astation">
-                <Input size="small" v-model="search.astation" placeholder="请输入到站"></Input>
+                <Input size="small" v-model="search.astation"></Input>
               </FormItem>
             </Col>
           </Row>
@@ -35,8 +35,8 @@
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="制票日期" prop="date">
-                <DatePicker size="small" type="date" disabled></DatePicker>
+              <FormItem label="制票日期" prop="bgLoadTime">
+                <DatePicker size="small" v-model="search.bgLoadTime" @on-change="handleChangeDate1"></DatePicker>
               </FormItem>
             </Col>
             <Col span="6">
@@ -53,8 +53,8 @@
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="结束制票日期" prop="date">
-                <DatePicker size="small" type="date" placeholder="请选择结束制票日期" v-model="search.date"></DatePicker>
+              <FormItem label="结束制票日期" prop="edLoadTime">
+                <DatePicker size="small" type="date" v-model="search.edLoadTime" @on-change="handleChangeDate2"></DatePicker>
               </FormItem>
             </Col>
             <Col span="6">
@@ -106,7 +106,7 @@
           </Row>
         </Form>
       </Col>
-      <Col span="12" >
+      <Col span="11" offset="1">
         <Table size="small" stripe :columns="columns" :data="list" highlight-row @on-current-change="getCurrentData"></Table>
       </Col>
     </Row>
@@ -222,10 +222,11 @@ export default {
     handleCopy () {
       this.$emit('handleCopy')
     },
-    handleChangeDate (dr) {
-      this.search.loadDate = dr
-      this.search.bgLoadTime = dr[0]
-      this.search.edLoadTime = dr[1]
+    handleChangeDate1 (dr) {
+      this.search.bgLoadTime = dr
+    },
+    handleChangeDate2 (dr) {
+      this.search.edLoadTime = dr
     },
     getCurrentData (item) {
       console.log(item)

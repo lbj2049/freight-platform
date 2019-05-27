@@ -273,12 +273,12 @@
               <Row>
                 <Col span="12">
                   <FormItem label="" :label-width="20">
-                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
                   </FormItem>
                 </Col>
                 <Col span="12">
                   <FormItem label="" :label-width="20">
-                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
                   </FormItem>
                 </Col>
               </Row>
@@ -467,7 +467,7 @@ export default {
           const body = res.data
           const data = body.Data
           if (body.Status === 2000) {
-            this.$Message.success(data.Result)
+            this.$Message.success(data.info)
           } else {
             this.$Message.error(data.ErrorDes)
           }

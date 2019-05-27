@@ -11,6 +11,7 @@
     </Row>
     -->
     <fee-2-search-form @handleGetData="doGetData" @handleSubmit="handleSubmit" @handleCopy="handleCopy"/>
+    <Divider style="margin: 2px 0"/>
     <Row>
       <Col span="24" >
         <fee-2-bill-form ref="billForm" @handleWrite="handleWrite" @handleFee="handleFee"/>

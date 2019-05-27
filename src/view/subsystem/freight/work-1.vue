@@ -8,8 +8,8 @@
     </Card>
     <Table size="small" stripe :columns="columns" :data="list"></Table>
 
-    <work1-set1-form ref="set1form" @handleFormSubmit="doHandleSearch"/>
-    <work1-set34-form ref="set34form" @handleFormSubmit="doHandleSearch"/>
+    <work1-set1-form ref="set1form" @handleFormSubmit="toHandleSearch"/>
+    <work1-set34-form ref="set34form" @handleFormSubmit="toHandleSearch"/>
   </div>
 </template>
 <script>

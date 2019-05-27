@@ -37,6 +37,8 @@
         </div>
       </Card>
     </Modal>
+
+    <waybill-accept-select-view ref="viewModel"/>
   </div>
 </template>
 <script>
@@ -45,9 +47,11 @@ import {
 } from '@/api/business.data'
 import TablePaging from '@/components/table-paging/table-paging'
 import WaybillAcceptSelectForm from './waybill-accept-select-form'
+import WaybillAcceptSelectView from './waybill-accept-select-view'
 export default {
   components: {
     WaybillAcceptSelectForm,
+    WaybillAcceptSelectView,
     TablePaging
   },
   data () {
@@ -177,6 +181,7 @@ export default {
     },
     toDetail () {
       console.log(this.item)
+      this.$refs.viewModel.show(this.item)
     },
     toStates () {
       console.log(this.item)

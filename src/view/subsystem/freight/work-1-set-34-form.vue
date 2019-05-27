@@ -203,13 +203,13 @@
                 </Row>
                 <Row>
                   <Col span="6">
-                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" disabled></Input></FormItem>
+                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt42.gname" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt42.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
@@ -321,7 +321,7 @@ export default {
       dt41rules: {
       },
       dt41disabled: true,
-      dt312: {
+      dt32: {
         carVersion: '',
         carCard: '',
         wbID: '',
@@ -402,7 +402,9 @@ export default {
             carCard: item.carCard,
             wbID: item.wbID,
             bglID: item.bglID,
-            sites: item.sites
+            sites: item.sites,
+            station: item.station,
+            astation: item.astation
           }
         } else {
           this.dt32disabled = true
@@ -412,6 +414,7 @@ export default {
           this.dt42disabled = false
           this.dt42 = {
             wbID: item.wbID,
+            carrierNote: '',
             gname: item.gname,
             caseNum: item.caseNum,
             tunnage: item.tunnage
@@ -443,7 +446,9 @@ export default {
       }
 
       if (this.currType === 32) {
-        let params = { UUID, compyId, ...this.dt31 }
+        let params = { UUID, compyId, ...this.dt32 }
+        // let wbID = this.dt32.wbID
+        // let params = { UUID, compyId, wbID }
         bg3CheckUnLoad(params).then(res => {
           this.resultHandler(res)
         })

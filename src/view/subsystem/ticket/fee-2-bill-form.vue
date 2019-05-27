@@ -5,11 +5,9 @@
         <Col span="16">
           <Row>
             <Col span="6">
-              <FormItem label="付款方式" prop="city">
-                <Select size="small" v-model="search.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
+              <FormItem label="付款方式">
+                <Select size="small" value="1" disabled>
+                  <Option value="1">现金</Option>
                 </Select>
               </FormItem>
             </Col>
@@ -17,29 +15,27 @@
               <div style="width: 100%; text-align: center; font-size: 24px; padding-top: 12px;">铁路局整车运单</div>
             </Col>
             <Col span="6">
-              <FormItem label="票据号" prop="mail">
-                <Input disabled size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="票据号" >
+                <Input size="small" disabled></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="12">
-              <FormItem label="付款单位姓名" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="付款单位姓名">
+                <Input size="small" disabled></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="票运输票据" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="票运输票据" prop="waybillNo">
+                <Input size="small" v-model="search.waybillNo"></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="办理种别" prop="city">
-                <Select size="small" v-model="search.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
+              <FormItem label="办理种别" disabled>
+                <Select size="small" value="1">
+                  <Option value="1">整车</Option>
                 </Select>
               </FormItem>
             </Col>
@@ -47,44 +43,36 @@
 
           <Row>
             <Col span="6">
-              <FormItem label="发站" prop="city">
-                <Select size="small" v-model="search.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
-                </Select>
+              <FormItem label="发站" prop="station">
+                <Input size="small" v-model="search.station"></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="到站" prop="city">
-                <Select size="small" v-model="search.city" placeholder="Select your city">
-                  <Option value="beijing">New York</Option>
-                  <Option value="shanghai">London</Option>
-                  <Option value="shenzhen">Sydney</Option>
-                </Select>
+              <FormItem label="到站" prop="astation">
+                <Input size="small" v-model="search.astation"></Input>
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="专用线名称代码" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="专用线名称代码">
+                <Input size="small" disabled></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="6">
-              <FormItem label="车种车号" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="车种车号" prop="carVersionCard">
+                <Input size="small" v-model="search.carVersionCard"></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="标重" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="标重" prop="parWeight">
+                <Input size="small" v-model="search.parWeight"></Input>
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="经由" prop="mail">
-                <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+              <FormItem label="经由">
+                <Input size="small" disabled></Input>
               </FormItem>
             </Col>
           </Row>
@@ -93,35 +81,33 @@
             <Col span="12">
               <Row>
                 <Col span="12">
-                  <FormItem label="箱型" prop="city">
-                    <Select size="small" v-model="search.city" placeholder="Select your city">
-                      <Option value="beijing">New York</Option>
-                      <Option value="shanghai">London</Option>
-                      <Option value="shenzhen">Sydney</Option>
+                  <FormItem label="箱型" >
+                    <Select size="small" disabled>
+                      <Option value=""></Option>
                     </Select>
                   </FormItem>
                 </Col>
                 <Col span="12">
-                  <FormItem label="篷布或施封号" prop="mail">
-                    <Input size="small" v-model="search.mail" placeholder="Enter your e-mail"></Input>
+                  <FormItem label="篷布或施封号">
+                    <Input size="small" disabled></Input>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span="24">
-                  <Table size="small" height="160" stripe :columns="columns" :data="list"></Table>
+                  <Table size="small" height="120" stripe :columns="columns1" :data="list1"></Table>
                 </Col>
               </Row>
               <Row>
                 <Col span="24">
                   <h5>费用</h5>
-                  <Table size="small" height="160" stripe :columns="columns" :data="list"></Table>
+                  <Table size="small" height="120" stripe :columns="columns2" :data="list2"></Table>
                 </Col>
               </Row>
             </Col>
             <Col span="12">
               <FormItem label="记事内容" prop="mail">
-                <Input v-model="search.mail" type="textarea" :autosize="{minRows: 12,maxRows: 18}" placeholder="Enter something..."></Input>
+                <Input v-model="search.mail" type="textarea" :autosize="{minRows: 14,maxRows: 18}"></Input>
               </FormItem>
 
             </Col>
@@ -130,16 +116,41 @@
         </Col>
         <Col span="8">
 
-        </Col>
-      </Row>
-      <Row>
-        <Col span="24">
-          <div style="text-align: center">
-            <FormItem :label-width="0">
-              <Button type="primary" :loading="loading" @click="handleWrite('search')" style="margin-left: 8px">记事</Button>
-              <Button type="primary" :loading="loading" @click="handleFee('search')" style="margin-left: 8px">计费</Button>
-            </FormItem>
-          </div>
+          <Tabs value="name1" style="padding: 10px 20px;">
+            <TabPane label="自由记事" name="name1">
+              <Divider orientation="left">自由记事</Divider>
+              <Row>
+                <Col span="12">请输入自由记事</Col>
+                <Col span="12" style="text-align: right"><Button size="small" disabled>确定</Button><Button size="small" disabled>清除</Button></Col>
+                <Col span="24">
+                  <FormItem label="选择记事">
+                    <Select size="small" disabled>
+                      <Option value=""></Option>
+                    </Select>
+                  </FormItem>
+                </Col>
+                <Col span="24">
+                  <FormItem label="记事内容">
+                    <Input type="textarea" :autosize="{minRows: 12,maxRows: 16}"></Input>
+                  </FormItem>
+                </Col>
+                <Col span="24" style="text-align: center">
+                  <Button size="small" disabled>加入自由记事</Button><Button size="small" disabled>编辑自由记事</Button>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane label="仓储设置" name="name2"></TabPane>
+          </Tabs>
+          <Row>
+            <Col span="24">
+              <div style="text-align: center">
+                <FormItem :label-width="0">
+                  <Button type="primary" :loading="loading" @click="handleFee('search')" style="margin-left: 8px">计费</Button>
+                  <Button :loading="loading" @click="handlePrint('search')" style="margin-left: 8px">打印</Button>
+                </FormItem>
+              </div>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
@@ -149,6 +160,11 @@
   </div>
 </template>
 <script>
+import {
+  calculate,
+  totleMoney,
+  print
+} from '@/api/ticket.data'
 export default {
   props: {
     loading: {
@@ -178,17 +194,21 @@ export default {
         { key: 'disabled', title: '封号', width: 60, tooltip: true },
         { key: 'carrierNote', title: '记事', width: 60, tooltip: true }
       ],
-      list: [],
-      columns: [
-        { type: 'index', width: 38, align: 'center' },
-        // { type: 'selection', width: 45, align: 'center' },
-        {
-          key: 'key1', combine: true, title: '托运信息'
-        },
-        {
-          key: 'key1', combine: true, title: '搬运日期'
-        }
-      ]
+      list2: [],
+      columns2: [
+        { key: 'feeName', title: '费用名称', width: 120, fixed: 'left', tooltip: true },
+        { key: 'accounts', title: '金额', width: 60, tooltip: true },
+        { key: 'revenue', title: '税率', width: 60, tooltip: true }
+      ],
+      totalMoney: null
+    }
+  },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
+    getCompyId () {
+      return this.$store.state.user.compyId
     }
   },
   methods: {
@@ -213,29 +233,56 @@ export default {
       this.list1.push(dt)
       this.list1.push({})
       this.list1.push({})
-      this.list1.push({})
-      this.list1.push({})
       console.log(this.list1)
     },
-    handleWrite (name) {
-      this.$refs[name].validate((valid) => {
-        if (valid) {
-          this.$emit('handleWrite', this.search)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
-        }
-      })
-    },
     handleFee () {
-      this.$refs[name].validate((valid) => {
-        if (valid) {
-          this.$emit('handleFee', this.search)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
-        }
-      })
+      if (Object.keys(this.search).length !== 0) {
+        const UUID = this.getUserId
+        const compyID = this.getCompyId
+        const wbID = this.search.wbID
+        const receptType = 1
+        let params = { UUID, compyID, wbID, receptType }
+        calculate(params).then(res => {
+          const body = res.data
+          const data = body.Data
+          if (body.Status === 2000) {
+            this.list2 = data || []
+          } else {
+            this.$Message.error(data.ErrorDes)
+          }
+        })
+        totleMoney(params).then(res => {
+          const body = res.data
+          const data = body.Data
+          if (body.Status === 2000) {
+            this.totalMoney = data.totleMoney
+          } else {
+            this.$Message.error(data.ErrorDes)
+          }
+        })
+      } else {
+        this.$Message.error('请选择数据')
+      }
+    },
+    handlePrint (name) {
+      if (Object.keys(this.search).length !== 0) {
+        const UUID = this.getUserId
+        const compyID = this.getCompyId
+        const wbID = this.search.wbID
+        const receptType = 1
+        let params = { UUID, compyID, wbID, receptType }
+        print(params).then(res => {
+          const body = res.data
+          const data = body.Data
+          if (body.Status === 2000) {
+            this.$Message.success(data.info)
+          } else {
+            this.$Message.error(data.ErrorDes)
+          }
+        })
+      } else {
+        this.$Message.error('请选择数据')
+      }
     }
   }
 }
