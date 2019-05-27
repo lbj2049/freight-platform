@@ -76,7 +76,7 @@ export default {
       this.$refs.searchForm.toHandleSearch()
     },
     doHandleSearch (search) {
-      console.log(search)
+      // console.log(search)
       const UUID = this.getUserId
       const compyID = this.getCompyId
       let params = { UUID, compyID, ...search, ...this.pagination }

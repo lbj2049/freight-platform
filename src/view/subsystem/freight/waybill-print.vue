@@ -125,10 +125,10 @@ export default {
       }
     },
     doHandlePrint () {
-      console.log('print')
+      // console.log('print')
     },
     doHandleOut () {
-      console.log('out')
+      // console.log('out')
     },
     resultHandler (res) {
       const body = res.data

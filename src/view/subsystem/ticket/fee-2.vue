@@ -42,27 +42,27 @@ export default {
   },
   methods: {
     doGetData (item) {
-      console.log('item', item)
+      // console.log('item', item)
       this.$refs.billForm.doSetData(item)
     },
     handleSearch (search) {
-      console.log('search', search)
+      // console.log('search', search)
     },
     handleSubmit () {
-      console.log('handleSubmit')
+      // console.log('handleSubmit')
     },
     handleCopy () {
-      console.log('handleCopy')
+      // console.log('handleCopy')
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     handleWrite () {
-      console.log('handleWrite')
+      // console.log('handleWrite')
     },
     handleFee () {
-      console.log('handleFee')
+      // console.log('handleFee')
     }
   }
 }

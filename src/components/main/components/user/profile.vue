@@ -82,7 +82,7 @@ export default {
   methods: {
     initInfo () {
       this.dataFrom = { ...this.$store.state.user.userInfo }
-      console.log(this.$store.state.user.userInfo)
+      // console.log(this.$store.state.user.userInfo)
     },
     // 弹出层的事件
     profileCancelEvent () {

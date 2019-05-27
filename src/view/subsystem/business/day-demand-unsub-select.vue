@@ -105,7 +105,7 @@ export default {
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     // 切换页面
     changePageNum (pageNum) {

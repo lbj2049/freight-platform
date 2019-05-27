@@ -144,16 +144,16 @@ export default {
       }
     },
     doDelete (item) {
-      console.log('remove', item)
+      // console.log('remove', item)
     },
     // 编辑
     toEdit (item) {
-      console.log('edit', item)
+      // console.log('edit', item)
       this.$refs.editItemForm.editFormData(item)
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     // 切换页面
     changePageNum (pageNum) {

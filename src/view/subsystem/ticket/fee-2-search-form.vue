@@ -229,7 +229,7 @@ export default {
       this.search.edLoadTime = dr
     },
     getCurrentData (item) {
-      console.log(item)
+      // console.log(item)
       if (item) {
         this.$emit('handleGetData', item)
       }

@@ -372,7 +372,7 @@ export default {
       this.verifyFormModel = true
     },
     handleSelectTicket () {
-      console.log('handleSelectTicket')
+      // console.log('handleSelectTicket')
       this.ticketSearchModel = true
     },
     handleSelectPosition () {
@@ -492,7 +492,7 @@ export default {
                   let checked = false
                   if (pd.site !== 0) {
                     const dc = dv.used.find(prt => prt.site === pd.site)
-                    console.log(dc)
+                    // console.log(dc)
                     if (dc) {
                       if (dc.state > 0) {
                         checked = true
@@ -563,7 +563,7 @@ export default {
           }
         }
       })
-      console.log(checkNum, stateNum)
+      // console.log(checkNum, stateNum)
       if (stateNum === checkNum) {
         if (checked) {
           let prtv = pr.ls.find(prt => prt.site === 0)
@@ -575,7 +575,7 @@ export default {
       }
     },
     doHandlePrChecked2 (pr) {
-      console.log(pr)
+      // console.log(pr)
       const prtv = pr.ls.find(prt => prt.site === 0)
 
       let checked = prtv.checked
@@ -587,7 +587,7 @@ export default {
       })
     },
     doHandlePrOk (pr) {
-      console.log(pr)
+      // console.log(pr)
       let site = []
       pr.ls.forEach(prt => {
         if (prt.site !== 0 && prt.state === 0 && prt.checked) {
@@ -606,7 +606,7 @@ export default {
       adCompyGlocation(params).then(res => {
         const body = res.data
         const data = body.Data
-        console.log(data)
+        // console.log(data)
         if (body.Status === 2000) {
           this.$Message.success(data.Result)
           this.handleChangeBGW()

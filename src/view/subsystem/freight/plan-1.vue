@@ -291,7 +291,7 @@ export default {
       }
     },
     handlePlan () {
-      console.log(this.pi)
+      // console.log(this.pi)
       if (!this.pi.wbID) {
         this.$Message.error('请选择装车计划')
         return
@@ -321,11 +321,11 @@ export default {
       })
     },
     handleExport () {
-      console.log('handleExport')
+      // console.log('handleExport')
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     }
   }
 }

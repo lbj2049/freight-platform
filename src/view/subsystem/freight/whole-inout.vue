@@ -119,13 +119,13 @@ export default {
       this.toHandleSearch()
     },
     doHandleOut () {
-      console.log('out')
+      // console.log('out')
     },
     handleAuth () {
-      console.log('handleAuth')
+      // console.log('handleAuth')
     },
     handleTicketVerify () {
-      console.log('handleTicketVerify')
+      // console.log('handleTicketVerify')
     }
   }
 }

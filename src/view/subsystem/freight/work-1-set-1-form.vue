@@ -143,7 +143,7 @@ export default {
       this.editable = enable
     },
     doSubmit () {
-      console.log(this.currData, this.list)
+      // console.log(this.currData, this.list)
       if (!this.currData.cgycID && !this.currData.cgycID) {
         this.$Message.error('请填写车位')
         return

@@ -144,29 +144,29 @@ export default {
   },
   methods: {
     handleSearch (search) {
-      console.log('search', search)
+      // console.log('search', search)
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     changePageNum (page) {
-      console.log('page', page)
+      // console.log('page', page)
     },
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      // console.log('pageSize', pageSize)
     },
     doAdd () {
       this.faultClickEvent()
     },
     doEdit (param) {
-      console.log(param.row)
+      // console.log(param.row)
       // this.showUserEditModal()
     },
     /* 表单弹窗事件 */
     // 表单弹窗的状态
     watchEditableChange (e) {
-      console.log(e)
+      // console.log(e)
       if (e === false) {
         this.editable = false
       };

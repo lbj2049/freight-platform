@@ -415,7 +415,7 @@ export default {
       this.list1.push({})
       this.list1.push({})
       this.list1.push({})
-      console.log(this.list1)
+      // console.log(this.list1)
     },
     handleWrite (name) {
       this.$refs[name].validate((valid) => {

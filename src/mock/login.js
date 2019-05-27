@@ -25,8 +25,8 @@ const USER_MAP = {
 
 export const login = req => {
   req = JSON.parse(req.body)
-  console.log('mock login')
-  return {token: USER_MAP[req.userName].token}
+  // console.log('mock login')
+  return { token: USER_MAP[req.userName].token }
 }
 
 export const getUserInfo = req => {

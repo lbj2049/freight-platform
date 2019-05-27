@@ -233,7 +233,7 @@ export default {
       this.list1.push(dt)
       this.list1.push({})
       this.list1.push({})
-      console.log(this.list1)
+      // console.log(this.list1)
     },
     handleFee () {
       if (Object.keys(this.search).length !== 0) {

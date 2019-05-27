@@ -180,11 +180,11 @@ export default {
       this.toHandleSearch()
     },
     toDetail () {
-      console.log(this.item)
+      // console.log(this.item)
       this.$refs.viewModel.show(this.item)
     },
     toStates () {
-      console.log(this.item)
+      // console.log(this.item)
       var arr = Object.keys(this.item)
       if (arr.length === 0) {
         this.$Message.error('请选择数据')
