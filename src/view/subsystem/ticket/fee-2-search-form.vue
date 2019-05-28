@@ -12,34 +12,34 @@
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="运单号" prop="waybillNo">
+              <FormItem label="运单号" :label-width="72" prop="waybillNo">
                 <Input size="small" v-model="search.waybillNo"></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="发站" prop="station">
+              <FormItem label="发站" :label-width="60" prop="station">
                 <Input size="small" v-model="search.station"></Input>
               </FormItem>
             </Col>
             <Col span="6">
-              <FormItem label="到站" prop="astation">
+              <FormItem label="到站" :label-width="60" prop="astation">
                 <Input size="small" v-model="search.astation"></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
-            <Col span="12">
-              <FormItem label="到专用线">
+            <Col span="8">
+              <FormItem label="到专用线" :label-width="72">
                 <Input size="small" disabled></Input>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="制票日期" prop="bgLoadTime">
+            <Col span="8">
+              <FormItem label="制票日期" :label-width="72" prop="bgLoadTime">
                 <DatePicker size="small" v-model="search.bgLoadTime" @on-change="handleChangeDate1"></DatePicker>
               </FormItem>
             </Col>
-            <Col span="6">
+            <Col span="8">
               <FormItem label="">
                 <Radio disabled>查询运单</Radio>
               </FormItem>
@@ -47,17 +47,17 @@
           </Row>
 
           <Row>
-            <Col span="12">
-              <FormItem label="发货人" prop="sname">
+            <Col span="8">
+              <FormItem label="发货人" :label-width="72" prop="sname">
                 <Input size="small" v-model="search.sname"></Input>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="结束制票日期" prop="edLoadTime">
+            <Col span="8">
+              <FormItem label="结束日期" :label-width="72" prop="edLoadTime">
                 <DatePicker size="small" type="date" v-model="search.edLoadTime" @on-change="handleChangeDate2"></DatePicker>
               </FormItem>
             </Col>
-            <Col span="6">
+            <Col span="8">
               <FormItem label="">
                 <Radio disabled>查询货票</Radio>
               </FormItem>
@@ -65,17 +65,17 @@
           </Row>
 
           <Row>
-            <Col span="12">
-              <FormItem label="收货人" prop="aname">
+            <Col span="8">
+              <FormItem label="收货人" :label-width="72" prop="aname">
                 <Input size="small" v-model="search.aname"></Input>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="票符票号">
+            <Col span="8">
+              <FormItem label="票符票号" :label-width="72">
                 <Input size="small" disabled></Input>
               </FormItem>
             </Col>
-            <Col span="6">
+            <Col span="8">
               <FormItem label="">
                 <Button size="small" type="primary" :loading="loading" @click="toHandleSearch('searchForm')" style="margin-left: 8px">查询</Button>
               </FormItem>
@@ -83,21 +83,23 @@
           </Row>
 
           <Row>
-            <Col span="12">
-              <RadioGroup size="small" disabled >
-                <Radio value="1" label="仅确认货票"></Radio>
-                <Radio value="2" label="确认并核收杂费"></Radio>
-              </RadioGroup>
+            <Col span="10">
+              <FormItem label="" :label-width="0">
+                <RadioGroup size="small" disabled >
+                  <Radio value="1" label="仅确认货票"></Radio>
+                  <Radio value="2" label="确认并核收杂费"></Radio>
+                </RadioGroup>
+              </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="处理状态">
+            <Col span="7">
+              <FormItem label="处理状态" :label-width="72">
                 <Select size="small" value="1" disabled>
                   <Option value="1">全部</Option>
                 </Select>
               </FormItem>
             </Col>
-            <Col span="6">
-              <FormItem label="运单状态">
+            <Col span="7">
+              <FormItem label="运单状态" :label-width="72">
                 <Select size="small" value="1" disabled>
                   <Option value="1">全部</Option>
                 </Select>

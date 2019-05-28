@@ -12,7 +12,7 @@
               </FormItem>
             </Col>
             <Col span="12">
-              <div style="width: 100%; text-align: center; font-size: 24px; padding-top: 12px;">铁路局整车运单</div>
+              <div style="width: 100%; text-align: center; font-size: 24px; padding-top: 0px;">铁路局整车运单</div>
             </Col>
             <Col span="6">
               <FormItem label="票据号" >
@@ -53,7 +53,7 @@
               </FormItem>
             </Col>
             <Col span="12">
-              <FormItem label="专用线名称代码">
+              <FormItem label="专用线名称">
                 <Input size="small" disabled></Input>
               </FormItem>
             </Col>
@@ -95,19 +95,19 @@
               </Row>
               <Row>
                 <Col span="24">
-                  <Table size="small" height="120" stripe :columns="columns1" :data="list1"></Table>
+                  <Table size="small" height="98" stripe :columns="columns1" :data="list1"></Table>
                 </Col>
               </Row>
               <Row>
                 <Col span="24">
                   <h5>费用</h5>
-                  <Table size="small" height="120" stripe :columns="columns2" :data="list2"></Table>
+                  <Table size="small" height="98" stripe :columns="columns2" :data="list2"></Table>
                 </Col>
               </Row>
             </Col>
             <Col span="12">
               <FormItem label="记事内容" prop="mail">
-                <Input v-model="search.mail" type="textarea" :autosize="{minRows: 14,maxRows: 18}"></Input>
+                <Input v-model="search.mail" type="textarea" :autosize="{minRows: 11,maxRows: 18}"></Input>
               </FormItem>
 
             </Col>
@@ -131,7 +131,7 @@
                 </Col>
                 <Col span="24">
                   <FormItem label="记事内容">
-                    <Input type="textarea" :autosize="{minRows: 12,maxRows: 16}"></Input>
+                    <Input type="textarea" :autosize="{minRows: 7,maxRows: 16}"></Input>
                   </FormItem>
                 </Col>
                 <Col span="24" style="text-align: center">

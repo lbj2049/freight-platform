@@ -103,12 +103,12 @@
                 </Select>
               </FormItem>
             </Col>
-            <Col span="3">
+            <Col span="1">
               <FormItem label="">
               </FormItem>
             </Col>
-            <Col span="3">
-              <FormItem :label-width="20">
+            <Col span="5">
+              <FormItem :label-width="10">
                 <Checkbox disabled>标准价率测算</Checkbox>
               </FormItem>
             </Col>
@@ -116,12 +116,12 @@
         </Col>
         <Col span="24">
           <Row>
-            <Col span="15">
+            <Col span="12">
               <FormItem label="到站专用线">
                 <Input size="small" disabled></Input>
               </FormItem>
             </Col>
-            <Col span="3">
+            <Col span="6">
               <FormItem label="服务内容" prop="city" :label-width="72">
                 <Select size="small" value="1">
                   <Option value="1">站到站运输</Option>
@@ -150,51 +150,51 @@
                 <Col span="20">
                   <Row>
                     <Col span="18">
-                      <FormItem label="名称" prop="sname">
+                      <FormItem label="名称" prop="sname" :label-width="60">
                         <Input size="small" v-model="search.sname"></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="经办人" prop="sagent">
+                      <FormItem label="经办人" prop="sagent" :label-width="60">
                         <Input size="small" v-model="search.sagent"></Input>
                       </FormItem>
                     </Col>
                   </Row>
                   <Row>
-                    <Col span="14">
-                      <FormItem label="地址" prop="saddr">
+                    <Col span="12">
+                      <FormItem label="地址" prop="saddr" :label-width="60">
                         <Input size="small" v-model="search.saddr"></Input>
                       </FormItem>
                     </Col>
-                    <Col span="4">
-                      <FormItem label="邮编">
+                    <Col span="6">
+                      <FormItem label="邮编" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="电话" prop="stel">
+                      <FormItem label="电话" prop="stel" :label-width="60">
                         <Input size="small" v-model="search.stel"></Input>
                       </FormItem>
                     </Col>
                   </Row>
                   <Row>
-                    <Col span="10">
-                      <FormItem label="取货地址">
-                        <Input size="small" disabled></Input>
-                      </FormItem>
-                    </Col>
-                    <Col span="4">
-                      <FormItem label="里程">
-                        <Input size="small" disabled></Input>
-                      </FormItem>
-                    </Col>
-                    <Col span="4">
-                      <FormItem label="联系人">
+                    <Col span="6">
+                      <FormItem label="取货地址" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="电话">
+                      <FormItem label="里程" :label-width="60">
+                        <Input size="small" disabled></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="联系人" :label-width="60">
+                        <Input size="small" disabled></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
@@ -210,51 +210,51 @@
                 <Col span="20">
                   <Row>
                     <Col span="18">
-                      <FormItem label="名称" prop="aname">
+                      <FormItem label="名称" prop="aname" :label-width="60">
                         <Input size="small" v-model="search.aname"></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="经办人" prop="aagent">
+                      <FormItem label="经办人" prop="aagent" :label-width="60">
                         <Input size="small" v-model="search.aagent"></Input>
                       </FormItem>
                     </Col>
                   </Row>
                   <Row>
-                    <Col span="14">
-                      <FormItem label="地址" prop="aaddr">
+                    <Col span="12">
+                      <FormItem label="地址" prop="aaddr" :label-width="60">
                         <Input size="small" v-model="search.aaddr"></Input>
                       </FormItem>
                     </Col>
-                    <Col span="4">
-                      <FormItem label="邮编">
+                    <Col span="6">
+                      <FormItem label="邮编" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="电话" prop="atel">
+                      <FormItem label="电话" prop="atel" :label-width="60">
                         <Input size="small" v-model="search.atel"></Input>
                       </FormItem>
                     </Col>
                   </Row>
                   <Row>
-                    <Col span="10">
-                      <FormItem label="取货地址">
-                        <Input size="small" disabled></Input>
-                      </FormItem>
-                    </Col>
-                    <Col span="4">
-                      <FormItem label="里程">
-                        <Input size="small" disabled></Input>
-                      </FormItem>
-                    </Col>
-                    <Col span="4">
-                      <FormItem label="联系人">
+                    <Col span="6">
+                      <FormItem label="取货地址" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
                     <Col span="6">
-                      <FormItem label="电话">
+                      <FormItem label="里程" :label-width="60">
+                        <Input size="small" disabled></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="联系人" :label-width="60">
+                        <Input size="small" disabled></Input>
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="电话" :label-width="60">
                         <Input size="small" disabled></Input>
                       </FormItem>
                     </Col>
@@ -265,7 +265,7 @@
               <Row>
                 <Col span="24">
                   <div style="padding-left: 20px; padding-bottom: 10px;">
-                    <Table size="small" height="250" stripe :columns="columns1" :data="list1"></Table>
+                    <Table size="small" height="98" stripe :columns="columns1" :data="list1"></Table>
                   </div>
                 </Col>
               </Row>
@@ -273,12 +273,12 @@
               <Row>
                 <Col span="12">
                   <FormItem label="" :label-width="20">
-                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
+                    <Input disabled type="textarea" :autosize="{minRows: 1,maxRows: 5}"></Input>
                   </FormItem>
                 </Col>
                 <Col span="12">
                   <FormItem label="" :label-width="20">
-                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
+                    <Input disabled type="textarea" :autosize="{minRows: 1,maxRows: 5}"></Input>
                   </FormItem>
                 </Col>
               </Row>
@@ -306,14 +306,14 @@
               <Row>
                 <Col span="24">
                   <div style="padding-left: 20px; padding-bottom: 10px;">
-                    <Table size="small" height="398" stripe :columns="columns2" :data="list2"></Table>
+                    <Table size="small" height="192" stripe :columns="columns2" :data="list2"></Table>
                   </div>
                 </Col>
               </Row>
               <Row>
                 <Col span="24">
                   <FormItem label="发票合计" prop="totalMoney">
-                    <Input disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}" v-model="totalMoney"></Input>
+                    <Input disabled type="textarea" :autosize="{minRows: 1,maxRows: 5}" v-model="totalMoney"></Input>
                   </FormItem>
                 </Col>
               </Row>
@@ -412,9 +412,9 @@ export default {
       }
       this.list1.push(dt)
       this.list1.push({})
-      this.list1.push({})
-      this.list1.push({})
-      this.list1.push({})
+      // this.list1.push({})
+      // this.list1.push({})
+      // this.list1.push({})
       // console.log(this.list1)
     },
     handleWrite (name) {

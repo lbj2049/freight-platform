@@ -110,7 +110,7 @@ export default {
         { key: 'sname', title: '托运人', width: 90 },
         { key: 'aname', title: '收货人', width: 90 },
         // { key: 'sCarLoadAddr', title: '托运人装车地点', width: 160 },
-        { key: 'gname', title: '货物名称' },
+        { key: 'gname', title: '货物名称', width: 90 },
         // { key: 'tunnage', title: '货物描述', width: 90 },
         // { key: 'sagent', title: '托运经办人', width: 100 },
         // { key: 'aagent', title: '收货经办人', width: 100 },
