@@ -138,6 +138,12 @@ export default {
       const UUID = this.getUserId
       const param = { ...item, UUID }
       this.handleExperiment(param).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status !== 2000) {
+          this.$Message.error(data.ErrorDes)
+          return
+        }
         this.$router.push('/front/guide')
       })
     },

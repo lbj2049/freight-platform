@@ -142,7 +142,7 @@
               </Col>
               <Col span="8">
                 <FormItem label="最大单件重量" prop="gMaxWeight">
-                  <Input v-model="demand.gMaxWeight" placeholder="请输入最大单件重量" number/>
+                  <InputNumber v-model="demand.gMaxWeight" placeholder="请输入最大单件重量"/>
                 </FormItem>
               </Col>
               <Col span="8">
@@ -279,13 +279,14 @@ export default {
   data () {
     return {
       isAdd: true,
-      receptTypes: [{ value: 1, label: '发车练习' }, { value: 2, label: '接车练习' }],
+      // receptTypes: [{ value: 1, label: '发车练习' }, { value: 2, label: '接车练习' }],
+      receptTypes: [{ value: 1, label: '发车练习' }],
       carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
         bwbID: '',
         title: '',
         receptType: 1,
-        gMaxWeight: '',
+        gMaxWeight: null,
         gpackage: '',
         smobile: '',
         amobile: '',
@@ -312,7 +313,7 @@ export default {
       },
       rules: {
         title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
         gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],

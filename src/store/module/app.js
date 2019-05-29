@@ -38,6 +38,7 @@ export default {
     hasReadErrorPage: false
   },
   getters: {
+    systemName: (state) => state.systemName,
     logoName: (state) => getLogoName(state.systemName),
     menuList: (state, getters, rootState) => getMenuByRouter(routers, state.systemName, rootState.user.access),
     errorCount: state => state.errorList.length

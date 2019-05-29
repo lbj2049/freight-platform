@@ -39,7 +39,7 @@ import Fullscreen from './components/fullscreen'
 import Language from './components/language'
 import ErrorStore from './components/error-store'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
-import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
+import { getNewTagList, getNextRoute, routeEqual, hasAccess } from '@/libs/util'
 import routers from '@/router/routers'
 import minLogo from '@/assets/images/logo-min.jpg'
 import maxLogo from '@/assets/images/logo.jpg'
@@ -74,6 +74,9 @@ export default {
       return this.$store.state.user.token !== 'student'
     },
     tagNavList () {
+      if (this.$store.state.app.tagNavList && this.$store.state.app.tagNavList.length > 0) {
+        return this.$store.state.app.tagNavList.filter(item => hasAccess([this.$store.state.user.token], item)) || []
+      }
       return this.$store.state.app.tagNavList
     },
     tagRouter () {

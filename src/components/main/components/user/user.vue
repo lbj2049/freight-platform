@@ -2,7 +2,8 @@
   <div class="user-avator-dropdown">
     <Dropdown @on-click="handleClick">
       <Badge :dot="!!messageUnreadCount">
-        <Avatar :src="userAvator"/>
+        <!--<Avatar :src="userAvator"/>-->
+        <Avatar style="background-color: #f56a00">{{userName}}</Avatar>
       </Badge>
       <!--
       -->
@@ -40,7 +41,8 @@ export default {
   },
   data () {
     return {
-      profileable: false
+      profileable: false,
+      userName: this.$store.state.user.userName
     }
   },
   methods: {

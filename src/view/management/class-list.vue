@@ -58,6 +58,7 @@ export default {
           width: 180,
           render: (btn, params) => {
             return btn('div', [
+              /*
               btn('Button', {
                 props: {
                   type: 'warning',
@@ -70,6 +71,7 @@ export default {
                   }
                 }
               }, '审核'),
+              */
               btn('Button', {
                 props: {
                   type: 'info',

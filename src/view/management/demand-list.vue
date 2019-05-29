@@ -147,8 +147,9 @@ export default {
     },
     // 搜索
     doHandleSearch (search) {
+      const receptType = 1
       const teaUUID = this.getUserId
-      let params = { teaUUID, ...search, ...this.pagination }
+      let params = { teaUUID, receptType, ...search, ...this.pagination }
       getTeaWayBill(params).then(res => {
         const body = res.data
         const data = body.Data

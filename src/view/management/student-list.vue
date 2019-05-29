@@ -4,7 +4,7 @@
     <!--<search-form ref="searchForm" btnName="搜索" :searchData="searchData" :labelShow="true" :labelWidth="90" @handleFormSubmit="doHandleSearch" ></search-form>-->
     <table-paging :columns="columns" :data="list" :distance="distance" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination">
       <div slot="topTools">
-        <Button type="text" @click="doRePass">密码初始化</Button>
+        <!--<Button type="text" @click="doRePass">密码初始化</Button>-->
         <Button type="default" @click="downloadTpl">下载模版</Button>
         <Button type="default" @click="doImport">批量导入</Button>
         <Button type="primary" @click="toAdd">新增</Button>
@@ -30,11 +30,11 @@ import {
   getStuModelURL,
   importStuInfo
 } from '@/api/teacher.data'
+import axios from 'axios'
 import SearchForm from '../../components/search-from/search-from'
 import TablePaging from '../../components/table-paging/table-paging'
 import StudentEdit from './student-edit'
 import { maker } from 'form-create'
-
 export default {
   components: {
     TablePaging, SearchForm, StudentEdit
@@ -438,12 +438,34 @@ export default {
           }, [h('Button', '上传')])
         },
         onOk: () => {
+          /*
           const params = {
             classID: classID,
             UUID: UUID,
             file: this.file
           }
-          importStuInfo(params).then(res => {
+          */
+          let formData = new FormData()
+          formData.append('classID', classID)
+          formData.append('UUID', UUID)
+          formData.append('file', this.file)
+
+          let config = {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          }
+          // 添加请求头
+          axios.post('/userInfo/importStuInfo', formData, config)
+            .then(res => {
+              const body = res.data
+              const data = body.Data
+              if (body.Status === 2000) {
+                this.$Message.success(data.Result)
+              } else {
+                this.$Message.error(data.ErrorDes)
+              }
+            })
+          /*
+          importStuInfo(formData).then(res => {
             const body = res.data
             const data = body.Data
             if (body.Status === 2000) {
@@ -452,6 +474,7 @@ export default {
               this.$Message.error(data.ErrorDes)
             }
           })
+          */
         }
       })
     },

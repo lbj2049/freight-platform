@@ -272,6 +272,7 @@ export default [
       }
     ]
   },
+  /*
   {
     path: '/multilevel',
     name: 'multilevel',
@@ -343,6 +344,7 @@ export default [
       }
     ]
   },
+  */
   {
     path: '/401',
     name: 'error_401',

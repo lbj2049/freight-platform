@@ -28,8 +28,9 @@ export default {
     messageReadedList: [],
     messageTrashList: [],
     messageContentStore: {},
-    experimentId: '',// 学生子系统实验 ID,
-    compyId: ''// 学生公司 ID
+    experimentId: '', // 学生子系统实验 ID,
+    compyId: '', // 学生公司 ID
+    compyName: '' // 学生公司名称
   },
   mutations: {
     setUserInfo (state, userInfo) {
@@ -80,6 +81,9 @@ export default {
     },
     setCompyId (state, id) {
       state.compyId = id
+    },
+    setCompyName (state, name) {
+      state.compyName = name
     }
   },
   getters: {
@@ -297,10 +301,9 @@ export default {
           if (body.Status === 2000) {
             commit('setExperimentId', data.expID)
             commit('setCompyId', data.compyID)
-          } else {
-            this.$Message.error(data.ErrorDes)
+            commit('setCompyName', data.compyName)
           }
-          resolve()
+          resolve(res)
         }).catch(error => {
           reject(error)
         })
