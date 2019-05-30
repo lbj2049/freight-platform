@@ -1,10 +1,9 @@
 <template>
   <Card :shadow="shadow" class="info-card-wrapper" :padding="0">
     <div class="content-con">
-      <div class="left-area" :style="{background: color, width: leftWidth}">
-        <common-icon class="icon" :type="icon" :size="iconSize" color="#fff"/>
+      <div class="top-area" :style="{'background-color': color, height: topHeight}" :class="img">
       </div>
-      <div class="right-area" :style="{width: rightWidth}">
+      <div class="bottom-area" style="height: 54px; line-height: 54px; font-size: 18px">
         <div>
           <slot></slot>
         </div>
@@ -25,11 +24,19 @@ export default {
       type: Number,
       default: 36
     },
+    top: {
+      type: Number,
+      default: 400
+    },
     color: {
       type: String,
       default: '#2d8cf0'
     },
     icon: {
+      type: String,
+      default: ''
+    },
+    img: {
       type: String,
       default: ''
     },
@@ -43,11 +50,11 @@ export default {
     }
   },
   computed: {
-    leftWidth () {
-      return `${this.left}%`
+    topHeight () {
+      return '20vw'
     },
-    rightWidth () {
-      return `${100 - this.left}%`
+    bottomHeight () {
+      return `40px`
     }
   },
   methods: {
@@ -59,10 +66,24 @@ export default {
 </script>
 
 <style lang="less">
+.ec {
+  background: url('../../assets/images/ec.png') no-repeat;
+  background-size:100% 100%;
+}
+.freight {
+  background: url('../../assets/images/freight.png') no-repeat;
+  background-size:100% 100%;
+}
+.container {
+  background: url('../../assets/images/container.png') no-repeat;
+  background-size:100% 100%;
+}
+.bill {
+  background: url('../../assets/images/bill.png') no-repeat;
+  background-size:100% 100%;
+}
 .common{
-  float: left;
   height: 100%;
-  display: table;
   text-align: center;
   cursor: pointer;
 }
@@ -71,25 +92,25 @@ export default {
   height: 100%;
 }
 .middle-center{
-  display: table-cell;
   vertical-align: middle;
 }
 .info-card-wrapper{
+  margin-top: 40px;
   .size;
   overflow: hidden;
   .ivu-card-body{
     .size;
   }
-  .content-con{
+  .content-con {
     .size;
-    position: relative;
-    .left-area{
+    .top-area{
+      /*background-image: url("../../assets/images/ec.png");*/
       .common;
       & > .icon{
         .middle-center;
       }
     }
-    .right-area{
+    .bottom-area{
       .common;
       & > div{
         .middle-center;

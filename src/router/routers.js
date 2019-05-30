@@ -418,12 +418,14 @@ export default [
       title: '日需求管理'
     },
     children: [
+      /*
       {
         path: 'day-demand-transport', name: '日运输需求', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日运输需求' }, component: () => import('@/view/subsystem/business/day-demand-transport.vue')
       },
       {
         path: 'day-demand-select', name: '日需求查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日需求查询' }, component: () => import('@/view/subsystem/business/day-demand-select.vue')
       },
+      */
       {
         path: 'day-demand-unsub-select', name: '日需求退订查询', systemName: 'business', meta: { access: ['student'], icon: 'md-add', title: '日需求退订查询' }, component: () => import('@/view/subsystem/business/day-demand-unsub-select.vue')
       },

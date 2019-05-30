@@ -5,8 +5,8 @@
 <template>
   <div>
     <Row :gutter="20">
-      <Col :xs="4" v-for="(item, i) in subsystemData" :key="`infor-${i}`" :offset="`${ i===0 ? 4 : 0}`" style="height: 120px;padding-bottom: 10px;">
-        <guide-card shadow :color="item.color" :icon="item.icon" :icon-size="36" v-on:click.native="doRedirect(item)">
+      <Col :xs="6" v-for="(item, i) in subsystemData" :key="`infor-${i}`" :offset="`${ i===0 ? 0 : 0}`" style="padding-bottom: 10px;">
+        <guide-card shadow :color="item.color" :icon="item.icon" :img="item.img" v-on:click.native="doRedirect(item)">
           <p>{{ item.title }}</p>
         </guide-card>
       </Col>
@@ -29,10 +29,10 @@ export default {
       gray: '#D3D3D3',
       subsystemMap: {},
       subsystemData: [
-        { type: 'ec', title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0' },
-        { type: 'freight', title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b' },
-        { type: 'container', title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900' },
-        { type: 'bill', title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14' }
+        { type: 'ec', title: '电子商务系统', icon: 'ios-cart-outline', url: '/business/home', color: '#2d8cf0', img: 'ec' },
+        { type: 'freight', title: '货运站系统', icon: 'ios-compass-outline', url: '/freight/home', color: '#19be6b', img: 'freight' },
+        { type: 'container', title: '集装箱系统', icon: 'ios-cube-outline', url: '/box/home', color: '#ff9900', img: 'container' },
+        { type: 'bill', title: '制票系统', icon: 'ios-paper-outline', url: '/ticket/home', color: '#ed3f14', img: 'bill' }
       ]
     }
   },
@@ -91,4 +91,4 @@ export default {
 
 <style>
 
-</style
+</style>
