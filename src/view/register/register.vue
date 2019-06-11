@@ -1,38 +1,34 @@
 <template>
   <div>
     <Modal :value="editable" :mask-closable="false" :footer-hide="true" title="用户注册" @on-visible-change="watchEditableChange" :styles="{top: '16%'}" width="880">
-      <Form ref="registerForm" :model="registerForm" :rules="registerRule" :label-width="80">
-        <FormItem label="班级" prop="classId">
-          <Select v-model="registerForm.classId" placeholder="请输入班级">
-            <Option value="1">一班</Option>
-            <Option value="2">二班</Option>
-            <Option value="3">三班</Option>
+      <Form ref="userInfo" :model="userInfo" :rules="registerRule" :label-width="80">
+        <FormItem label="班级" prop="classID">
+          <Select v-model="userInfo.classID" placeholder="请输入班级">
+            <Option v-for="item in classes" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
         </FormItem>
-        <FormItem label="学号" prop="userno">
-          <Input v-model="registerForm.userno" placeholder="请输入学号"></Input>
+        <FormItem label="登录名" prop="loginName">
+          <Input v-model="userInfo.loginName" placeholder="请输入登录名"></Input>
         </FormItem>
-        <FormItem label="登录名" prop="username">
-          <Input v-model="registerForm.username" placeholder="请输入登录名"></Input>
+        <FormItem label="密码" prop="loginPwd">
+          <Input v-model="userInfo.loginPwd" placeholder="请输入密码"></Input>
         </FormItem>
-        <FormItem label="姓名" prop="realname">
-          <Input v-model="registerForm.realname" placeholder="请输入姓名"></Input>
+        <FormItem label="姓名" prop="userName">
+          <Input v-model="userInfo.userName" placeholder="请输入姓名"></Input>
         </FormItem>
-        <FormItem label="性别" prop="sex">
-          <RadioGroup v-model="registerForm.sex">
-            <Radio label="1">男</Radio>
-            <Radio label="2">女</Radio>
+
+        <FormItem label="电话" prop="userTel">
+          <Input v-model="userInfo.userTel"  placeholder="请输入电话" ></Input>
+        </FormItem>
+        <FormItem label="性别" prop="userSex">
+          <RadioGroup v-model="userInfo.userSex">
+            <Radio :label="1">男</Radio>
+            <Radio :label="2">女</Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem label="密码" prop="password">
-          <Input v-model="registerForm.password" placeholder="请输入姓名"></Input>
-        </FormItem>
-        <FormItem label="联系电话" prop="phone">
-          <Input v-model="registerForm.phone" placeholder="请输入姓名"></Input>
-        </FormItem>
         <FormItem>
-          <Button type="primary" @click="handleSubmit('registerForm')">注册</Button>
-          <Button @click="handleReset('registerForm')" style="margin-left: 8px">重置</Button>
+          <Button type="primary" @click="handleSubmit('userInfo')">注册</Button>
+          <Button @click="handleReset('userInfo')" style="margin-left: 8px">重置</Button>
           <Button @click="formCancelEvent" type="text" style="float: right">关闭</Button>
         </FormItem>
       </Form>
@@ -42,6 +38,10 @@
     </div>
 </template>
 <script>
+import {
+  getClassSel,
+  editUserInfo
+} from '@/api/teacher.data'
 export default {
   props: {
     loading: {
@@ -55,42 +55,59 @@ export default {
   },
   data () {
     return {
-      registerForm: {
-        classId: '',
-        userno: '',
-        username: '',
-        realname: '',
-        sex: 1,
-        password: '',
-        phone: ''
+      classes: [],
+      userInfo: {
+        loginName: '',
+        loginPwd: '',
+        userName: '',
+        state: 0,
+        userNo: '',
+        userTel: '',
+        userSex: 1,
+        userType: 1,
+        classID: null
       },
       registerRule: {
-        classId: [
+        classID: [
           { required: true, message: '班级不能为空', trigger: 'blur' }
         ],
-        userno: [
-          { required: true, message: '学号不能为空', trigger: 'blur' }
+        loginName: [
+          { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
-        username: [
-          { required: true, message: '登录名不能为空', trigger: 'blur' }
+        userName: [
+          { required: true, message: '姓名不能为空', trigger: 'blur' }
         ],
-        realname: [
-          { required: true, message: '不能为空', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '密码不能为空', trigger: 'blur' }
+        loginPwd: [
+          // { required: true, message: '密码不能为空', trigger: 'blur' }
         ]
       }
     }
   },
+  mounted: function () {
+    // this.getClassList()
+  },
   methods: {
+    getClassList () {
+      getClassSel({}).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          if (data) {
+            data.forEach(({ classID, className }) => this.classes.push({ value: classID, label: className }))
+            this.userInfo.classID = this.classes[ 0 ]
+          }
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
+    },
     // 弹出层的事件
     formConfirmEvent () {
       this.$emit('formConfirmEvent')
     },
     formCancelEvent () {
       this.$emit('formCancelEvent')
-      this.handleReset('registerForm')
+      this.handleReset('userInfo')
     },
     watchEditableChange (e) {
       this.$emit('watchEditableChange', e)
@@ -98,9 +115,16 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
+          editUserInfo(this.userInfo).then(res => {
+            const body = res.data
+            const data = body.Data
+            if (body.Status === 2000) {
+              this.editable = false
+              this.$Message.success(data.Result)
+            } else {
+              this.$Message.error(data.ErrorDes)
+            }
+          })
         }
       })
     },

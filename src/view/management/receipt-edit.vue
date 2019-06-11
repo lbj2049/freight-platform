@@ -280,12 +280,12 @@ export default {
     return {
       isAdd: true,
       // receptTypes: [{ value: 1, label: '发车练习' }, { value: 2, label: '接车练习' }],
-      receptTypes: [{ value: 1, label: '发车练习' }],
+      receptTypes: [{ value: 2, label: '接车练习' }],
       carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
         bwbID: '',
         title: '',
-        receptType: 1,
+        receptType: 2,
         gMaxWeight: null,
         gpackage: '',
         smobile: '',
@@ -313,7 +313,7 @@ export default {
       },
       rules: {
         title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
+        gMaxWeight: [ { required: true, message: '请输入有效数字' } ],
         gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
@@ -376,7 +376,7 @@ export default {
       })
     },
     handleReset (name) {
-      this.demand = this.defaultInfo
+      this.demand = { ...this.defaultInfo }
       this.$refs[name].resetFields()
     }
   }

@@ -148,7 +148,7 @@ export const getHomeRoute = (routers, systemName, homeName = 'home') => {
 export const getLogoName = (systemName) => {
   let logoName = ''
   if (systemName === 'main') {
-    logoName = '铁路货运平台'
+    logoName = '铁路物流管理实训平台'
   } else if (systemName === 'business') {
     logoName = '铁路货运电子商务系统'
   } else if (systemName === 'freight') {

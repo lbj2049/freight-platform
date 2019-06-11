@@ -18,6 +18,21 @@
       </div>
     </table-paging>
     <student-edit ref="editUserForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange" @onSuccessValid="handleSubmit"/>
+
+    <Modal v-model="importable" width="240" @on-cancel="doImportCancel">
+      <p slot="header" style="color:#f60;text-align:center">
+        <span>批量导入</span>
+      </p>
+      <div style="text-align:center">
+        <Upload :before-upload="handleBeforeUpload" action="/userInfo/importStuInfo">
+          <Button icon="ios-cloud-upload-outline">{{ file === null ? '上传': '已上传' }}</Button>
+        </Upload>
+        <div v-if="file !== null" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">文件: {{ file.name }}</div>
+      </div>
+      <div slot="footer">
+        <Button @click="doImportCancel">取消</Button><Button type="primary" @click="doImportOk" :disabled="file === null">确定</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
@@ -43,7 +58,9 @@ export default {
     return {
       loading: false,
       editable: false,
+      importable: false,
       file: null,
+      fileable: !this.file,
       multItem: [],
       searchApi: {},
       searchModel: {},
@@ -421,6 +438,8 @@ export default {
       })
     },
     doImport () {
+      this.importable = true
+      /*
       let classID = this.searchModel.classID.value
       const UUID = this.getUserId
       this.$Modal.confirm({
@@ -435,48 +454,47 @@ export default {
               action: '/userInfo/importStuInfo?classID=' + classID + '&UUID=' + UUID,
               'before-upload': this.handleBeforeUpload
             }
-          }, [h('Button', '上传')])
+          }, [h('Button', !this.file ? '上传' : '已选择')])
         },
         onOk: () => {
-          /*
-          const params = {
-            classID: classID,
-            UUID: UUID,
-            file: this.file
+          if (!this.file) {
+            this.$Message.error('请选择文件')
+            return false
           }
-          */
-          let formData = new FormData()
-          formData.append('classID', classID)
-          formData.append('UUID', UUID)
-          formData.append('file', this.file)
-
-          let config = {
-            headers: { 'Content-Type': 'multipart/form-data' }
-          }
-          // 添加请求头
-          axios.post('/userInfo/importStuInfo', formData, config)
-            .then(res => {
-              const body = res.data
-              const data = body.Data
-              if (body.Status === 2000) {
-                this.$Message.success(data.Result)
-              } else {
-                this.$Message.error(data.ErrorDes)
-              }
-            })
-          /*
-          importStuInfo(formData).then(res => {
-            const body = res.data
-            const data = body.Data
-            if (body.Status === 2000) {
-              this.$Message.success(data.Result)
-            } else {
-              this.$Message.error(data.ErrorDes)
-            }
-          })
-          */
+          this.doImport()
         }
       })
+      */
+    },
+    doImportOk () {
+      let classID = this.searchModel.classID.value
+      const UUID = this.getUserId
+      let formData = new FormData()
+      formData.append('classID', classID)
+      formData.append('UUID', UUID)
+      formData.append('file', this.file)
+
+      let config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      // 添加请求头
+      axios.post('/userInfo/importStuInfo', formData, config)
+        .then(res => {
+          const body = res.data
+          const data = body.Data
+          if (body.Status === 2000) {
+            this.$Message.success(data.Result)
+            this.file = null
+            this.importable = false
+            this.toHandleSearch()
+          } else {
+            this.$Message.error(data.ErrorDes)
+          }
+        })
+    },
+    doImportCancel () {
+      this.file = null
+      this.importable = false
     },
     handleBeforeUpload (file) {
       this.file = file

@@ -3,7 +3,7 @@
     <Row :gutter="20" style="margin-top: 10px;">
 
       <Col span="24" style="text-align: center">
-        <h2 style="margin-top: 170px;margin-bottom: 20px;font-size: 28px;color: #91ADDC;">欢迎使用铁路货运平台 !</h2>
+        <h2 style="margin-top: 170px;margin-bottom: 20px;font-size: 28px;color: #91ADDC;">欢迎使用铁路物流管理实训平台 !</h2>
         <img src="../../../assets/images/welcome.png"/>
       </Col>
       <!--

@@ -70,16 +70,32 @@ export default {
   background: url('../../assets/images/ec.png') no-repeat;
   background-size:100% 100%;
 }
+.ec_gray {
+  background: url('../../assets/images/ec_gray.png') no-repeat;
+  background-size:100% 100%;
+}
 .freight {
   background: url('../../assets/images/freight.png') no-repeat;
+  background-size:100% 100%;
+}
+.freight_gray {
+  background: url('../../assets/images/freight_gray.png') no-repeat;
   background-size:100% 100%;
 }
 .container {
   background: url('../../assets/images/container.png') no-repeat;
   background-size:100% 100%;
 }
+.container_gray {
+  background: url('../../assets/images/container_gray.png') no-repeat;
+  background-size:100% 100%;
+}
 .bill {
   background: url('../../assets/images/bill.png') no-repeat;
+  background-size:100% 100%;
+}
+.bill_gray {
+  background: url('../../assets/images/bill_gray.png') no-repeat;
   background-size:100% 100%;
 }
 .common{

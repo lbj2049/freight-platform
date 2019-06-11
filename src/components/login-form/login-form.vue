@@ -49,8 +49,8 @@ export default {
   data () {
     return {
       form: {
-        loginName: 'admin',
-        loginPwd: '123456',
+        loginName: '',
+        loginPwd: '',
         role: 1
       },
       roles: [

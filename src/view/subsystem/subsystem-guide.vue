@@ -59,6 +59,7 @@ export default {
           this.subsystemData.forEach((item, i) => {
             if (this.subsystemMap[ item.type ] !== 1) {
               item.color = this.gray
+              item.img = item.type + '_gray'
             }
           })
         } else {

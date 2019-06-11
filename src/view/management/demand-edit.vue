@@ -313,7 +313,7 @@ export default {
       },
       rules: {
         title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
+        // gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
         gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
         amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
@@ -376,7 +376,7 @@ export default {
       })
     },
     handleReset (name) {
-      this.demand = this.defaultInfo
+      this.demand = { ...this.defaultInfo }
       this.$refs[name].resetFields()
     }
   }

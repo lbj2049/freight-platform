@@ -8,10 +8,10 @@
       <Card icon="log-in" title="欢迎登录" :bordered="false">
         <div class="form-con">
           <login-form @on-success-valid="handleSubmit" @do-register="doRegister"></login-form>
-          <p class="login-tip">输入任意用户名和密码即可</p>
+          <!--<p class="login-tip">输入任意用户名和密码即可</p>-->
         </div>
       </Card>
-      <register :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
+      <register ref="registerForm" :editable="editable" @formConfirmEvent="formConfirmEvent" @formCancelEvent="formCancelEvent" @watchEditableChange="watchEditableChange"/>
 
     </div>
   </div>
@@ -83,6 +83,7 @@ export default {
     // 点击事件
     faultClickEvent () {
       this.editable = true
+      this.$refs.registerForm.getClassList()
     },
     // 弹出层的事件
     formConfirmEvent () {
