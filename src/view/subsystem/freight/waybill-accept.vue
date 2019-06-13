@@ -31,7 +31,7 @@ export default {
       columns: [
         { type: 'index', width: 38, align: 'center', fixed: 'left' },
         { type: 'selection', width: 45, align: 'center', fixed: 'left' },
-        { key: 'station', title: '到站', width: 90, fixed: 'left' },
+        { key: 'astation', title: '到站', width: 90, fixed: 'left' },
         { key: 'gname', title: '品名', width: 160, fixed: 'left' },
         { key: 'sname', title: '押运人', width: 160, fixed: 'left' },
         { key: 'needNo', title: '需求号', width: 160, fixed: 'left' },

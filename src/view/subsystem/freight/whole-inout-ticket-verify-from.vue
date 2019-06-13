@@ -18,26 +18,26 @@
       <Modal v-model="verifyFormModel" title="外勤进出货验证" @on-ok="verifyOk" @on-cancel="verifyCancel">
         <Form ref="ticket" :model="ticket" :rules="rules" :show-message="false" :label-width="72" class="qib-form">
           <FormItem label="票据号" prop="waybillNo">
-            <Input size="small" v-model="ticket.waybillNo" placeholder="请输入">
+            <Input size="small" v-model="ticket.waybillNo" readonly>
               <Button slot="append" @click="handleSelectTicket">选择</Button>
             </Input>
           </FormItem>
           <Divider orientation="left" class="divider">整车进出货信息</Divider>
           <FormItem label="托运人" prop="sname">
-            <Input size="small" v-model="ticket.sname" placeholder="请输入"></Input>
+            <Input size="small" v-model="ticket.sname" readonly></Input>
           </FormItem>
           <FormItem label="收货人" prop="aname">
-            <Input size="small" v-model="ticket.aname" placeholder="请输入"></Input>
+            <Input size="small" v-model="ticket.aname" readonly></Input>
           </FormItem>
           <Row>
             <Col span="12">
               <FormItem label="品名" prop="gname">
-                <Input size="small" v-model="ticket.gname" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.gname" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <FormItem label="货重" prop="tunnage">
-                <Input size="small" v-model="ticket.tunnage" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.tunnage"></Input>
               </FormItem>
             </Col>
           </Row>
@@ -45,38 +45,38 @@
           <Row>
             <Col span="12">
               <FormItem label="发站" prop="station">
-                <Input size="small" v-model="ticket.station" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.station" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <FormItem label="到站" prop="astation">
-                <Input size="small" v-model="ticket.astation" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.astation" readonly></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="12">
-              <FormItem label="汽车号码" prop="waybillNo">
-                <Input size="small" v-model="ticket.name" placeholder="请输入"></Input>
+              <FormItem label="汽车号码">
+                <Input size="small" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <FormItem label="预约日期" prop="waybillNo">
-                <Input size="small" type="date" v-model="ticket.date" placeholder="请输入"></Input>
+                <Input size="small" type="date" v-model="ticket.date" readonly></Input>
               </FormItem>
             </Col>
           </Row>
 
           <Row>
             <Col span="12">
-              <FormItem label="进门重量" prop="tunnage">
-                <Input size="small" v-model="ticket.tunnage" placeholder="请输入"></Input>
+              <FormItem label="进门重量">
+                <Input size="small" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <FormItem label="有效日期" prop="date">
-                <Input size="small" type="date" v-model="ticket.date" placeholder="请输入"></Input>
+                <Input size="small" type="date" v-model="ticket.date" readonly></Input>
               </FormItem>
             </Col>
           </Row>
@@ -84,26 +84,26 @@
           <Row>
             <Col span="12">
               <FormItem label="需求号" prop="needNo">
-                <Input size="small" v-model="ticket.needNo" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.needNo" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <FormItem label="股道简称" prop="yardName">
-                <Input size="small" v-model="ticket.yardName" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.yardName" readonly></Input>
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="12">
               <FormItem label="货区货位" prop="glocation">
-                <Input size="small" v-model="ticket.glocation" placeholder="请输入"></Input>
+                <Input size="small" v-model="ticket.glocation" readonly></Input>
               </FormItem>
             </Col>
             <Col span="12">
               <Row>
                 <Col span="10">
                   <FormItem :label-width="12" prop="isg">
-                    <Checkbox v-model="ticket.isg">综合货位</Checkbox>
+                    <Checkbox v-model="ticket.isg" readonly>综合货位</Checkbox>
                   </FormItem>
                 </Col>
                 <Col span="12">
@@ -124,8 +124,8 @@
               <FormItem label="票据类型" :label-width="72">
                 <RadioGroup v-model="ts.ticketType">
                   <Radio label="1" >运单</Radio>
-                  <Radio label="2" disabled>货单</Radio>
-                  <Radio label="3" disabled>出站单</Radio>
+                  <Radio label="2" readonly>货单</Radio>
+                  <Radio label="3" readonly>出站单</Radio>
                 </RadioGroup>
               </FormItem>
             </Col>
@@ -205,8 +205,8 @@
           </Col>
           <Col span="6">
             <FormItem label="货区" prop="bgwID">
-              <Select size="small" v-model="glocation.bgwID" placeholder="请选择货区" @on-change="handleChangeBGW">
-                <Option v-for="item in pwhs" :value="item.value" :key="item.value">{{ item.label }}</Option>
+              <Select size="small" v-model="glocation.bgwID" placeholder="请选择货区" @on-change="handleChangeBGW" :label-in-value="true">
+                <Option v-for="item in pwhs" :value="item.value" :key="item.label">{{ item.label }}</Option>
               </Select>
             </FormItem>
           </Col>
@@ -315,7 +315,9 @@ export default {
       ],
       tsrs: [],
       glocation: {
-        bgwID: ''
+        bgwID: '',
+        warehouse: '',
+        doors: []
         // wbID: '',
         // bglID: '',
         // sites: []
@@ -370,6 +372,13 @@ export default {
     handleTicketVerify () {
       this.$emit('handleTicketVerify')
       this.verifyFormModel = true
+
+      Object.assign(this.$data.ticket, this.$options.data().ticket)
+      Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
+      Object.assign(this.$data.glocation, this.$options.data().glocation)
+      Object.assign(this.$data.pwhs, this.$options.data().pwhs)
+      Object.assign(this.$data.tsrs, this.$options.data().tsrs)
+      Object.assign(this.$data.psrs, this.$options.data().psrs)
     },
     handleSelectTicket () {
       // console.log('handleSelectTicket')
@@ -433,11 +442,13 @@ export default {
         this.$Message.error('请选择一条数据')
         return
       }
+
       this.ticket = this.ticketTmp
       this.ticketTmp = {}
       this.ticketSearchModel = false
       this.$refs[name].resetFields()
       this.$refs.tsRowTable.clearCurrentRow()
+      Object.assign(this.$data.glocation, this.$options.data().glocation)
     },
     getCurrentData (data) {
       this.ticketTmp = data
@@ -449,7 +460,8 @@ export default {
 
     },
     positionSelectOk () {
-
+      // console.log(this.glocation)
+      this.ticket.glocation = this.glocation.warehouse + this.glocation.doors.join(",")
     },
     positionSelectCancel () {
 
@@ -459,7 +471,8 @@ export default {
       this.ts.resDate_ed = dr[1]
     },
     // 选择货区
-    handleChangeBGW () {
+    handleChangeBGW (sv) {
+      // console.log(sv)
       // console.log(this.glocation)
       const UUID = this.getUserId
       const compyID = this.getCompyId
@@ -467,6 +480,9 @@ export default {
       if (!bgwID) {
         this.$Message.error('请选择货位')
         return
+      }
+      if (sv) {
+        this.glocation.warehouse = sv.label
       }
       let params = { UUID, compyID, bgwID }
       this.psrs = []
@@ -510,24 +526,6 @@ export default {
                     let pdt = { ...pd, bgwID, bglID, checked }
                     psds.push(pdt)
                   }
-                  /*
-                  dv.used.forEach(dc => {
-                    if (pdt.site === dc.site) {
-                      let checked = false
-                      if (dc.state > 0) {
-                        checked = true
-                      }
-                      pdt = { ...dc, bgwID, bglID, checked }
-                    } else if (pdt.site === 0) {
-                      if ((dv.used.length === 8)) {
-                        pdt.checked = true
-                      }
-                    } else {
-                      pdt.bglID = bglID
-                    }
-                    psds.push(pdt)
-                  })
-                */
                 })
               } else {
                 this.psds.forEach(pd => {
@@ -609,6 +607,10 @@ export default {
         // console.log(data)
         if (body.Status === 2000) {
           this.$Message.success(data.Result)
+          const idx = this.glocation.doors.findIndex((v) => v === pr.door)
+          if (idx === -1) {
+            this.glocation.doors.push(pr.door)
+          }
           this.handleChangeBGW()
         } else {
           this.$Message.error(data.ErrorDes)

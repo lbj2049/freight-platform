@@ -173,7 +173,6 @@ export default {
   methods: {
     // 下拉框变化触发
     handleSelectChange (value, key) {
-      debugger
       this.searchFormData[key] = value
     },
     // 时间范围限制

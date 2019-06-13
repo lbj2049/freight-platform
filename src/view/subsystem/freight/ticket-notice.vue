@@ -103,7 +103,11 @@ export default {
       this.toHandleSearch()
     },
     doHandleNotice () {
-      const wbIDs = this.getBatchIds()
+      const ids = this.getBatchIds()
+      if (!ids) {
+        return
+      }
+      const wbIDs = ids.join(',')
       noticCar({ wbIDs }).then(res => {
         this.resultHandler(res)
       })
