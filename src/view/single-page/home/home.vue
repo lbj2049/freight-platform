@@ -62,7 +62,7 @@ export default {
     }
   },
   created () {
-    console.log(this.$route, this.$route.name)
+    // console.log(this.$route, this.$route.name)
     let na = this.$route.name.split('/')
     /*
     if (na.length > 1) {

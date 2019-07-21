@@ -1,9 +1,10 @@
 <template>
   <div>
-    <Modal :value="editable" :mask-closable="false" :styles="{top: '16%'}" width="880" @on-visible-change="getEditableChange" class="work-form-modal">
+    <Modal :value="editable" :mask-closable="false" :styles="{top: '5%'}" width="880" @on-visible-change="getEditableChange" class="work-form-modal" title="装卸车检查">
 
       <Card :padding="0" :dis-hover="true">
         <p slot="title">装车</p>
+        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt31disabled && dt32disabled">查看单据</Button>
         <Row>
           <Col span="12">
             <Card>
@@ -156,6 +157,7 @@
       </Card>
       <Card>
         <p slot="title">卸车</p>
+        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt41disabled && dt42disabled">查看单据</Button>
         <Row>
           <Col span="12">
             <Card>
@@ -281,6 +283,8 @@
         </div>
       </div>
     </Modal>
+
+    <waybill-accept-select-view ref="viewModel"/>
   </div>
 </template>
 
@@ -289,15 +293,21 @@ import {
   bg3CheckLoad,
   ed3CheckLoad,
   bg3CheckUnLoad,
-  ed3CheckUnLoad
+  ed3CheckUnLoad,
+  getTestModel
 } from '@/api/freight.data'
+import WaybillAcceptSelectView from '../business/waybill-accept-select-view'
 export default {
   name: 'work-1-set-34-form',
+  components: {
+    WaybillAcceptSelectView
+  },
   data () {
     return {
       loading: false,
       editable: false,
       currType: '',
+      wbID: '',
       dt31: {
         axleNum: '',
         carVersion: '',
@@ -358,8 +368,9 @@ export default {
   },
   methods: {
     show (item, type) {
-      console.log(item, type)
+      // console.log(item, type)
       this.editable = true
+      this.wbID = item.wbID
       if (item.receptType === 1) {
         this.dt32 = this.dt42 = {}
         this.dt32disabled = this.dt42disabled = true
@@ -477,11 +488,24 @@ export default {
     },
     doCancel () {
       this.editable = !this.editable
+    },
+    showTicketDetail () {
+      let wbID = this.wbID
+      let params = { wbID }
+      getTestModel(params).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.$refs.viewModel.show(data)
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="less">
+  @import 'work-1-set-34-from';
 </style>

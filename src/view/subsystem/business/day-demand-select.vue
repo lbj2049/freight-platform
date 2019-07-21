@@ -98,23 +98,23 @@ export default {
   },
   methods: {
     remove (value) {
-      console.log('remove', value)
+      // console.log('remove', value)
     },
     edit (value) {
-      console.log('edit', value)
+      // console.log('edit', value)
     },
     handleSearch (search) {
-      console.log('search', search)
+      // console.log('search', search)
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     changePageNum (page) {
-      console.log('page', page)
+      // console.log('page', page)
     },
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      // console.log('pageSize', pageSize)
     }
   }
 }

@@ -222,3 +222,11 @@ export const setPBoardMove = (params) => {
     method: 'post'
   })
 }
+
+export const getTestModel = (params) => {
+  return axios.request({
+    url: '/fWayBill/getTestModel',
+    data: params,
+    method: 'post'
+  })
+}

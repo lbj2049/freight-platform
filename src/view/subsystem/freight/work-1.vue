@@ -59,11 +59,11 @@ export default {
           title: '接车对位',
           width: 90,
           render: (h, params) => {
-            console.log(params.row)
+            // console.log(params.row)
             if (params.row.checkPlace === 1) {
               return h('div', [ h('div', '√') ])
             }
-            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'click': () => { console.log(1); this.doSet1(params.row) } } }, '配置') ])
+            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'click': () => { /* console.log(1); this.doSet1(params.row) */ } } }, '配置') ])
           }
         },
         {
@@ -71,7 +71,7 @@ export default {
           title: '防护牌安设',
           width: 100,
           render: (h, params) => {
-            console.log(params.row)
+            // console.log(params.row)
             if (params.row.PBset === 1) {
               return h('div', [ h('div', '√') ])
             }
@@ -83,7 +83,7 @@ export default {
           title: '前三检',
           width: 80,
           render: (h, params) => {
-            console.log(params.row)
+            // console.log(params.row)
             if (params.row.bgCheck === 1) {
               return h('div', [ h('div', '√') ])
             }
@@ -95,7 +95,7 @@ export default {
           title: '后三检',
           width: 80,
           render: (h, params) => {
-            console.log(params.row)
+            // console.log(params.row)
             if (params.row.endCheck === 1) {
               return h('div', [ h('div', '√') ])
             }
@@ -107,7 +107,7 @@ export default {
           title: '防护牌撤除',
           width: 100,
           render: (h, params) => {
-            console.log(params.row)
+            // console.log(params.row)
             if (params.row.PBmove === 1) {
               return h('div', [ h('div', '√') ])
             }
@@ -182,7 +182,7 @@ export default {
         },
         onOk: () => {
           const UUID = this.getUserId
-          console.log(dt)
+          // console.log(dt)
           if (!dt) {
             this.$Message.error('请选择时间')
             return false
@@ -223,7 +223,7 @@ export default {
         },
         onOk: () => {
           const UUID = this.getUserId
-          console.log(dt)
+          // console.log(dt)
           if (!dt) {
             this.$Message.error('请选择时间')
             return false
@@ -245,29 +245,29 @@ export default {
       }
     },
     handleWorkTime () {
-      console.log('handleWorkTime')
+      // console.log('handleWorkTime')
     },
     handleWorkScan () {
-      console.log('handleWorkScan')
+      // console.log('handleWorkScan')
     },
     handleWorkCancel () {
-      console.log('handleWorkCancel')
+      // console.log('handleWorkCancel')
     },
     handleWorkBrand () {
-      console.log('handleWorkBrand')
+      // console.log('handleWorkBrand')
     },
     handlePrint () {
-      console.log('handlePrint')
+      // console.log('handlePrint')
     },
     selectChange (value) {
       this.multItem = value
-      console.log('selectChange', value)
+      // console.log('selectChange', value)
     },
     changePageNum (page) {
-      console.log('page', page)
+      // console.log('page', page)
     },
     changePageSize (pageSize) {
-      console.log('pageSize', pageSize)
+      // console.log('pageSize', pageSize)
     }
   }
 }

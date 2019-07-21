@@ -373,12 +373,12 @@ export default {
       this.$emit('handleTicketVerify')
       this.verifyFormModel = true
 
-      Object.assign(this.$data.ticket, this.$options.data().ticket)
-      Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
-      Object.assign(this.$data.glocation, this.$options.data().glocation)
-      Object.assign(this.$data.pwhs, this.$options.data().pwhs)
-      Object.assign(this.$data.tsrs, this.$options.data().tsrs)
-      Object.assign(this.$data.psrs, this.$options.data().psrs)
+      if (!this.$data.ticket) Object.assign(this.$data.ticket, this.$options.data().ticket)
+      if (!this.$data.ticketTmp) Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
+      if (!this.$data.glocation) Object.assign(this.$data.glocation, this.$options.data().glocation)
+      if (!this.$data.pwhs) Object.assign(this.$data.pwhs, this.$options.data().pwhs)
+      if (!this.$data.tsrs) Object.assign(this.$data.tsrs, this.$options.data().tsrs)
+      if (!this.$data.psrs) Object.assign(this.$data.psrs, this.$options.data().psrs)
     },
     handleSelectTicket () {
       // console.log('handleSelectTicket')
@@ -454,14 +454,14 @@ export default {
       this.ticketTmp = data
     },
     verifyOk () {
-
+      this.$emit('handleFormSubmit', this.search)
     },
     verifyCancel () {
-
+      // this.$emit('handleFormSubmit', this.search)
     },
     positionSelectOk () {
       // console.log(this.glocation)
-      this.ticket.glocation = this.glocation.warehouse + this.glocation.doors.join(",")
+      this.ticket.glocation = this.glocation.warehouse + this.glocation.doors.join(',')
     },
     positionSelectCancel () {
 

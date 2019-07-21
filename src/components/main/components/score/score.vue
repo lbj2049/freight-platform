@@ -77,7 +77,7 @@ export default {
       const compyID = this.getCompyId
       let params = { teaUUID, compyID, ...this.pagination1 }
       // let params = { teaUUID, userid, ...this.pagination1 }
-      console.log(params)
+      // console.log(params)
       getScoreDetail(params).then(res => {
         const body = res.data
         const data = body.Data

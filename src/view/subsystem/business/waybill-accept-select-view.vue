@@ -318,13 +318,58 @@ export default {
     return {
       carTypeMap: { 1: '整车', 2: '集装箱', 3: '零担', 4: '其他' },
       viewable: false,
-      currData: {}
+      currData: {
+      },
+      defData: {
+        'gMaxWeight': '',
+        'gpackage': '',
+        'amobile': '',
+        'needNo': '',
+        'sofficID': '',
+        'notepad': '',
+        'aagent': '',
+        'astationID': '',
+        'reservaNo': '',
+        'astation': '',
+        'loadDate': '',
+        'wbID': '',
+        'carType': '',
+        'admitCarState': '',
+        'aaddr': '',
+        'station': '',
+        'paulinNum': '',
+        'ctime': '',
+        'aoffic': '',
+        'state': '',
+        'bsIDs': '',
+        'aCarDownAddr': '',
+        'aofficID': '',
+        'smobile': '',
+        'caseNum': '',
+        'tunnage': '',
+        'saddr': '',
+        'aname': '',
+        'acceptNo': '',
+        'carNum': '',
+        'gname': '',
+        'sCarLoadAddr': '',
+        'acardID': '',
+        'sname': '',
+        'sagent': '',
+        'scardID': '',
+        'atel': '',
+        'resDate': '',
+        'carrierNote': '',
+        'stel': '',
+        'soffic': '',
+        'stationID': ''
+      }
     }
   },
   methods: {
     show (item) {
       // console.log('set1 form show')
-      this.currData = item
+      this.currData = item || this.defData
       this.viewable = true
     },
     getViewableChange (enable) {
