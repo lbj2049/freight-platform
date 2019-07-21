@@ -7,7 +7,7 @@
     <div>
       <Table :size="size" :data="data" :columns="columns" :stripe="stripe" :border="border" :show-header="showHeader" :width="width" :disabled-hover="disHover" @on-selection-change="selectChange"></Table>
     </div>
-    <Affix :offset-bottom="0">
+    <Affix :offset-bottom="0" style="overflow: hidden">
       <Col span="8">
         <div class="bottomToolGroup">
           <slot name="bottomTools"></slot>

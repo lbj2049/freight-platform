@@ -23,3 +23,10 @@ export const enterTest = (params) => {
     method: 'post'
   })
 }
+export const getScoreDetail = (params) => {
+  return axios.request({
+    url: '/score/getScoreDetail',
+    data: params,
+    method: 'post'
+  })
+}

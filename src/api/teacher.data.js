@@ -176,3 +176,27 @@ export const importStuInfo = (params) => {
     method: 'post'
   })
 }
+
+export const stuPlanList = (params) => {
+  return axios.request({
+    url: '/score/stuPlanList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const getSysGradeList = (params) => {
+  return axios.request({
+    url: '/score/getSysGradeList',
+    data: params,
+    method: 'post'
+  })
+}
+
+export const getScoreDetail = (params) => {
+  return axios.request({
+    url: '/score/getScoreDetail',
+    data: params,
+    method: 'post'
+  })
+}

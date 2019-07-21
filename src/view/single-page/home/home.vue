@@ -45,9 +45,10 @@ export default {
   },
   data () {
     return {
+      welcome_src: 'require("../../../assets/images/welcome.png")',
       pieData: [
-        {value: 335, name: '需求单'},
-        {value: 310, name: '收货单'}
+        { value: 335, name: '需求单' },
+        { value: 310, name: '收货单' }
       ],
       barData: {
         Mon: 13253,
@@ -59,6 +60,21 @@ export default {
         Sun: 1324
       }
     }
+  },
+  created () {
+    console.log(this.$route, this.$route.name)
+    let na = this.$route.name.split('/')
+    /*
+    if (na.length > 1) {
+      if (na[1] === 'business') {
+        welcome_src = ''
+      } else if (na[1] === 'ticket') {
+        welcome_src = ''
+      } else if (na[1] === 'freight') {
+        welcome_src = ''
+      }
+    }
+    */
   },
   mounted () {
     //

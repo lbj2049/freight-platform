@@ -6,7 +6,7 @@
       <p slot="title">日需求预定</p>
       <day-demand-sub-form ref="editItemForm" @handleFormSubmit="doHandleFormSubmit"/>
     </Card>
-    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize"></table-paging>
+    <table-paging :columns="columns" :data="list" @selectChange="selectChange" @changePageNum="changePageNum" @changePageSize="changePageSize" :pagination="pagination"></table-paging>
   </div>
 </template>
 <script>

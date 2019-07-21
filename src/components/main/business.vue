@@ -7,6 +7,7 @@
         <!--<error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>-->
         <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
         <go-back :backUrl="backUrl" style="margin-right: 10px;"/>
+        <score style="margin-right: 10px;"/>
       </header-bar>
     </Header>
     <Layout>
@@ -40,6 +41,7 @@ import Fullscreen from './components/fullscreen'
 import Language from './components/language'
 import GoBack from './components/go-back'
 import ErrorStore from './components/error-store'
+import Score from './components/score'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
@@ -55,6 +57,7 @@ export default {
     Fullscreen,
     GoBack,
     ErrorStore,
+    Score,
     User,
     ABackTop
   },

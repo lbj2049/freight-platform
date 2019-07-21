@@ -272,6 +272,25 @@ export default [
       }
     ]
   },
+  {
+    path: '/teacher/stu',
+    name: '学生操作',
+    systemName: 'main',
+    meta: {
+      access: ['teacher'],
+      icon: 'md-menu',
+      title: '模拟客户操作'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'process-list', name: '学生进度', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '学生进度' }, component: () => import('@/view/management/process-select.vue')
+      },
+      {
+        path: 'score-list', name: '系统评分', systemName: 'main', meta: { access: ['teacher'], icon: 'ios-navigate', title: '系统评分' }, component: () => import('@/view/management/score-list.vue')
+      }
+    ]
+  },
   /*
   {
     path: '/multilevel',

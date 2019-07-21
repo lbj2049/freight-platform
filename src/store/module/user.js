@@ -177,13 +177,14 @@ export default {
         token: 'admin',
         avator: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
       }
+      // console.log(state.userInfo, state.userId, state.userName)
       return new Promise((resolve, reject) => {
         commit('setAvator', data.avator)
         commit('setUserName', data.name)
         commit('setUserId', data.user_id)
         commit('setAccess', data.access)
         commit('setHasGetInfo', true)
-        resolve()
+        resolve(data)
       })
       /*
       return new Promise((resolve, reject) => {

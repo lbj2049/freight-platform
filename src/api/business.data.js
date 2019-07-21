@@ -31,3 +31,18 @@ export const setPass = (params) => {
     method: 'post'
   })
 }
+
+export const getStampLinkageList = (params) => {
+  return axios.request({
+    url: '/baseStamp/getStampLinkageList',
+    data: params,
+    method: 'post'
+  })
+}
+export const updStamp = (params) => {
+  return axios.request({
+    url: '/stuWayBill/updStamp',
+    data: params,
+    method: 'post'
+  })
+}

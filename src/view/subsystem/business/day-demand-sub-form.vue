@@ -264,64 +264,66 @@ export default {
     return {
       carTypes: [{ value: 1, label: '整车' }, { value: 2, label: '集装箱' }, { value: 3, label: '零担' }, { value: 4, label: '其他' }],
       demand: {
-        bwbID: '',
-        title: '',
+        bwbID: null,
+        title: null,
         receptType: 1,
-        gMaxWeight: '',
-        gpackage: '',
-        smobile: '',
-        amobile: '',
-        tunnage: '',
-        aname: '',
-        notepad: '',
-        aagent: '',
-        carNum: '',
-        gname: '',
-        glocation: '',
-        sCarLoadAddr: '',
-        acardID: '',
-        carType: '',
-        sname: '',
-        sagent: '',
-        scardID: '',
-        atel: '',
-        stel: '',
-        aCarDownAddr: '',
-        soffic: '',
-        aoffic: '',
-        aaddr: '',
-        saddr: ''
+        gMaxWeight: null,
+        gpackage: null,
+        smobile: null,
+        amobile: null,
+        tunnage: null,
+        aname: null,
+        notepad: null,
+        aagent: null,
+        carNum: null,
+        gname: null,
+        glocation: null,
+        sCarLoadAddr: null,
+        acardID: null,
+        carType: 1,
+        sname: null,
+        sagent: null,
+        scardID: null,
+        atel: null,
+        stel: null,
+        aCarDownAddr: null,
+        soffic: null,
+        aoffic: null,
+        aaddr: null,
+        saddr: null
       },
       rules: {
-        title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
-        gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        tunnage: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
-        aname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // notepad: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // aagent: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        carNum: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
-        gname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // glocation: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        sCarLoadAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        acardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        carType: [ { required: true, message: '不能为空', trigger: 'change', type: 'number' } ],
-        sname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // sagent: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        scardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        atel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        stel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        aCarDownAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ]
-        // soffic: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // aoffic: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // aaddr: [ { required: true, message: '不能为空', trigger: 'blur' } ],
-        // saddr: [ { required: true, message: '不能为空', trigger: 'blur' } ]
+        // title: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // gMaxWeight: [ { required: true, message: '请输入有效数字', trigger: 'blur' } ],
+        // gpackage: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // smobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // amobile: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // tunnage: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        tunnage: [ { message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        // aname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // carNum: [ { required: true, message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        carNum: [ { message: '请输入有效数字', trigger: 'blur', type: 'number' } ],
+        // gname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // sCarLoadAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // acardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        carType: [ { required: true, message: '不能为空', trigger: 'change', type: 'number' } ]// ,
+        // sname: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // scardID: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // atel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // stel: [ { required: true, message: '不能为空', trigger: 'blur' } ],
+        // aCarDownAddr: [ { required: true, message: '不能为空', trigger: 'blur' } ]
       },
       defaultInfo: {
 
       }
+    }
+  },
+  computed: {
+    getUserId () {
+      return this.$store.state.user.userId
+    },
+    getExperimentId () {
+      return this.$store.state.user.experimentId
     }
   },
   created () {
@@ -349,6 +351,7 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.demand.expID = this.getExperimentId
           this.$emit('handleFormSubmit', this.demand)
         }
       })
