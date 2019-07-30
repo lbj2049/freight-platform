@@ -239,7 +239,7 @@ export default {
     // 删除
     doDelete (item) {
       const UUID = this.getUserId
-      delExp({ UUIDs: UUID, expID: item.expID }).then(res => {
+      delExp({ teaUUID: UUID, expID: item.expID }).then(res => {
         this.resultHandler(res)
       })
     },

@@ -187,22 +187,22 @@ export default {
         title: '选择实验',
         render: (h) => {
           return h('Select', {
-              props: {
-                value: 1
-              },
-              on: {
-                'on-change': (val) => {
-                  expID = val
-                }
+            // props: {
+            //   value: 1
+            // },
+            on: {
+              'on-change': (val) => {
+                expID = val
               }
-            }, this.exps.map((d) => {
-              return h('Option', {
-                props: {
-                  value: d.value,
-                  label: d.label
-                }
-              })
+            }
+          }, this.exps.map((d) => {
+            return h('Option', {
+              props: {
+                value: d.value,
+                label: d.label
+              }
             })
+          })
           )
         },
         onOk: () => {

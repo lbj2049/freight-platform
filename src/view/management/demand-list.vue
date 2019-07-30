@@ -187,9 +187,9 @@ export default {
         title: '选择实验',
         render: (h) => {
           return h('Select', {
-            props: {
-              value: 1
-            },
+            // props: {
+            //   value: 1
+            // },
             on: {
               'on-change': (val) => {
                 expID = val

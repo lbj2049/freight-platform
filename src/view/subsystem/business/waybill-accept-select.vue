@@ -19,20 +19,26 @@
         <p slot="title">需求号：{{this.item.needNo}}</p>
         <div style="overflow: hidden; text-align: center">
           <!--<Button shape="circle" type="success" icon="ios-radio-button-off" size="small"/>-->
-          <div v-for="(m, index) in states" :label="m.value" :key="m.value" style="float: left">
-            <div v-if="item.state > m.value">
-              <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
-              <Icon type="md-remove" size="32" color="#19be6b" v-if="index < states.length - 1"/>
+
+          <div v-if="item.state === 41">
+              <p>未通过受理，无运单状态</p>
+          </div>
+          <div v-else-if="item.state !== 41">
+            <div v-for="(m, index) in states" :label="m.value" :key="m.value" style="float: left">
+              <div v-if="item.state > m.value">
+                <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
+                <Icon type="md-remove" size="32" color="#19be6b" v-if="index < states.length - 1"/>
+              </div>
+              <div v-if="item.state === m.value">
+                <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
+                <Icon type="md-remove" size="32" color="#c5c8ce" v-if="index < states.length - 1"/>
+              </div>
+              <div v-if="item.state < m.value">
+                <Icon type="ios-radio-button-on" size="32" color="#c5c8ce"/>
+                <Icon type="md-remove" size="32" color="#c5c8ce" v-if="index < states.length - 1"/>
+              </div>
+              <span>{{ m.label }}</span>
             </div>
-            <div v-if="item.state == m.value">
-              <Icon type="ios-radio-button-on" size="32" color="#19be6b"/>
-              <Icon type="md-remove" size="32" color="#c5c8ce" v-if="index < states.length - 1"/>
-            </div>
-            <div v-if="item.state < m.value">
-              <Icon type="ios-radio-button-on" size="32" color="#c5c8ce"/>
-              <Icon type="md-remove" size="32" color="#c5c8ce" v-if="index < states.length - 1"/>
-            </div>
-            <span>{{ m.label }}</span>
           </div>
         </div>
       </Card>

@@ -41,9 +41,9 @@
               <Tag color="blue">记载事项</Tag>
             </Col>
             <Col span="20">
-              <Form :model="acceptFormItem" :label-width="120" class="qib-form">
-                <FormItem label="筛选">
-                  <Select v-model="acceptFormItem.select" @on-change="handleChangeBs">
+              <Form ref="acceptForm" :model="acceptFormItem" :label-width="120" class="qib-form">
+                <FormItem label="筛选" prop="bsptID">
+                  <Select v-model="acceptFormItem.bsptID" @on-change="handleChangeBs">
                     <Option v-for="(bspt) in bspts" :key="bspt.bsptID" :value="bspt.bsptID">{{bspt.typeName}}</Option>
                   </Select>
                 </FormItem>
@@ -55,15 +55,15 @@
                       @click.prevent.native="handleCheckAll">全选</Checkbox>
                   </div>
                 </FormItem>
-                <FormItem label="">
+                <FormItem label="" prop="bsIds">
                   <CheckboxGroup v-model="acceptFormItem.bsIds" @on-change="checkAllGroupChange">
                     <Checkbox v-for="(item) in bsTypes" :label="item.value" :key="item.value" :true-value="item.checked">{{item.label}}</Checkbox>
                   </CheckboxGroup>
                 </FormItem>
-                <FormItem label="承运人记载事项">
+                <FormItem label="承运人记载事项" prop="carrierNote">
                   <Input v-model="acceptFormItem.carrierNote" type="textarea"></Input>
                 </FormItem>
-                <FormItem label="承运人装车/施封">
+                <FormItem label="承运人装车/施封" prop="opslt">
                   <Select v-model="acceptFormItem.opslt">
                     <Option value="1">承运人装车/施封</Option>
                   </Select>
@@ -144,6 +144,7 @@ export default {
         carrierNote: null,
         bsIds: [],
         bsIDs: null,
+        bsptID: null,
         opslt: 1
       },
       indeterminate: true,
@@ -222,6 +223,17 @@ export default {
         return []
       }
     },
+    getCarrierNotes () {
+      if (this.multItem && this.multItem.length > 0) {
+        const items = []
+        this.multItem.forEach((k, v) => {
+          items.push(k.carrierNote)
+        })
+        return items.join(',')
+      } else {
+        return ''
+      }
+    },
     doBatchPass () {
       if (!this.getBatchIds()) {
         return
@@ -229,11 +241,20 @@ export default {
       // this.doSetState(1)
       this.acceptModel = true
       const itemIds = this.getBatchBsIds()
+
+      this.acceptFormItem.carrierNote = this.getCarrierNotes()
       getStampLinkageList({ bsIDs: itemIds.join(',') }).then(res => {
         const body = res.data
         const data = body.Data
         if (body.Status === 2000) {
           this.bspts = data || []
+          let c = this.bspts.find((item) => {
+            return item.ismark === 1
+          })
+          if (c) {
+            this.acceptFormItem.bsptID = c.bsptID
+            this.handleChangeBs(c.bsptID)
+          }
           // console.log(this.bspts)
           this.handleCheckAll()
         } else {
@@ -258,14 +279,21 @@ export default {
       }
       updStamp({ UUID: UUID, wbIDs: itemIds.join(','), bsIDs: this.acceptFormItem.bsIds.join(','), carrierNote: this.acceptFormItem.carrierNote }).then(res => {
         // this.resultHandler(res)
-        this.acceptStepCurrent += 1
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.acceptStepCurrent += 1
+          this.$refs['acceptForm'].resetFields()
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
       })
     },
     doPassStep1 () {
       this.doSetState(1)
-
-      if (this.current === 1) {
-        this.current = 0
+      debugger
+      if (this.acceptStepCurrent === 1) {
+        this.acceptStepCurrent = 0
       }
       this.acceptModel = false
     },

@@ -14,8 +14,8 @@
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="发站" prop="sStation">
-                <Input size="small" v-model="demand.sStation" placeholder="请输入发站" disabled/>
+              <FormItem label="发站" prop="station">
+                <Input size="small" v-model="demand.station" placeholder="请输入发站" disabled/>
               </FormItem>
             </Col>
             <Col span="8">
@@ -130,8 +130,8 @@
               </FormItem>
             </Col>
             <Col span="8">
-              <FormItem label="发站" prop="aStation">
-                <Input size="small" v-model="demand.aStation" placeholder="请输入到站"/>
+              <FormItem label="收站" prop="astation">
+                <Input size="small" v-model="demand.astation" placeholder="请输入到站"/>
               </FormItem>
             </Col>
             <Col span="8">
