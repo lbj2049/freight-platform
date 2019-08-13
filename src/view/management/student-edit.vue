@@ -29,8 +29,8 @@
 
         <Row>
           <Col span="24">
-            <FormItem label="电话" prop="userTel">
-              <Input v-model="userInfo.userTel"  placeholder="请输入电话" ></Input>
+            <FormItem label="学号" prop="userNo">
+              <Input v-model="userInfo.userNo"  placeholder="请输入学号" ></Input>
             </FormItem>
           </Col>
         </Row>

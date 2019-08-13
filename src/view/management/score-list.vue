@@ -75,8 +75,8 @@ export default {
             )
             return btn('div', btns)
           }
-        },
-        { key: 'perScroe', title: '百分制核算'
+        // },
+        // { key: 'perScroe', title: '百分制核算'
         }
       ],
       pagination: {

@@ -374,11 +374,11 @@ export default {
       this.verifyFormModel = true
 
       if (!this.$data.ticket) Object.assign(this.$data.ticket, this.$options.data().ticket)
-      if (!this.$data.ticketTmp) Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
-      if (!this.$data.glocation) Object.assign(this.$data.glocation, this.$options.data().glocation)
-      if (!this.$data.pwhs) Object.assign(this.$data.pwhs, this.$options.data().pwhs)
-      if (!this.$data.tsrs) Object.assign(this.$data.tsrs, this.$options.data().tsrs)
-      if (!this.$data.psrs) Object.assign(this.$data.psrs, this.$options.data().psrs)
+      // if (!this.$data.ticketTmp) Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
+      // if (!this.$data.glocation) Object.assign(this.$data.glocation, this.$options.data().glocation)
+      // if (!this.$data.pwhs) Object.assign(this.$data.pwhs, this.$options.data().pwhs)
+      // if (!this.$data.tsrs) Object.assign(this.$data.tsrs, this.$options.data().tsrs)
+      // if (!this.$data.psrs) Object.assign(this.$data.psrs, this.$options.data().psrs)
     },
     handleSelectTicket () {
       // console.log('handleSelectTicket')
@@ -389,7 +389,6 @@ export default {
         this.$Message.error('请选择票据')
         return
       }
-
       this.pwhs = []
       const UUID = this.getUserId
       const compyID = this.getCompyId
@@ -448,6 +447,9 @@ export default {
       this.ticketSearchModel = false
       this.$refs[name].resetFields()
       this.$refs.tsRowTable.clearCurrentRow()
+      this.psrs = []
+      this.glocation = {}
+      // Object.assign(this.$data.ticketTmp, this.$options.data().ticketTmp)
       Object.assign(this.$data.glocation, this.$options.data().glocation)
     },
     getCurrentData (data) {
@@ -472,13 +474,16 @@ export default {
     },
     // 选择货区
     handleChangeBGW (sv) {
+      if (!this.positionSelectModel) {
+        return
+      }
       // console.log(sv)
       // console.log(this.glocation)
       const UUID = this.getUserId
       const compyID = this.getCompyId
       const bgwID = this.glocation.bgwID
       if (!bgwID) {
-        this.$Message.error('请选择货位')
+        this.$Message.error('请选择货区')
         return
       }
       if (sv) {

@@ -4,7 +4,7 @@
 
       <Card :padding="0" :dis-hover="true">
         <p slot="title">装车</p>
-        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt31disabled && dt32disabled">查看单据</Button>
+        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt31disabled && dt41disabled">查看单据</Button>
         <Row>
           <Col span="12">
             <Card>
@@ -14,19 +14,19 @@
                   <Checkbox disabled>良好</Checkbox>
                 </FormItem>
                 <FormItem label="轴数" prop="axleNum">
-                  <Input size="small" type="text" v-model="dt31.axleNum" readonly :disabled="dt31disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.axleNum" readonly :disabled="dt31disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="车型" prop="carVersion">
-                  <Input size="small" type="text" v-model="dt31.carVersion" readonly :disabled="dt31disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.carVersion" readonly :disabled="dt31disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="车号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt31.carCard" readonly :disabled="dt31disabled"></Input>
+                  <Input size="small" type="text" v-model="dt31.carCard" readonly :disabled="dt31disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="标重" prop="tunnage">
                   <Input size="small" type="text" v-model="dt31.tunnage" :disabled="dt31disabled"></Input>
                 </FormItem>
-                <FormItem label="货位" prop="bglID">
-                  <Input size="small" type="text" v-model="dt31.bglID" readonly :disabled="dt31disabled"></Input>
+                <FormItem label="货位" prop="door">
+                  <Input size="small" type="text" v-model="dt31.door" readonly :disabled="dt31disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem>
                   <Checkbox disabled>综合货拉</Checkbox>
@@ -55,16 +55,16 @@
                 </Row>
                 <Row>
                   <Col span="6">
-                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" disabled></Input></FormItem>
+                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.volume" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -114,12 +114,13 @@
                     <FormItem :label-width="20"><Checkbox disabled>封</Checkbox><Checkbox disabled>蓬</Checkbox></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.volume" disabled></Input></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -157,26 +158,26 @@
       </Card>
       <Card>
         <p slot="title">卸车</p>
-        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt41disabled && dt42disabled">查看单据</Button>
+        <Button slot="extra" type="text" size="small" @click="showTicketDetail" :disabled="dt32disabled && dt42disabled">查看单据</Button>
         <Row>
           <Col span="12">
             <Card>
               <p slot="title">卸车前三检</p>
               <Form ref="dt3Form" :model="dt32" :rules="dt32rules" :label-width="80" :show-message="false" class="qib-form">
                 <FormItem label="车型" prop="carVersion">
-                  <Input size="small" type="text" v-model="dt32.carVersion" readonly :disabled="dt32disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carVersion" readonly :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="车号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="施封篷布号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="发站" prop="station">
-                  <Input size="small" type="text" v-model="dt32.station" readonly :disabled="dt32disabled"></Input>
+                  <Input size="small" type="text" v-model="dt32.station" readonly :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
-                <FormItem label="货位" prop="bglID">
-                  <Input size="small" type="text" v-model="dt32.bglID" :disabled="dt32disabled"></Input>
+                <FormItem label="货位" prop="door">
+                  <Input size="small" type="text" v-model="dt32.door" :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem>
                   <Checkbox disabled>综合货拉</Checkbox>
@@ -205,16 +206,16 @@
                 </Row>
                 <Row>
                   <Col span="6">
-                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt42.gname" disabled></Input></FormItem>
+                    <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt42.gname" :disabled="dt42disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt42.caseNum" disabled></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt42.caseNum" :disabled="dt42disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" :disabled="dt42disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.volume" :disabled="dt42disabled"></Input></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -250,13 +251,13 @@
                     <FormItem label="合计"></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.volume" disabled></Input></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -315,7 +316,8 @@ export default {
         wbID: '',
         bglID: '',
         sites: '',
-        tunnage: ''
+        tunnage: '',
+        door: ''
       },
       dt31rules: {
 
@@ -326,7 +328,8 @@ export default {
         carrierNote: '',
         gname: '',
         caseNum: '',
-        tunnage: ''
+        tunnage: '',
+        volume: ''
       },
       dt41rules: {
       },
@@ -338,7 +341,8 @@ export default {
         bglID: '',
         sites: null,
         station: '',
-        astation: ''
+        astation: '',
+        door: ''
       },
       dt32rules: {
 
@@ -348,7 +352,8 @@ export default {
         wbID: '',
         gname: '',
         caseNum: '',
-        tunnage: ''
+        tunnage: '',
+        volume: ''
       },
       dt42rules: {
 
@@ -384,7 +389,8 @@ export default {
             wbID: item.wbID,
             bglID: item.bglID,
             sites: item.sites,
-            tunnage: item.tunnage
+            tunnage: item.tunnage,
+            door: item.door
           }
         } else {
           this.dt31disabled = true
@@ -397,7 +403,8 @@ export default {
             carrierNote: '',
             gname: item.gname,
             caseNum: item.caseNum,
-            tunnage: item.tunnage
+            tunnage: item.tunnage,
+            volume: item.volume
           }
         } else {
           this.dt41disabled = true
@@ -415,7 +422,8 @@ export default {
             bglID: item.bglID,
             sites: item.sites,
             station: item.station,
-            astation: item.astation
+            astation: item.astation,
+            door: item.door
           }
         } else {
           this.dt32disabled = true
@@ -428,7 +436,8 @@ export default {
             carrierNote: '',
             gname: item.gname,
             caseNum: item.caseNum,
-            tunnage: item.tunnage
+            tunnage: item.tunnage,
+            volume: item.volume
           }
         } else {
           this.dt42disabled = true

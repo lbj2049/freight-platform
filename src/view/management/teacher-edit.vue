@@ -81,7 +81,7 @@ export default {
         userName: '',
         state: 1,
         userNo: '',
-        userTel: 1,
+        userTel: '',
         userSex: '1',
         userType: 2
       },

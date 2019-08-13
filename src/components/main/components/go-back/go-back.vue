@@ -17,6 +17,9 @@ export default {
   },
   methods: {
     goBack (backUrl) {
+      if (backUrl.search('front/home') > -1) {
+        this.$store.state.user.compyId = ''
+      }
       this.$router.push({
         name: backUrl
       })

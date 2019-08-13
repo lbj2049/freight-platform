@@ -57,12 +57,12 @@
               </Col>
               <Col span="8">
                 <FormItem label="发站" prop="soffic">
-                  <Input v-model="demand.soffic" placeholder="请输入发站" disabled/>
+                  <Input v-model="demand.soffic" placeholder="随机分发" disabled/>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="发局" prop="soffic">
-                  <Input v-model="demand.soffic" placeholder="请输入发局" disabled/>
+                  <Input v-model="demand.soffic" placeholder="随机分发" disabled/>
                 </FormItem>
               </Col>
             </Row>
@@ -175,12 +175,12 @@
               </Col>
               <Col span="8">
                 <FormItem label="到站" prop="aoffic">
-                  <Input v-model="demand.aoffic" placeholder="请输入到站" disabled/>
+                  <Input v-model="demand.aoffic" placeholder="随机分发" disabled/>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="到局" prop="aoffic">
-                  <Input v-model="demand.aoffic" placeholder="请输入到局" disabled/>
+                  <Input v-model="demand.aoffic" placeholder="随机分发" disabled/>
                 </FormItem>
               </Col>
             </Row>

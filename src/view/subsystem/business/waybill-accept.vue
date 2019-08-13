@@ -291,7 +291,7 @@ export default {
     },
     doPassStep1 () {
       this.doSetState(1)
-      debugger
+      // debugger
       if (this.acceptStepCurrent === 1) {
         this.acceptStepCurrent = 0
       }

@@ -63,7 +63,7 @@ export default {
             if (params.row.checkPlace === 1) {
               return h('div', [ h('div', '√') ])
             }
-            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'click': () => { /* console.log(1); this.doSet1(params.row) */ } } }, '配置') ])
+            return h('div', [ h('Button', { props: { size: 'small' }, on: { 'click': () => { /* console.log(1); */ this.doSet1(params.row) } } }, '配置') ])
           }
         },
         {

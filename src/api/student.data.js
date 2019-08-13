@@ -30,3 +30,11 @@ export const getScoreDetail = (params) => {
     method: 'post'
   })
 }
+
+export const sumFSByCompyID = (params) => {
+  return axios.request({
+    url: '/score/sumFSByCompyID',
+    data: params,
+    method: 'post'
+  })
+}

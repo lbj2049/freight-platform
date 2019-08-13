@@ -1,11 +1,15 @@
 <template>
   <div class="score-btn-con-btn-con">
-    <Tooltip :content="'系统评分明细'" placement="bottom">
+    <Tooltip :content="'系统评分明细'" placement="bottom" v-if="getCompyId">
       <!--<Icon @click.native="toHandleDetail()" :type="'md-return-left'" :size="23"></Icon>-->
       <Button type="dashed" @click="showDetail()">查看成绩</Button>
     </Tooltip>
     <div>
       <Modal v-model="showDetailModel" title="系统评分" @on-ok="showDetailModel = false" width="780" :transfer="true">
+        <p slot="header">
+          <span>系统评分</span>
+          <span style="float: right; margin-right: 100px;">总分:{{grossScore}}</span>
+        </p>
         <table-paging :columns="columns1" :data="list1" @changePageNum="changePageNum1" @changePageSize="changePageSize1" :pagination="pagination1">
 
         </table-paging>
@@ -16,8 +20,9 @@
 
 <script>
 import {
-  getScoreDetail
-} from '@/api/teacher.data'
+  getScoreDetail,
+  sumFSByCompyID
+} from '@/api/student.data'
 import TablePaging from '@/components/table-paging/table-paging'
 export default {
   components: {
@@ -39,7 +44,8 @@ export default {
         total: 0,
         pageSize: 10,
         pageNum: 1
-      }
+      },
+      grossScore: '11'
     }
   },
   created () {
@@ -75,9 +81,21 @@ export default {
     toHandleDetail () {
       const teaUUID = this.getUserId
       const compyID = this.getCompyId
+      if (!compyID) {
+        return
+      }
       let params = { teaUUID, compyID, ...this.pagination1 }
       // let params = { teaUUID, userid, ...this.pagination1 }
       // console.log(params)
+      sumFSByCompyID({ compyID }).then(res => {
+        const body = res.data
+        const data = body.Data
+        if (body.Status === 2000) {
+          this.grossScore = data.grossScore
+        } else {
+          this.$Message.error(data.ErrorDes)
+        }
+      })
       getScoreDetail(params).then(res => {
         const body = res.data
         const data = body.Data

@@ -97,7 +97,7 @@ export default {
           key: 'userName', combine: true, title: '姓名'
         },
         {
-          key: 'userTel', title: '手机'
+          key: 'userNo', title: '学号'
         },
         {
           key: 'userSex',
