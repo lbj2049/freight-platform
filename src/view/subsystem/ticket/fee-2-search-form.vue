@@ -109,7 +109,7 @@
         </Form>
       </Col>
       <Col span="11" offset="1">
-        <Table size="small" stripe :columns="columns" :data="list" highlight-row @on-current-change="getCurrentData"></Table>
+        <Table size="small" stripe :columns="columns" :data="list" highlight-row @on-current-change="getCurrentData" :height="172"></Table>
       </Col>
     </Row>
     <!--提交时加载动画-->

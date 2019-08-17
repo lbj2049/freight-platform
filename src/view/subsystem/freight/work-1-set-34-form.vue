@@ -100,20 +100,6 @@
                     <FormItem label="合计"></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
-                  </Col>
-                  <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
-                  </Col>
-                  <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" disabled></Input></FormItem>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span="6">
-                    <FormItem :label-width="20"><Checkbox disabled>封</Checkbox><Checkbox disabled>蓬</Checkbox></FormItem>
-                  </Col>
-                  <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
@@ -121,6 +107,20 @@
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.volume" disabled></Input></FormItem>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span="6">
+                    <FormItem :label-width="20"><Checkbox disabled>封</Checkbox><Checkbox disabled>蓬</Checkbox></FormItem>
+                  </Col>
+                  <Col span="6">
+                    <FormItem :label-width="0"><Select size="small" type="text" disabled><Option value="全部" key="全部">全部</Option></Select></FormItem>
+                  </Col>
+                  <Col span="6">
+                    <FormItem :label-width="0"><Select size="small" type="text" disabled><Option value="全部" key="全部">全部</Option></Select></FormItem>
+                  </Col>
+                  <Col span="6">
+                    <!--<FormItem :label-width="0"><Select size="small" type="text" disabled></Select></FormItem>-->
                   </Col>
                 </Row>
                 <Row>

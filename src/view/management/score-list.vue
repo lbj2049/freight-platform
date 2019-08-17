@@ -90,7 +90,7 @@ export default {
         { key: 'waybillNo', title: '运单号' },
         { key: 'explains', title: '得分项说明' },
         { key: 'score', title: '得分' },
-        { key: 'ctime', title: '操作时间' }
+        { key: 'cTime', title: '操作时间' }
       ],
       pagination1: {
         total: 0,
