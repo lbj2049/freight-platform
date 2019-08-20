@@ -23,13 +23,13 @@ export const upPwd = (params) => {
   })
 }
 
-export const getUserInfo = (token) => {
+export const getInfoByUUID = (UUID) => {
   return axios.request({
-    url: 'get_info',
+    url: '/userInfo/getInfoByUUID',
     params: {
-      token
+      UUID
     },
-    method: 'get'
+    method: 'post'
   })
 }
 

@@ -41,6 +41,7 @@ export default {
       this.handleLogin({ loginName, loginPwd, role, type }).then(body => {
         if (body.Status === 2000) {
           // console.log(loginName, loginPwd, role, type, body)
+          /*
           if (role === 1) {
             this.$router.push({
               name: this.$config.guideName
@@ -50,6 +51,18 @@ export default {
               name: this.$config.homeName
             })
           }
+          */
+          this.getUserInfo().then(res => {
+            if (role === 1) {
+              this.$router.push({
+                name: this.$config.guideName
+              })
+            } else {
+              this.$router.push({
+                name: this.$config.homeName
+              })
+            }
+          })
         } else {
           this.$Message.error(body.Data.ErrorDes)
         }

@@ -390,8 +390,9 @@ export default {
     },
     handleSubmit (userInfo) {
       let classID = this.searchModel.classID.value
-      let u = { ...userInfo, classID }
-      debugger
+
+      const userType = 1
+      let u = { ...userInfo, classID, userType }
       // userInfo.classID = this.searchModel.classID.value
       editUserInfo(u).then(res => {
         this.resultHandler(res)

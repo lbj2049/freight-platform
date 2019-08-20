@@ -1,7 +1,7 @@
 import {
   login,
   logout,
-  getUserInfo,
+  getInfoByUUID,
   getMessage,
   getContentByMsgId,
   hasRead,
@@ -12,13 +12,13 @@ import {
 import {
   enterTest
 } from '@/api/student.data'
-import { setToken, getToken } from '@/libs/util'
+import { setToken, getToken, setUserId, getUserId } from '@/libs/util'
 
 export default {
   state: {
     userInfo: {},
     userName: '',
-    userId: '',
+    userId: getUserId(),
     avatorImgPath: '',
     token: getToken(),
     access: '',
@@ -41,6 +41,7 @@ export default {
     },
     setUserId (state, id) {
       state.userId = id
+      setUserId(id)
     },
     setUserName (state, name) {
       state.userName = name
@@ -112,16 +113,16 @@ export default {
           // commit('setToken', data.token)
           if (body.Status === 2000) {
             let token = role === 1 ? 'student' : role === 2 ? 'teacher' : 'admin'
-            let access = [token]
+            // let access = [token]
 
             const data = body.Data
             commit('setToken', token)
-            commit('setUserInfo', data)
-            commit('setUserName', data.userName)
+            // commit('setUserInfo', data)
+            // commit('setUserName', data.userName)
             commit('setUserId', data.UUID)
-            commit('setAccess', access)
-            commit('setHasGetInfo', true)
-            commit('setAvator', data.head_img)
+            // commit('setAccess', access)
+            // commit('setHasGetInfo', true)
+            // commit('setAvator', data.head_img)
             // console.log(state)
           }
           resolve(body)
@@ -170,6 +171,7 @@ export default {
     },
     // 获取用户相关信息
     getUserInfo ({ state, commit }) {
+      /*
       const data = {
         name: 'admin',
         user_id: '3',
@@ -177,7 +179,9 @@ export default {
         token: 'admin',
         avator: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
       }
+      */
       // console.log(state.userInfo, state.userId, state.userName)
+      /*
       return new Promise((resolve, reject) => {
         commit('setAvator', data.avator)
         commit('setUserName', data.name)
@@ -186,16 +190,24 @@ export default {
         commit('setHasGetInfo', true)
         resolve(data)
       })
+      */
       /*
       return new Promise((resolve, reject) => {
         try {
-          getUserInfo(state.token).then(res => {
+          getInfoByUUID(state.userId).then(res => {
             const data = res.data
             commit('setAvator', data.avator)
             commit('setUserName', data.name)
             commit('setUserId', data.user_id)
             commit('setAccess', data.access)
             commit('setHasGetInfo', true)
+
+            commit('setUserInfo', data)
+            commit('setUserName', data.userName)
+            commit('setUserId', data.UUID)
+            commit('setAccess', access)
+            commit('setHasGetInfo', true)
+            commit('setAvator', data.head_img)
             resolve(data)
           }).catch(err => {
             reject(err)
@@ -205,6 +217,29 @@ export default {
         }
       })
       */
+      return new Promise((resolve, reject) => {
+        try {
+          getInfoByUUID(state.userId).then(res => {
+            let data = res.data.Data
+            const token = data.userType === 1 ? 'student' : data.userType === 2 ? 'teacher' : 'admin'
+            const access = [token]
+
+            commit('setUserInfo', data)
+            commit('setUserName', data.userName)
+            commit('setUserId', data.UUID)
+            commit('setAccess', access)
+            commit('setHasGetInfo', true)
+            commit('setAvator', data.head_img)
+
+            data.access = access
+            resolve(data)
+          }).catch(err => {
+            reject(err)
+          })
+        } catch (error) {
+          reject(error)
+        }
+      })
     },
     // 此方法用来获取未读消息条数，接口只返回数值，不返回消息列表
     getUnreadMessageCount ({ state, commit }) {
