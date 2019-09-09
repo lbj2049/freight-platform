@@ -106,9 +106,9 @@ export default {
         { type: 'index', width: 38, align: 'center', fixed: 'left' },
         { key: 'needNo', title: '需求号', width: 160, fixed: 'left' },
         { key: 'carType', title: '车种', width: 90, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) }, fixed: 'left' },
-        { key: 'admitCarState', title: '车种', width: 80, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) }, fixed: 'left' },
-        { key: 'resDate', title: '承认车', width: 80 },
-        { key: 'reservaNo', title: '计划运输号' },
+        // { key: 'admitCarState', title: '车种', width: 80, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) }, fixed: 'left' },
+        { key: 'resDate', title: '承认车', width: 80, fixed: 'left' },
+        { key: 'transNo', title: '计划运输号', width: 120 },
         // { key: 'acceptNo', title: '受理号', width: 90, fixed: 'left' },
         { key: 'astation', title: '到站', width: 90 },
         { key: 'aoffic', title: '到局', width: 90 },
@@ -187,7 +187,7 @@ export default {
     // 搜索
     toHandleSearch () {
       this.loadData2()
-      this.loadData3()
+      // this.loadData3()
       this.loadData4()
       this.loadData5()
       this.$refs.searchForm.toHandleSearch()
@@ -228,7 +228,9 @@ export default {
         }
       })
     },
-    loadData3 (search) {
+    loadData3 (data) {
+      this.list3 = [data]
+      /*
       const UUID = this.getUserId
       const compyID = this.getCompyId
       let params = { UUID, compyID, ...search, ...this.pagination }
@@ -241,6 +243,7 @@ export default {
           this.$Message.error(data.ErrorDes)
         }
       })
+      */
     },
     loadData4 (search) {
       const UUID = this.getUserId
@@ -273,6 +276,7 @@ export default {
     getCurrentData1 (data) {
       if (data) {
         this.pi.wbID = data.wbID
+        this.loadData3(data)
       }
     },
     getCurrentData2 (data) {

@@ -12,7 +12,7 @@ import {
 import {
   enterTest
 } from '@/api/student.data'
-import { setToken, getToken, setUserId, getUserId } from '@/libs/util'
+import { setToken, getToken, setUserId, getUserId, getExp, setExp } from '@/libs/util'
 
 export default {
   state: {
@@ -232,6 +232,15 @@ export default {
             commit('setAvator', data.head_img)
 
             data.access = access
+
+            const exp = getExp()
+            console.log(exp)
+            if (exp) {
+              commit('setExperimentId', exp.expID)
+              commit('setCompyId', exp.compyID)
+              commit('setCompyName', exp.compyName)
+            }
+
             resolve(data)
           }).catch(err => {
             reject(err)
@@ -335,6 +344,7 @@ export default {
           const body = res.data
           const data = body.Data
           if (body.Status === 2000) {
+            setExp(data)
             commit('setExperimentId', data.expID)
             commit('setCompyId', data.compyID)
             commit('setCompyName', data.compyName)

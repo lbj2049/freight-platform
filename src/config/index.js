@@ -20,7 +20,7 @@ export default {
     // dev: 'http://121.42.10.114:9090/yzsoft/',
     // pro: 'http://121.42.10.114:9090/yzsoft/'
     dev: '',
-    pro: ''
+    pro: '/yzsoft'
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home

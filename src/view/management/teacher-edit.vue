@@ -117,7 +117,8 @@ export default {
       this.$emit('watchEditableChange', e)
     },
     editFormData (userInfo) {
-      this.userInfo = { ...userInfo }
+      const userType = 2;
+      this.userInfo = { ...userInfo, userType }
       this.isAdd = true
       if (this.userInfo.UUID) {
         this.isAdd = false

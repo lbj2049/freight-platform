@@ -286,7 +286,7 @@
           </tr>
           <tr height='19' style='mso-height-source:userset;height:14.25pt' id='r26'>
             <td colspan='7' rowspan='3' height='55' class='x37' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;height:41.25pt;'>托运人记事：{{currData.notepad}}</td>
-            <td colspan='7' rowspan='3' height='55' class='x37' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;height:41.25pt;'>承运人记事：</td>
+            <td colspan='7' rowspan='3' height='55' class='x37' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;height:41.25pt;'>承运人记事：{{currData.carrierNote}}</td>
           </tr>
           <tr height='19' style='mso-height-source:userset;height:14.25pt' id='r27'>
           </tr>

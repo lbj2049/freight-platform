@@ -86,11 +86,11 @@ export default {
       },
       list1: [],
       columns1: [
-        { type: 'index', width: 60, align: 'center' },
-        { key: 'waybillNo', title: '运单号' },
+        { type: 'index', width: 40, align: 'center' },
+        { key: 'waybillNo', width: 140, title: '运单号' },
         { key: 'explains', title: '得分项说明' },
-        { key: 'score', title: '得分' },
-        { key: 'cTime', title: '操作时间' }
+        { key: 'score', width: 60, title: '得分' },
+        { key: 'cTime', width: 150, title: '操作时间' }
       ],
       pagination1: {
         total: 0,

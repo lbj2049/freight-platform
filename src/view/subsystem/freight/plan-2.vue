@@ -130,30 +130,42 @@ export default {
       list1: [],
       columns1: [
         { type: 'index', width: 38, align: 'center', fixed: 'left' },
-        { key: 'needNo', title: '需求号', width: 160, fixed: 'left' },
+        { key: '', title: '顺位', width: 60, fixed: 'left' },
+        // { key: 'needNo', title: '需求号', width: 160 },
         { key: 'carType', title: '车种', width: 90, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) }, fixed: 'left' },
-        { key: 'admitCarState', title: '车种', width: 80, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) }, fixed: 'left' },
-        { key: 'resDate', title: '承认车', width: 80 },
-        { key: 'reservaNo', title: '计划运输号' },
+        { key: 'carTypeNum', title: '车号', width: 120, fixed: 'left' },
+        // { key: 'admitCarState', title: '车种', width: 80, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) }, fixed: 'left' },
+        // { key: 'resDate', title: '承认车', width: 80 },
+        // { key: 'reservaNo', title: '计划运输号' },
         // { key: 'acceptNo', title: '受理号', width: 90, fixed: 'left' },
+        { key: 'station', title: '发站', width: 90 },
         { key: 'astation', title: '到站', width: 90 },
-        { key: 'aoffic', title: '到局', width: 90 },
+        // { key: 'aoffic', title: '到局', width: 90 },
         { key: 'gname1', title: '品名1', width: 120 },
         { key: 'tunnage1', title: '货重1（kg）', width: 120 },
         { key: 'caseNum1', title: '件数1', width: 90 },
+        { key: '', title: '专用线股道', width: 120 },
+        { key: '', title: '现车股道', width: 120 },
+        { key: '', title: '票据ID', width: 120 },
+        { key: '', title: '运单打印', width: 120 },
+        { key: '', title: '票据号', width: 120 },
+        { key: '', title: '票据查询', width: 120 },
+        { key: 'sname', title: '发货人', width: 90 },
+        { key: 'paulinNum', title: '篷布数', width: 90 },
+        { key: '', title: '物品清单', width: 90, render: (h, params) => { return h('div', [ h('Button', { props: { size: 'small', disabled: true } }, '查看清单') ]) } },
         { key: 'gname2', title: '品名2', width: 120 },
         { key: 'tunnage2', title: '货重2（kg）', width: 120 },
-        { key: 'caseNum2', title: '件数2', width: 90 },
-        { key: 'gname3', title: '品名3', width: 120 },
-        { key: 'tunnage3', title: '货重3（kg）', width: 120 },
-        { key: 'caseNum3', title: '件数3', width: 90 },
-        { key: '', title: '物品清单', width: 90, render: (h, params) => { return h('div', [ h('Button', { props: { size: 'small', disabled: true } }, '查看物流') ]) } },
-        { key: 'state', title: '运单状态', width: 90, render: (h, params) => { let state = params.row.state; return h('div', this.stateMap[state]) } },
+        { key: 'caseNum2', title: '件数2', width: 90 }
+        // { key: 'gname3', title: '品名3', width: 120 },
+        // { key: 'tunnage3', title: '货重3（kg）', width: 120 },
+        // { key: 'caseNum3', title: '件数3', width: 90 }
+        // { key: '', title: '物品清单', width: 90, render: (h, params) => { return h('div', [ h('Button', { props: { size: 'small', disabled: true } }, '查看物流') ]) } },
+        // { key: 'state', title: '运单状态', width: 90, render: (h, params) => { let state = params.row.state; return h('div', this.stateMap[state]) } },
 
-        { key: 'yardName', title: '股道名称', width: 90 },
-        { key: 'sname', title: '发货人', width: 90 },
-        { key: 'aname', title: '收货人', width: 90 },
-        { key: 'tunnage', title: '成组单号', width: 90 }
+        // { key: 'yardName', title: '股道名称', width: 90 },
+        // { key: 'sname', title: '发货人', width: 90 },
+        // { key: 'aname', title: '收货人', width: 90 },
+        // { key: 'tunnage', title: '成组单号', width: 90 }
       ],
       list2: [],
       columns2: [
@@ -167,16 +179,18 @@ export default {
       list3: [],
       columns3: [
         { type: 'index', width: 38, align: 'center', fixed: 'left' },
-        { key: 'carType', title: '车种', width: 90, render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
-        { key: 'yardName', title: '股道名称', width: 90 },
+        { key: '', title: '顺位', width: 60, fixed: 'left' },
+        { key: 'carType', title: '车种', width: 90, fixed: 'left', render: (h, params) => { let carType = params.row.carType; return h('div', this.carTypeMap[carType]) } },
+        { key: 'carTypeNum', title: '车号', width: 120, fixed: 'left' },
+        { key: 'yardName', title: '股道', width: 90 },
         { key: 'gname1', title: '品名1', width: 120 },
         { key: 'gname2', title: '品名2', width: 120 },
         { key: 'gname3', title: '品名3', width: 120 },
-        { key: 'astation', title: '到站', width: 90 },
-        { key: 'workerName', title: '工作人员名称', width: 160 },
-        { key: 'groupName', title: '小组名称', width: 90 },
-        { key: 'sname', title: '托运人', width: 90 },
-        { key: 'needNo', title: '需求号', width: 90 }
+        { key: 'station', title: '发站', width: 90 },
+        { key: 'workerName', title: '预派外勤', width: 160 },
+        { key: 'groupName', title: '预派装卸', width: 90 },
+        { key: 'aname', title: '收货人', width: 90 }
+        // { key: 'needNo', title: '需求号', width: 90 }
       ],
       list4: [],
       columns4: [
@@ -214,7 +228,7 @@ export default {
     // 搜索
     toHandleSearch () {
       this.loadData2()
-      this.loadData3()
+      // this.loadData3()
       this.loadData4()
       this.loadData5()
       this.$refs.searchForm.toHandleSearch()
@@ -272,6 +286,11 @@ export default {
         }
       })
     },
+
+    loadData3 (data) {
+      this.list3 = [data]
+    },
+    /*
     loadData3 (search) {
       const UUID = this.getUserId
       const compyID = this.getCompyId
@@ -286,6 +305,7 @@ export default {
         }
       })
     },
+    */
     loadData4 (search) {
       const UUID = this.getUserId
       const compyID = this.getCompyId
@@ -322,6 +342,7 @@ export default {
     getCurrentData1 (data) {
       if (data) {
         this.pi.wbID = data.wbID
+        this.loadData3(data)
       }
     },
     getCurrentData2 (data) {

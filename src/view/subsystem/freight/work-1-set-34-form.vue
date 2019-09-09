@@ -23,7 +23,7 @@
                   <Input size="small" type="text" v-model="dt31.carCard" readonly :disabled="dt31disabled" class="qbi-input"></Input>
                 </FormItem>
                 <FormItem label="标重" prop="tunnage">
-                  <Input size="small" type="text" v-model="dt31.tunnage" :disabled="dt31disabled"></Input>
+                  <InputNumber size="small" type="text" v-model="dt31.tunnage" :step="0.01" :disabled="dt31disabled"></InputNumber>
                 </FormItem>
                 <FormItem label="货位" prop="door">
                   <Input size="small" type="text" v-model="dt31.door" readonly :disabled="dt31disabled" class="qbi-input"></Input>
@@ -58,13 +58,13 @@
                     <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" :disabled="dt41disabled"></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.caseNum" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" :disabled="dt41disabled"></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.tunnage" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.volume" :disabled="dt41disabled"></Input></FormItem>
+                    <FormItem prop="volume" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.volume" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -170,8 +170,8 @@
                 <FormItem label="车号" prop="carCard">
                   <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled" class="qbi-input"></Input>
                 </FormItem>
-                <FormItem label="施封篷布号" prop="carCard">
-                  <Input size="small" type="text" v-model="dt32.carCard" readonly :disabled="dt32disabled" class="qbi-input"></Input>
+                <FormItem label="施封篷布号" prop="paulinNum">
+                  <Input size="small" type="text" v-model="dt32.paulinNum" :disabled="dt32disabled"></Input>
                 </FormItem>
                 <FormItem label="发站" prop="station">
                   <Input size="small" type="text" v-model="dt32.station" readonly :disabled="dt32disabled" class="qbi-input"></Input>
@@ -209,13 +209,13 @@
                     <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt42.gname" :disabled="dt42disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><Input size="small" type="text" v-model="dt42.caseNum" :disabled="dt42disabled"></Input></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><InputNumber size="small" type="text" v-model="dt42.tunnage" :step="0.01" :disabled="dt42disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" :disabled="dt42disabled"></Input></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><InputNumber size="small" type="text" v-model="dt42.caseNum" :step="0.01" :disabled="dt42disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.volume" :disabled="dt42disabled"></Input></FormItem>
+                    <FormItem prop="volume" :label-width="0"><InputNumber size="small" type="text" v-model="dt42.volume" :step="0.01" :disabled="dt42disabled"></InputNumber></FormItem>
                   </Col>
                 </Row>
                 <Row>
@@ -254,7 +254,7 @@
                     <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.tunnage" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" v-model="dt42.volume" disabled></Input></FormItem>
@@ -337,6 +337,7 @@ export default {
       dt32: {
         carVersion: '',
         carCard: '',
+        paulinNum: '',
         wbID: '',
         bglID: '',
         sites: null,
@@ -418,6 +419,7 @@ export default {
           this.dt32 = {
             carVersion: item.carVersion,
             carCard: item.carCard,
+            paulinNum: item.paulinNum,
             wbID: item.wbID,
             bglID: item.bglID,
             sites: item.sites,

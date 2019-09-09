@@ -3,8 +3,9 @@
     <Row :gutter="20" style="margin-top: 10px;">
 
       <Col span="24" style="text-align: center">
-        <h2 style="margin-top: 170px;margin-bottom: 20px;font-size: 28px;color: #91ADDC;">欢迎使用铁路物流管理实训平台 !</h2>
-        <img src="../../../assets/images/welcome.png"/>
+        <h2 style="margin-top: 170px;margin-bottom: 20px;font-size: 28px;color: #91ADDC;" v-show="hasTitle">欢迎使用{{title}} !</h2>
+        <!--<img src="../../../assets/images/welcome.png"/>-->
+        <img :src="welcome_src"/>
       </Col>
       <!--
       <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import config from '@/config'
 import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
 import { ChartPie, ChartBar } from '_c/charts'
@@ -45,7 +47,9 @@ export default {
   },
   data () {
     return {
-      welcome_src: 'require("../../../assets/images/welcome.png")',
+      welcome_src: require('../../../assets/images/welcome.png'),
+      hasTitle: true,
+      title: '',
       pieData: [
         { value: 335, name: '需求单' },
         { value: 310, name: '收货单' }
@@ -65,16 +69,20 @@ export default {
     // console.log(this.$route, this.$route.name)
     let na = this.$route.name.split('/')
     /*
+    */
+    this.title = config.title
     if (na.length > 1) {
-      if (na[1] === 'business') {
-        welcome_src = ''
-      } else if (na[1] === 'ticket') {
-        welcome_src = ''
-      } else if (na[1] === 'freight') {
-        welcome_src = ''
+      if (na[1] === config.businessHomeName) {
+        this.hasTitle = false
+        this.welcome_src = require('../../../assets/images/home/business.png')
+      } else if (na[1] === config.freightHomeName) {
+        this.hasTitle = false
+        this.welcome_src = require('../../../assets/images/home/freight.png')
+      } else if (na[1] === config.ticketHomeName) {
+        this.hasTitle = false
+        this.welcome_src = require('../../../assets/images/home/ticket.png')
       }
     }
-    */
   },
   mounted () {
     //

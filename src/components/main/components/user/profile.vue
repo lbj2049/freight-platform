@@ -74,6 +74,9 @@ export default {
   computed: {
     getUserId () {
       return this.$store.state.user.userId
+    },
+    getToken () {
+      return this.$store.state.user.token
     }
   },
   mounted: function () {
@@ -81,7 +84,8 @@ export default {
   },
   methods: {
     initInfo () {
-      this.dataFrom = { ...this.$store.state.user.userInfo }
+      const userType = this.$store.state.user.token === 'teacher' ? 2 : this.$store.state.user.token === 'student' ? 3 : 1
+      this.dataFrom = { ...this.$store.state.user.userInfo, userType }
       // console.log(this.$store.state.user.userInfo)
     },
     // 弹出层的事件

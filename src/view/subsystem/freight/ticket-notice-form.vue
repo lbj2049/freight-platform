@@ -58,7 +58,8 @@ export default {
   },
   data () {
     return {
-      receptTypes: [{ value: 1, label: '装' }, { value: 2, label: '卸' }],
+      // receptTypes: [{ value: 1, label: '装' }, { value: 2, label: '卸' }],
+      receptTypes: [{ value: 1, label: '装' }],
       search: {
         receptType: 1,
         yardName: '',
