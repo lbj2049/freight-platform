@@ -106,7 +106,7 @@
             <td colspan='5' rowspan='2' height='36' class='x36' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;height:27pt;'>{{currData.aname}}</td>
             <td class='x23'>经办人</td>
             <td colspan='2' class='x59' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;'>{{currData.aagent}}</td>
-            <td class='x23'>绝封号</td>
+            <td class='x23'>施封号</td>
             <td colspan='3' class='x35' style='border-right:1px solid windowtext;border-bottom:1px solid windowtext;'></td>
           </tr>
           <tr height='19' style='mso-height-source:userset;height:14.25pt' id='r10'>

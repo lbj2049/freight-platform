@@ -8,6 +8,7 @@ export const TOKEN_KEY = 'token'
 export const USER_ID_KEY = 'userid'
 
 export const EXP_KEY = 'exp'
+export const SYSTEN_KEY = 'system'
 
 export const setToken = (token) => {
   Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
@@ -30,13 +31,30 @@ export const getUserId = () => {
 }
 
 export const setExp = (exp) => {
-  Cookies.set(EXP_KEY, exp, { expires: cookieExpires || 1 })
+  Cookies.set(EXP_KEY, JSON.stringify(exp), { expires: cookieExpires || 1 })
 }
 
 export const getExp = () => {
   const exp = Cookies.get(EXP_KEY)
-  if (exp) return exp
+  if (exp) return JSON.parse(exp)
   else return false
+}
+
+export const setSystem = (systemName) => {
+  Cookies.set(SYSTEN_KEY, systemName, { expires: cookieExpires || 1 })
+}
+
+export const getSystem = () => {
+  const systemName = Cookies.get(SYSTEN_KEY)
+  if (systemName) return systemName
+  else return false
+}
+
+export const doCleanCookie = () => {
+  Cookies.remove(TOKEN_KEY)
+  Cookies.remove(USER_ID_KEY)
+  Cookies.remove(EXP_KEY)
+  Cookies.remove(SYSTEN_KEY)
 }
 
 export const hasChild = (item) => {

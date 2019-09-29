@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import routes from './routers'
 import store from '@/store'
 import iView from 'iview'
-import { setToken, getToken, canTurnTo, setTitle } from '@/libs/util'
+import { setToken, getToken, canTurnTo, setTitle, getSystem, getExp, getHomeRoute } from '@/libs/util'
 import config from '@/config'
 const { homeName, guideName } = config
 
@@ -59,7 +59,45 @@ router.beforeEach((to, from, next) => {
     } else {
       store.dispatch('getUserInfo').then(user => {
         // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
-        turnTo(to, user.access, next)
+        if (token === 'student') {
+          const systemName = getSystem()
+          const exp = getExp()
+          // console.log(systemName, exp)
+          // debugger
+          if (to.name === 'home') {
+            if (systemName === config.businessHomeName) {
+              next({
+                name: config.businessHomeName // 跳转到homeName页
+              })
+            } else if (systemName === config.freightHomeName) {
+              next({
+                name: config.freightHomeName // 跳转到homeName页
+              })
+            } else if (systemName === config.ticketHomeName) {
+              next({
+                name: config.ticketHomeName // 跳转到homeName页
+              })
+            }
+          }
+          if (exp && Object.keys(exp).length !== 0) {
+            const UUID = store.state.user.userId
+            const param = { ...exp, UUID }
+            // console.log(param)
+            store.dispatch('handleExperiment', param).then(expInfo => {
+              console.log(expInfo)
+              next({
+                name: '/front/guide' // 跳转到homeName页
+              })
+            })
+          } else {
+            next({
+              name: config.guideName // 跳转到homeName页
+            })
+          }
+          // turnTo(homeRoute, user.access, next)
+        } else {
+          turnTo(to, user.access, next)
+        }
       }).catch(() => {
         setToken('')
         next({

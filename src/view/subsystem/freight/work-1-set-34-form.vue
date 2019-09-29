@@ -58,10 +58,10 @@
                     <FormItem prop="gname" :label-width="0"><Input size="small" type="text" v-model="dt41.gname" :disabled="dt41disabled"></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="caseNum" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.caseNum" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
+                    <FormItem prop="tunnage" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.tunnage" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem prop="tunnage" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.tunnage" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
+                    <FormItem prop="caseNum" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.caseNum" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem prop="volume" :label-width="0"><InputNumber size="small" type="text" v-model="dt41.volume" :step="0.01" :disabled="dt41disabled"></InputNumber></FormItem>
@@ -100,10 +100,10 @@
                     <FormItem label="合计"></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
-                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.tunnage" disabled></Input></FormItem>
+                    <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.caseNum" disabled></Input></FormItem>
                   </Col>
                   <Col span="6">
                     <FormItem :label-width="0"><Input size="small" type="text" v-model="dt41.volume" disabled></Input></FormItem>

@@ -111,7 +111,7 @@ export default {
       columns: [
         { type: 'selection', width: 60, align: 'center', fixed: 'left' },
         { key: 'needNo', title: '需求号', width: 160, fixed: 'left' },
-        { key: 'admitCarState', title: '车种', width: 90, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) } },
+        { key: 'admitCarState', title: '承认车标识', width: 90, render: (h, params) => { let admitCarState = params.row.admitCarState; return h('div', this.admitCarStateMap[admitCarState]) } },
         // { key: 'resDate', title: '预定日期', width: 90, fixed: 'left' },
         // { key: 'reservaNo', title: '预约号', width: 160, fixed: 'left' },
         // { key: 'acceptNo', title: '受理号', width: 90, fixed: 'left' },

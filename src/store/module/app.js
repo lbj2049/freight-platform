@@ -10,7 +10,8 @@ import {
   routeEqual,
   getRouteTitleHandled,
   localSave,
-  localRead
+  localRead,
+  setSystem
 } from '@/libs/util'
 import beforeClose from '@/router/before-close'
 import { saveErrorLogger } from '@/api/data'
@@ -46,6 +47,7 @@ export default {
   mutations: {
     setSystemName (state, systemName) {
       state.systemName = systemName
+      setSystem(systemName)
     },
     setBreadCrumb (state, route) {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)

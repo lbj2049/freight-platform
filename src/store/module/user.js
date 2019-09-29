@@ -163,6 +163,7 @@ export default {
           commit('setUserInfo', {})
           commit('setToken', '')
           commit('setAccess', [])
+          setExp({})
           resolve()
         }).catch(err => {
           reject(err)
@@ -234,7 +235,7 @@ export default {
             data.access = access
 
             const exp = getExp()
-            console.log(exp)
+            // console.log(exp)
             if (exp) {
               commit('setExperimentId', exp.expID)
               commit('setCompyId', exp.compyID)

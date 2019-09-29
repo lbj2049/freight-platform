@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { setExp } from '@/libs/util'
+import { setExp, setSystem } from '@/libs/util'
 export default {
   name: 'GoBack',
   props: {
@@ -21,6 +21,7 @@ export default {
       if (backUrl.search('front/home') > -1) {
         this.$store.state.user.compyId = ''
         setExp('')
+        setSystem('main')
       }
       this.$router.push({
         name: backUrl

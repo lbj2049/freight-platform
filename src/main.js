@@ -14,6 +14,7 @@ import importDirective from '@/directive'
 import installPlugin from '@/plugin'
 import './index.less'
 import '@/assets/icons/iconfont.css'
+import { doCleanCookie } from '@/libs/util'
 // import TreeTable from 'tree-table-vue'
 // 实际打包时应该不引入mock
 /* eslint-disable */
@@ -47,5 +48,12 @@ new Vue({
   router,
   i18n,
   store,
+  mounted: function () {
+    //此方法刷新页面时也会执行
+    window.addEventListener('beforeunload',()=>{
+      localStorage.removeItem('systemTagNave');
+      doCleanCookie()
+    });
+  },
   render: h => h(App)
 })
