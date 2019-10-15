@@ -1,10 +1,6 @@
-<p align="center">
-    <a href="https://www.iviewui.com">
-        <img width="200" src="https://file.iviewui.com/logo-new.svg">
-    </a>
-</p>
 
-# iView Admin
+
+# freight-platform
 
 [使用文档](https://lison16.github.io/iview-admin-doc/#/)
 
