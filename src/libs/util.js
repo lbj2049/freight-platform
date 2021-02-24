@@ -194,6 +194,8 @@ export const getLogoName = (systemName) => {
     logoName = '铁路货运电子商务系统'
   } else if (systemName === 'freight') {
     logoName = '铁路货运站系统'
+  } else if (systemName === 'box') {
+    logoName = '铁路集装箱系统'
   } else if (systemName === 'ticket') {
     logoName = '铁路制票系统'
   }

@@ -69,7 +69,7 @@ export default {
     },
     doRedirect (item) {
       const installed = this.subsystemMap[ item.type ] === 1
-
+      /*
       if (item.type === 'container') {
         this.$Notice.warning({
           title: '[' + item.title + '] 开发中，期待下一个版本'
@@ -84,6 +84,17 @@ export default {
             name: item.url
           })
         }
+      }
+      */
+
+      if (!installed) {
+        this.$Notice.warning({
+          title: '[' + item.title + '] 暂未安装'
+        })
+      } else {
+        this.$router.push({
+          name: item.url
+        })
       }
     }
   }

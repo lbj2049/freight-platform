@@ -42,6 +42,7 @@ export default {
   '/front/home': '首页',
   '/business/home': '首页',
   '/freight/home': '首页',
+  '/box/home': '首页',
   '/ticket/home': '首页',
   // 电子商务系统
   'waybill-accept': '运单管理',

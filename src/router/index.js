@@ -73,6 +73,10 @@ router.beforeEach((to, from, next) => {
               next({
                 name: config.freightHomeName // 跳转到homeName页
               })
+            } else if (systemName === config.containerHomeName) {
+              next({
+                name: config.containerHomeName // 跳转到homeName页
+              })
             } else if (systemName === config.ticketHomeName) {
               next({
                 name: config.ticketHomeName // 跳转到homeName页

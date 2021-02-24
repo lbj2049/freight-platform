@@ -1,4 +1,4 @@
-import { Main, Guide, Business, Freight, Ticket, HorizontalGuide, TabGuide } from '@/components/main'
+import { Main, Guide, Business, Freight, Box, Ticket, HorizontalGuide, TabGuide } from '@/components/main'
 
 import parentView from '@/components/parent-view'
 
@@ -592,6 +592,45 @@ export default [
         path: 'wk2', name: '超限超重记录', systemName: 'freight', meta: { access: ['student'], icon: 'ios-navigate', title: '超限超重记录' }, component: () => import('@/view/management/student-list.vue')
       }
       */
+    ]
+  },
+  {
+    path: '/box',
+    name: 'box',
+    redirect: '/box/home',
+    component: Box,
+    systemName: 'box',
+    meta: {
+      access: ['student'],
+      hideInMenu: true
+    },
+    children: [
+      {
+        path: '/box/home', name: '/box/home', systemName: 'ticket', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+      }
+    ]
+  },
+  {
+    path: '/box/box/reserve',
+    name: '空箱预定',
+    component: Box,
+    systemName: 'box',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '空箱预定'
+    },
+    children: [
+      {
+        path: 'box-reserve-sub', name: '空箱预定提报', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定提报' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-handle', name: '空箱预定处理', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定处理' }, component: () => import('@/view/subsystem/box/box-reserve-handle.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '空箱预定查询', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定查询' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      }
     ]
   },
   {

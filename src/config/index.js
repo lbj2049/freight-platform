@@ -29,12 +29,14 @@ export default {
   guideName: 'front',
   businessHomeName: 'business',
   freightHomeName: 'freight',
+  containerHomeName: 'box',
   ticketHomeName: 'ticket',
-  systemNames: ['main', 'business', 'freight', 'ticket'],
+  systemNames: ['main', 'business', 'freight', 'box', 'ticket'],
   systemDataMap: {
     main: [],
     business: [],
     freight: [],
+    box: [],
     ticket: []
   },
   /**

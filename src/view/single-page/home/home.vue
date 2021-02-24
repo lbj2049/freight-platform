@@ -78,6 +78,9 @@ export default {
       } else if (na[1] === config.freightHomeName) {
         this.hasTitle = false
         this.welcome_src = require('../../../assets/images/home/freight.png')
+      } else if (na[1] === config.containerHomeName) {
+        this.hasTitle = false
+        this.welcome_src = require('../../../assets/images/home/box.png')
       } else if (na[1] === config.ticketHomeName) {
         this.hasTitle = false
         this.welcome_src = require('../../../assets/images/home/ticket.png')
