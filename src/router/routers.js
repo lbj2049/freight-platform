@@ -606,12 +606,12 @@ export default [
     },
     children: [
       {
-        path: '/box/home', name: '/box/home', systemName: 'ticket', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
+        path: '/box/home', name: '/box/home', systemName: 'box', meta: { access: ['student'], hideInMenu: true, title: '首页', notCache: true, icon: 'md-home' }, component: () => import('@/view/single-page/home')
       }
     ]
   },
   {
-    path: '/box/box/reserve',
+    path: '/box/reserve',
     name: '空箱预定',
     component: Box,
     systemName: 'box',
@@ -625,11 +625,51 @@ export default [
       {
         path: 'box-reserve-sub', name: '空箱预定提报', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定提报' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
       },
+      /*
       {
         path: 'box-reserve-handle', name: '空箱预定处理', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定处理' }, component: () => import('@/view/subsystem/box/box-reserve-handle.vue')
       },
       {
         path: 'box-reserve-select', name: '空箱预定查询', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '空箱预定查询' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      }
+      */
+    ]
+  },
+  {
+    path: '/box/send/manage',
+    name: '发送管理',
+    component: Box,
+    systemName: 'box',
+    meta: {
+      access: ['student'],
+      hideInBread: true,
+      icon: 'md-menu',
+      title: '发送管理'
+    },
+    children: [
+      {
+        path: 'box-reserve-sub', name: '安排空箱', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '安排空箱' }, component: () => import('@/view/subsystem/box/box-empty-plan-search.vue')
+      },
+      {
+        path: 'box-reserve-handle', name: '站内空箱', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '站内空箱' }, component: () => import('@/view/subsystem/box/box-reserve-handle.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '检斤验货', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '检斤验货' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '配载', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '配载' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '装配', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '装配' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '按列装车', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '按列装车' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '出线确认', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '出线确认' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
+      },
+      {
+        path: 'box-reserve-select', name: '非铁路出发', systemName: 'box', meta: { access: ['student'], icon: 'md-add', title: '非铁路出发' }, component: () => import('@/view/subsystem/box/box-reserve-sub.vue')
       }
     ]
   },
