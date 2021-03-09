@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Form ref="demand" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
+      <Form ref="searchForm" :model="demand" :rules="rules" :label-width="88" :show-message="false" class="qib-form">
 
           <Row>
             <Col span="8">
@@ -22,8 +22,8 @@
 
         <Divider />
         <FormItem>
-          <Button type="primary" :loading="loading" @click="handleSubmit('demand')" style="margin-left: 8px">查询</Button>
-          <Button @click="handleReset('demand')" style="margin-left: 8px">清空</Button>
+          <Button type="primary" :loading="loading" @click="handleSubmit('searchForm')" style="margin-left: 8px">查询</Button>
+          <Button @click="handleReset('searchForm')" style="margin-left: 8px">清空</Button>
         </FormItem>
       </Form>
       <!--提交时加载动画-->
@@ -43,20 +43,21 @@ export default {
       demand: {
         reservaNo: '',
         aStation: '',
-        caseDate: null,
+        caseDate: ''
       },
       rules: {
       }
     }
   },
   methods: {
+    // 搜索
+    toHandleSearch () {
+      this.handleSubmit('searchForm')
+    },
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit('handleFormSubmit', this.demand)
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
         }
       })
     },
